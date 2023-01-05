@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": ".dist/js",
+    "target": "es5",
+    "module": "es6",
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./src/**/*",
+    // "./src/declarations.d.ts",
+    "./src/assets/**/*",
+    "./node_modules/chrome-types/*.d.ts"
+  ]
+}
