@@ -1,10 +1,9 @@
 import _ from 'underscore'
 import browserApi from './browser-api';
+// console.log(chrome.commands.getAll())
 
-chrome.commands.onCommand.addListener(async (command) => {
-  console.log(`Command "${command}" triggered`);
-	await browserApi.openPopup()
-	const activeUrl = await browserApi.getTab(true)
-	const response = await browserApi.sendMessage({activeUrl})
+global.sendActiveTabUrl = async function sendActiveTabUrl() {
+	const activeTab = await browserApi.getTab(true)
+	const response = await browserApi.sendMessage({activeUrl: activeTab.url})
 	return response
-});
+}

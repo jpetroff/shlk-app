@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import styles from './Home.less'
-import { modifyURLSlug } from '../../js/utils'
-import { HTMLAnyInput } from '../../js/constants'
+import { modifyURLSlug, validateURL } from '../../js/utils'
+import { HTMLAnyInput, AnyObject } from '../../js/constants'
 import config from '../../js/config.development'
+import { WithRouterProps } from '../../js/router-hoc'
 
 import React from 'react'
 import _, { result } from 'underscore'
@@ -16,8 +17,11 @@ import LSC from '../../js/localstorage-cache'
 
 import { Header } from '../Header'
 
+import {} from 'react-router-dom'
+
 type Props = {
-	initialLocation?: string
+	router?: WithRouterProps
+	extension?: AnyObject
 }
 
 type State = {
@@ -47,8 +51,9 @@ export class Home extends React.Component<Props, State> {
     super(props)
 		this.baseUrl = config.serviceUrl
 
+		const [ predefinedLocation ] = this.checkUrlParams(['l'], props.router)
     this.state = {
-			location: _.isEmpty(props.initialLocation) ? props.initialLocation : '',
+			location: _.unescape(predefinedLocation || ''),
 			generatedShortlink: undefined,
 			generatedDescriptiveShortlink: undefined,
 			generatedHash: undefined,
@@ -63,11 +68,35 @@ export class Home extends React.Component<Props, State> {
 		this.heroInputRef = React.createRef<HTMLAnyInput>()
 		_.bindAll(this, 'updateLocation', 'submitLocation', 'handleSuccessPaste', 'handleDescriptorChange', '_submitDescriptor', 'saveLSCache')
 		this.submitDescriptor = _.debounce(this._submitDescriptor, 500)
+		this.updateDeferredLOcation = _.once( () => this.props.extension?.activeTabUrl && this.setState({ location: this.props.extension.activeTabUrl}) )
   }
 
+	// @TODO: refactor — make splitting function in utils
+	checkUrlParams(queryParam: string[], router?: WithRouterProps) : Array<string | null> {
+		if(!router) return []
+		const searchParams = new URLSearchParams(router.location.search)
+		let result : Array<string | null> = []
+		_.forEach(queryParam, (param) => {
+			result.push(searchParams.get(param))
+		})
+		_.map(result, (item) => {
+			if(item != null) return decodeURIComponent(item)
+		})
+		return result 
+	}
+
 	componentDidMount() {
-    if(this.heroInputRef.current) this.heroInputRef.current.focus();
+    if(this.heroInputRef.current) this.heroInputRef.current.focus()
+		if(validateURL(this.state.location)) this.submitLocation()
   }
+
+	componentDidUpdate() {
+		console.log('UPD', this.props)
+		if(
+			this.props.extension?.activeTabUrl != this.state.location
+		) this.updateDeferredLOcation()
+	}
+	private updateDeferredLOcation : () => void
 
 	updateLocation(str: string) {
 		this.setState({
@@ -249,4 +278,3 @@ export class Home extends React.Component<Props, State> {
 		)
 	}
 }
-

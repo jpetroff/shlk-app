@@ -2,6 +2,7 @@ import styles from './shortlink-display.less'
 import React from 'react'
 import _ from 'underscore'
 import Link, { LinkColors } from '../link'
+import clipboardTools from '../../js/clipboard-tools'
 
 type Props = {
 	shortlink: string | undefined
@@ -10,22 +11,19 @@ type Props = {
 	hashLength?: number
 }
 
-
 export const ShortlinkDisplay : React.FC<Props> = function(
 	{
-		shortlink,
-		isLoading = false,
 		placeholder,
-		hashLength
+		hashLength,
+		shortlink,
+		isLoading = false
 	} : Props
 ) {
 
 	function copyOnClick() {
-		if(_.isFunction(navigator.clipboard.writeText) && shortlink) {
-			navigator.clipboard.writeText(shortlink)
-		} 
-		// for IE?
-		// else if (_.isFunction(window.clipboardData.setData)) { window.clipboardData.setData("Text", shortlink) }
+		if(shortlink) {
+			clipboardTools.copy(shortlink)
+		}
 	}
 
 	const globalClass = 'shortlink-display'
