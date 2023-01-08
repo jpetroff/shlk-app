@@ -1,25 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import styles from './Home.less'
-import { modifyURLSlug, validateURL } from '../../js/utils'
+import { checkMobileMQ, modifyURLSlug, validateURL } from '../../js/utils'
 import { HTMLAnyInput, AnyObject } from '../../js/constants'
-import config from '../../js/config'
 import { WithRouterProps } from '../../js/router-hoc'
 
-import React from 'react'
-import _, { result } from 'underscore'
+import * as React from 'react'
+import * as _ from 'underscore'
 
 import HeroInput from '../../components/hero-input/index'
-import { ShortlinkDisplay } from '../../components/shortlink-display'
-import { ShortlinkSlugInput, TextPattern } from '../../components/shortlink-slug-input'
+import ShortlinkDisplay from '../../components/shortlink-display'
+import ShortlinkSlugInput, { TextPattern, SlugInputSpecialChars } from '../../components/shortlink-slug-input'
 import linkTools from '../../js/url-tools'
 import clipboardTools from '../../js/clipboard-tools'
 
 import Query from '../../js/shortlink-queries'
 import LSC from '../../js/localstorage-cache'
 
-import { Header } from '../Header'
+import Header from '../Header'
 
-import {} from 'react-router-dom'
+const config = require('../../js/config')
 
 enum globalCommands {
 	submitAndCopy = 0
@@ -45,6 +44,7 @@ type State = {
 		createLinkIsLoading?: boolean
 		createDescriptiveLinkIsLoading?: boolean
 	}
+	mobileConvenienceInput: boolean
 }
 
 
@@ -66,7 +66,8 @@ export class Home extends React.Component<Props, State> {
 			loadingState: {
 				createLinkIsLoading: false,
 				createDescriptiveLinkIsLoading: false
-			}
+			},
+			mobileConvenienceInput: false
 		}
 		this.heroInputRef = React.createRef<HTMLAnyInput>()
 		// _.bindAll(this, 'updateLocation', 'submitLocation', 'handleSuccessPaste', 'handleDescriptorChange', '_submitDescriptor', 'saveLSCache')
@@ -76,13 +77,31 @@ export class Home extends React.Component<Props, State> {
   }
 
 	componentDidMount() {
-    if(this.heroInputRef.current) this.heroInputRef.current.focus()
-		if(validateURL(this.state.location)) this.submitLocation()
+    if(
+				this.heroInputRef.current &&
+				!checkMobileMQ
+			) this.heroInputRef.current.focus()
+
+		if(this.heroInputRef.current) {
+			this.heroInputRef.current.addEventListener('click', this._onHeroInputElementClick)
+		}
+
+		if(validateURL(this.state.location)) {
+			this.submitLocation()
+		}
+
+		if(!_.isEmpty(this.state.location)) {
+			this._setMobileConvenienceInput(true)
+		}
+
 		this.handleGlobalEvents(true)
   }
 
 	componentWillUnmount(): void {
 		this.handleGlobalEvents(false)
+		if(this.heroInputRef.current) {
+			this.heroInputRef.current.removeEventListener('click', this._onHeroInputElementClick)
+		}
 	}
 
 	private handleGlobalEvents(bind : boolean = true) {
@@ -101,20 +120,24 @@ export class Home extends React.Component<Props, State> {
 	}
 
 	componentDidUpdate() {
-		console.log('UPD', this.props)
-		if(
-			this.props.extension?.activeTabUrl != this.state.location
-		) this.updateDeferredLocation()
+		if(this.props.extension?.activeTabUrl != this.state.location) 
+			this.updateDeferredLocation()
+
+		if(!_.isEmpty(this.state.location))
+			this._setMobileConvenienceInput(true)
 	}
+	// _.once wrapper for update function
 	private updateDeferredLocation : () => void
 
-	updateLocation(str: string) {
+	updateLocation(str: string, isClearPress: boolean = false) {
+		console.log(isClearPress)
 		this.setState({
 			location: str.trim(),
 			generatedShortlink: undefined,
 			generatedDescriptiveShortlink: undefined,
 			generatedHash: undefined,
 		})
+		if(isClearPress) this._setMobileConvenienceInput(false)
 	}
 
 	public async handleGlobalCommand(command: number) {
@@ -122,7 +145,7 @@ export class Home extends React.Component<Props, State> {
 		switch(command) {
 			case globalCommands.submitAndCopy: {
 				await this.submitLocation()
-				await clipboardTools.copy(this.state.generatedShortlink)
+				clipboardTools.copy(this.state.generatedShortlink || '')
 				return
 			}
 		}
@@ -143,7 +166,7 @@ export class Home extends React.Component<Props, State> {
 				...newState,
 				userTag: args.userTag,
 				descriptionTag: args.descriptionTag,
-				generatedDescriptiveShortlink: linkTools.generateDescriptiveShortlink({ userTag: args.userTag, descriptionTag: args.descriptionTag })
+				generatedDescriptiveShortlink: linkTools.generateDescriptiveShortlink({ userTag: args.userTag, descriptionTag: args.descriptionTag || '' })
 			}
 		}
 		this.setState(newState)
@@ -257,6 +280,7 @@ export class Home extends React.Component<Props, State> {
 			linkTools.displayServiceUrl+'/',
 			{ key: 'userTag', value: this.state.userTag, placeholder: 'user' },
 			'@',
+			SlugInputSpecialChars.mobileLineBreak,
 			{ key: 'descriptionTag', value: this.state.descriptionTag, placeholder: 'your-custom-url' },
 		]
 	}
@@ -265,37 +289,54 @@ export class Home extends React.Component<Props, State> {
 		this.setState({ errorState: {} })
 	}
 
+	private _setMobileConvenienceInput(mode: boolean) {
+		console.trace()
+		console.log('_setMobileConvenienceInput', checkMobileMQ() && this.state.mobileConvenienceInput != mode)
+		if(checkMobileMQ() && this.state.mobileConvenienceInput != mode) {
+			this.setState({ mobileConvenienceInput: mode })
+		}
+	}
+
+	private _onHeroInputElementClick(event: Event) : void {
+		console.log(event)
+		this._setMobileConvenienceInput(true)
+	}
+
 	render() {
+		const globalClass = styles.homepage+'_app-body'
+		const mobileConvenienceClass = this.state.mobileConvenienceInput ? '__mobile-convenience-state' : ''
 		return (
-			<>
-				<Header />
-				<div className={`${styles.homepage} body__layout`}>
-					<div className={`body__layout__offset-wrapper`}>
-						<HeroInput 
-							inputRef={this.heroInputRef}
-							onChange={this.updateLocation}
-							onSubmit={this.submitLocation}
-							name="URL"
-							placeholder="Type or paste a link"
-							value={this.state.location}
-						/>
+				<div className={`${globalClass}`}>
+					<Header />
+					<div className={`${globalClass}__layout`}>
+						<div className={`${globalClass}__shortlink-block ${mobileConvenienceClass}`}>
+							<div className={`${globalClass}__offset-wrapper`}>
+								<HeroInput 
+									inputRef={this.heroInputRef}
+									onChange={this.updateLocation}
+									onSubmit={this.submitLocation}
+									name="URL"
+									placeholder="Type or paste a link"
+									value={this.state.location}
+								/>
+							</div>
+							<ShortlinkDisplay
+								placeholder={config.displayServiceUrl}
+								shortlink={this.state.generatedShortlink}
+								isLoading={this.state.loadingState.createLinkIsLoading}
+							/>
+							{this.state.generatedShortlink && 
+								<ShortlinkSlugInput
+									text={this._generateTextPattern()}
+									onChange={this.handleDescriptorChange}
+									show={this.state.generatedShortlink ? true : false}
+									generatedLink={this.state.generatedDescriptiveShortlink}
+									isLoading={this.state.loadingState.createDescriptiveLinkIsLoading}
+								/>
+							}
+						</div>
 					</div>
-					<ShortlinkDisplay
-						placeholder={config.displayServiceUrl}
-						shortlink={this.state.generatedShortlink}
-						isLoading={this.state.loadingState.createLinkIsLoading}
-					/>
-					{this.state.generatedShortlink && 
-						<ShortlinkSlugInput
-							text={this._generateTextPattern()}
-							onChange={this.handleDescriptorChange}
-							show={this.state.generatedShortlink ? true : false}
-							generatedLink={this.state.generatedDescriptiveShortlink}
-							isLoading={this.state.loadingState.createDescriptiveLinkIsLoading}
-						/>
-					}
 				</div>
-			</>
 		)
 	}
 }

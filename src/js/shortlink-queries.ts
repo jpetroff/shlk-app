@@ -2,7 +2,8 @@ import _ from 'underscore'
 import { GraphQLClient, gql } from 'graphql-request'
 import { validateURL } from './utils'
 import { AnyObject } from './constants'
-import config from './config'
+const config = require('./config')
+
 
 class GraphQLHomeQuery {
 	private queryUrl : string

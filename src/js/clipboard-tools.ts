@@ -1,6 +1,6 @@
 import _ from 'underscore'
 import constants from './constants'
-import config from './config'
+const config = require('./config')
 
 class ClipboardTools {
 	readonly enabled : boolean

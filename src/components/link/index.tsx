@@ -1,6 +1,6 @@
 import styles from './link.less'
-import React from 'react'
-import _ from 'underscore'
+import * as React from 'react'
+import * as _ from 'underscore'
 import Icon, { ReactIcon, IconSize } from '../icons'
 
 export enum LinkColors {

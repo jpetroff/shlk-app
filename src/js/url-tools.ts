@@ -34,7 +34,7 @@ class LinkTools {
 	generateDescriptiveShortlink( { userTag, descriptionTag } : DescriptiveShortlink ) : string {
 		const userTagPart = userTag ? userTag : ''
 		const descriptionTagPart = '@' + descriptionTag
-		return `${this.baseUrl}/${userTagPart}${descriptionTag}`
+		return `${this.baseUrl}/${userTagPart}${descriptionTagPart}`
 	}
 
 	fixProtocol( url: string ) : string {
