@@ -2,7 +2,7 @@ import _ from 'underscore'
 import { GraphQLClient, gql } from 'graphql-request'
 import { validateURL } from './utils'
 import { AnyObject } from './constants'
-import config from './config.development'
+import config from './config'
 
 class GraphQLHomeQuery {
 	private queryUrl : string

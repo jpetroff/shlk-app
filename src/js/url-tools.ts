@@ -1,6 +1,6 @@
-import _ from 'underscore'
+import * as _ from 'underscore'
 import constants from './constants'
-import config from './config.development'
+const config = require('./config')
 
 interface DescriptiveShortlink {
 	userTag?: string
@@ -32,7 +32,8 @@ class LinkTools {
 	}
 
 	generateDescriptiveShortlink( { userTag, descriptionTag } : DescriptiveShortlink ) : string {
-		const userTagPart = userTag ? userTag + '@' : ''
+		const userTagPart = userTag ? userTag : ''
+		const descriptionTagPart = '@' + descriptionTag
 		return `${this.baseUrl}/${userTagPart}${descriptionTag}`
 	}
 
@@ -43,6 +44,24 @@ class LinkTools {
 		if(this.validateURL(result)) return result
 
 		throw new Error(`URL ${result} is not valid`)
+	}
+
+	/* 
+		For query array [ 'param1', 'param2', ... ]
+		Returns corresponding query values or null [ 'value1', null, ...  ]
+	 */
+	queryUrlSearchParams(queryParam: string[], searchParamsString?: string) : Array<string | null> {
+		if(!searchParamsString) return Array.from({length: _.size(queryParam)}, () => null)
+
+		const searchParams = new URLSearchParams(searchParamsString)
+		let result : Array<string | null> = []
+		_.forEach(queryParam, (param) => {
+			result.push(searchParams.get(param))
+		})
+		_.map(result, (item) => {
+			if(item != null) return decodeURIComponent(item)
+		})
+		return result 
 	}
 }
 

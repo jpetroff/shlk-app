@@ -2,7 +2,7 @@
 import styles from './Home.less'
 import { modifyURLSlug, validateURL } from '../../js/utils'
 import { HTMLAnyInput, AnyObject } from '../../js/constants'
-import config from '../../js/config.development'
+import config from '../../js/config'
 import { WithRouterProps } from '../../js/router-hoc'
 
 import React from 'react'
@@ -11,6 +11,8 @@ import _, { result } from 'underscore'
 import HeroInput from '../../components/hero-input/index'
 import { ShortlinkDisplay } from '../../components/shortlink-display'
 import { ShortlinkSlugInput, TextPattern } from '../../components/shortlink-slug-input'
+import linkTools from '../../js/url-tools'
+import clipboardTools from '../../js/clipboard-tools'
 
 import Query from '../../js/shortlink-queries'
 import LSC from '../../js/localstorage-cache'
@@ -18,6 +20,10 @@ import LSC from '../../js/localstorage-cache'
 import { Header } from '../Header'
 
 import {} from 'react-router-dom'
+
+enum globalCommands {
+	submitAndCopy = 0
+}
 
 type Props = {
 	router?: WithRouterProps
@@ -43,15 +49,12 @@ type State = {
 
 
 export class Home extends React.Component<Props, State> {
-	private baseUrl: string
-
 	private heroInputRef: React.RefObject<HTMLAnyInput>
 
 	constructor(props) {
     super(props)
-		this.baseUrl = config.serviceUrl
 
-		const [ predefinedLocation ] = this.checkUrlParams(['l'], props.router)
+		const [ predefinedLocation ] = linkTools.queryUrlSearchParams(['l'], props.router?.location?.search)
     this.state = {
 			location: _.unescape(predefinedLocation || ''),
 			generatedShortlink: undefined,
@@ -66,37 +69,44 @@ export class Home extends React.Component<Props, State> {
 			}
 		}
 		this.heroInputRef = React.createRef<HTMLAnyInput>()
-		_.bindAll(this, 'updateLocation', 'submitLocation', 'handleSuccessPaste', 'handleDescriptorChange', '_submitDescriptor', 'saveLSCache')
+		// _.bindAll(this, 'updateLocation', 'submitLocation', 'handleSuccessPaste', 'handleDescriptorChange', '_submitDescriptor', 'saveLSCache')
+		_.bindAll(this, ..._.functions(this))
 		this.submitDescriptor = _.debounce(this._submitDescriptor, 500)
-		this.updateDeferredLOcation = _.once( () => this.props.extension?.activeTabUrl && this.setState({ location: this.props.extension.activeTabUrl}) )
+		this.updateDeferredLocation = _.once( () => this.props.extension?.activeTabUrl && this.setState({ location: this.props.extension.activeTabUrl}) )
   }
-
-	// @TODO: refactor — make splitting function in utils
-	checkUrlParams(queryParam: string[], router?: WithRouterProps) : Array<string | null> {
-		if(!router) return []
-		const searchParams = new URLSearchParams(router.location.search)
-		let result : Array<string | null> = []
-		_.forEach(queryParam, (param) => {
-			result.push(searchParams.get(param))
-		})
-		_.map(result, (item) => {
-			if(item != null) return decodeURIComponent(item)
-		})
-		return result 
-	}
 
 	componentDidMount() {
     if(this.heroInputRef.current) this.heroInputRef.current.focus()
 		if(validateURL(this.state.location)) this.submitLocation()
+		this.handleGlobalEvents(true)
   }
+
+	componentWillUnmount(): void {
+		this.handleGlobalEvents(false)
+	}
+
+	private handleGlobalEvents(bind : boolean = true) {
+		if(bind) {
+			window.addEventListener('keypress', this.onGlobalKeypress)
+		} else {
+			window.removeEventListener('keypress', this.onGlobalKeypress)
+		}
+	}
+
+	private onGlobalKeypress(event: KeyboardEvent) {
+		console.log('keypress', event)
+		if(event.ctrlKey && event.shiftKey && event.code == 'KeyC' ) {
+			this.handleGlobalCommand(globalCommands.submitAndCopy)
+		}
+	}
 
 	componentDidUpdate() {
 		console.log('UPD', this.props)
 		if(
 			this.props.extension?.activeTabUrl != this.state.location
-		) this.updateDeferredLOcation()
+		) this.updateDeferredLocation()
 	}
-	private updateDeferredLOcation : () => void
+	private updateDeferredLocation : () => void
 
 	updateLocation(str: string) {
 		this.setState({
@@ -107,10 +117,21 @@ export class Home extends React.Component<Props, State> {
 		})
 	}
 
+	public async handleGlobalCommand(command: number) {
+		console.log('global command:', command)
+		switch(command) {
+			case globalCommands.submitAndCopy: {
+				await this.submitLocation()
+				await clipboardTools.copy(this.state.generatedShortlink)
+				return
+			}
+		}
+	}
+
 	private setShortlinkState( args: { location: string, hash: string, userTag?: string, descriptionTag?: string} ) {
 		console.log(args)
 		let newState: any = {
-			generatedShortlink: `${this.baseUrl}/${args.hash}`,
+			generatedShortlink: linkTools.generateShortlinkFromHash(args.hash),
 			generatedHash: args.hash,
 			location: args.location,
 			errorState: {
@@ -118,13 +139,11 @@ export class Home extends React.Component<Props, State> {
 			}
 		}
 		if(!_.isEmpty(args.descriptionTag)) {
-			const userTagPart = args.userTag ? args.userTag+'@' : ''
-			const descriptionTagPart = args.descriptionTag
 			newState = {
 				...newState,
 				userTag: args.userTag,
 				descriptionTag: args.descriptionTag,
-				generatedDescriptiveShortlink: `${this.baseUrl}/${userTagPart}${descriptionTagPart}`
+				generatedDescriptiveShortlink: linkTools.generateDescriptiveShortlink({ userTag: args.userTag, descriptionTag: args.descriptionTag })
 			}
 		}
 		this.setState(newState)
@@ -163,6 +182,7 @@ export class Home extends React.Component<Props, State> {
 
 	async submitLocation() {
 		this._clearErrorState()
+
 		const location = this.state.location.trim()
 		if (_.isEmpty(location)) return
 		
@@ -171,9 +191,10 @@ export class Home extends React.Component<Props, State> {
 
 		this.setState({loadingState: {createLinkIsLoading: true}})
 		try {
-			const result = await Query.createShortlink(location)
+			const locationUrl = linkTools.fixProtocol(location)
+			const result = await Query.createShortlink(locationUrl)
 			console.log('[Home] submitLocation\n', result)
-			if(!result || !result.hash) throw new Error(`Unexpected error: shortlink for '${location}' was not created. Please, try again`)
+			if(!result || !result.hash) throw new Error(`Unexpected error: shortlink for '${locationUrl}' was not created. Please, try again`)
 
 			this.setShortlinkState({
 				location: result.location,
@@ -233,7 +254,7 @@ export class Home extends React.Component<Props, State> {
 
 	private _generateTextPattern(): Array<TextPattern | string> {
 		return [
-			config.displayServiceUrl+'/',
+			linkTools.displayServiceUrl+'/',
 			{ key: 'userTag', value: this.state.userTag, placeholder: 'user' },
 			'@',
 			{ key: 'descriptionTag', value: this.state.descriptionTag, placeholder: 'your-custom-url' },

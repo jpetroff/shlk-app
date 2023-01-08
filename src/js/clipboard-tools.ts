@@ -1,6 +1,6 @@
 import _ from 'underscore'
 import constants from './constants'
-import config from './config.development'
+import config from './config'
 
 class ClipboardTools {
 	readonly enabled : boolean
@@ -24,8 +24,6 @@ class ClipboardTools {
 		if(this.enabled && clipText) {
 			navigator.clipboard.writeText(clipText)
 		} 
-		// for IE?
-		// else if (_.isFunction(window.clipboardData.setData)) { window.clipboardData.setData("Text", shortlink) }
 	}
 }
 

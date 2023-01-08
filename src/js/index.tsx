@@ -6,7 +6,7 @@ import '../manifest.json'
 require('./modernizr_build.js')
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import {
   createHashRouter,
   RouterProvider,
@@ -28,7 +28,6 @@ const router = createHashRouter([
   }
 ]);
 
-ReactDOM.render(
-	<RouterProvider router={router} />,
-	document.getElementById('app')
-);
+const container = document.getElementById('app')
+const root = createRoot(container)
+root.render(<RouterProvider router={router} />)
