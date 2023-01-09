@@ -10,7 +10,8 @@ type Props = {
 	shortlink: string | undefined
 	isLoading?: boolean
 	placeholder?: string
-	hashLength?: number
+	hashLength?: number,
+	hasCta?: boolean
 }
 
 export const ShortlinkDisplay : React.FC<Props> = function(
@@ -18,7 +19,8 @@ export const ShortlinkDisplay : React.FC<Props> = function(
 		placeholder,
 		hashLength,
 		shortlink,
-		isLoading = false
+		isLoading = false,
+		hasCta = true
 	} : Props
 ) {
 
@@ -72,7 +74,7 @@ export const ShortlinkDisplay : React.FC<Props> = function(
 					className={`${globalClass}__copy-button`}
 					label={btnLabel}
 					size={ButtonSize.LARGE}
-					type={ButtonType.PRIMARY}
+					type={hasCta ? ButtonType.PRIMARY : ButtonType.SECONDARY}
 					isDisabled={_.isEmpty(shortlink)}
 					isLoading={isLoading}
 					/>
