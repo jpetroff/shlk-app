@@ -1,4 +1,4 @@
-@import '../../css/_constants.less';
+@import (reference) '../../css/_constants.less';
 
 .link-loading-gradient {
 	background: linear-gradient(to right, 
@@ -18,11 +18,16 @@
 	color: transparent;
 }
 
+.link-block {
+	cursor: pointer;
+}
+
 :local(.wrapperClass)_link {
 	box-sizing: border-box;
 	text-decoration: none !important;
 	cursor: pointer;
 	outline: @pure-blue-70;
+  position: relative;
 
 	&_app, &:visited {
 		color: @pure-blue-50;
@@ -34,10 +39,10 @@
 		color: @purple-20;
 	}
 
-	&:hover, .link-block & {
+	&:hover, .link-block:hover & {
 		color: @red-50;
 	}
-	&:active, .link-block & {
+	&:active, .link-block:active & {
 		color: @red-40;
 	}
 

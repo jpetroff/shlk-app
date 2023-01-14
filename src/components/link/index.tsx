@@ -2,55 +2,78 @@ import styles from './link.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import Icon, { ReactIcon, IconSize } from '../icons'
+import classNames from 'classnames'
+import { Flyover } from '../tooltip'
 
 export enum LinkColors {
-	USER = 'user',
-	APP = 'app'
+  USER = 'user',
+  APP = 'app'
 }
 
 type Props = {
-	colorScheme?: LinkColors
-	label: string
-	icon?: ReactIcon
-	iconSize?: IconSize
-	iconRight?: boolean
-	isDisabled?: boolean
-	isLoading?: boolean
+  colorScheme?: LinkColors
+  label?: string
+  icon?: ReactIcon
+  iconSize?: IconSize
+  iconRight?: boolean
+  isDisabled?: boolean
+  isLoading?: boolean
+  flyover?: string
+  tooltip?: TooltipProps
 } & JSX.IntrinsicElements['a']
 
 const Link : React.FC<Props> = (
  args: Props
 ) => {
-	if(_.isEmpty(args.label)) return (<></>)
+  const [showFlyover, setShowFlyover] = React.useState(false)
 
-	const globalClass = styles.wrapperClass+'_link'
-	let linkMods : Array<string> = []
-	linkMods.push(globalClass+'_'+args.colorScheme)
-	if(args.isLoading) linkMods.push(globalClass+'_loading')
-	if(args.isDisabled || args.isLoading) linkMods.push(globalClass+'_disabled')
+  const globalClass = styles.wrapperClass+'_link'
+  const linkClasses = classNames({
+    [`${globalClass}`]: true,
+    [`${globalClass}_${args.colorScheme}`]: true,
+    [`${globalClass}_loading`]: args.isLoading,
+    [`${globalClass}_disabled`]: args.isDisabled || args.isLoading
+  })
 
-	const htmlAnchorAttributes = _.omit(args, 'colorScheme', 'label', 'icon', 'iconSize', 'isDisabled', 'iconRight', 'isLoading')
-	return (
-		<a {...htmlAnchorAttributes}
-			className={`${globalClass} ${linkMods.join(' ')} ${args.className || ''}`}
-		>
-			{args.icon && !args.iconRight && 
-				<Icon useIcon={args.icon} size={args.iconSize || IconSize.SMALL} />
-			}
+  const handleClick : (event: React.MouseEvent<HTMLAnchorElement>) => void = (event) => {
+    if(args.isDisabled || args.isLoading) {
+      event.preventDefault()
+      event.stopPropagation()
+      return;
+    } 
 
-			{args.label}
+    if(_.isFunction(args.onClick)) {
+      args.onClick(event)
+    }
 
-			{args.icon && args.iconRight && 
-				<Icon useIcon={args.icon} size={args.iconSize || IconSize.SMALL} />
-			}
-		</a>
-	)
+    if(args.flyover) setShowFlyover(true)
+  }
+
+  const htmlAnchorAttributes = _.omit(args, 'colorScheme', 'label', 'icon', 'iconSize', 'isDisabled', 'iconRight', 'isLoading', 'flyover', 'tooltip', 'onClick')
+  return (
+    <a {...htmlAnchorAttributes}
+      className={`${linkClasses} ${args.className || ''}`}
+      onClick={handleClick}
+    >
+      {args.icon && !args.iconRight && 
+        <Icon useIcon={args.icon} size={args.iconSize || IconSize.SMALL} />
+      }
+
+      {args.label}{args.children}
+
+      {args.icon && args.iconRight && 
+        <Icon useIcon={args.icon} size={args.iconSize || IconSize.SMALL} />
+      }
+
+      {args.flyover && showFlyover && <Flyover label={args.flyover} onDone={() => setShowFlyover(false)} />}
+    </a>
+  )
 }
 
 Link.defaultProps = {
-	isDisabled: false,
-	isLoading: false, 
-	colorScheme: LinkColors.APP
+  isDisabled: false,
+  isLoading: false, 
+  colorScheme: LinkColors.APP
 }
 
 export default Link
