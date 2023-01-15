@@ -22,10 +22,10 @@ export const proxyStorage = {
 
     let objResult : AnyObject[] = []
 
-    _.each(result, (retrievedItem) => {
+    _.each(result, (retrievedItem, key) => {
       try {
-        objResult.push(JSON.parse(retrievedItem as string))
-      } catch { }
+        objResult.push( { ...JSON.parse(retrievedItem as string), key })
+      } catch {  /* skip adding elements that cannot be parsed */  }
     })
 
     return objResult
@@ -34,6 +34,10 @@ export const proxyStorage = {
   canUse() {
     if(chrome.storage.sync) return true
     return false
+  },
+
+  async removeItem(key: string) : Promise<void> {
+    chrome.storage.sync.remove(key)
   }
 
 }
