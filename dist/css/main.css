@@ -1,0 +1,1702 @@
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/css/main.less ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+ html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+/* Color styles */
+.main-page-width-mixin {
+  width: calc(100vw * 2 / 3);
+  max-width: 64rem;
+}
+/* Text-size styles */
+/* base size: 16_20_text (16px) */
+/* 
+	Colors
+ */
+/* 
+	Typography
+ */
+.t-text_16-20 {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+}
+.t-micricopy_13-16 {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+}
+.t-secondary-header_18-24 {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01em;
+}
+.t-header_24-32 {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+}
+/* 
+	Screen breakpoints
+ */
+/* 
+	Loading text animation
+ */
+@keyframes loading {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+/* 
+	Shadows
+*/
+.shadow-light-10 {
+  box-shadow: 0 3px 7px -5px rgba(78, 73, 90, 0.5);
+}
+.shadow-light-20 {
+  box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4);
+}
+.shadow-light-30 {
+  box-shadow: 0 5px 15px -5px rgba(78, 73, 90, 0.36);
+}
+.shadow-light-40 {
+  box-shadow: 0 10px 20px -5px rgba(78, 73, 90, 0.36);
+}
+.shadow-light-50 {
+  box-shadow: 0 15px 25px -5px rgba(78, 73, 90, 0.32);
+}
+html.extension {
+  width: 480px;
+  height: 600px;
+}
+.document {
+  font-size: 16px;
+}
+@font-face {
+  font-family: 'Mori';
+  src: url(/assets/fonts/PPMori-SemiBold.eot);
+  src: url(/assets/fonts/PPMori-SemiBold.woff) format('woff'), url(/assets/fonts/PPMori-SemiBold.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga', 'kern';
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  color: #1c1825;
+}
+.__loading-skeleton-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw * 2 / 3);
+  max-width: 64rem;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  gap: 2rem;
+  align-items: center;
+  z-index: 1;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 480px) {
+  .__loading-skeleton-wrapper {
+    width: 100%;
+    padding: 0 1.25rem;
+  }
+}
+.__loading-skeleton-wrapper::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.84) 48%, rgba(255, 255, 255, 0.84) 52%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 100%);
+  background-size: 200% 100%;
+  animation: loading 2s linear infinite;
+}
+.__loading-skeleton-wrapper .__faded-logo {
+  color: #c9c6d2;
+}
+.__loading-skeleton-wrapper .__faded-logo .__faded-logo__svg {
+  width: 92px;
+  height: 92px;
+}
+.__loading-skeleton-wrapper .__faded-input {
+  box-sizing: border-box;
+  border: 2px solid #c9c6d2;
+  border-radius: 0.5rem;
+  flex-grow: 1;
+  height: 3.75rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.__loading-skeleton-wrapper .__faded-input:after {
+  display: flex;
+  content: ' ';
+  height: 1.25rem;
+  border-radius: 2px;
+  background-color: #e4e1ea;
+  width: 18%;
+  margin-left: 1rem;
+}
+@media screen and (max-width: 480px) {
+  .__loading-skeleton-wrapper .__faded-input {
+    height: 3.5rem;
+  }
+  .__loading-skeleton-wrapper .__faded-input:after {
+    width: 44%;
+  }
+}
+
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Home/Home.less ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+.zLgrqy89mJpIMhikjpR5 {
+  background-color: white;
+}
+.zLgrqy89mJpIMhikjpR5_app-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body {
+    height: calc(100% + 3.0625rem);
+  }
+}
+.zLgrqy89mJpIMhikjpR5_app-body__layout {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: calc(100vw * 2 / 3);
+  max-width: 64rem;
+  margin: 0 auto;
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body__layout {
+    margin: 0 1.25rem;
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+.zLgrqy89mJpIMhikjpR5_app-body__shortlink-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body__shortlink-block {
+    flex-grow: 1;
+    justify-content: center;
+  }
+}
+.zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
+  height: calc(50vh - 4.725rem);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 100%;
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
+    height: auto;
+    padding-top: 2.5rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
+    height: auto;
+    padding-top: 2.5rem;
+  }
+  .__mobile-convenience-state .zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state.zLgrqy89mJpIMhikjpR5_app-body__shortlink-block {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
+    border-radius: 0px 0px 0.5rem 0.5rem;
+  }
+}
+.zLgrqy89mJpIMhikjpR5_app-body__snackbar-container {
+  position: absolute;
+  top: 100%;
+  padding-top: 1.25rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body__snackbar-container {
+    position: absolute;
+    top: 100%;
+    padding-top: 1.25rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+}
+.zLgrqy89mJpIMhikjpR5_app-body__footer-wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.zLgrqy89mJpIMhikjpR5_app-body__footer-wrapper:before {
+  content: '';
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+}
+@media screen and (max-width: 480px) {
+  .zLgrqy89mJpIMhikjpR5_app-body__footer-wrapper {
+    flex-grow: 0;
+  }
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-slug-input/shortlink-slug-input.less ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+.FGZWw5GuJsSrNN3zElWl_slug-input {
+  padding-top: 2rem;
+  color: #4e495a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem 1rem;
+  border-top: 2px solid #e4e1ea;
+  vertical-align: baseline;
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input {
+    padding: 1rem 0 0.75rem 0;
+    gap: 0rem;
+  }
+  .__mobile-convenience-state .FGZWw5GuJsSrNN3zElWl_slug-input {
+    padding-left: 1.25rem;
+    padding-right: 0.75rem;
+  }
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__label {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #4e495a;
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__action-wrapper {
+  background: transparent;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-left: -0.25rem;
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state .FGZWw5GuJsSrNN3zElWl_slug-input__action-wrapper {
+    flex-grow: 1;
+  }
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__input-common-style {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #4e495a;
+  padding: 0;
+  line-height: inherit;
+  display: inline-block;
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input_error .FGZWw5GuJsSrNN3zElWl_slug-input__input-common-style {
+  color: #ba3312;
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input__input-common-style {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+    line-height: 1.625rem;
+    vertical-align: baseline;
+  }
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable {
+  padding: 0;
+  min-width: 0.25rem;
+  position: relative;
+  display: inline-block;
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__real-input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  background-color: transparent;
+  z-index: 1;
+  outline: none;
+  border-radius: 0;
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__real-input:focus {
+  border-bottom: 2px solid #4e495a;
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__width-sizer_hide {
+  opacity: 0;
+  z-index: 0;
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__width-sizer_show {
+  opacity: 1;
+  z-index: 0;
+  color: #b0adb9;
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+    line-height: 1.625rem;
+    vertical-align: baseline;
+  }
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_pseudolink {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_pseudolink {
+    display: none;
+  }
+}
+.FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_button {
+  display: none;
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_button {
+    display: flex;
+  }
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input__content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 481px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input__mlbr {
+    display: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .FGZWw5GuJsSrNN3zElWl_slug-input__lbr {
+    display: none;
+  }
+}
+
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/link/link.less ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+.link-loading-gradient {
+  background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
+}
+.link-loading-mixin {
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+.link-block {
+  cursor: pointer;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link {
+  box-sizing: border-box;
+  text-decoration: none !important;
+  cursor: pointer;
+  outline: #7e9ef1;
+  position: relative;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link_app,
+.DUNkWEdpRmL3Ce2KwU1I_link:visited {
+  color: #0045ff;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link_user {
+  color: #5314ff;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link_user:visited {
+  color: #8d509b;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link:hover,
+.link-block:hover .DUNkWEdpRmL3Ce2KwU1I_link {
+  color: #e03d16;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link:active,
+.link-block:active .DUNkWEdpRmL3Ce2KwU1I_link {
+  color: #ba3312;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link_disabled,
+.DUNkWEdpRmL3Ce2KwU1I_link_disabled:visited,
+.DUNkWEdpRmL3Ce2KwU1I_link_disabled:active,
+.DUNkWEdpRmL3Ce2KwU1I_link_disabled:hover {
+  color: #9692a0;
+  cursor: not-allowed;
+}
+.DUNkWEdpRmL3Ce2KwU1I_link_loading {
+  background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/icons/icons.less ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+.yU3DGxl1KZkVFqC3cCvh svg {
+  width: 100%;
+  height: 100%;
+}
+.icon-svg_size-large {
+  width: 24px;
+  height: 24px;
+}
+.icon-svg_size-small {
+  width: 20px;
+  height: 20px;
+}
+
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/tooltip/tooltip.less ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+.QtduWhr80zneTuxPwQWA_tooltip {
+  box-sizing: border-box;
+}
+.Ix0Z_Q0BA0SpwEf4Vh0n_flyover {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 300ms ease-in, top 350ms ease-out;
+  opacity: 0;
+  color: #8d509b;
+  font-size: inherit;
+  line-height: inherit;
+  text-shadow: 1px 1px 0.25em #ffffff, -1px 1px 0.25em #ffffff, 1px -1px 0.25em #ffffff, -1px -1px 0.25em #ffffff;
+  z-index: 99999;
+}
+.flyover-animation-appear,
+.flyover-animation-enter {
+  top: 50%;
+  opacity: 0;
+}
+.flyover-animation-appear-active,
+.flyover-animation-enter-active {
+  top: -0.75em;
+  opacity: 1;
+}
+.flyover-animation-appear-done,
+.flyover-animation-enter-done {
+  top: -0.75em;
+  opacity: 0;
+}
+
+/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/button/button.less ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************/
+.button-shadow-backdrop {
+  content: ' ';
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(28, 24, 37, 0) 0%, rgba(28, 24, 37, 0.06) 100%);
+  z-index: -1;
+}
+.button-shadow-backdrop-primary {
+  content: ' ';
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(28, 24, 37, 0) 0%, rgba(28, 24, 37, 0.12) 100%);
+  z-index: -1;
+}
+.primary-loading-gradient {
+  background: linear-gradient(to right, #f5f8ff 0%, #f5f8ff 15%, #7e9ef1 46%, #7e9ef1 54%, #f5f8ff 85%, #f5f8ff 100%);
+}
+.secondary-loading-gradient {
+  background: linear-gradient(to right, #5f84e7 0%, #5f84e7 15%, #d6e1ff 46%, #d6e1ff 54%, #5f84e7 85%, #5f84e7 100%);
+}
+.button-loading-mixin {
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+.DxYB4DbpuNCYM3P51g20_button {
+  display: flex;
+  border-radius: 4px;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.1s ease-out;
+  transform: scale(1);
+  user-select: none;
+  position: relative;
+  /*  
+		Sizes
+	 */
+  /* 
+		Types
+	 */
+}
+.DxYB4DbpuNCYM3P51g20_button:focus {
+  box-shadow: 0 0 0 0.125rem #d6e1ff;
+}
+.DxYB4DbpuNCYM3P51g20_button_disabled {
+  cursor: not-allowed;
+}
+.DxYB4DbpuNCYM3P51g20_button_large {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  height: 2.5rem;
+}
+.DxYB4DbpuNCYM3P51g20_button_large:active {
+  transform: scale(0.96);
+}
+.DxYB4DbpuNCYM3P51g20_button_large.DxYB4DbpuNCYM3P51g20_button_icon-only {
+  padding: 0.5rem;
+}
+.DxYB4DbpuNCYM3P51g20_button_large.DxYB4DbpuNCYM3P51g20_button_icon-only:active {
+  transform: scale(0.9);
+}
+.DxYB4DbpuNCYM3P51g20_button_small {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  padding: 0.375rem 0.75rem;
+  gap: 0.25rem;
+  height: 2rem;
+}
+.DxYB4DbpuNCYM3P51g20_button_small:active {
+  transform: scale(0.94);
+}
+.DxYB4DbpuNCYM3P51g20_button_small.DxYB4DbpuNCYM3P51g20_button_icon-only {
+  padding: 0.375rem;
+}
+.DxYB4DbpuNCYM3P51g20_button_small.DxYB4DbpuNCYM3P51g20_button_icon-only:active {
+  transform: scale(0.94);
+}
+.DxYB4DbpuNCYM3P51g20_button_primary {
+  background-color: #0b42d6;
+  color: #f5f8ff;
+}
+.DxYB4DbpuNCYM3P51g20_button_primary:after {
+  content: ' ';
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(28, 24, 37, 0) 0%, rgba(28, 24, 37, 0.12) 100%);
+  z-index: -1;
+}
+.DxYB4DbpuNCYM3P51g20_button_primary:hover {
+  color: #ffffff;
+}
+.DxYB4DbpuNCYM3P51g20_button_primary.DxYB4DbpuNCYM3P51g20_button_disabled {
+  background-color: #7e9ef1;
+  color: #f5f8ff;
+}
+.DxYB4DbpuNCYM3P51g20_button_primary.DxYB4DbpuNCYM3P51g20_button_loading .DxYB4DbpuNCYM3P51g20_button__label {
+  display: inline-block;
+  background: linear-gradient(to right, #f5f8ff 0%, #f5f8ff 15%, #7e9ef1 46%, #7e9ef1 54%, #f5f8ff 85%, #f5f8ff 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+.DxYB4DbpuNCYM3P51g20_button_ghost {
+  background-color: transparent;
+}
+.DxYB4DbpuNCYM3P51g20_button_ghost:hover {
+  background-color: #f5f8ff;
+}
+.DxYB4DbpuNCYM3P51g20_button_ghost.DxYB4DbpuNCYM3P51g20_button_icon_only:hover {
+  background-color: transparent;
+}
+.DxYB4DbpuNCYM3P51g20_button_ghost.DxYB4DbpuNCYM3P51g20_button_disabled {
+  color: #7c7887;
+}
+.DxYB4DbpuNCYM3P51g20_button_secondary,
+.DxYB4DbpuNCYM3P51g20_button_ghost {
+  color: #0045ff;
+}
+.DxYB4DbpuNCYM3P51g20_button_secondary:hover,
+.DxYB4DbpuNCYM3P51g20_button_ghost:hover {
+  color: #0b42d6;
+}
+.DxYB4DbpuNCYM3P51g20_button_secondary {
+  background-color: #d6e1ff;
+}
+.DxYB4DbpuNCYM3P51g20_button_secondary:after {
+  content: ' ';
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(28, 24, 37, 0) 0%, rgba(28, 24, 37, 0.06) 100%);
+  z-index: -1;
+}
+.DxYB4DbpuNCYM3P51g20_button_secondary.DxYB4DbpuNCYM3P51g20_button_disabled {
+  background-color: #d6e1ff;
+  color: #5f84e7;
+}
+.DxYB4DbpuNCYM3P51g20_button_secondary.DxYB4DbpuNCYM3P51g20_button_loading .DxYB4DbpuNCYM3P51g20_button__label {
+  display: inline-block;
+  background: linear-gradient(to right, #5f84e7 0%, #5f84e7 15%, #d6e1ff 46%, #d6e1ff 54%, #5f84e7 85%, #5f84e7 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Header/Header.less ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+.g1XACUakyskMnf3GgnPW_app-header {
+  position: relative;
+  padding-top: 1.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+}
+@media screen and (max-width: 480px) {
+  .g1XACUakyskMnf3GgnPW_app-header {
+    padding: 1rem 1.25rem;
+    padding-bottom: 0;
+  }
+}
+.g1XACUakyskMnf3GgnPW_app-header__middle {
+  flex-grow: 1;
+}
+.g1XACUakyskMnf3GgnPW_app-header__account-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01em;
+}
+.g1XACUakyskMnf3GgnPW_app-header__account-link__avatar {
+  height: 2.875rem;
+  width: 2.875rem;
+  background-color: #d6e1ff;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.g1XACUakyskMnf3GgnPW_app-header__account-link__avatar .icon-svg {
+  width: 2rem;
+  height: 2rem;
+}
+@media screen and (max-width: 480px) {
+  .g1XACUakyskMnf3GgnPW_app-header__account-link__text {
+    display: none;
+  }
+}
+.g1XACUakyskMnf3GgnPW_app-header__logo {
+  display: none;
+}
+@media screen and (max-width: 480px) {
+  .g1XACUakyskMnf3GgnPW_app-header__logo_m {
+    display: block;
+  }
+}
+@media screen and (min-width: 481px) {
+  .g1XACUakyskMnf3GgnPW_app-header__logo_d {
+    display: block;
+  }
+}
+
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/hero-input/hero-input.less ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.UNFFH17QLkNPUjfqsi7C_hero-input {
+  color: #1c1825;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  border: 2px solid #0045ff;
+  border-radius: 0.5rem;
+  position: relative;
+  box-sizing: border-box;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f5f8ff;
+  /* 
+    mods
+   */
+}
+@media screen and (max-width: 480px) {
+  .UNFFH17QLkNPUjfqsi7C_hero-input {
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input {
+    margin-left: 0;
+    margin-right: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    flex-wrap: wrap;
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    gap: 0.25rem;
+  }
+  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input_empty.UNFFH17QLkNPUjfqsi7C_hero-input_can-shortcut-paste {
+    gap: 0;
+  }
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input_focus {
+  box-shadow: 0 0 0 0.125rem #d6e1ff;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input_empty .UNFFH17QLkNPUjfqsi7C_hero-input__clear {
+  display: none;
+}
+.__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input_empty .UNFFH17QLkNPUjfqsi7C_hero-input__clear {
+  display: flex;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input_can-shortcut-paste .UNFFH17QLkNPUjfqsi7C_hero-input__paste {
+  display: none;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input_not-empty .UNFFH17QLkNPUjfqsi7C_hero-input__paste {
+  display: none;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input_empty .UNFFH17QLkNPUjfqsi7C_hero-input__create {
+  display: none;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input__input-elem {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01em;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  border: none;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 4rem;
+  outline: none;
+  display: block;
+  padding: 1rem;
+  padding-right: 0;
+  z-index: 1;
+}
+@media screen and (max-width: 480px) {
+  .UNFFH17QLkNPUjfqsi7C_hero-input__input-elem {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.014em;
+    line-height: 1.5rem;
+    padding: 1rem 0 1rem 0.75rem;
+  }
+  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input__input-elem {
+    padding: 0.5rem 0 0.5rem 1.25rem;
+  }
+  .UNFFH17QLkNPUjfqsi7C_hero-input__cta-actions__mobile-tip {
+    display: block;
+  }
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input__actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input__cta-actions {
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input__mobile-tip {
+  display: none;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input__placeholder {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+  line-height: 1.5rem;
+  position: absolute;
+  z-index: 0;
+  color: #7c7887;
+  top: 1rem;
+  left: 1rem;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input__placeholder_show {
+  visibility: visible;
+}
+.UNFFH17QLkNPUjfqsi7C_hero-input__placeholder_hide {
+  visibility: hidden;
+}
+@media screen and (max-width: 480px) {
+  .UNFFH17QLkNPUjfqsi7C_hero-input__placeholder {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.014em;
+    line-height: 1.5rem;
+    left: 0.75rem;
+  }
+  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input__placeholder {
+    top: 1.25rem;
+    left: 1.25rem;
+  }
+}
+
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-display/shortlink-display.less ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
+.RgBfG5zbETNwvdqzYjG3_shortlink-display {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display {
+    padding: 1.25rem 0.75rem;
+  }
+  .__mobile-convenience-state .RgBfG5zbETNwvdqzYjG3_shortlink-display {
+    padding: 1rem 0.75rem 0.75rem 1.25rem;
+  }
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+@media screen and (max-width: 480px) {
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__content-wrapper {
+    gap: 0;
+    flex-grow: 1;
+  }
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper {
+  background: transparent;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-left: -0.25rem;
+  cursor: initial;
+}
+@media screen and (min-width: 481px) {
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink {
+    transition: all 0.1s ease-in;
+    cursor: pointer;
+  }
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+    transition: all 0.1s ease-in;
+    position: relative;
+    top: 0;
+  }
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink:hover {
+    background-color: #f1f0f5;
+  }
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink:hover .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+    color: #1c1825;
+  }
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink:hover .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+    top: -0.125rem;
+  }
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+  color: #4e495a;
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__text_loading {
+  color: transparent !important;
+  background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__text_placeholder-spacing {
+  letter-spacing: 0.5rem;
+  margin-left: 0.4rem;
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display_empty .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+  color: #b0adb9;
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display_error .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+  color: #ba3312;
+}
+@media screen and (max-width: 480px) {
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+    flex-grow: 1;
+  }
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display_empty .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+    flex-grow: 0;
+  }
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+}
+@media screen and (max-width: 480px) {
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+    display: none;
+  }
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-button {
+  display: none;
+}
+@media screen and (max-width: 480px) {
+  .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-button {
+    display: flex;
+  }
+}
+.RgBfG5zbETNwvdqzYjG3_shortlink-display__label {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #4e495a;
+  display: inline-block;
+}
+.shortlink-display-loading-gradient {
+  background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
+}
+.shortlink-display-loading-mixin {
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading 2s linear infinite;
+  color: transparent;
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/snackbar/snackbar.less ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.IuglF75qHd7Zq5_KvgKz_snackbar {
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background-color: rgba(28, 24, 37, 0.96);
+  box-shadow: 0 5px 15px -5px rgba(78, 73, 90, 0.36);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 15.5rem;
+  transition: opacity 150ms ease-in, top 150ms ease-in;
+  overflow: hidden;
+}
+@media screen and (min-width: 481px) {
+  .IuglF75qHd7Zq5_KvgKz_snackbar {
+    min-width: 24rem;
+    max-width: 30rem;
+  }
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__content-wrapper {
+  padding: 0 0 0.75rem 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__message {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  flex-grow: 1;
+  padding-top: 0.75rem;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__dismiss {
+  color: #b0adb9;
+  padding: 0.75rem 0.75rem 0 0;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__snackbar-action {
+  display: flex;
+  padding: 0.5rem 0.75rem 0.75rem 0;
+  align-self: flex-end;
+  color: #adc4ff;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__transition-appear,
+.IuglF75qHd7Zq5_KvgKz_snackbar__transition-enter {
+  opacity: 0;
+  top: 0.5rem;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__transition-appear-active,
+.IuglF75qHd7Zq5_KvgKz_snackbar__transition-enter-active {
+  opacity: 1;
+  top: 0;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__transition-exit {
+  opacity: 1;
+  top: 0;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__transition-exit-active {
+  opacity: 0;
+  top: 0.5rem;
+}
+.IuglF75qHd7Zq5_KvgKz_snackbar__timer-progress {
+  animation-name: timer-progress-animation;
+  animation-timing-function: linear;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #e4e1ea;
+}
+@keyframes timer-progress-animation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/History/History.less ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+.a3Hpy8edUYXG7tzexKMg_history-widget {
+  box-sizing: border-box;
+  display: flex;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 1.25rem 0;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget {
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 2px #e4e1ea;
+    padding-top: 0.75rem;
+    gap: 0;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: -1px 0 0 0 #e4e1ea;
+  gap: 0.125rem;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__link-block:first-child {
+  box-shadow: none;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block:first-child {
+    box-shadow: none !important;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover {
+  box-shadow: 0 2px 7px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
+  border-radius: 2px;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover + .a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+  box-shadow: none;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+    width: auto;
+    box-shadow: 0 -1px 0 0 #e4e1ea;
+  }
+  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover,
+  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover + .a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+    box-shadow: 0 -1px 0 0 #e4e1ea;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__link-list {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__link-list {
+    flex-direction: column;
+    margin: 0 0.75rem;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__full-link {
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem 0.75rem 1rem;
+  gap: 0.25rem;
+  align-items: center;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__full-link__span {
+  display: flex;
+  height: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__full-link {
+    padding: 0.125rem 0 1rem 0;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  align-items: center;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+  padding: 0.75rem 1rem 0 1rem;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink__span {
+  display: flex;
+  height: 1.25rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__shortlink {
+    padding: 1rem 0 0.125rem 0;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
+.a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+  display: flex;
+  opacity: 0;
+  color: #7c7887;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  height: 1rem;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink:hover .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink:hover .a3Hpy8edUYXG7tzexKMg_history-widget__separator,
+.a3Hpy8edUYXG7tzexKMg_history-widget__full-link:hover .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
+.a3Hpy8edUYXG7tzexKMg_history-widget__full-link:hover .a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+  opacity: 1;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink_anim-active .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink_anim-active .a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+  opacity: 1 !important;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
+  .a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+    opacity: 1 !important;
+  }
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__action-hint__animated-inner {
+  position: relative;
+  display: flex;
+  animation-timing-function: ease-in;
+  animation-duration: 1000ms;
+  animation-timing-function: ease-in-out;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink_anim-active .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint__animated-inner {
+  animation-name: test-swap;
+}
+.a3Hpy8edUYXG7tzexKMg_history-widget__header {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #7c7887;
+  padding: 0 1rem;
+}
+@media screen and (max-width: 480px) {
+  .a3Hpy8edUYXG7tzexKMg_history-widget__header {
+    padding: 0 0.75rem;
+  }
+}
+@keyframes test-swap {
+  0% {
+    top: 0rem;
+  }
+  12% {
+    top: -1rem;
+  }
+  88% {
+    top: -1rem;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Footer/footer.less ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+.CKs9BDeQeqjvEz3wQlrv_footer {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #7c7887;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.375rem 0;
+  border-top: 1px solid #f1f0f5;
+  margin: 0 1rem;
+}
+@media screen and (max-width: 480px) {
+  .CKs9BDeQeqjvEz3wQlrv_footer {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.375rem 0;
+    margin: 0 1.25rem;
+  }
+}
+.CKs9BDeQeqjvEz3wQlrv_footer__wrapper {
+  width: calc(100vw * 2 / 3);
+  max-width: 64rem;
+  margin: 0 auto;
+}
+@media screen and (max-width: 480px) {
+  .CKs9BDeQeqjvEz3wQlrv_footer__wrapper {
+    width: 100%;
+  }
+}
+.CKs9BDeQeqjvEz3wQlrv_footer__item {
+  height: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+}
+.CKs9BDeQeqjvEz3wQlrv_footer__flag-icon {
+  box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
+  border-radius: 2px;
+}
+
+
+/*# sourceMappingURL=main.css.map*/

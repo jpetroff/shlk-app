@@ -11,7 +11,7 @@ export default {
 	*/
 	regexWeburl: new RegExp(
 		"^" +
-			// protocol identifier (optional)
+			// protocol identifier
 			"(https?|ftp):\/\/" +
 			// user:pass BasicAuth (optional)
 			"(?:\\S+(?::\\S*)?@)?" +

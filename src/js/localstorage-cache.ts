@@ -1,5 +1,5 @@
 import * as _ from 'underscore'
-import proxyStorage from './proxy-storage'
+import proxyStorage from './proxy-storage.webapp'
 import linkTools from './url-tools'
 
 export type ShortlinkLocal = {

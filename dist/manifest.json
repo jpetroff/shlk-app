@@ -1,0 +1,45 @@
+{
+  "manifest_version":3,
+  "version":"1.0.1",
+  "name":"shlk.cc — copy and create shortlinks",
+	"icons": {
+		"48": "/assets/favicon/mstile-70x70.png",
+		"96": "/assets/favicon/mstile-70x70.png"
+	},
+	"permissions": [
+    "tabs",
+    "bookmarks",
+		"clipboardRead",
+		"clipboardWrite",
+		"bookmarks",
+		"alarms",
+		"cookies",
+		"notifications",
+		"storage",
+		"browsingData"
+  ],
+  "optional_permissions": [
+  ],
+	"host_permissions": [
+		"http://localhost:8002/",
+		"https://shlk.cc/",
+		"https://localhost/"
+	],
+	"action":{
+		"default_popup": "index.html",
+		"default_icon": "/assets/favicon/mstile-70x70.png"
+	},
+	"background": {
+    "service_worker": "js/background.js",
+    "type": "module" //optional
+  },
+	"commands": {
+		"_execute_action": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+C",
+				"mac": "Command+Shift+C"
+			},
+			"description": "Shorten active tab URL"
+		}
+	}
+}
