@@ -1,4 +1,4 @@
-import styles from './shortlink-slug-input.less'
+import styles from './styles-shortlink-slug-input.less'
 import * as _ from 'underscore'
 import * as React from 'react'
 import Link, { LinkColors } from '../link'
@@ -96,8 +96,7 @@ export const ShortlinkSlugInput : React.FC<Props> = (
             })
           }
         </div>
-        <Link 
-            href='#'
+        <Link
             className={`${globalClass}__copy_pseudolink`}
             colorScheme={LinkColors.APP}
             isDisabled={_.isEmpty(generatedLink) || error}

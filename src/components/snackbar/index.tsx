@@ -1,4 +1,4 @@
-import styles from './snackbar.less'
+import styles from './styles-snackbar.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import Button, { ButtonSize, ButtonType } from '../button'

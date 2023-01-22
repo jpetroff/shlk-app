@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import styles from './Home.less'
+import styles from './styles-shortlink-bar.less'
 import { checkMobileMQ, modifyURLSlug, validateURL, setCookie, getCookie } from '../../js/utils'
 import { HTMLAnyInput, AnyObject } from '../../js/constants'
-import { WithRouterProps } from '../../js/router-hoc'
 
 import * as React from 'react'
 import * as _ from 'underscore'
@@ -10,7 +9,7 @@ import * as _ from 'underscore'
 import HeroInput from '../../components/hero-input/index'
 import ShortlinkDisplay from '../../components/shortlink-display'
 import ShortlinkSlugInput, { TextPattern, SlugInputSpecialChars } from '../../components/shortlink-slug-input'
-import Snackbar from '../../components/snackbar'
+import Snackbar from '../../components/snackbar' 
 
 import linkTools from '../../js/url-tools'
 import clipboardTools from '../../js/clipboard-tools'
@@ -19,10 +18,7 @@ import Query from '../../js/shortlink-queries'
 import LSC, {ShortlinkLocalStorage} from '../../js/localstorage-cache'
 import GracefulError, { GracefulErrorType } from './errors'
 
-import Header from '../Header'
 import { HistoryWidget } from '../History'
-import Footer from '../Footer'
-
 
 const config = require('../../js/config')
 
@@ -56,7 +52,7 @@ type State = {
 }
 
 
-export class Home extends React.Component<Props, State> {
+export default class ShortlinkBar extends React.Component<Props, State> {
   private heroInputRef: React.RefObject<HTMLAnyInput>
 
   constructor(props) {
@@ -340,7 +336,6 @@ export class Home extends React.Component<Props, State> {
     const mobileConvenienceClass = this.state.mobileConvenienceInput ? '__mobile-convenience-state' : ''
     return (
         <div className={`${globalClass}`}>
-          <Header />
           <div className={`${globalClass}__layout`}>
             <div className={`${globalClass}__shortlink-block ${mobileConvenienceClass}`}>
               <div className={`${globalClass}__offset-wrapper`}>
@@ -388,7 +383,6 @@ export class Home extends React.Component<Props, State> {
               <HistoryWidget list={this.state.cachedShortlinks} totalCount={this.state.cachedShortlinks.length} />
             </div>
           </div>
-          <Footer />
         </div>
     )
   }

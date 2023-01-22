@@ -1,4 +1,4 @@
-import styles from './contenteditable-input.less'
+import styles from './styles-contenteditable-input.less'
 import * as _ from 'underscore'
 import * as React from 'react'
 import ContentEditable, {ContentEditableEvent, Props} from 'react-contenteditable'

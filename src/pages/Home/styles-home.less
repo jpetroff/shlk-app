@@ -1,0 +1,11 @@
+@import (reference) '../../css/_constants.less';
+
+:local(.wrapperClass)_page-home {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @media @mq-mobile {
+    height: ~"calc(100% + 3.0625rem)";
+  }
+}

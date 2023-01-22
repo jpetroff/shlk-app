@@ -1,4 +1,4 @@
-import styles from './Header.less'
+import styles from './styles-header.less'
 import * as React from 'react'
 
 import Icon, { Logo, LogoC, Avatar, IconSize } from '../../components/icons'
@@ -26,7 +26,7 @@ const Header : React.FC<Props> = (
       </div>
       <div className={`${globalClass}__middle`}></div>
       <div className={`${globalClass}__user`}>
-        <Link className={`${globalClass}__account-link`} isDisabled={true}
+        <Link className={`${globalClass}__account-link`} isDisabled={false} to="/app/login"
         >
           <div className={`${globalClass}__account-link__avatar`}><Icon useIcon={Avatar} size={IconSize.LARGE} /></div>
           <div className={`${globalClass}__account-link__text`}>Sign in</div>

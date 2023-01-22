@@ -1,4 +1,4 @@
-import styles from './tooltip.less'
+import styles from './styles-tooltip.less'
 import * as React from 'react'
 import { CSSTransition } from 'react-transition-group'
 

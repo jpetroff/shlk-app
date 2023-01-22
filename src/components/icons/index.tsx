@@ -1,4 +1,4 @@
-import styles from './icons.less'
+import styles from './styles-icons.less'
 import * as React from 'react'
 
 import LogoSvg from '../../assets/svg/logo.svg'

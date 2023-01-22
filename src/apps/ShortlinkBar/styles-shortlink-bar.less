@@ -7,12 +7,8 @@
 :local(.homepage)_app-body {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
   margin: 0;
-
-  @media @mq-mobile {
-    height: ~"calc(100% + 3.0625rem)";
-  }
 
   &__layout {
     display: flex;

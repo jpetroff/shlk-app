@@ -1,4 +1,4 @@
-import styles from './History.less'
+import styles from './styles-history.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import {ShortlinkLocalStorage} from '../../js/localstorage-cache'
@@ -65,7 +65,7 @@ const HistoryWidget : React.FC<Props> = (
             className={`${globalClass}__link-block`} 
             key={key}
             >
-            <Link 
+            <Link
               onClick={(event) => handleClick(shortlink, key, event)}
               className={`${globalClass}__shortlink ${activeKey == key ? globalClass+'__shortlink_anim-active' : ''}`} 
             >

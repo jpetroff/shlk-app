@@ -1,4 +1,4 @@
-import styles from './footer.less'
+import styles from './styles-footer.less'
 import * as React from 'react'
 import Flag from '../../assets/svg/flag_fi_16.svg'
 import Heart from '../../assets/svg/w_love_14.svg'

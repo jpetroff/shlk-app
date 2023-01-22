@@ -423,25 +423,6 @@ html.extension {
   width: 480px;
   height: 600px;
 }
-.document {
-  font-size: 16px;
-}
-@font-face {
-  font-family: 'Mori';
-  src: url(/assets/fonts/PPMori-SemiBold.eot);
-  src: url(/assets/fonts/PPMori-SemiBold.woff) format('woff'), url(/assets/fonts/PPMori-SemiBold.woff2) format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-body {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'liga', 'kern';
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-size: 1rem;
-  color: #1c1825;
-}
 .__loading-skeleton-wrapper {
   position: absolute;
   display: flex;
@@ -508,272 +489,120 @@ body {
     width: 44%;
   }
 }
-
-/*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Home/Home.less ***!
-  \************************************************************************************************************************************************************************************************************************************************************/
-.zLgrqy89mJpIMhikjpR5 {
-  background-color: white;
+.document {
+  font-size: 16px;
 }
-.zLgrqy89mJpIMhikjpR5_app-body {
+@font-face {
+  font-family: 'Mori';
+  src: url(/assets/fonts/PPMori-SemiBold.eot);
+  src: url(/assets/fonts/PPMori-SemiBold.woff) format('woff'), url(/assets/fonts/PPMori-SemiBold.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga', 'kern';
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  color: #1c1825;
+}
+
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/pages/Home/styles-home.less ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+.XtXxp0pJ8jLdhAjacNyU_page-home {
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 0;
 }
 @media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body {
+  .XtXxp0pJ8jLdhAjacNyU_page-home {
     height: calc(100% + 3.0625rem);
   }
 }
-.zLgrqy89mJpIMhikjpR5_app-body__layout {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  width: calc(100vw * 2 / 3);
-  max-width: 64rem;
-  margin: 0 auto;
-}
-@media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body__layout {
-    margin: 0 1.25rem;
-    width: auto;
-    justify-content: flex-end;
-  }
-}
-.zLgrqy89mJpIMhikjpR5_app-body__shortlink-block {
+
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Header/styles-header.less ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+.rZf2AbGKDN3xcX2bC4Eh_app-header {
   position: relative;
-  display: flex;
-  flex-direction: column;
-}
-@media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body__shortlink-block {
-    flex-grow: 1;
-    justify-content: center;
-  }
-}
-.zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
-  height: calc(50vh - 4.725rem);
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  width: 100%;
-}
-@media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
-    height: auto;
-    padding-top: 2.5rem;
-  }
-}
-@media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
-    height: auto;
-    padding-top: 2.5rem;
-  }
-  .__mobile-convenience-state .zLgrqy89mJpIMhikjpR5_app-body__offset-wrapper {
-    padding: 0;
-  }
-}
-@media screen and (max-width: 480px) {
-  .__mobile-convenience-state.zLgrqy89mJpIMhikjpR5_app-body__shortlink-block {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #ffffff;
-    box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
-    border-radius: 0px 0px 0.5rem 0.5rem;
-  }
-}
-.zLgrqy89mJpIMhikjpR5_app-body__snackbar-container {
-  position: absolute;
-  top: 100%;
-  padding-top: 1.25rem;
+  padding-top: 1.75rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
 }
 @media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body__snackbar-container {
-    position: absolute;
-    top: 100%;
-    padding-top: 1.25rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    left: 0;
-    right: 0;
-    transform: none;
+  .rZf2AbGKDN3xcX2bC4Eh_app-header {
+    padding: 1rem 1.25rem;
+    padding-bottom: 0;
   }
 }
-.zLgrqy89mJpIMhikjpR5_app-body__footer-wrapper {
-  display: flex;
+.rZf2AbGKDN3xcX2bC4Eh_app-header__middle {
   flex-grow: 1;
-  flex-direction: column;
 }
-.zLgrqy89mJpIMhikjpR5_app-body__footer-wrapper:before {
-  content: '';
+.rZf2AbGKDN3xcX2bC4Eh_app-header__account-link {
   display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  width: 100%;
-}
-@media screen and (max-width: 480px) {
-  .zLgrqy89mJpIMhikjpR5_app-body__footer-wrapper {
-    flex-grow: 0;
-  }
-}
-
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-slug-input/shortlink-slug-input.less ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************/
-.FGZWw5GuJsSrNN3zElWl_slug-input {
-  padding-top: 2rem;
-  color: #4e495a;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 1.25rem 1rem;
-  border-top: 2px solid #e4e1ea;
-  vertical-align: baseline;
-}
-@media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input {
-    padding: 1rem 0 0.75rem 0;
-    gap: 0rem;
-  }
-  .__mobile-convenience-state .FGZWw5GuJsSrNN3zElWl_slug-input {
-    padding-left: 1.25rem;
-    padding-right: 0.75rem;
-  }
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__label {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 0.81rem;
-  line-height: 1rem;
-  letter-spacing: 0.02em;
-  color: #4e495a;
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__action-wrapper {
-  background: transparent;
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  display: flex;
-  align-items: baseline;
-  gap: 1.25rem;
-  margin-left: -0.25rem;
-}
-@media screen and (max-width: 480px) {
-  .__mobile-convenience-state .FGZWw5GuJsSrNN3zElWl_slug-input__action-wrapper {
-    flex-grow: 1;
-  }
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__input-common-style {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.12rem;
+  line-height: 1.5rem;
   letter-spacing: 0.01em;
-  color: #4e495a;
-  padding: 0;
-  line-height: inherit;
-  display: inline-block;
 }
-.FGZWw5GuJsSrNN3zElWl_slug-input_error .FGZWw5GuJsSrNN3zElWl_slug-input__input-common-style {
-  color: #ba3312;
+.rZf2AbGKDN3xcX2bC4Eh_app-header__account-link__avatar {
+  height: 2.875rem;
+  width: 2.875rem;
+  background-color: #d6e1ff;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input__input-common-style {
-    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.12rem;
-    line-height: 1.5rem;
-    letter-spacing: 0.01em;
-    line-height: 1.625rem;
-    vertical-align: baseline;
-  }
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable {
-  padding: 0;
-  min-width: 0.25rem;
-  position: relative;
-  display: inline-block;
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__real-input {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  border: none;
-  padding: 0;
-  margin: 0;
-  height: auto;
-  background-color: transparent;
-  z-index: 1;
-  outline: none;
-  border-radius: 0;
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__real-input:focus {
-  border-bottom: 2px solid #4e495a;
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__width-sizer_hide {
-  opacity: 0;
-  z-index: 0;
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable__width-sizer_show {
-  opacity: 1;
-  z-index: 0;
-  color: #b0adb9;
+.rZf2AbGKDN3xcX2bC4Eh_app-header__account-link__avatar .icon-svg {
+  width: 2rem;
+  height: 2rem;
 }
 @media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input__input-resizable {
-    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.12rem;
-    line-height: 1.5rem;
-    letter-spacing: 0.01em;
-    line-height: 1.625rem;
-    vertical-align: baseline;
-  }
-}
-.FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_pseudolink {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1rem;
-  line-height: 1.25rem;
-  letter-spacing: 0.014em;
-}
-@media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_pseudolink {
+  .rZf2AbGKDN3xcX2bC4Eh_app-header__account-link__text {
     display: none;
   }
 }
-.FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_button {
+.rZf2AbGKDN3xcX2bC4Eh_app-header__logo {
   display: none;
 }
 @media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input .FGZWw5GuJsSrNN3zElWl_slug-input__copy_button {
-    display: flex;
-  }
-}
-@media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input__content-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
+  .rZf2AbGKDN3xcX2bC4Eh_app-header__logo_m {
+    display: block;
   }
 }
 @media screen and (min-width: 481px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input__mlbr {
-    display: none;
-  }
-}
-@media screen and (max-width: 480px) {
-  .FGZWw5GuJsSrNN3zElWl_slug-input__lbr {
-    display: none;
+  .rZf2AbGKDN3xcX2bC4Eh_app-header__logo_d {
+    display: block;
   }
 }
 
-/*!******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/link/link.less ***!
-  \******************************************************************************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/icons/styles-icons.less ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+.aKrTBR4KEoH2SwLeWQHq svg {
+  width: 100%;
+  height: 100%;
+}
+.icon-svg_size-large {
+  width: 24px;
+  height: 24px;
+}
+.icon-svg_size-small {
+  width: 20px;
+  height: 20px;
+}
+
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/link/styles-link.less ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
 .link-loading-gradient {
   background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
 }
@@ -787,39 +616,39 @@ body {
 .link-block {
   cursor: pointer;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link {
+.joxf0lfMlLTC_8e5Zg59_link {
   box-sizing: border-box;
   text-decoration: none !important;
   cursor: pointer;
   outline: #7e9ef1;
   position: relative;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link_app,
-.DUNkWEdpRmL3Ce2KwU1I_link:visited {
+.joxf0lfMlLTC_8e5Zg59_link_app,
+.joxf0lfMlLTC_8e5Zg59_link:visited {
   color: #0045ff;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link_user {
+.joxf0lfMlLTC_8e5Zg59_link_user {
   color: #5314ff;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link_user:visited {
+.joxf0lfMlLTC_8e5Zg59_link_user:visited {
   color: #8d509b;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link:hover,
-.link-block:hover .DUNkWEdpRmL3Ce2KwU1I_link {
+.joxf0lfMlLTC_8e5Zg59_link:hover,
+.link-block:hover .joxf0lfMlLTC_8e5Zg59_link {
   color: #e03d16;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link:active,
-.link-block:active .DUNkWEdpRmL3Ce2KwU1I_link {
+.joxf0lfMlLTC_8e5Zg59_link:active,
+.link-block:active .joxf0lfMlLTC_8e5Zg59_link {
   color: #ba3312;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link_disabled,
-.DUNkWEdpRmL3Ce2KwU1I_link_disabled:visited,
-.DUNkWEdpRmL3Ce2KwU1I_link_disabled:active,
-.DUNkWEdpRmL3Ce2KwU1I_link_disabled:hover {
+.joxf0lfMlLTC_8e5Zg59_link_disabled,
+.joxf0lfMlLTC_8e5Zg59_link_disabled:visited,
+.joxf0lfMlLTC_8e5Zg59_link_disabled:active,
+.joxf0lfMlLTC_8e5Zg59_link_disabled:hover {
   color: #9692a0;
   cursor: not-allowed;
 }
-.DUNkWEdpRmL3Ce2KwU1I_link_loading {
+.joxf0lfMlLTC_8e5Zg59_link_loading {
   background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -828,29 +657,13 @@ body {
   color: transparent;
 }
 
-/*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/icons/icons.less ***!
-  \********************************************************************************************************************************************************************************************************************************************************************/
-.yU3DGxl1KZkVFqC3cCvh svg {
-  width: 100%;
-  height: 100%;
-}
-.icon-svg_size-large {
-  width: 24px;
-  height: 24px;
-}
-.icon-svg_size-small {
-  width: 20px;
-  height: 20px;
-}
-
-/*!************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/tooltip/tooltip.less ***!
-  \************************************************************************************************************************************************************************************************************************************************************************/
-.QtduWhr80zneTuxPwQWA_tooltip {
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/tooltip/styles-tooltip.less ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.Xkn4egT2cUj4GvjvB30h_tooltip {
   box-sizing: border-box;
 }
-.Ix0Z_Q0BA0SpwEf4Vh0n_flyover {
+.quHaxHd9qf2jPZdS_XIt_flyover {
   box-sizing: border-box;
   position: absolute;
   left: 50%;
@@ -880,9 +693,266 @@ body {
   opacity: 0;
 }
 
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/button/button.less ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/ShortlinkBar/styles-shortlink-bar.less ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+.uX1loPVNRTk8j9VgmdWu {
+  background-color: white;
+}
+.uX1loPVNRTk8j9VgmdWu_app-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0;
+}
+.uX1loPVNRTk8j9VgmdWu_app-body__layout {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: calc(100vw * 2 / 3);
+  max-width: 64rem;
+  margin: 0 auto;
+}
+@media screen and (max-width: 480px) {
+  .uX1loPVNRTk8j9VgmdWu_app-body__layout {
+    margin: 0 1.25rem;
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+.uX1loPVNRTk8j9VgmdWu_app-body__shortlink-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 480px) {
+  .uX1loPVNRTk8j9VgmdWu_app-body__shortlink-block {
+    flex-grow: 1;
+    justify-content: center;
+  }
+}
+.uX1loPVNRTk8j9VgmdWu_app-body__offset-wrapper {
+  height: calc(50vh - 4.725rem);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 100%;
+}
+@media screen and (max-width: 480px) {
+  .uX1loPVNRTk8j9VgmdWu_app-body__offset-wrapper {
+    height: auto;
+    padding-top: 2.5rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .uX1loPVNRTk8j9VgmdWu_app-body__offset-wrapper {
+    height: auto;
+    padding-top: 2.5rem;
+  }
+  .__mobile-convenience-state .uX1loPVNRTk8j9VgmdWu_app-body__offset-wrapper {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state.uX1loPVNRTk8j9VgmdWu_app-body__shortlink-block {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
+    border-radius: 0px 0px 0.5rem 0.5rem;
+  }
+}
+.uX1loPVNRTk8j9VgmdWu_app-body__snackbar-container {
+  position: absolute;
+  top: 100%;
+  padding-top: 1.25rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media screen and (max-width: 480px) {
+  .uX1loPVNRTk8j9VgmdWu_app-body__snackbar-container {
+    position: absolute;
+    top: 100%;
+    padding-top: 1.25rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+}
+.uX1loPVNRTk8j9VgmdWu_app-body__footer-wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.uX1loPVNRTk8j9VgmdWu_app-body__footer-wrapper:before {
+  content: '';
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+}
+@media screen and (max-width: 480px) {
+  .uX1loPVNRTk8j9VgmdWu_app-body__footer-wrapper {
+    flex-grow: 0;
+  }
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-slug-input/styles-shortlink-slug-input.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+.PNfNbDTmGG95JCxskKgQ_slug-input {
+  padding-top: 2rem;
+  color: #4e495a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem 1rem;
+  border-top: 2px solid #e4e1ea;
+  vertical-align: baseline;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input {
+    padding: 1rem 0 0.75rem 0;
+    gap: 0rem;
+  }
+  .__mobile-convenience-state .PNfNbDTmGG95JCxskKgQ_slug-input {
+    padding-left: 1.25rem;
+    padding-right: 0.75rem;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__label {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #4e495a;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__action-wrapper {
+  background: transparent;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-left: -0.25rem;
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state .PNfNbDTmGG95JCxskKgQ_slug-input__action-wrapper {
+    flex-grow: 1;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #4e495a;
+  padding: 0;
+  line-height: inherit;
+  display: inline-block;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input_error .PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
+  color: #ba3312;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+    line-height: 1.625rem;
+    vertical-align: baseline;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable {
+  padding: 0;
+  min-width: 0.25rem;
+  position: relative;
+  display: inline-block;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__real-input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  background-color: transparent;
+  z-index: 1;
+  outline: none;
+  border-radius: 0;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__real-input:focus {
+  border-bottom: 2px solid #4e495a;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__width-sizer_hide {
+  opacity: 0;
+  z-index: 0;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__width-sizer_show {
+  opacity: 1;
+  z-index: 0;
+  color: #b0adb9;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+    line-height: 1.625rem;
+    vertical-align: baseline;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_pseudolink {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_pseudolink {
+    display: none;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_button {
+  display: none;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_button {
+    display: flex;
+  }
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 481px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__mlbr {
+    display: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__lbr {
+    display: none;
+  }
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/button/styles-button.less ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
 .button-shadow-backdrop {
   content: ' ';
   position: absolute;
@@ -918,7 +988,7 @@ body {
   animation: loading 2s linear infinite;
   color: transparent;
 }
-.DxYB4DbpuNCYM3P51g20_button {
+.sA4oqQHvNbL0NiVpoMNj_button {
   display: flex;
   border-radius: 4px;
   align-items: center;
@@ -935,13 +1005,13 @@ body {
 		Types
 	 */
 }
-.DxYB4DbpuNCYM3P51g20_button:focus {
+.sA4oqQHvNbL0NiVpoMNj_button:focus {
   box-shadow: 0 0 0 0.125rem #d6e1ff;
 }
-.DxYB4DbpuNCYM3P51g20_button_disabled {
+.sA4oqQHvNbL0NiVpoMNj_button_disabled {
   cursor: not-allowed;
 }
-.DxYB4DbpuNCYM3P51g20_button_large {
+.sA4oqQHvNbL0NiVpoMNj_button_large {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
   line-height: 1.25rem;
@@ -950,16 +1020,16 @@ body {
   gap: 0.5rem;
   height: 2.5rem;
 }
-.DxYB4DbpuNCYM3P51g20_button_large:active {
+.sA4oqQHvNbL0NiVpoMNj_button_large:active {
   transform: scale(0.96);
 }
-.DxYB4DbpuNCYM3P51g20_button_large.DxYB4DbpuNCYM3P51g20_button_icon-only {
+.sA4oqQHvNbL0NiVpoMNj_button_large.sA4oqQHvNbL0NiVpoMNj_button_icon-only {
   padding: 0.5rem;
 }
-.DxYB4DbpuNCYM3P51g20_button_large.DxYB4DbpuNCYM3P51g20_button_icon-only:active {
+.sA4oqQHvNbL0NiVpoMNj_button_large.sA4oqQHvNbL0NiVpoMNj_button_icon-only:active {
   transform: scale(0.9);
 }
-.DxYB4DbpuNCYM3P51g20_button_small {
+.sA4oqQHvNbL0NiVpoMNj_button_small {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 0.81rem;
   line-height: 1rem;
@@ -968,20 +1038,20 @@ body {
   gap: 0.25rem;
   height: 2rem;
 }
-.DxYB4DbpuNCYM3P51g20_button_small:active {
+.sA4oqQHvNbL0NiVpoMNj_button_small:active {
   transform: scale(0.94);
 }
-.DxYB4DbpuNCYM3P51g20_button_small.DxYB4DbpuNCYM3P51g20_button_icon-only {
+.sA4oqQHvNbL0NiVpoMNj_button_small.sA4oqQHvNbL0NiVpoMNj_button_icon-only {
   padding: 0.375rem;
 }
-.DxYB4DbpuNCYM3P51g20_button_small.DxYB4DbpuNCYM3P51g20_button_icon-only:active {
+.sA4oqQHvNbL0NiVpoMNj_button_small.sA4oqQHvNbL0NiVpoMNj_button_icon-only:active {
   transform: scale(0.94);
 }
-.DxYB4DbpuNCYM3P51g20_button_primary {
+.sA4oqQHvNbL0NiVpoMNj_button_primary {
   background-color: #0b42d6;
   color: #f5f8ff;
 }
-.DxYB4DbpuNCYM3P51g20_button_primary:after {
+.sA4oqQHvNbL0NiVpoMNj_button_primary:after {
   content: ' ';
   position: absolute;
   border-radius: 4px;
@@ -992,14 +1062,14 @@ body {
   background: linear-gradient(180deg, rgba(28, 24, 37, 0) 0%, rgba(28, 24, 37, 0.12) 100%);
   z-index: -1;
 }
-.DxYB4DbpuNCYM3P51g20_button_primary:hover {
+.sA4oqQHvNbL0NiVpoMNj_button_primary:hover {
   color: #ffffff;
 }
-.DxYB4DbpuNCYM3P51g20_button_primary.DxYB4DbpuNCYM3P51g20_button_disabled {
+.sA4oqQHvNbL0NiVpoMNj_button_primary.sA4oqQHvNbL0NiVpoMNj_button_disabled {
   background-color: #7e9ef1;
   color: #f5f8ff;
 }
-.DxYB4DbpuNCYM3P51g20_button_primary.DxYB4DbpuNCYM3P51g20_button_loading .DxYB4DbpuNCYM3P51g20_button__label {
+.sA4oqQHvNbL0NiVpoMNj_button_primary.sA4oqQHvNbL0NiVpoMNj_button_loading .sA4oqQHvNbL0NiVpoMNj_button__label {
   display: inline-block;
   background: linear-gradient(to right, #f5f8ff 0%, #f5f8ff 15%, #7e9ef1 46%, #7e9ef1 54%, #f5f8ff 85%, #f5f8ff 100%);
   background-size: 200% 100%;
@@ -1008,30 +1078,30 @@ body {
   animation: loading 2s linear infinite;
   color: transparent;
 }
-.DxYB4DbpuNCYM3P51g20_button_ghost {
+.sA4oqQHvNbL0NiVpoMNj_button_ghost {
   background-color: transparent;
 }
-.DxYB4DbpuNCYM3P51g20_button_ghost:hover {
+.sA4oqQHvNbL0NiVpoMNj_button_ghost:hover {
   background-color: #f5f8ff;
 }
-.DxYB4DbpuNCYM3P51g20_button_ghost.DxYB4DbpuNCYM3P51g20_button_icon_only:hover {
+.sA4oqQHvNbL0NiVpoMNj_button_ghost.sA4oqQHvNbL0NiVpoMNj_button_icon_only:hover {
   background-color: transparent;
 }
-.DxYB4DbpuNCYM3P51g20_button_ghost.DxYB4DbpuNCYM3P51g20_button_disabled {
+.sA4oqQHvNbL0NiVpoMNj_button_ghost.sA4oqQHvNbL0NiVpoMNj_button_disabled {
   color: #7c7887;
 }
-.DxYB4DbpuNCYM3P51g20_button_secondary,
-.DxYB4DbpuNCYM3P51g20_button_ghost {
+.sA4oqQHvNbL0NiVpoMNj_button_secondary,
+.sA4oqQHvNbL0NiVpoMNj_button_ghost {
   color: #0045ff;
 }
-.DxYB4DbpuNCYM3P51g20_button_secondary:hover,
-.DxYB4DbpuNCYM3P51g20_button_ghost:hover {
+.sA4oqQHvNbL0NiVpoMNj_button_secondary:hover,
+.sA4oqQHvNbL0NiVpoMNj_button_ghost:hover {
   color: #0b42d6;
 }
-.DxYB4DbpuNCYM3P51g20_button_secondary {
+.sA4oqQHvNbL0NiVpoMNj_button_secondary {
   background-color: #d6e1ff;
 }
-.DxYB4DbpuNCYM3P51g20_button_secondary:after {
+.sA4oqQHvNbL0NiVpoMNj_button_secondary:after {
   content: ' ';
   position: absolute;
   border-radius: 4px;
@@ -1042,11 +1112,11 @@ body {
   background: linear-gradient(180deg, rgba(28, 24, 37, 0) 0%, rgba(28, 24, 37, 0.06) 100%);
   z-index: -1;
 }
-.DxYB4DbpuNCYM3P51g20_button_secondary.DxYB4DbpuNCYM3P51g20_button_disabled {
+.sA4oqQHvNbL0NiVpoMNj_button_secondary.sA4oqQHvNbL0NiVpoMNj_button_disabled {
   background-color: #d6e1ff;
   color: #5f84e7;
 }
-.DxYB4DbpuNCYM3P51g20_button_secondary.DxYB4DbpuNCYM3P51g20_button_loading .DxYB4DbpuNCYM3P51g20_button__label {
+.sA4oqQHvNbL0NiVpoMNj_button_secondary.sA4oqQHvNbL0NiVpoMNj_button_loading .sA4oqQHvNbL0NiVpoMNj_button__label {
   display: inline-block;
   background: linear-gradient(to right, #5f84e7 0%, #5f84e7 15%, #d6e1ff 46%, #d6e1ff 54%, #5f84e7 85%, #5f84e7 100%);
   background-size: 200% 100%;
@@ -1056,71 +1126,10 @@ body {
   color: transparent;
 }
 
-/*!****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Header/Header.less ***!
-  \****************************************************************************************************************************************************************************************************************************************************************/
-.g1XACUakyskMnf3GgnPW_app-header {
-  position: relative;
-  padding-top: 1.75rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  display: flex;
-}
-@media screen and (max-width: 480px) {
-  .g1XACUakyskMnf3GgnPW_app-header {
-    padding: 1rem 1.25rem;
-    padding-bottom: 0;
-  }
-}
-.g1XACUakyskMnf3GgnPW_app-header__middle {
-  flex-grow: 1;
-}
-.g1XACUakyskMnf3GgnPW_app-header__account-link {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.12rem;
-  line-height: 1.5rem;
-  letter-spacing: 0.01em;
-}
-.g1XACUakyskMnf3GgnPW_app-header__account-link__avatar {
-  height: 2.875rem;
-  width: 2.875rem;
-  background-color: #d6e1ff;
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.g1XACUakyskMnf3GgnPW_app-header__account-link__avatar .icon-svg {
-  width: 2rem;
-  height: 2rem;
-}
-@media screen and (max-width: 480px) {
-  .g1XACUakyskMnf3GgnPW_app-header__account-link__text {
-    display: none;
-  }
-}
-.g1XACUakyskMnf3GgnPW_app-header__logo {
-  display: none;
-}
-@media screen and (max-width: 480px) {
-  .g1XACUakyskMnf3GgnPW_app-header__logo_m {
-    display: block;
-  }
-}
-@media screen and (min-width: 481px) {
-  .g1XACUakyskMnf3GgnPW_app-header__logo_d {
-    display: block;
-  }
-}
-
-/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/hero-input/hero-input.less ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************/
-.UNFFH17QLkNPUjfqsi7C_hero-input {
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/hero-input/styles-hero-input.less ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+.Ln1Azy9g3YaOiJSiDx3g_hero-input {
   color: #1c1825;
   width: 100%;
   display: flex;
@@ -1138,11 +1147,11 @@ body {
    */
 }
 @media screen and (max-width: 480px) {
-  .UNFFH17QLkNPUjfqsi7C_hero-input {
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input {
     margin-left: -2px;
     margin-right: -2px;
   }
-  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input {
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input {
     margin-left: 0;
     margin-right: 0;
     border-top: none;
@@ -1153,29 +1162,29 @@ body {
     padding: 0.75rem 0.75rem 0.75rem 0;
     gap: 0.25rem;
   }
-  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input_empty.UNFFH17QLkNPUjfqsi7C_hero-input_can-shortcut-paste {
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input_empty.Ln1Azy9g3YaOiJSiDx3g_hero-input_can-shortcut-paste {
     gap: 0;
   }
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input_focus {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_focus {
   box-shadow: 0 0 0 0.125rem #d6e1ff;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input_empty .UNFFH17QLkNPUjfqsi7C_hero-input__clear {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__clear {
   display: none;
 }
-.__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input_empty .UNFFH17QLkNPUjfqsi7C_hero-input__clear {
+.__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__clear {
   display: flex;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input_can-shortcut-paste .UNFFH17QLkNPUjfqsi7C_hero-input__paste {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_can-shortcut-paste .Ln1Azy9g3YaOiJSiDx3g_hero-input__paste {
   display: none;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input_not-empty .UNFFH17QLkNPUjfqsi7C_hero-input__paste {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_not-empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__paste {
   display: none;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input_empty .UNFFH17QLkNPUjfqsi7C_hero-input__create {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__create {
   display: none;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input__input-elem {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.12rem;
   line-height: 1.5rem;
@@ -1193,7 +1202,7 @@ body {
   z-index: 1;
 }
 @media screen and (max-width: 480px) {
-  .UNFFH17QLkNPUjfqsi7C_hero-input__input-elem {
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
     font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     line-height: 1.25rem;
@@ -1201,28 +1210,28 @@ body {
     line-height: 1.5rem;
     padding: 1rem 0 1rem 0.75rem;
   }
-  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input__input-elem {
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
     padding: 0.5rem 0 0.5rem 1.25rem;
   }
-  .UNFFH17QLkNPUjfqsi7C_hero-input__cta-actions__mobile-tip {
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input__cta-actions__mobile-tip {
     display: block;
   }
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input__actions {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__actions {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 @media screen and (max-width: 480px) {
-  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input__cta-actions {
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__cta-actions {
     justify-content: flex-end;
     width: 100%;
   }
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input__mobile-tip {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__mobile-tip {
   display: none;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input__placeholder {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.12rem;
   letter-spacing: 0.01em;
@@ -1233,14 +1242,14 @@ body {
   top: 1rem;
   left: 1rem;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input__placeholder_show {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder_show {
   visibility: visible;
 }
-.UNFFH17QLkNPUjfqsi7C_hero-input__placeholder_hide {
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder_hide {
   visibility: hidden;
 }
 @media screen and (max-width: 480px) {
-  .UNFFH17QLkNPUjfqsi7C_hero-input__placeholder {
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
     font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     line-height: 1.25rem;
@@ -1248,16 +1257,16 @@ body {
     line-height: 1.5rem;
     left: 0.75rem;
   }
-  .__mobile-convenience-state .UNFFH17QLkNPUjfqsi7C_hero-input__placeholder {
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
     top: 1.25rem;
     left: 1.25rem;
   }
 }
 
-/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-display/shortlink-display.less ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************/
-.RgBfG5zbETNwvdqzYjG3_shortlink-display {
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-display/styles-shortlink-display.less ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1268,25 +1277,25 @@ body {
   align-items: center;
 }
 @media screen and (max-width: 480px) {
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display {
     padding: 1.25rem 0.75rem;
   }
-  .__mobile-convenience-state .RgBfG5zbETNwvdqzYjG3_shortlink-display {
+  .__mobile-convenience-state .I2BeY9dBUHpIhfMPTIg4_shortlink-display {
     padding: 1rem 0.75rem 0.75rem 1.25rem;
   }
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__content-wrapper {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__content-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
 }
 @media screen and (max-width: 480px) {
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__content-wrapper {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__content-wrapper {
     gap: 0;
     flex-grow: 1;
   }
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__action-wrapper {
   background: transparent;
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
@@ -1297,29 +1306,29 @@ body {
   cursor: initial;
 }
 @media screen and (min-width: 481px) {
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__action-wrapper_has-shortlink {
     transition: all 0.1s ease-in;
     cursor: pointer;
   }
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__action-wrapper_has-shortlink .I2BeY9dBUHpIhfMPTIg4_shortlink-display__copy-pseudolink {
     transition: all 0.1s ease-in;
     position: relative;
     top: 0;
   }
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink:hover {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__action-wrapper_has-shortlink:hover {
     background-color: #f1f0f5;
   }
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink:hover .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__action-wrapper_has-shortlink:hover .I2BeY9dBUHpIhfMPTIg4_shortlink-display__text {
     color: #1c1825;
   }
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__action-wrapper_has-shortlink:hover .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__action-wrapper_has-shortlink:hover .I2BeY9dBUHpIhfMPTIg4_shortlink-display__copy-pseudolink {
     top: -0.125rem;
   }
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__text {
   color: #4e495a;
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__text_loading {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__text_loading {
   color: transparent !important;
   background: linear-gradient(to right, #9692a0 0%, #9692a0 30%, rgba(150, 146, 160, 0.1) 48%, rgba(150, 146, 160, 0.1) 52%, #9692a0 70%, #9692a0 100%);
   background-size: 200% 100%;
@@ -1328,44 +1337,44 @@ body {
   animation: loading 2s linear infinite;
   color: transparent;
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__text_placeholder-spacing {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__text_placeholder-spacing {
   letter-spacing: 0.5rem;
   margin-left: 0.4rem;
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display_empty .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display_empty .I2BeY9dBUHpIhfMPTIg4_shortlink-display__text {
   color: #b0adb9;
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display_error .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display_error .I2BeY9dBUHpIhfMPTIg4_shortlink-display__text {
   color: #ba3312;
 }
 @media screen and (max-width: 480px) {
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__text {
     flex-grow: 1;
   }
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display_empty .RgBfG5zbETNwvdqzYjG3_shortlink-display__text {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display_empty .I2BeY9dBUHpIhfMPTIg4_shortlink-display__text {
     flex-grow: 0;
   }
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__copy-pseudolink {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
   line-height: 1.25rem;
   letter-spacing: 0.014em;
 }
 @media screen and (max-width: 480px) {
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-pseudolink {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__copy-pseudolink {
     display: none;
   }
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-button {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__copy-button {
   display: none;
 }
 @media screen and (max-width: 480px) {
-  .RgBfG5zbETNwvdqzYjG3_shortlink-display__copy-button {
+  .I2BeY9dBUHpIhfMPTIg4_shortlink-display__copy-button {
     display: flex;
   }
 }
-.RgBfG5zbETNwvdqzYjG3_shortlink-display__label {
+.I2BeY9dBUHpIhfMPTIg4_shortlink-display__label {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 0.81rem;
   line-height: 1rem;
@@ -1384,10 +1393,10 @@ body {
   color: transparent;
 }
 
-/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/snackbar/snackbar.less ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************/
-.IuglF75qHd7Zq5_KvgKz_snackbar {
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/snackbar/styles-snackbar.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.MGRyntnpp9YBdVditZxw_snackbar {
   box-sizing: border-box;
   border-radius: 0.5rem;
   background-color: rgba(28, 24, 37, 0.96);
@@ -1400,18 +1409,18 @@ body {
   overflow: hidden;
 }
 @media screen and (min-width: 481px) {
-  .IuglF75qHd7Zq5_KvgKz_snackbar {
+  .MGRyntnpp9YBdVditZxw_snackbar {
     min-width: 24rem;
     max-width: 30rem;
   }
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__content-wrapper {
+.MGRyntnpp9YBdVditZxw_snackbar__content-wrapper {
   padding: 0 0 0.75rem 1rem;
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__message {
+.MGRyntnpp9YBdVditZxw_snackbar__message {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 0.81rem;
   line-height: 1rem;
@@ -1420,14 +1429,14 @@ body {
   flex-grow: 1;
   padding-top: 0.75rem;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__dismiss {
+.MGRyntnpp9YBdVditZxw_snackbar__dismiss {
   color: #b0adb9;
   padding: 0.75rem 0.75rem 0 0;
   cursor: pointer;
   width: 1rem;
   height: 1rem;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__snackbar-action {
+.MGRyntnpp9YBdVditZxw_snackbar__snackbar-action {
   display: flex;
   padding: 0.5rem 0.75rem 0.75rem 0;
   align-self: flex-end;
@@ -1437,25 +1446,25 @@ body {
   line-height: 1rem;
   letter-spacing: 0.02em;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__transition-appear,
-.IuglF75qHd7Zq5_KvgKz_snackbar__transition-enter {
+.MGRyntnpp9YBdVditZxw_snackbar__transition-appear,
+.MGRyntnpp9YBdVditZxw_snackbar__transition-enter {
   opacity: 0;
   top: 0.5rem;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__transition-appear-active,
-.IuglF75qHd7Zq5_KvgKz_snackbar__transition-enter-active {
+.MGRyntnpp9YBdVditZxw_snackbar__transition-appear-active,
+.MGRyntnpp9YBdVditZxw_snackbar__transition-enter-active {
   opacity: 1;
   top: 0;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__transition-exit {
+.MGRyntnpp9YBdVditZxw_snackbar__transition-exit {
   opacity: 1;
   top: 0;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__transition-exit-active {
+.MGRyntnpp9YBdVditZxw_snackbar__transition-exit-active {
   opacity: 0;
   top: 0.5rem;
 }
-.IuglF75qHd7Zq5_KvgKz_snackbar__timer-progress {
+.MGRyntnpp9YBdVditZxw_snackbar__timer-progress {
   animation-name: timer-progress-animation;
   animation-timing-function: linear;
   height: 2px;
@@ -1474,10 +1483,10 @@ body {
   }
 }
 
-/*!******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/History/History.less ***!
-  \******************************************************************************************************************************************************************************************************************************************************************/
-.a3Hpy8edUYXG7tzexKMg_history-widget {
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/History/styles-history.less ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+.BmXNp0aAu5TKHmZbvWmM_history-widget {
   box-sizing: border-box;
   display: flex;
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -1489,7 +1498,7 @@ body {
   margin: 1.25rem 0;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget {
     box-sizing: border-box;
     border-radius: 0.5rem;
     box-shadow: 0 0 0 2px #e4e1ea;
@@ -1497,7 +1506,7 @@ body {
     gap: 0;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__link-block {
   display: flex;
   flex-direction: column;
   width: 33%;
@@ -1506,49 +1515,49 @@ body {
   box-shadow: -1px 0 0 0 #e4e1ea;
   gap: 0.125rem;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__link-block:first-child {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__link-block:first-child {
   box-shadow: none;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block:first-child {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__link-block:first-child {
     box-shadow: none !important;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__link-block:hover {
   box-shadow: 0 2px 7px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
   border-radius: 2px;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover + .a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__link-block:hover + .BmXNp0aAu5TKHmZbvWmM_history-widget__link-block {
   box-shadow: none;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__link-block {
     width: auto;
     box-shadow: 0 -1px 0 0 #e4e1ea;
   }
-  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover,
-  .a3Hpy8edUYXG7tzexKMg_history-widget__link-block:hover + .a3Hpy8edUYXG7tzexKMg_history-widget__link-block {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__link-block:hover,
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__link-block:hover + .BmXNp0aAu5TKHmZbvWmM_history-widget__link-block {
     box-shadow: 0 -1px 0 0 #e4e1ea;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__link-list {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__link-list {
   display: flex;
   flex-direction: row;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__link-list {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__link-list {
     flex-direction: column;
     margin: 0 0.75rem;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__full-link {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__full-link {
   display: flex;
   flex-direction: row;
   padding: 0 1rem 0.75rem 1rem;
   gap: 0.25rem;
   align-items: center;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__full-link__span {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__full-link__span {
   display: flex;
   height: 1rem;
   text-overflow: ellipsis;
@@ -1556,11 +1565,11 @@ body {
   word-break: break-all;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__full-link {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__full-link {
     padding: 0.125rem 0 1rem 0;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
@@ -1571,7 +1580,7 @@ body {
   letter-spacing: 0.014em;
   padding: 0.75rem 1rem 0 1rem;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink__span {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink__span {
   display: flex;
   height: 1.25rem;
   text-overflow: ellipsis;
@@ -1579,12 +1588,12 @@ body {
   word-break: break-all;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__shortlink {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink {
     padding: 1rem 0 0.125rem 0;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
-.a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint,
+.BmXNp0aAu5TKHmZbvWmM_history-widget__separator {
   display: flex;
   opacity: 0;
   color: #7c7887;
@@ -1598,33 +1607,33 @@ body {
   flex-shrink: 0;
   transition: opacity 0.1s ease-in-out;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink:hover .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink:hover .a3Hpy8edUYXG7tzexKMg_history-widget__separator,
-.a3Hpy8edUYXG7tzexKMg_history-widget__full-link:hover .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
-.a3Hpy8edUYXG7tzexKMg_history-widget__full-link:hover .a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink:hover .BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint,
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink:hover .BmXNp0aAu5TKHmZbvWmM_history-widget__separator,
+.BmXNp0aAu5TKHmZbvWmM_history-widget__full-link:hover .BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint,
+.BmXNp0aAu5TKHmZbvWmM_history-widget__full-link:hover .BmXNp0aAu5TKHmZbvWmM_history-widget__separator {
   opacity: 1;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink_anim-active .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink_anim-active .a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink_anim-active .BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint,
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink_anim-active .BmXNp0aAu5TKHmZbvWmM_history-widget__separator {
   opacity: 1 !important;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint,
-  .a3Hpy8edUYXG7tzexKMg_history-widget__separator {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint,
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__separator {
     opacity: 1 !important;
   }
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__action-hint__animated-inner {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint__animated-inner {
   position: relative;
   display: flex;
   animation-timing-function: ease-in;
   animation-duration: 1000ms;
   animation-timing-function: ease-in-out;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__shortlink_anim-active .a3Hpy8edUYXG7tzexKMg_history-widget__action-hint__animated-inner {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__shortlink_anim-active .BmXNp0aAu5TKHmZbvWmM_history-widget__action-hint__animated-inner {
   animation-name: test-swap;
 }
-.a3Hpy8edUYXG7tzexKMg_history-widget__header {
+.BmXNp0aAu5TKHmZbvWmM_history-widget__header {
   font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 0.81rem;
   line-height: 1rem;
@@ -1633,7 +1642,7 @@ body {
   padding: 0 1rem;
 }
 @media screen and (max-width: 480px) {
-  .a3Hpy8edUYXG7tzexKMg_history-widget__header {
+  .BmXNp0aAu5TKHmZbvWmM_history-widget__header {
     padding: 0 0.75rem;
   }
 }
@@ -1652,10 +1661,10 @@ body {
   }
 }
 
-/*!****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Footer/footer.less ***!
-  \****************************************************************************************************************************************************************************************************************************************************************/
-.CKs9BDeQeqjvEz3wQlrv_footer {
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/Footer/styles-footer.less ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+.QxR5s5L4UUkKJR2t07Ex_footer {
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 0.75rem;
@@ -1669,33 +1678,40 @@ body {
   margin: 0 1rem;
 }
 @media screen and (max-width: 480px) {
-  .CKs9BDeQeqjvEz3wQlrv_footer {
+  .QxR5s5L4UUkKJR2t07Ex_footer {
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.375rem 0;
     margin: 0 1.25rem;
   }
 }
-.CKs9BDeQeqjvEz3wQlrv_footer__wrapper {
+.QxR5s5L4UUkKJR2t07Ex_footer__wrapper {
   width: calc(100vw * 2 / 3);
   max-width: 64rem;
   margin: 0 auto;
 }
 @media screen and (max-width: 480px) {
-  .CKs9BDeQeqjvEz3wQlrv_footer__wrapper {
+  .QxR5s5L4UUkKJR2t07Ex_footer__wrapper {
     width: 100%;
   }
 }
-.CKs9BDeQeqjvEz3wQlrv_footer__item {
+.QxR5s5L4UUkKJR2t07Ex_footer__item {
   height: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.25rem;
 }
-.CKs9BDeQeqjvEz3wQlrv_footer__flag-icon {
+.QxR5s5L4UUkKJR2t07Ex_footer__flag-icon {
   box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
   border-radius: 2px;
+}
+
+/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/pages/Login/styles-login.less ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************/
+.Uy_Z3riGHQ80RofSWelp_page-login {
+  box-sizing: border-box;
 }
 
 

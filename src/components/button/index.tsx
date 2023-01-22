@@ -1,4 +1,4 @@
-import styles from './button.less'
+import styles from './styles-button.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import { Flyover } from '../tooltip'

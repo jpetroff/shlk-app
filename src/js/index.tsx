@@ -13,23 +13,23 @@ import {
   RouterProvider,
   useSearchParams
 } from 'react-router-dom'
-import { withRouter } from './router-hoc'
-import { withExtension } from './extension-hoc.webapp'
-import { Home } from '../apps/Home/index'
 
-const ExtHome = withExtension( withRouter(Home) )
+import Home from '../pages/Home'
+import Login from '../pages/Login'
 
 
 const createRouter = config.target == 'webapp' ? createBrowserRouter : createHashRouter
 const router = createRouter([
   {
-    path: "/",
-    element: (
-      <ExtHome />
-    ),
+    path: '/',
+    element: (<Home />),
+  },
+  {
+    path: '/app/login',
+    element: (<Login />)
   }
 ]);
 
-const container = document.getElementById('app')
+const container = (document.getElementById('app') as HTMLElement)
 const root = createRoot(container)
 root.render(<RouterProvider router={router} />)

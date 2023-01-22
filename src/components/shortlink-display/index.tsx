@@ -1,4 +1,4 @@
-import styles from './shortlink-display.less'
+import styles from './styles-shortlink-display.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import Link, { LinkColors } from '../link'
@@ -66,8 +66,7 @@ export const ShortlinkDisplay : React.FC<Props> = function(
           </span>
 
           {!_.isEmpty(shortlink) && 
-            <Link 
-              href='#'
+            <Link
               className={`${globalClass}__copy-pseudolink`}
               colorScheme={LinkColors.APP}
               flyover={'Copied!'}

@@ -1,6 +1,6 @@
 import * as _ from 'underscore'
 import * as React from 'react'
-import styles from './hero-input.less'
+import styles from './styles-hero-input.less'
 
 import Button, { ButtonSize, ButtonType } from '../button'
 import { Cross, Enter } from '../icons'

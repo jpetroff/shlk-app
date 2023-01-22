@@ -1,9 +1,10 @@
-import styles from './link.less'
+import styles from './styles-link.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import Icon, { ReactIcon, IconSize } from '../icons'
 import classNames from 'classnames'
 import { Flyover } from '../tooltip'
+import { Link as RouterLink, LinkProps } from 'react-router-dom'
 
 export enum LinkColors {
   USER = 'user',
@@ -20,7 +21,9 @@ type Props = {
   isLoading?: boolean
   flyover?: string
   tooltip?: TooltipProps
-} & JSX.IntrinsicElements['a']
+  to?: string,
+  href?: string
+} & Omit<LinkProps, 'to'>
 
 const Link : React.FC<Props> = (
  args: Props
@@ -39,22 +42,20 @@ const Link : React.FC<Props> = (
     if(args.isDisabled || args.isLoading) {
       event.preventDefault()
       event.stopPropagation()
-      return;
+      return
     } 
 
     if(_.isFunction(args.onClick)) {
+      event.preventDefault()
+      event.stopPropagation()
       args.onClick(event)
     }
 
     if(args.flyover) setShowFlyover(true)
   }
 
-  const htmlAnchorAttributes = _.omit(args, 'colorScheme', 'label', 'icon', 'iconSize', 'isDisabled', 'iconRight', 'isLoading', 'flyover', 'tooltip', 'onClick')
-  return (
-    <a {...htmlAnchorAttributes}
-      className={`${linkClasses} ${args.className || ''}`}
-      onClick={handleClick}
-    >
+  const inner = (
+    <>
       {args.icon && !args.iconRight && 
         <Icon useIcon={args.icon} size={args.iconSize || IconSize.SMALL} />
       }
@@ -66,8 +67,26 @@ const Link : React.FC<Props> = (
       }
 
       {args.flyover && showFlyover && <Flyover label={args.flyover} onDone={() => setShowFlyover(false)} />}
-    </a>
+    </>
   )
+
+  const htmlAnchorAttributes = _.omit(args, 'colorScheme', 'label', 'icon', 'iconSize', 'isDisabled', 'iconRight', 'isLoading', 'flyover', 'tooltip', 'onClick', 'href', 'to')
+  
+  if (
+    args.to && args.to != ''
+  ) {
+    return <RouterLink to={args.to} {...htmlAnchorAttributes} 
+      className={`${linkClasses} ${args.className || ''}`}
+      onClick={handleClick}>
+        {inner}
+      </RouterLink>
+  } else {
+    return <a href={args.href}  {...htmlAnchorAttributes} 
+    className={`${linkClasses} ${args.className || ''}`}
+    onClick={handleClick}>
+      {inner}
+    </a>
+  }
 }
 
 Link.defaultProps = {

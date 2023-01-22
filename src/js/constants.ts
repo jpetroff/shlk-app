@@ -57,4 +57,4 @@ export default {
 	MediaQueries: {
 		mobile: `(max-width: 480px)`
 	},
-} 
+}
