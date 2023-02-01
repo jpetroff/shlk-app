@@ -1,5 +1,5 @@
-declare module "*.svg" {
-  import * as React from 'react'
-  const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>
-  export default content
-}
+declare type Maybe<T> = T | undefined | null
+
+declare type AnyObject = { [key: string]: any }
+
+declare type HTMLAnyInput = HTMLInputElement & HTMLTextAreaElement

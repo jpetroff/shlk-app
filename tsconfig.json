@@ -10,9 +10,9 @@
     "resolveJsonModule": true
   },
   "include": [
-    // "./src/**/*.ts",
-    // "./src/**/*.tsx",
-    "./src/**/*.d.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.js",
     "./node_modules/chrome-types/*.d.ts"
   ]
 }

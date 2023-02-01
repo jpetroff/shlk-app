@@ -1,5 +1,4 @@
 import _ from 'underscore'
-import { AnyObject } from './constants'
 
 export type TabObject = {
   url: string

@@ -1,8 +1,7 @@
 import _ from 'underscore'
 import { GraphQLClient, gql } from 'graphql-request'
 import { validateURL } from './utils'
-import { AnyObject } from './constants'
-const config = require('./config')
+import config from './config'
 
 
 class GraphQLHomeQuery {

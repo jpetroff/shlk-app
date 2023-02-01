@@ -1,9 +1,3 @@
-export type AnyObject = {
-	[key: string]: any
-}
-
-export type HTMLAnyInput = HTMLInputElement & HTMLTextAreaElement
-
 export default {
 
 	/* 

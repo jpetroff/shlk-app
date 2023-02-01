@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'extensi
   module.exports = {
     serviceUrl: 'https://shlk.cc',
     displayServiceUrl: 'shlk.cc',
-    mode: 'production',
-    target: 'webapp'
+    target: 'webapp',
+    mode: 'production'
   }
 }

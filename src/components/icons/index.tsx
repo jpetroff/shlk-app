@@ -5,6 +5,7 @@ import LogoSvg from '../../assets/svg/logo.svg'
 import LogoCSvg from '../../assets/svg/logo-compact.svg'
 import AvatarSvg from '../../assets/svg/icon/avatar.svg'
 import CaretRightSvg from '../../assets/svg/icon/caret-right.svg'
+import CaretLeftSvg from '../../assets/svg/icon/caret-left.svg'
 import CrossSvg from '../../assets/svg/icon/cross.svg'
 import CrossSvg_16 from '../../assets/svg/icon/cross_16.svg'
 import EnterSvg from '../../assets/svg/icon/enter.svg'
@@ -14,6 +15,7 @@ export const Logo = LogoSvg
 export const LogoC = LogoCSvg
 export const Avatar = AvatarSvg
 export const CaretRight = CaretRightSvg
+export const CaretLeft = CaretLeftSvg
 export const Cross = CrossSvg
 export const Enter = EnterSvg
 export const Cross_16 = CrossSvg_16

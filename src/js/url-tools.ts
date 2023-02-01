@@ -1,6 +1,6 @@
 import * as _ from 'underscore'
 import constants from './constants'
-const config = require('./config')
+import config from './config'
 
 interface DescriptiveShortlink {
   userTag?: string

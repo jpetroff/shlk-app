@@ -1,9 +1,13 @@
 require.context('../assets/', true)
 require('./modernizr_build.js')
-const config = require('./config')
+
+import config from './config'
 import '../css/main.less'
 import '../index.html'
-import '../manifest.json'
+
+if(config.target == 'extension') {
+  require('../manifest.json')
+}
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
@@ -13,23 +17,34 @@ import {
   RouterProvider,
   useSearchParams
 } from 'react-router-dom'
+import AppContext from './app.context'
 
-import Home from '../pages/Home'
-import Login from '../pages/Login'
+import Home from '../pages/home'
+import Login from '../pages/login'
 
+async function main() {
+  let appContext : AppContext = {}
 
-const createRouter = config.target == 'webapp' ? createBrowserRouter : createHashRouter
-const router = createRouter([
-  {
-    path: '/',
-    element: (<Home />),
-  },
-  {
-    path: '/app/login',
-    element: (<Login />)
-  }
-]);
+  const createRouter = config.target == 'webapp' ? createBrowserRouter : createHashRouter
 
-const container = (document.getElementById('app') as HTMLElement)
-const root = createRoot(container)
-root.render(<RouterProvider router={router} />)
+  const router = createRouter([
+    {
+      path: '/',
+      element: (<Home />),
+    },
+    {
+      path: '/app/login',
+      element: (<Login />)
+    }
+  ])
+  
+  const container = (document.getElementById('app') as HTMLElement)
+  const root = createRoot(container)
+  root.render(
+    <AppContext.Provider value={appContext}>
+      <RouterProvider router={router} />
+    </AppContext.Provider>
+  )
+}
+
+main().catch( (err) => {console.error(err) })

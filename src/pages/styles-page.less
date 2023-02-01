@@ -1,0 +1,76 @@
+@import (reference) '../css/_constants.less';
+
+.mixin-fullscreen-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+
+  @media @mq-mobile {
+    height: ~"calc(100% + 3.0625rem)";
+  }
+}
+
+.mixin-centered-content {
+  display: flex;
+  flex-grow: 1;
+
+  @media @mq-not-mobile {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.mixin-narrow-body {
+  box-sizing: border-box;
+  width: 400px;
+  border-radius: 0.5rem;
+  border: 1px solid @black-90;
+  min-height: 600px;
+  position: relative;
+
+  .narrow-body__back-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 2.875rem;
+    height: 2.875rem;
+    border: 1px solid @black-90;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: -3.875rem;
+    color: @black-50;
+    transition: border-color 0.1s ease, color 0.1s ease;
+    text-decoration: none;
+
+    &:hover {
+      border-color: @black-80;
+      color: @black-30;
+    }
+  }
+
+  @media @mq-mobile {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    min-height: auto;
+  }
+}
+
+:local(.homeClass)_home {
+  .mixin-fullscreen-page;
+}
+
+:local(.loginClass)_login {
+  .mixin-fullscreen-page;
+
+  &__layout {
+    .mixin-centered-content;
+  }
+
+  &__body {
+    .mixin-narrow-body;
+  }
+}

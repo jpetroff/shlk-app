@@ -509,17 +509,132 @@ body {
   color: #1c1825;
 }
 
-/*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/pages/Home/styles-home.less ***!
-  \********************************************************************************************************************************************************************************************************************************************************************/
-.XtXxp0pJ8jLdhAjacNyU_page-home {
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/pages/styles-page.less ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+.mixin-fullscreen-page {
   display: flex;
   flex-direction: column;
   height: 100%;
+  box-sizing: border-box;
 }
 @media screen and (max-width: 480px) {
-  .XtXxp0pJ8jLdhAjacNyU_page-home {
+  .mixin-fullscreen-page {
     height: calc(100% + 3.0625rem);
+  }
+}
+.mixin-centered-content {
+  display: flex;
+  flex-grow: 1;
+}
+@media screen and (min-width: 481px) {
+  .mixin-centered-content {
+    justify-content: center;
+    align-items: center;
+  }
+}
+.mixin-narrow-body {
+  box-sizing: border-box;
+  width: 400px;
+  border-radius: 0.5rem;
+  border: 1px solid #e4e1ea;
+  min-height: 600px;
+  position: relative;
+}
+.mixin-narrow-body .narrow-body__back-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  border: 1px solid #e4e1ea;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -3.875rem;
+  color: #7c7887;
+  transition: border-color 0.1s ease, color 0.1s ease;
+  text-decoration: none;
+}
+.mixin-narrow-body .narrow-body__back-button:hover {
+  border-color: #c9c6d2;
+  color: #4e495a;
+}
+@media screen and (max-width: 480px) {
+  .mixin-narrow-body {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    min-height: auto;
+  }
+}
+.MfCsBhGn6M2PdP_exAlg_home {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 480px) {
+  .MfCsBhGn6M2PdP_exAlg_home {
+    height: calc(100% + 3.0625rem);
+  }
+}
+.oU7PEn8gl5r2vm5AA4Ko_login {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 480px) {
+  .oU7PEn8gl5r2vm5AA4Ko_login {
+    height: calc(100% + 3.0625rem);
+  }
+}
+.oU7PEn8gl5r2vm5AA4Ko_login__layout {
+  display: flex;
+  flex-grow: 1;
+}
+@media screen and (min-width: 481px) {
+  .oU7PEn8gl5r2vm5AA4Ko_login__layout {
+    justify-content: center;
+    align-items: center;
+  }
+}
+.oU7PEn8gl5r2vm5AA4Ko_login__body {
+  box-sizing: border-box;
+  width: 400px;
+  border-radius: 0.5rem;
+  border: 1px solid #e4e1ea;
+  min-height: 600px;
+  position: relative;
+}
+.oU7PEn8gl5r2vm5AA4Ko_login__body .narrow-body__back-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  border: 1px solid #e4e1ea;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -3.875rem;
+  color: #7c7887;
+  transition: border-color 0.1s ease, color 0.1s ease;
+  text-decoration: none;
+}
+.oU7PEn8gl5r2vm5AA4Ko_login__body .narrow-body__back-button:hover {
+  border-color: #c9c6d2;
+  color: #4e495a;
+}
+@media screen and (max-width: 480px) {
+  .oU7PEn8gl5r2vm5AA4Ko_login__body {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    min-height: auto;
   }
 }
 
@@ -1705,13 +1820,6 @@ body {
 .QxR5s5L4UUkKJR2t07Ex_footer__flag-icon {
   box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
   border-radius: 2px;
-}
-
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/pages/Login/styles-login.less ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
-.Uy_Z3riGHQ80RofSWelp_page-login {
-  box-sizing: border-box;
 }
 
 

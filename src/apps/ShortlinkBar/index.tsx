@@ -27,8 +27,8 @@ enum globalCommands {
 }
 
 type Props = {
-  router?: WithRouterProps
-  extension?: AnyObject
+  router?: PageRouterProps
+  extension?: PageExtensionProps
 }
 
 type State = {
@@ -82,7 +82,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   componentDidMount() {
     if(
         this.heroInputRef.current &&
-        (!checkMobileMQ || this.props.extension)
+        (!checkMobileMQ() || config.target == 'extension')
       ) this.heroInputRef.current.focus()
 
     if(validateURL(this.state.location)) {
@@ -116,7 +116,12 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     }
   }
 
-  private updateActiveTabUrl = _.once(() => this.setState({ location: this.props.extension?.activeTabUrl || ''}))
+  private updateActiveTabUrl = _.once(() => {
+    if(this.props.extension?.activeTabUrl != '') {
+      this.setState({ location: this.props.extension?.activeTabUrl || ''})
+      this._setMobileConvenienceInput(true)
+    }
+  })
   componentDidUpdate() {
     if(this.props.extension && this.props.extension.activeTabUrl != this.state.location) {
       this.updateActiveTabUrl()
@@ -148,7 +153,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   }
 
   private setShortlinkState( args: { location: string, hash: string, userTag?: string, descriptionTag?: string} ) {
-    console.log(args)
+    console.log(`[Display new shortlink]`, args)
     let newState: any = {
       generatedShortlink: linkTools.generateShortlinkFromHash(args.hash),
       generatedHash: args.hash,
@@ -170,7 +175,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   private async retrieveLSCache() : Promise<boolean> {
     const locationUrl = linkTools.fixUrl(this.state.location.trim())
     const cachedURL = await LSC.checkShortlinkCache( {url: locationUrl} )
-    console.log('cache try', locationUrl, window.localStorage[locationUrl])
+    console.log('[Trying cache...]', locationUrl, window.localStorage[locationUrl])
 
     if(cachedURL == null || !cachedURL.hash) return false
 
@@ -179,7 +184,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       (this.state.descriptionTag != '' && this.state.descriptionTag != cachedURL.descriptionTag)
     ) return false 
 
-    console.log('[LS] Retrieved object:\n',cachedURL)
+    console.log('[Cache → Retrieved object]:\n',cachedURL)
     this.setShortlinkState({
       location: cachedURL.url,
       hash: cachedURL.hash,
@@ -225,7 +230,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
       this.setState({loadingState: {createLinkIsLoading: true}})
       const result = await Query.createShortlink(locationUrl)
-      console.log('[Home] submitLocation\n', result)
+      console.log('[Home → submitLocation]\n', result)
       if(!result || !result.hash) throw new Error(`Unexpected error: shortlink for '${locationUrl}' was not created. Please, try again`)
 
       this.setShortlinkState({
@@ -263,7 +268,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   public submitDescriptor: (() => void) & _.Cancelable;
   private async _submitDescriptor() {
     this._clearErrorState()
-    console.log('[Home] submitDescriptor\n', this.state.userTag, this.state.descriptionTag)
+    console.log('[Home → submitDescriptor]\n', this.state.userTag, this.state.descriptionTag)
 
     if(!_.isEmpty(this.state.userTag)) setCookie('userTag', this.state.userTag, 365)
 
