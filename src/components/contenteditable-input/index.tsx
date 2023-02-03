@@ -22,7 +22,7 @@ export const ContentEditableInput : React.FC<ExtProps> = (
 ) => { 
 	const passProps : Omit<Props, 'ref'> = _.omit(props, ['placeholder', 'ref'])
 	const [id] = React.useState<string>(btoa((Math.random() *100000).toString()).replace(/[=/+]/ig, ''))
-	const placeholderStyle = `#${id}:after {content: '${_.isEmpty(props.html) ? props.placeholder : ''}'}`
+	const placeholderStyle = `#${id}:after {content: '${!props.html ? props.placeholder : ''}'}`
 
 	const handleKeyPress : (event: any) => void = (event) => {
 		console.log(event.nativeEvent)

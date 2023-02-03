@@ -1,4 +1,9 @@
 import { createContext } from 'react'
+import * as _ from 'underscore'
+import config from './config'
+
+import browserApi from './browser-api'
+import UserQuery from './user.gql'
 
 declare type LoginContext = {
   name: string,
@@ -11,11 +16,28 @@ declare type ExtensionContext = {
   activeTabUrl: string
 }
 
-declare type AppContext = {
+declare type AppContextT = {
   extension?: Maybe<ExtensionContext>,
   user?: Maybe<LoginContext>
 }
 
-const AppContext = createContext( {} )
+const appContext = createContext<AppContextT>( {} )
 
-export default AppContext
+export default appContext
+
+export async function getInitAppContext(): Promise<AppContextT> {
+  let result : AppContextT = {}
+
+  // getting active tab
+  if(config.target == 'extension' && browserApi.isInit) {
+    const activeTab = await browserApi.getTab(true)
+    if(activeTab?.url) 
+      result.extension = { activeTabUrl: activeTab.url }
+  }
+
+  // getting login data
+  const currentUser = await UserQuery.getLoggedInUser()
+  result.user = currentUser as LoginContext
+
+  return result
+}

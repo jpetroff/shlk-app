@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import styles from './styles-shortlink-bar.less'
 import { checkMobileMQ, modifyURLSlug, validateURL, setCookie, getCookie } from '../../js/utils'
-import { HTMLAnyInput, AnyObject } from '../../js/constants'
 
 import * as React from 'react'
 import * as _ from 'underscore'
@@ -14,9 +13,10 @@ import Snackbar from '../../components/snackbar'
 import linkTools from '../../js/url-tools'
 import clipboardTools from '../../js/clipboard-tools'
 
-import Query from '../../js/shortlink-queries'
+import Query from '../../js/shortlink.gql'
 import LSC, {ShortlinkLocalStorage} from '../../js/localstorage-cache'
 import GracefulError, { GracefulErrorType } from './errors'
+import AppContext from '../../js/app.context'
 
 import { HistoryWidget } from '../History'
 
@@ -54,11 +54,14 @@ type State = {
 
 export default class ShortlinkBar extends React.Component<Props, State> {
   private heroInputRef: React.RefObject<HTMLAnyInput>
+  declare context: React.ContextType<typeof AppContext>
 
   constructor(props) {
     super(props)
 
+    this.heroInputRef = React.createRef<HTMLAnyInput>()
     const [ predefinedLocation ] = linkTools.queryUrlSearchParams(['l'], props.router?.location?.search)
+
     this.state = {
       location: _.unescape(predefinedLocation || ''),
       generatedShortlink: undefined,
@@ -74,28 +77,32 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       mobileConvenienceInput: false,
       cachedShortlinks: []
     }
-    this.heroInputRef = React.createRef<HTMLAnyInput>()
+    
     _.bindAll(this, ..._.functions(this))
     this.submitDescriptor = _.debounce(this._submitDescriptor, 500)
   }
 
   componentDidMount() {
     if(
-        this.heroInputRef.current &&
-        (!checkMobileMQ() || config.target == 'extension')
-      ) this.heroInputRef.current.focus()
+      this.heroInputRef.current &&
+      (!checkMobileMQ() || config.target == 'extension')
+    ) this.heroInputRef.current.focus()
 
     if(validateURL(this.state.location)) {
       this.submitLocation()
     }
 
-    if(!_.isEmpty(this.state.location)) {
+    if(this.state.location) {
       this._setMobileConvenienceInput(true)
     }
 
     this.handleGlobalEvents(true)
 
     this.loadAllCachedShortlinks()
+
+    if(this.context?.extension?.activeTabUrl) this.setState({
+      location: this.context.extension.activeTabUrl
+    })
   }
 
   componentWillUnmount(): void {
@@ -116,16 +123,11 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     }
   }
 
-  private updateActiveTabUrl = _.once(() => {
-    if(this.props.extension?.activeTabUrl != '') {
-      this.setState({ location: this.props.extension?.activeTabUrl || ''})
-      this._setMobileConvenienceInput(true)
-    }
-  })
   componentDidUpdate() {
-    if(this.props.extension && this.props.extension.activeTabUrl != this.state.location) {
-      this.updateActiveTabUrl()
-    }
+    if(
+      this.state.location &&
+      config.target == 'extension'
+    ) this._setMobileConvenienceInput(true)
   }
 
   updateLocation(str: string, isClearPress: boolean = false) {
@@ -160,7 +162,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       location: args.location,
       errorState: {}
     }
-    if(!_.isEmpty(args.descriptionTag)) {
+    if(args.descriptionTag) {
       newState = {
         ...newState,
         userTag: args.userTag,
@@ -223,7 +225,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
     try {
       const locationUrl = linkTools.fixUrl(this.state.location.trim())
-      if (_.isEmpty(locationUrl)) return
+      if (!locationUrl) return
       
       const cachedResult = await this.retrieveLSCache()
       if(cachedResult) return
@@ -270,9 +272,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     this._clearErrorState()
     console.log('[Home → submitDescriptor]\n', this.state.userTag, this.state.descriptionTag)
 
-    if(!_.isEmpty(this.state.userTag)) setCookie('userTag', this.state.userTag, 365)
+    if(this.state.userTag) setCookie('userTag', this.state.userTag, 365)
 
-    if(_.isEmpty(this.state.descriptionTag)) { 
+    if(!this.state.descriptionTag) { 
       this.setState({
         generatedDescriptiveShortlink: undefined,
         loadingState: {createDescriptiveLinkIsLoading: false}
@@ -392,3 +394,4 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     )
   }
 }
+ShortlinkBar.contextType = AppContext

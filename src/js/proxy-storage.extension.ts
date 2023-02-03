@@ -1,5 +1,4 @@
-import _ from 'underscore'
-import { AnyObject } from './constants'
+import * as _ from 'underscore'
 
 export const proxyStorage = {
 

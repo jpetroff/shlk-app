@@ -1,7 +1,6 @@
 import { GraphQLError } from "graphql"
 import { GraphQLClient } from "graphql-request"
 import { ClientError } from "graphql-request/dist/types"
-import { AnyObject } from "../../js/constants"
 
 
 export type GracefulErrorType = {

@@ -38,7 +38,7 @@ export const ShortlinkDisplay : React.FC<Props> = function(
   const globalClass = styles.wrapperClass+'_shortlink-display'
   const shortlinkClasses = classNames({
     [`${globalClass}`]: true,
-    [`${globalClass}_empty`]: _.isEmpty(shortlink),
+    [`${globalClass}_empty`]: !shortlink,
     [`${globalClass}_error`]: error
   })
 
@@ -51,7 +51,7 @@ export const ShortlinkDisplay : React.FC<Props> = function(
 
   const displayShortlink : string = (new String(shortlink)).replace(/^https?\:\/\//ig,'')
 
-  const activeActionWrapperClass = !_.isEmpty(shortlink) ? globalClass+'__action-wrapper_has-shortlink' : ''
+  const activeActionWrapperClass = shortlink ? globalClass+'__action-wrapper_has-shortlink' : ''
   const placeholderLoadingClass = isLoading ? globalClass+'__text_loading' : ''
 
   return (
@@ -65,7 +65,7 @@ export const ShortlinkDisplay : React.FC<Props> = function(
             {shortlink ? displayShortlink : placeholderText}
           </span>
 
-          {!_.isEmpty(shortlink) && 
+          {shortlink && 
             <Link
               className={`${globalClass}__copy-pseudolink`}
               colorScheme={LinkColors.APP}
@@ -78,13 +78,13 @@ export const ShortlinkDisplay : React.FC<Props> = function(
         </div>
       </div>
       {
-        (isLoading || !_.isEmpty(shortlink)) &&
+        (isLoading || shortlink) &&
         <Button
           className={`${globalClass}__copy-button`}
           label={btnLabel}
           size={ButtonSize.LARGE}
           type={hasCta ? ButtonType.PRIMARY : ButtonType.SECONDARY}
-          isDisabled={_.isEmpty(shortlink)}
+          isDisabled={!shortlink}
           isLoading={isLoading}
           flyover={'Copied!'}
           />

@@ -675,6 +675,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
+  background-size: 100% 100%;
+  font-size: 1.375rem;
 }
 .rZf2AbGKDN3xcX2bC4Eh_app-header__account-link__avatar .icon-svg {
   width: 2rem;
@@ -684,6 +687,10 @@ body {
   .rZf2AbGKDN3xcX2bC4Eh_app-header__account-link__text {
     display: none;
   }
+}
+.rZf2AbGKDN3xcX2bC4Eh_app-header_logged-user .rZf2AbGKDN3xcX2bC4Eh_app-header__account-link__avatar {
+  background-color: #0045ff;
+  color: #ffffff;
 }
 .rZf2AbGKDN3xcX2bC4Eh_app-header__logo {
   display: none;

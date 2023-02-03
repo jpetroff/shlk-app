@@ -47,10 +47,10 @@ export const ShortlinkSlugInput : React.FC<Props> = (
     [`${globalClass}_error`]: error,
     [`${globalClass}_hide`]: !show
   })
-  const activeActionWrapperClass = !_.isEmpty(generatedLink) ? globalClass+'__action-wrapper_has-shortlink' : ''
+  const activeActionWrapperClass = generatedLink ? globalClass+'__action-wrapper_has-shortlink' : ''
 
   let linkLabel : string = 'Copy custom shortlink'
-  if(_.isEmpty(generatedLink)) linkLabel = ''
+  if(!generatedLink) linkLabel = ''
   if(isLoading) linkLabel = 'Loading'
 
   let btnLabel : string = 'Copy'
@@ -99,20 +99,20 @@ export const ShortlinkSlugInput : React.FC<Props> = (
         <Link
             className={`${globalClass}__copy_pseudolink`}
             colorScheme={LinkColors.APP}
-            isDisabled={_.isEmpty(generatedLink) || error}
+            isDisabled={!generatedLink || error}
             isLoading={isLoading}
             label={linkLabel}
             flyover='Copied!'
             />
         </div>
         {
-          (isLoading || !_.isEmpty(generatedLink)) &&
+          (isLoading || generatedLink) &&
           <Button
             className={`${globalClass}__copy_button`}
             label={btnLabel}
             size={ButtonSize.LARGE}
             type={hasCta ? ButtonType.PRIMARY : ButtonType.SECONDARY}
-            isDisabled={_.isEmpty(generatedLink) || error}
+            isDisabled={!generatedLink || error}
             isLoading={isLoading}
             onClick={handleCopy}
             flyover='Copied!'
