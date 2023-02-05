@@ -43,3 +43,9 @@ export function getCookie(cname) {
   }
   return "";
 }
+
+export function deleteURLQueryParam(param: string) {
+  let _modifiedSearch = new URLSearchParams(window.location.search)
+  _modifiedSearch.delete(param)
+  window.location.search = _modifiedSearch.toString()
+}

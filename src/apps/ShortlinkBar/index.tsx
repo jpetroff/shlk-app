@@ -14,7 +14,7 @@ import linkTools from '../../js/url-tools'
 import clipboardTools from '../../js/clipboard-tools'
 
 import Query from '../../js/shortlink.gql'
-import LSC, {ShortlinkLocalStorage} from '../../js/localstorage-cache'
+import Cache, {TCachedLink} from '../../js/cache'
 import GracefulError, { GracefulErrorType } from './errors'
 import AppContext from '../../js/app.context'
 
@@ -48,7 +48,7 @@ type State = {
     createDescriptiveLinkIsLoading?: boolean
   }
   mobileConvenienceInput: boolean
-  cachedShortlinks: ShortlinkLocalStorage[]
+  cachedShortlinks: Array<TCachedLink>
 }
 
 
@@ -176,7 +176,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
   private async retrieveLSCache() : Promise<boolean> {
     const locationUrl = linkTools.fixUrl(this.state.location.trim())
-    const cachedURL = await LSC.checkShortlinkCache( {url: locationUrl} )
+    const cachedURL = Cache.checkShortlink( {location: locationUrl} )
     console.log('[Trying cache...]', locationUrl, window.localStorage[locationUrl])
 
     if(cachedURL == null || !cachedURL.hash) return false
@@ -188,7 +188,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
     console.log('[Cache → Retrieved object]:\n',cachedURL)
     this.setShortlinkState({
-      location: cachedURL.url,
+      location: cachedURL.location,
       hash: cachedURL.hash,
       userTag: cachedURL.userTag,
       descriptionTag: cachedURL.descriptionTag
@@ -198,8 +198,8 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
   private saveLSCache() {
     if(!this.state.generatedHash) console.error('Empty hash to be saved!')
-    LSC.storeShortlink({
-      url: this.state.location.trim(),
+    Cache.storeShortlink({
+      location: this.state.location.trim(),
       hash: this.state.generatedHash,
       userTag: this.state.userTag,
       descriptionTag: this.state.descriptionTag
@@ -208,15 +208,10 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   }
 
   private async loadAllCachedShortlinks() {
-    const aMonthAgo = new Date()
-    aMonthAgo.setMonth(aMonthAgo.getMonth() - 1)
-    const result = await LSC.getAll({
-      sortByDate: true, 
-      clearThreshold: aMonthAgo,
-      limit: 3
-    })
-    if(result) this.setState({
-      cachedShortlinks: result
+    Cache.setStorage()
+    const storage = await Cache.awaitStorage()
+    this.setState({
+      cachedShortlinks: _.first(storage, 3)
     })
   }
 
@@ -237,7 +232,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
       this.setShortlinkState({
         location: result.location,
-        hash: result.hash
+        hash: result.hash,
+        userTag: result.descriptor?.userTag || '',
+        descriptionTag: result.descriptor?.descriptionTag || ''
       })
     } catch (err) {
       this.setState({errorState: {
@@ -299,7 +296,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         hash: result.hash,
         userTag: result.descriptor.userTag,
         descriptionTag: result.descriptor.descriptionTag
-      })		
+      })
     } catch (err) {
       this.setState({errorState: {
           lastError: GracefulError.process(err) || undefined,
@@ -313,7 +310,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   private _generateTextPattern(): Array<TextPattern | string> {
     return [
       linkTools.displayServiceUrl+'/',
-      { key: 'userTag', value: this.state.userTag, placeholder: 'user' },
+      { key: 'userTag', value: this.state.userTag, placeholder: 'name' },
       '@',
       SlugInputSpecialChars.mobileLineBreak,
       { key: 'descriptionTag', value: this.state.descriptionTag, placeholder: 'your-custom-url' },

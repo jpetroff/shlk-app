@@ -25,6 +25,10 @@ class GQLShortlinkQuery {
       createShortlink(location: $location) {
         hash
         location
+        descriptor {
+          userTag
+          descriptionTag
+        }
       }
     }
     `
@@ -46,7 +50,12 @@ class GQLShortlinkQuery {
       $location: String!
       $hash: String
     ) {
-      createDescriptiveShortlink(userTag: $userTag, descriptionTag: $descriptionTag, location: $location, hash: $hash) {
+      createDescriptiveShortlink(
+        userTag: $userTag, 
+        descriptionTag: $descriptionTag, 
+        location: $location, 
+        hash: $hash
+      ) {
         hash
         location
         descriptor {
@@ -60,6 +69,47 @@ class GQLShortlinkQuery {
     const response = await this.gqlClient.request(query, { userTag, descriptionTag, location, hash })
     console.log('[GQL] createShortlinkDescriptor\n', response)
     return response.createDescriptiveShortlink
+  }
+
+  public async getUserShortlinks( { limit, skip, sort, order, search } : QICommon) {
+    const query = gql`
+    query getUserShortlinksWithVars (
+      $limit: Int
+      $skip: Int
+      $sort: String
+      $order: String
+      $search: String
+    ){
+      getUserShortlinks(
+        args: {
+          limit: $limit
+          skip: $skip
+          sort: $sort
+          order: $order
+          search: $search
+        }
+      ) {
+        hash
+        location
+        descriptor {
+          userTag
+          descriptionTag
+        }
+        owner
+        urlMetadata
+        snooze {
+          awake
+          description
+        }
+        createdAt
+        updatedAt
+      }
+    }
+    `
+
+    const response = await this.gqlClient.request(query, { limit, skip, sort, order, search })
+    console.log('[GQL] getUserShortlinks\n', response)
+    return response.getUserShortlinks
   }
 }
 

@@ -16,7 +16,7 @@ export const proxyStorage = {
     return false
   },
 
-  async getAllItems(parse: boolean = true) : Promise<any[] | string[] | void> {
+  async getAllItems(parse: boolean = true) : Promise<any[] | string[]> {
     let result : string[] = []
     const keys = _.keys(window.localStorage)
     _.each(keys, (key) => {

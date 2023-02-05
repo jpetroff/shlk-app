@@ -1,7 +1,7 @@
 import styles from './styles-page.less'
 
 import * as React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 
 import Header from '../apps/Header'
 import Footer from '../apps/Footer'
@@ -13,6 +13,7 @@ const config = require('../js/config')
 
 const Login : React.FC = () => {
   const globalClass = styles.loginClass + '_login'
+  const navigate = useNavigate()
   const router = useRouter()
 
   return (
@@ -20,7 +21,7 @@ const Login : React.FC = () => {
       <Header />
       <div className={`${globalClass}__layout`}>
         <div className={`${globalClass}__body`}>
-          <RouterLink to='/' className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></RouterLink>
+        <div onClick={() => navigate(-1)} className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></div>
           <Button
             href='/oauth/google'
             label='Log in with Google'

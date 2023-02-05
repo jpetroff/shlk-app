@@ -14,7 +14,7 @@ export const proxyStorage = {
     await chrome.storage.sync.set(newItem)
   },
 
-  async getAllItems(parse: boolean = true) : Promise<any[] | string[] | void> {
+  async getAllItems(parse: boolean = true) : Promise<any[] | string[]> {
     const result = await chrome.storage.sync.get()
     
     if(!parse) return _.values(result)

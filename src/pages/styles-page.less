@@ -44,6 +44,7 @@
     color: @black-50;
     transition: border-color 0.1s ease, color 0.1s ease;
     text-decoration: none;
+    cursor: pointer;
 
     &:hover {
       border-color: @black-80;
@@ -64,6 +65,18 @@
 }
 
 :local(.loginClass)_login {
+  .mixin-fullscreen-page;
+
+  &__layout {
+    .mixin-centered-content;
+  }
+
+  &__body {
+    .mixin-narrow-body;
+  }
+}
+
+:local(.appMainClass)_app-main {
   .mixin-fullscreen-page;
 
   &__layout {

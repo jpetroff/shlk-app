@@ -13,10 +13,13 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import AppContext, { getInitAppContext } from './app.context'
 import createRouter from './routes'
+import cache, { CacheMode } from './cache'
 
 async function main() {
   const appContext = await getInitAppContext()
-  console.log(appContext)
+  if(appContext.user) { cache.mode = CacheMode.remote }
+  else { cache.mode = CacheMode.local }
+  cache.setStorage()
 
   const router = createRouter()
   const container = (document.getElementById('app') as HTMLElement)
