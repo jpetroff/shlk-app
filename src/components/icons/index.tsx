@@ -9,6 +9,9 @@ import CaretLeftSvg from '../../assets/svg/icon/caret-left.svg'
 import CrossSvg from '../../assets/svg/icon/cross.svg'
 import CrossSvg_16 from '../../assets/svg/icon/cross_16.svg'
 import EnterSvg from '../../assets/svg/icon/enter.svg'
+import GoogleSvg from '../../assets/svg/icon/google.svg'
+import SearchSvg from '../../assets/svg/icon/search.svg'
+import SnoozeSvg from '../../assets/svg/icon/snooze.svg'
 
 
 export const Logo = LogoSvg
@@ -18,6 +21,10 @@ export const CaretRight = CaretRightSvg
 export const CaretLeft = CaretLeftSvg
 export const Cross = CrossSvg
 export const Enter = EnterSvg
+export const Google = GoogleSvg
+export const Snooze = SnoozeSvg
+export const Search = SearchSvg 
+
 export const Cross_16 = CrossSvg_16
 
 export enum IconSize {

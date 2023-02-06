@@ -10,8 +10,8 @@ import ShortlinkDisplay from '../../components/shortlink-display'
 import ShortlinkSlugInput, { TextPattern, SlugInputSpecialChars } from '../../components/shortlink-slug-input'
 import Snackbar from '../../components/snackbar' 
 
-import linkTools from '../../js/url-tools'
-import clipboardTools from '../../js/clipboard-tools'
+import linkTools from '../../js/link.tools'
+import clipboardTools from '../../js/clipboard.tools'
 
 import Query from '../../js/shortlink.gql'
 import Cache, {TCachedLink} from '../../js/cache'
@@ -182,27 +182,30 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     if(cachedURL == null || !cachedURL.hash) return false
 
     if(
-      this.state.userTag != cachedURL.userTag ||
-      (this.state.descriptionTag != '' && this.state.descriptionTag != cachedURL.descriptionTag)
+      this.state.userTag != cachedURL.descriptor?.userTag ||
+      (this.state.descriptionTag != '' && this.state.descriptionTag != cachedURL.descriptor?.descriptionTag)
     ) return false 
 
     console.log('[Cache → Retrieved object]:\n',cachedURL)
     this.setShortlinkState({
       location: cachedURL.location,
       hash: cachedURL.hash,
-      userTag: cachedURL.userTag,
-      descriptionTag: cachedURL.descriptionTag
+      userTag: cachedURL.descriptor?.userTag,
+      descriptionTag: cachedURL.descriptor?.descriptionTag
     })
     return true
   }
 
   private saveLSCache() {
     if(!this.state.generatedHash) console.error('Empty hash to be saved!')
+    const descriptor = this.state.descriptionTag ? 
+      { userTag: this.state.userTag, descriptionTag: this.state.descriptionTag } :
+      undefined
+
     Cache.storeShortlink({
       location: this.state.location.trim(),
       hash: this.state.generatedHash,
-      userTag: this.state.userTag,
-      descriptionTag: this.state.descriptionTag
+      descriptor
     })
     this.loadAllCachedShortlinks()
   }

@@ -79,7 +79,7 @@ const Button : React.FC<Props> = function(
         {args.label && 
           <span 
             className={`${globalClass}__label`} >
-            {args.label}
+            {args.label}{args.icon ? <>&nbsp;</> : ''}
           </span>
         }
         {args.isCaret &&

@@ -28,10 +28,10 @@ const AppMain : React.FC = () => {
 
   return (
     <div className={`${shortlinkPageClasses}`}>
-      <Header />
+      <Header backButton='/' title='My Links' sticky={true} />
         <div className={`${globalClass}__layout`}>
           <div className={`${globalClass}__body`}>
-            <div onClick={() => navigate(-1)} className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></div>
+            <RouterLink to='/' className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></RouterLink>
 
           </div>
         </div>

@@ -142,3 +142,24 @@
 .shadow-light-50 {
 	box-shadow: 0 15px 25px -5px rgba(@black-30, 0.32)
 }
+
+.common-back-button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  border: 1px solid @black-90;
+  border-radius: 50%;
+  color: @black-50;
+  transition: border-color 0.1s ease, color 0.1s ease;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    border-color: @black-80;
+    color: @black-30;
+  }
+}

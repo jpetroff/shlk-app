@@ -3,9 +3,10 @@ import * as React from 'react'
 import * as _ from 'underscore'
 import Link, { LinkColors } from '../link'
 import Button, { ButtonSize, ButtonType } from '../button'
-import clipboardTools from '../../js/clipboard-tools'
+import clipboardTools from '../../js/clipboard.tools'
 import { Flyover } from '../tooltip'
 import classNames from 'classnames'
+import LinkTools from '../../js/link.tools'
 
 type Props = {
   shortlink: string | undefined
@@ -49,7 +50,7 @@ export const ShortlinkDisplay : React.FC<Props> = function(
   let btnLabel : string = 'Copy'
   if(isLoading) linkLabel = 'Loading'
 
-  const displayShortlink : string = (new String(shortlink)).replace(/^https?\:\/\//ig,'')
+  const displayShortlink : string = shortlink ? LinkTools.makeDisplayUrl(shortlink) : null
 
   const activeActionWrapperClass = shortlink ? globalClass+'__action-wrapper_has-shortlink' : ''
   const placeholderLoadingClass = isLoading ? globalClass+'__text_loading' : ''

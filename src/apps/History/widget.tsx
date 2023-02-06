@@ -2,9 +2,9 @@ import styles from './styles-history.less'
 import * as React from 'react'
 import * as _ from 'underscore'
 import {ShortlinkLocal, TCachedLink} from '../../js/cache'
-import clipboardTools from '../../js/clipboard-tools'
+import clipboardTools from '../../js/clipboard.tools'
 import Link, { LinkColors } from '../../components/link'
-import LinkTools from '../../js/url-tools'
+import LinkTools from '../../js/link.tools'
 import classNames from 'classnames'
 
 type Props = {
@@ -51,13 +51,13 @@ const HistoryWidget : React.FC<Props> = (
       <div className={`${globalClass}__link-list`}>
         {list.map( (item: TCachedLink, key: number) => {
           if(!item.hash) return null
-          const shortlink = item.descriptionTag && item.descriptionTag != '' ? 
-                            LinkTools.generateDescriptiveShortlink( { userTag: item.userTag, descriptionTag: item.descriptionTag } ) :
+          const shortlink = item.descriptor?.descriptionTag && item.descriptor.descriptionTag != '' ? 
+                            LinkTools.generateDescriptiveShortlink( item.descriptor ) :
                             LinkTools.generateShortlinkFromHash(item.hash)
 
-          const displayShortlink = shortlink.replace(/https?:\/\//ig, '')
+          const displayShortlink = LinkTools.makeDisplayUrl(shortlink)
           const url = item.location
-          const displayUrl = item.location.replace(/https?:\/\//ig, '')
+          const displayUrl = LinkTools.makeDisplayUrl(item.location)
 
           
           return (

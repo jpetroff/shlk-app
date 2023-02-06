@@ -22,7 +22,6 @@ class LinkTools {
 
   sanitizeURLSlug (str: string) : string {
     str = str.replace(/[^a-z0-9\s-]/ig, '')
-    // str = str.replace(/\s+/ig, ' ').trim()
     str = str.replace(/\s/ig, '-')
     return str
   }
@@ -65,6 +64,12 @@ class LinkTools {
       if(item != null) return decodeURIComponent(item)
     })
     return result 
+  }
+
+  makeDisplayUrl(rawUrl: string): string {
+    let result = rawUrl.trim().replace(/^https?:\/\//ig, '')
+    result = result.replace(/^www\./ig, '')
+    return result
   }
 }
 

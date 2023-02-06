@@ -5,7 +5,7 @@ import styles from './styles-hero-input.less'
 import Button, { ButtonSize, ButtonType } from '../button'
 import { Cross, Enter } from '../icons'
 import { canShortcutPasteWithKeyboard, checkMobileMQ } from '../../js/utils'
-import clipboardTools from '../../js/clipboard-tools'
+import clipboardTools from '../../js/clipboard.tools'
 
 type Props = {
   onChange: (str: string, isClearPress?: boolean) => void;

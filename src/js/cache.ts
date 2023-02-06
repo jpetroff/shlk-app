@@ -1,14 +1,16 @@
 import * as _ from 'underscore'
 import proxyStorage from './proxy-storage.webapp'
-import linkTools from './url-tools'
+import linkTools from './link.tools'
 import GQLShortlinkQuery from './shortlink.gql'
 import { deleteURLQueryParam } from './utils'
 
 export type ShortlinkLocal = {
   hash?: string,
   location: string,
-  userTag?: string,
-  descriptionTag?: string
+  descriptor?: {
+    userTag?: string,
+    descriptionTag: string
+  }
 }
 
 type TGetAll = {
