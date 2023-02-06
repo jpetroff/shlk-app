@@ -67,7 +67,7 @@ class LinkTools {
   }
 
   makeDisplayUrl(rawUrl: string): string {
-    let result = rawUrl.trim().replace(/^https?:\/\//ig, '')
+    let result = (rawUrl || '').trim().replace(/^https?:\/\//ig, '')
     result = result.replace(/^www\./ig, '')
     return result
   }

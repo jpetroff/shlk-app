@@ -2,7 +2,7 @@ import { createContext } from 'react'
 import * as _ from 'underscore'
 import config from './config'
 
-import browserApi from './browser-api'
+import browserApi from './browser.api'
 import UserQuery from './user.gql'
 
 declare type LoginContext = {

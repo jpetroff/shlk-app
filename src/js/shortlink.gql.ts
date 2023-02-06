@@ -71,7 +71,7 @@ class GQLShortlinkQuery {
     return response.createDescriptiveShortlink
   }
 
-  public async getUserShortlinks( { limit, skip, sort, order, search } : QICommon) {
+  public async getUserShortlinks<T = AnyObject>( { limit, skip, sort, order, search } : QICommon) : Promise<T[]> {
     const query = gql`
     query getUserShortlinksWithVars (
       $limit: Int

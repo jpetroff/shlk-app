@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router'
-import browserApi from '../js/browser-api'
+import browserApi from '../js/browser.api'
 import * as _ from 'underscore'
 
 const config = require('../js/config')

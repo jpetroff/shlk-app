@@ -709,6 +709,7 @@ body {
   min-height: 600px;
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 @media screen and (max-width: 480px) {
   .QMDj2SeFg1FU8zxpOFDV_app-main__body {
@@ -744,6 +745,10 @@ body {
     border: none;
     min-height: auto;
   }
+}
+.QMDj2SeFg1FU8zxpOFDV_app-main__shortlink-list {
+  display: flex;
+  flex-direction: column;
 }
 
 /*!***********************************************************************************************************************************************************************************************************************************************************************!*\
@@ -2009,6 +2014,13 @@ body {
 .QxR5s5L4UUkKJR2t07Ex_footer__flag-icon {
   box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
   border-radius: 2px;
+}
+
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-list-item/styles-shortlink-list-item.less ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item {
+  box-sizing: border-box;
 }
 
 

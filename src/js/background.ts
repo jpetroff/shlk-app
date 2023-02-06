@@ -1,5 +1,5 @@
 import _ from 'underscore'
-import browserApi from './browser-api'
+import browserApi from './browser.api'
 
 // global.sendActiveTabUrl = async function sendActiveTabUrl() {
 // 	const activeTab = await browserApi.getTab(true)
