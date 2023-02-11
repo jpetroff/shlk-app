@@ -358,6 +358,9 @@ template {
 /* Text-size styles */
 /* base size: 16_20_text (16px) */
 /* 
+  z-inde layers
+ */
+/* 
 	Colors
  */
 /* 
@@ -510,6 +513,7 @@ html.extension {
 }
 .document {
   font-size: 16px;
+  transform: translate3d(0, 0, 0);
 }
 @font-face {
   font-family: 'Mori';
@@ -685,10 +689,16 @@ body {
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: none;
 }
 @media screen and (max-width: 480px) {
   .QMDj2SeFg1FU8zxpOFDV_app-main {
     height: calc(100% + 3.0625rem);
+  }
+}
+@media screen and (max-width: 480px) {
+  .QMDj2SeFg1FU8zxpOFDV_app-main {
+    height: 100%;
   }
 }
 .QMDj2SeFg1FU8zxpOFDV_app-main__layout {
@@ -710,6 +720,8 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  background-color: #fbfaff;
+  border-radius: 4px;
 }
 @media screen and (max-width: 480px) {
   .QMDj2SeFg1FU8zxpOFDV_app-main__body {
@@ -744,6 +756,13 @@ body {
     border-radius: 0;
     border: none;
     min-height: auto;
+  }
+}
+@media screen and (max-width: 480px) {
+  .QMDj2SeFg1FU8zxpOFDV_app-main__body {
+    height: calc(100vh - 3.875rem);
+    overflow: hidden;
+    border-radius: 0;
   }
 }
 .QMDj2SeFg1FU8zxpOFDV_app-main__shortlink-list {
@@ -2016,11 +2035,262 @@ body {
   border-radius: 2px;
 }
 
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/apps/ShortlinkList/styles-shortlink-list.less ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+.n7SvLwerq4JAUA30sATZ_shortlink-list-app {
+  box-sizing: border-box;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  background-color: #f5f8ff;
+  border-radius: 4px;
+}
+@media screen and (max-width: 480px) {
+  .n7SvLwerq4JAUA30sATZ_shortlink-list-app {
+    border-radius: 0;
+  }
+}
+.n7SvLwerq4JAUA30sATZ_shortlink-list-app__search {
+  background-color: #ffffff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 3.3px 10px -5px rgba(78, 73, 90, 0.4), 0 0 0 1px rgba(78, 73, 90, 0.1);
+  padding: 1rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+.n7SvLwerq4JAUA30sATZ_shortlink-list-app__list {
+  padding: 1rem 1.25rem;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/input/styles-input.less ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+.OmUBXCio1gw6F97xhrOA_input {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.OmUBXCio1gw6F97xhrOA_input__label {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #2f2b3b;
+}
+.OmUBXCio1gw6F97xhrOA_input__input-wrapper {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  background-color: #f5f8ff;
+}
+.OmUBXCio1gw6F97xhrOA_input__input-element {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+  line-height: 1.5rem;
+  padding: 0.5rem calc(0.75rem - 0.125rem);
+  border: 0.125rem solid #0045ff;
+  border-radius: 4px;
+  outline: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  z-index: 1;
+}
+.OmUBXCio1gw6F97xhrOA_input__input-element:focus {
+  box-shadow: 0 0 0 2px #d6e1ff;
+}
+.OmUBXCio1gw6F97xhrOA_input_has-left-icon .OmUBXCio1gw6F97xhrOA_input__input-element {
+  padding-left: calc(2.5rem - 0.125rem);
+}
+.OmUBXCio1gw6F97xhrOA_input_has-right-icon .OmUBXCio1gw6F97xhrOA_input__input-element,
+.OmUBXCio1gw6F97xhrOA_input_not-empty .OmUBXCio1gw6F97xhrOA_input__input-element {
+  padding-right: calc(2.5rem - 0.125rem);
+}
+.OmUBXCio1gw6F97xhrOA_input__placeholder {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+  line-height: 1.5rem;
+  position: absolute;
+  top: calc(0.5rem + 0.125rem);
+  left: 0.75rem;
+  right: 0.75rem;
+  color: #7c7887;
+  z-index: 0;
+}
+.OmUBXCio1gw6F97xhrOA_input_not-empty .OmUBXCio1gw6F97xhrOA_input__placeholder {
+  display: none;
+}
+.OmUBXCio1gw6F97xhrOA_input_has-left-icon .OmUBXCio1gw6F97xhrOA_input__placeholder {
+  left: 2.5rem;
+}
+.OmUBXCio1gw6F97xhrOA_input_has-right-icon .OmUBXCio1gw6F97xhrOA_input__placeholder {
+  right: 2.5rem;
+}
+.OmUBXCio1gw6F97xhrOA_input__left-icon,
+.OmUBXCio1gw6F97xhrOA_input__right-icon {
+  position: absolute;
+  color: #7c7887;
+  top: calc(0.5rem + 0.125rem);
+}
+.OmUBXCio1gw6F97xhrOA_input__left-icon {
+  left: calc(0.5rem + 0.125rem);
+}
+.OmUBXCio1gw6F97xhrOA_input__right-icon {
+  right: calc(0.5rem + 0.125rem);
+}
+.OmUBXCio1gw6F97xhrOA_input_not-empty .OmUBXCio1gw6F97xhrOA_input__right-icon {
+  display: none;
+}
+.OmUBXCio1gw6F97xhrOA_input__clear {
+  position: absolute;
+  top: calc(0.25rem + 0.125rem);
+  right: calc(0.25rem + 0.125rem);
+  display: none;
+  z-index: 2;
+}
+.OmUBXCio1gw6F97xhrOA_input_not-empty .OmUBXCio1gw6F97xhrOA_input__clear {
+  display: flex;
+}
+
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-list-item/styles-shortlink-list-item.less ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************/
 .sIsdb0ueTuLAEoR2h_cc_shortlink-item {
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(78, 73, 90, 0.1);
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-shortlink {
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.125rem;
+  padding: 0 0.75rem;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__shortlink {
+  color: #2f2b3b !important;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  padding: 0.75rem 0;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__action-hint,
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__separator {
+  display: flex;
+  opacity: 1;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  height: 1rem;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__action-hint__animated-inner {
+  position: relative;
+  display: flex;
+  animation-timing-function: ease-in;
+  animation-duration: 1000ms;
+  animation-timing-function: ease-in-out;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__shortlink_anim-active .sIsdb0ueTuLAEoR2h_cc_shortlink-item__action-hint__animated-inner {
+  animation-name: test-swap;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.75rem;
+  margin-bottom: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e4e1ea;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__subheader {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  color: #7c7887;
+  overflow: hidden;
+  flex-grow: 1;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  height: 1rem;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 0.125rem;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__title,
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  -webkit-break-after: avoid;
+  break-after: avoid;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__title {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+  height: 1.25rem;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__description {
+  height: 1rem;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #2f2b3b !important;
+}
+.sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__favicon {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 2px;
+}
+@keyframes test-swap {
+  0% {
+    top: 0rem;
+  }
+  12% {
+    top: -1rem;
+  }
+  88% {
+    top: -1rem;
+  }
+  100% {
+    top: 0;
+  }
 }
 
 

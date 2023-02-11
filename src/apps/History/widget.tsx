@@ -55,7 +55,7 @@ const HistoryWidget : React.FC<Props> = (
                             LinkTools.generateDescriptiveShortlink( item.descriptor ) :
                             LinkTools.generateShortlinkFromHash(item.hash)
 
-          const displayShortlink = LinkTools.makeDisplayUrl(shortlink)
+          const displayShortlink = LinkTools.makeDisplayUrl(`${LinkTools.displayServiceUrl}/${item.hash}`)
           const url = item.location
           const displayUrl = LinkTools.makeDisplayUrl(item.location)
 

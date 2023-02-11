@@ -103,6 +103,8 @@ class GQLShortlinkQuery {
         }
         createdAt
         updatedAt
+        siteTitle
+        siteDescription
       }
     }
     `

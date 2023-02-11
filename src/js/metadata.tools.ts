@@ -19,8 +19,8 @@ class MetadataTools {
     if(shortlink.siteTitle) return shortlink.siteTitle
     if(!shortlink.urlMetadata) return linkTools.makeDisplayUrl(shortlink.location)
 
-    return  shortlink.urlMetadata.og?.title || 
-            shortlink.urlMetadata.title ||
+    return  shortlink.urlMetadata.title ||
+            shortlink.urlMetadata.og?.title || 
             shortlink.urlMetadata.site_name ||
             shortlink.urlMetadata.og?.site_name ||
             linkTools.makeDisplayUrl(shortlink.location)
@@ -32,9 +32,9 @@ class MetadataTools {
 
     const type = shortlink.urlMetadata.type.replace(/;.*$/ig, '').trim()
     if(/html/ig.test(type)) {
-      const v1 =  shortlink.urlMetadata.description ||
+      const v1 =  (shortlink.urlMetadata.description ||
                   shortlink.urlMetadata.og?.description || 
-                  ''
+                  '')
       const v2 =  [
                     shortlink.urlMetadata.og?.type || '',
                     shortlink.urlMetadata.og?.site_name || ''

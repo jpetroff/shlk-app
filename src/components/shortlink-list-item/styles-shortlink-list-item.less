@@ -1,5 +1,126 @@
 @import (reference) '../../css/_constants.less';
 
+@swap-duration: 1000ms;
+
+:export {
+  swapDuration: @swap-duration
+}
+
+@wrap-padding: 0.75rem;
+
 :local(.wrapperClass)_shortlink-item {
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: @black-100;
+  border-radius: 4px;
+  box-shadow: @thin-shadow-stroke;
+
+  &__display-shortlink {
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.125rem;
+    padding: 0 @wrap-padding;
+  }
+
+  &__shortlink {
+    color: @black-20 !important;
+    .t-micricopy_13-16;
+    padding: @wrap-padding 0;
+  }
+
+  &__action-hint,
+  &__separator {
+    display: flex;
+    opacity: 1;
+    .t-micricopy_13-16;
+    height: 1rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  &__action-hint__animated-inner {
+    position: relative;
+    display: flex;
+    animation-timing-function: ease-in;
+    animation-duration: @swap-duration;
+    animation-timing-function: ease-in-out;
+  }
+  &__shortlink_anim-active &__action-hint__animated-inner {
+    animation-name: test-swap;
+  }
+
+  &__display-full-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: @wrap-padding;
+    margin-bottom: 0;
+    padding-bottom: @wrap-padding;
+    border-bottom: 1px solid @black-90;
+
+    &__subheader {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      color: @black-50;
+      overflow: hidden;
+      flex-grow: 1;
+      .t-micricopy_13-16;
+      text-overflow: ellipsis;
+      height: 1rem;
+    }
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 0.125rem;
+    }
+
+    &__title,
+    &__description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: keep-all;
+      -webkit-break-after: avoid;
+      break-after: avoid;
+    }
+    &__title {
+      .t-text_16-20;
+      height: 1.25rem;
+    }
+    &__description {
+      height: 1rem;
+      .t-micricopy_13-16;
+      color: @black-20 !important;
+    }
+
+    &__favicon {
+      height: 1rem;
+      width: 1rem;
+      border-radius: 2px;
+    }
+  }
+
+}
+
+@keyframes test-swap {
+  0% {
+    top: 0rem;
+  }
+  12% {
+    top: -1rem;
+  }
+  88% {
+    top: -1rem;
+  }
+  100% {
+    top: 0;
+  }
 }

@@ -74,6 +74,11 @@
 
 :local(.appMainClass)_app-main {
   .mixin-fullscreen-page;
+  -webkit-overflow-scrolling: none;
+
+  @media @mq-mobile {
+    height: 100%;
+  }
 
   &__layout {
     .mixin-centered-content;
@@ -82,6 +87,15 @@
   &__body {
     .mixin-narrow-body;
     flex-direction: column;
+    background-color: @blue-95;
+    border-radius: 4px;
+  }
+  @media @mq-mobile {
+    &__body {
+      height: ~"calc(100vh - 3.875rem)";
+      overflow: hidden;
+      border-radius: 0;
+    }
   }
 
   &__shortlink-list {

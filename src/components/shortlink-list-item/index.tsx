@@ -37,7 +37,9 @@ const ShortlinkListItem : React.FC<Props> = (
     timestamp,
     siteTitle,
     siteDescription,
-    urlMetadata
+    urlMetadata,
+    snooze,
+    tags
   } : Props
 ) => {
   const globalClass = `${styles.wrapperClass}_shortlink-item`
@@ -48,20 +50,35 @@ const ShortlinkListItem : React.FC<Props> = (
                     LinkTools.generateDescriptiveShortlink( descriptor ) :
                     LinkTools.generateShortlinkFromHash(hash)
 
-  const displayShortlink = LinkTools.makeDisplayUrl(shortlink)
-  const displayUrl = LinkTools.makeDisplayUrl(location)
+  const displayShortlink = LinkTools.makeDisplayUrl(`${LinkTools.displayServiceUrl}/${hash}`)
 
-  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
 
   }
 
   return (
     <div className={`${shortlinkItemClasses}`}>
+      <Link  
+        className={`${globalClass}__display-full-link`} 
+        href={location}
+        colorScheme={LinkColors.USER}
+        >
+        <div className={`${globalClass}__display-full-link__subheader`}>
+          {urlMetadata?.favicons && (
+            <img className={`${globalClass}__display-full-link__favicon`} src={urlMetadata?.favicons[0].src} />
+          )}
+          {location}
+        </div>
+        <div className={`${globalClass}__display-full-link__main`}>
+          <div className={`${globalClass}__display-full-link__title`}>{siteTitle}</div>
+          <div className={`${globalClass}__display-full-link__description`}>{siteDescription}</div>
+        </div>
+      </Link>
       <Link
         onClick={handleClick}
         className={`${globalClass}__display-shortlink`} 
         >
-        <span className={`${globalClass}__shortlink__span`}>{displayShortlink}</span>
+        <span className={`${globalClass}__shortlink`}>{displayShortlink}</span>
         <span className={`${globalClass}__separator`} >·</span>
         <span className={`${globalClass}__action-hint`}>
           <span className={`${globalClass}__action-hint__animated-inner`}>
@@ -70,15 +87,9 @@ const ShortlinkListItem : React.FC<Props> = (
           </span>
         </span>
       </Link>
-      <Link  
-        className={`${globalClass}__display-full-link`} 
-        href={location}
-        colorScheme={LinkColors.USER}
-        >
-        <span className={`${globalClass}__full-link__span`}>{displayUrl}</span>
-        <span className={`${globalClass}__separator`} >·</span>
-        <span className={`${globalClass}__action-hint`}>{ActionLabels.open}</span>
-      </Link>
+      {(tags || snooze) &&
+        <div className={`${globalClass}__display-full-link__app-meta`}></div>
+      }
     </div>
   )
 }

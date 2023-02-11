@@ -3,14 +3,16 @@ const tmpAddr = 'http://localhost:8002'
 if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'extension') {
   module.exports = {
     serviceUrl: tmpAddr,
-    displayServiceUrl: new String(tmpAddr).replace(/^https?:\/\//ig, ''),
+    // displayServiceUrl: new String(tmpAddr).replace(/^https?:\/\//ig, ''),
+    displayServiceUrl: 'shlk.cc',
     target: 'extension',
     mode: 'development'
   }
 } else if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'webapp') {
   module.exports = {
     serviceUrl: window.location.origin,
-    displayServiceUrl: new String(window.location.origin).replace(/^https?:\/\//ig, ''),
+    // displayServiceUrl: new String(window.location.origin).replace(/^https?:\/\//ig, ''),
+    displayServiceUrl: 'shlk.cc',
     target: 'webapp',
     mode: 'development'
   } 

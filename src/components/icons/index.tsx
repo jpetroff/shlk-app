@@ -41,12 +41,14 @@ type Props = {
 
 const Icon : React.FC<Props> = function( {
 	useIcon,
-	size
+	size,
+  className
 } ) {
 	const globalClass = 'icon-svg'
 	const IconNode = useIcon
+  const propClass = className || ''
 	return (
-		<div className={`${styles.wrapperClass} ${globalClass} ${globalClass}_size-${size}`}>
+		<div className={`${styles.wrapperClass} ${globalClass} ${globalClass}_size-${size} ${propClass}`}>
 			<IconNode className={`${globalClass}__node`} />
 		</div>
 	)
