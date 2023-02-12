@@ -41,6 +41,11 @@ class BrowserApi {
   public onMessage(callback: (message: any, sender: chrome.runtime.MessageSender, sendResponse?: () => void) => boolean ) {
     return chrome.runtime.onMessage.addListener(callback)
   }
+
+  public openExternal(url: string) {
+    if(!this.isInit) return
+    chrome.tabs.create({ url })
+  }
   
 }
 

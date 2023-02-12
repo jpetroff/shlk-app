@@ -1,17 +1,16 @@
 import styles from './styles-page.less'
 
 import * as React from 'react'
-import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Link from '../components/link'
 import * as _ from 'underscore'
 
 import Header from '../apps/Header'
-import Footer from '../apps/Footer'
 import { useRouter } from './page-hooks'
 import Icon, { CaretLeft, IconSize } from '../components/icons'
 import classNames from 'classnames'
 import AppContext from '../js/app.context'
 import ShortlinkList from '../apps/ShortlinkList'
-import shortlinkQueries from '../js/shortlink.gql'
 
 
 const config = require('../js/config')
@@ -35,7 +34,6 @@ const AppMain : React.FC = () => {
   React.useEffect( () => {
     if(!appContext.user?.email) {
       navigate('/login')
-      return
     }
   })
 
@@ -45,7 +43,7 @@ const AppMain : React.FC = () => {
 
         <div className={`${globalClass}__layout`}>
           <div className={`${globalClass}__body`}>
-            <RouterLink to='/' className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></RouterLink>
+            <Link to='/' className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></Link>
             <ShortlinkList />
           </div>
         </div>

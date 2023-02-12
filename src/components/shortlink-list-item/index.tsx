@@ -50,7 +50,9 @@ const ShortlinkListItem : React.FC<Props> = (
                     LinkTools.generateDescriptiveShortlink( descriptor ) :
                     LinkTools.generateShortlinkFromHash(hash)
 
-  const displayShortlink = LinkTools.makeDisplayUrl(`${LinkTools.displayServiceUrl}/${hash}`)
+  const displayShortlink =  descriptor?.descriptionTag && descriptor.descriptionTag != '' ? 
+                            LinkTools.makeDisplayShortlink( descriptor ) :
+                            LinkTools.makeDisplayShortlink(hash)
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
 
@@ -67,7 +69,7 @@ const ShortlinkListItem : React.FC<Props> = (
           {urlMetadata?.favicons && (
             <img className={`${globalClass}__display-full-link__favicon`} src={urlMetadata?.favicons[0].src} />
           )}
-          {location}
+          {LinkTools.makeDisplayUrl(location)}
         </div>
         <div className={`${globalClass}__display-full-link__main`}>
           <div className={`${globalClass}__display-full-link__title`}>{siteTitle}</div>

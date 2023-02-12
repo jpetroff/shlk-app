@@ -55,11 +55,13 @@ const HistoryWidget : React.FC<Props> = (
                             LinkTools.generateDescriptiveShortlink( item.descriptor ) :
                             LinkTools.generateShortlinkFromHash(item.hash)
 
-          const displayShortlink = LinkTools.makeDisplayUrl(`${LinkTools.displayServiceUrl}/${item.hash}`)
+          const displayShortlink =  item.descriptor?.descriptionTag && item.descriptor.descriptionTag != '' ? 
+                                    LinkTools.makeDisplayShortlink( item.descriptor ) :
+                                    LinkTools.makeDisplayShortlink( item.hash )
+
           const url = item.location
           const displayUrl = LinkTools.makeDisplayUrl(item.location)
 
-          
           return (
           <div 
             className={`${globalClass}__link-block`} 
@@ -83,8 +85,6 @@ const HistoryWidget : React.FC<Props> = (
               href={url}
               colorScheme={LinkColors.USER}>
                 <span className={`${globalClass}__full-link__span`}>{displayUrl}</span>
-                <span className={`${globalClass}__separator`} >·</span>
-                <span className={`${globalClass}__action-hint`}>{ActionLabels.open}</span>
             </Link>
           </div>) 
         })}

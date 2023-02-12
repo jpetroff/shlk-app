@@ -6,6 +6,10 @@ import { Flyover } from '../tooltip'
 import Icon, { ReactIcon, IconSize, CaretRight } from '../icons'
 import { useState } from 'react'
 
+import config from '../../js/config'
+import browserApi from '../../js/browser.api'
+import linkTools from '../../js/link.tools'
+
 export enum ButtonSize {
   LARGE = 'large',
   SMALL = 'small'
@@ -60,6 +64,12 @@ const Button : React.FC<Props> = function(
     if(_.isFunction(args.onClick)) {
       // _.delay(() => args.onClick(event), 100)
       args.onClick(event)
+    }
+
+    if(config.target == 'extension' && args.href) {
+      event.preventDefault()
+      const fullUrl = new URL(args.href, linkTools.baseUrl)
+      browserApi.openExternal(fullUrl.toString())
     }
 
     if(args.flyover) setShowFlyover(true)

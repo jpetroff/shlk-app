@@ -432,14 +432,14 @@ template {
   height: 2.875rem;
   border: 1px solid #e4e1ea;
   border-radius: 50%;
-  color: #7c7887;
+  color: #7c7887 !important;
   transition: border-color 0.1s ease, color 0.1s ease;
   text-decoration: none;
   cursor: pointer;
 }
 .common-back-button:hover {
   border-color: #c9c6d2;
-  color: #4e495a;
+  color: #4e495a !important;
 }
 html.extension {
   width: 480px;
@@ -580,7 +580,7 @@ body {
   height: 2.875rem;
   border: 1px solid #e4e1ea;
   border-radius: 50%;
-  color: #7c7887;
+  color: #7c7887 !important;
   transition: border-color 0.1s ease, color 0.1s ease;
   text-decoration: none;
   cursor: pointer;
@@ -590,7 +590,7 @@ body {
 }
 .mixin-narrow-body .narrow-body__back-button:hover {
   border-color: #c9c6d2;
-  color: #4e495a;
+  color: #4e495a !important;
 }
 @media screen and (max-width: 480px) {
   .mixin-narrow-body {
@@ -658,7 +658,7 @@ body {
   height: 2.875rem;
   border: 1px solid #e4e1ea;
   border-radius: 50%;
-  color: #7c7887;
+  color: #7c7887 !important;
   transition: border-color 0.1s ease, color 0.1s ease;
   text-decoration: none;
   cursor: pointer;
@@ -668,7 +668,7 @@ body {
 }
 .oU7PEn8gl5r2vm5AA4Ko_login__body .narrow-body__back-button:hover {
   border-color: #c9c6d2;
-  color: #4e495a;
+  color: #4e495a !important;
 }
 @media screen and (max-width: 480px) {
   .oU7PEn8gl5r2vm5AA4Ko_login__body {
@@ -738,7 +738,7 @@ body {
   height: 2.875rem;
   border: 1px solid #e4e1ea;
   border-radius: 50%;
-  color: #7c7887;
+  color: #7c7887 !important;
   transition: border-color 0.1s ease, color 0.1s ease;
   text-decoration: none;
   cursor: pointer;
@@ -748,7 +748,7 @@ body {
 }
 .QMDj2SeFg1FU8zxpOFDV_app-main__body .narrow-body__back-button:hover {
   border-color: #c9c6d2;
-  color: #4e495a;
+  color: #4e495a !important;
 }
 @media screen and (max-width: 480px) {
   .QMDj2SeFg1FU8zxpOFDV_app-main__body {
@@ -873,7 +873,7 @@ body {
   height: 2.875rem;
   border: 1px solid #e4e1ea;
   border-radius: 50%;
-  color: #7c7887;
+  color: #7c7887 !important;
   transition: border-color 0.1s ease, color 0.1s ease;
   text-decoration: none;
   cursor: pointer;
@@ -881,7 +881,7 @@ body {
 }
 .rZf2AbGKDN3xcX2bC4Eh_app-header__back_wrapper:hover {
   border-color: #c9c6d2;
-  color: #4e495a;
+  color: #4e495a !important;
 }
 @media screen and (max-width: 480px) {
   .rZf2AbGKDN3xcX2bC4Eh_app-header__back_wrapper {
@@ -2248,7 +2248,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 0.125rem;
+  gap: 0.25rem;
 }
 .sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__title,
 .sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__description {
@@ -2271,7 +2271,7 @@ body {
   font-size: 0.81rem;
   line-height: 1rem;
   letter-spacing: 0.02em;
-  color: #2f2b3b !important;
+  color: #4e495a !important;
 }
 .sIsdb0ueTuLAEoR2h_cc_shortlink-item__display-full-link__favicon {
   height: 1rem;

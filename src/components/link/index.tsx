@@ -5,6 +5,9 @@ import Icon, { ReactIcon, IconSize } from '../icons'
 import classNames from 'classnames'
 import { Flyover } from '../tooltip'
 import { Link as RouterLink, LinkProps } from 'react-router-dom'
+import config from '../../js/config'
+import browserApi from '../../js/browser.api'
+import linkTools from '../../js/link.tools'
 
 export enum LinkColors {
   USER = 'user',
@@ -51,6 +54,12 @@ const Link : React.FC<Props> = (
       args.onClick(event)
     }
 
+    if(config.target == 'extension' && args.href) {
+      event.preventDefault()
+      const fullUrl = new URL(args.href, linkTools.baseUrl)
+      browserApi.openExternal(fullUrl.toString())
+    }
+
     if(args.flyover) setShowFlyover(true)
   }
 
@@ -81,7 +90,7 @@ const Link : React.FC<Props> = (
         {inner}
       </RouterLink>
   } else {
-    return <a href={args.href}  {...htmlAnchorAttributes} 
+    return <a href={args.href} {...htmlAnchorAttributes} 
     className={`${linkClasses} ${args.className || ''}`}
     onClick={handleClick}>
       {inner}

@@ -71,6 +71,18 @@ class LinkTools {
     result = result.replace(/^www\./ig, '')
     return result
   }
+
+  makeDisplayShortlink(hash: string): string;
+  makeDisplayShortlink( {userTag, descriptionTag} : {userTag?: string, descriptionTag: string} ): string;
+  makeDisplayShortlink( prop: string | {userTag?: string, descriptionTag: string} ):string {
+    if(_.isObject(prop)) {
+      const userTagPart = prop.userTag ? prop.userTag : ''
+      const descriptionTagPart = '@' + prop.descriptionTag
+      return `${this.displayServiceUrl}/${userTagPart}${descriptionTagPart}`
+    } else {
+      return `${this.displayServiceUrl}/${prop}`
+    }
+  }
 }
 
 export default new LinkTools()
