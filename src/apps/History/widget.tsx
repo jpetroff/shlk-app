@@ -14,7 +14,7 @@ type Props = {
 
 enum ActionLabels {
   copy = 'Copy',
-  copied = 'Copied!',
+  copied = 'Copied',
   open = 'Open'
 }
 
@@ -34,13 +34,6 @@ const HistoryWidget : React.FC<Props> = (
     if(clipboardTools.enabled) clipboardTools.copy(url)
     setActiveKey(key) 
   }
-
-  React.useEffect( () => {
-    if(activeKey == null) return 
-    const timeout = setTimeout( () => { setActiveKey(null) }, parseInt(styles.swapDuration))
-
-    return () => { clearTimeout(timeout)}
-  }, [activeKey])
 
   if(totalCount == 0) return(<></>)
   return (
@@ -69,22 +62,16 @@ const HistoryWidget : React.FC<Props> = (
             >
             <Link
               onClick={(event) => handleClick(shortlink, key, event)}
-              className={`${globalClass}__shortlink ${activeKey == key ? globalClass+'__shortlink_anim-active' : ''}`} 
+              className={`${globalClass}__shortlink`}
+              suffix={`${ActionLabels.copy}+${ActionLabels.copied}`}
             >
-              <span className={`${globalClass}__shortlink__span`}>{displayShortlink}</span>
-              <span className={`${globalClass}__separator`} >·</span>
-              <span className={`${globalClass}__action-hint`}>
-                <span className={`${globalClass}__action-hint__animated-inner`}>
-                  {ActionLabels.copy}<br/>
-                  {ActionLabels.copied}
-                </span>
-              </span>
+              <span className={`${globalClass}__shortlink__label`}>{displayShortlink}</span>
             </Link>
             <Link  
               className={`${globalClass}__full-link`} 
               href={url}
               colorScheme={LinkColors.USER}>
-                <span className={`${globalClass}__full-link__span`}>{displayUrl}</span>
+                <span className={`${globalClass}__full-link__label`}>{displayUrl}</span>
             </Link>
           </div>) 
         })}

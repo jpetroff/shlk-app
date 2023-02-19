@@ -74,6 +74,7 @@
 
 :local(.appMainClass)_app-main {
   .mixin-fullscreen-page;
+  height: 100vh;
   -webkit-overflow-scrolling: none;
 
   @media @mq-mobile {
@@ -82,10 +83,19 @@
 
   &__layout {
     .mixin-centered-content;
+    box-sizing: border-box;
+    @media @mq-not-mobile {
+      padding: 2rem 0;
+      height: ~"calc(100vh - 3.875rem)";
+      overflow: hidden;
+    }
   }
 
   &__body {
     .mixin-narrow-body;
+    // flex-grow: 1;
+    height: 100%;
+    margin: 2rem 0;
     flex-direction: column;
     background-color: @blue-95;
     border-radius: 4px;

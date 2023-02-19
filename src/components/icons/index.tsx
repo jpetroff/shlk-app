@@ -12,6 +12,9 @@ import EnterSvg from '../../assets/svg/icon/enter.svg'
 import GoogleSvg from '../../assets/svg/icon/google.svg'
 import SearchSvg from '../../assets/svg/icon/search.svg'
 import SnoozeSvg from '../../assets/svg/icon/snooze.svg'
+import LogoutSvg from '../../assets/svg/icon/logout.svg'
+import CaretDownSvg from '../../assets/svg/icon/caret-down.svg'
+import LinkSvg from '../../assets/svg/icon/link.svg'
 
 
 export const Logo = LogoSvg
@@ -19,11 +22,14 @@ export const LogoC = LogoCSvg
 export const Avatar = AvatarSvg
 export const CaretRight = CaretRightSvg
 export const CaretLeft = CaretLeftSvg
+export const CaretDown = CaretDownSvg 
 export const Cross = CrossSvg
 export const Enter = EnterSvg
 export const Google = GoogleSvg
 export const Snooze = SnoozeSvg
 export const Search = SearchSvg 
+export const Logout = LogoutSvg 
+export const LinkIcon = LinkSvg 
 
 export const Cross_16 = CrossSvg_16
 

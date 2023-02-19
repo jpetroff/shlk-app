@@ -25,17 +25,25 @@ type Props = {
   flyover?: string
   tooltip?: TooltipProps
   to?: string,
-  href?: string
+  href?: string,
+  suffix?: string,
+  inline?: boolean
 } & Omit<LinkProps, 'to'>
 
 const Link : React.FC<Props> = (
  args: Props
 ) => {
-  const [showFlyover, setShowFlyover] = React.useState(false)
+  let [showFlyover, setShowFlyover] : [ boolean, React.Dispatch<boolean> ] = [false, () => {}]
+  if(args.flyover) [showFlyover, setShowFlyover] = React.useState(false)
+  
+  const suffixes = args.suffix ? args.suffix.split('+') : []
+  let [animateSuffix, setAnimateSuffix] : [ boolean, React.Dispatch<boolean> ] = [false, () => {}]
+  if(suffixes.length > 1) [animateSuffix, setAnimateSuffix] = React.useState(null)
 
   const globalClass = styles.wrapperClass+'_link'
   const linkClasses = classNames({
     [`${globalClass}`]: true,
+    [`${globalClass}_inline`]: args.inline,
     [`${globalClass}_${args.colorScheme}`]: true,
     [`${globalClass}_loading`]: args.isLoading,
     [`${globalClass}_disabled`]: args.isDisabled || args.isLoading
@@ -61,8 +69,16 @@ const Link : React.FC<Props> = (
     }
 
     if(args.flyover) setShowFlyover(true)
+    if(suffixes.length > 1) setAnimateSuffix(true)
   }
 
+  if(args.suffix) React.useEffect( () => {
+    if(!animateSuffix) return 
+    const timeout = setTimeout( () => { setAnimateSuffix(false) }, parseInt(styles.swapDuration))
+
+    return () => { clearTimeout(timeout)}
+  })
+  
   const inner = (
     <>
       {args.icon && !args.iconRight && 
@@ -76,10 +92,20 @@ const Link : React.FC<Props> = (
       }
 
       {args.flyover && showFlyover && <Flyover label={args.flyover} onDone={() => setShowFlyover(false)} />}
+
+      {suffixes.length > 0 && (<>
+        <span className={`${globalClass}__separator`} >&nbsp;·&nbsp;</span>
+        <span className={`${globalClass}__action-hint`}>
+          <span className={`${globalClass}__action-hint__animated-inner ${animateSuffix ? `${globalClass}__action-hint__animated-inner-active` : ''}`}>
+            {suffixes[0]}
+            {suffixes[1] && <><br/>{suffixes[1]}</>}
+          </span>
+        </span>
+      </>)}
     </>
   )
 
-  const htmlAnchorAttributes = _.omit(args, 'colorScheme', 'label', 'icon', 'iconSize', 'isDisabled', 'iconRight', 'isLoading', 'flyover', 'tooltip', 'onClick', 'href', 'to')
+  const htmlAnchorAttributes = _.omit(args, 'colorScheme', 'label', 'icon', 'iconSize', 'isDisabled', 'iconRight', 'isLoading', 'flyover', 'tooltip', 'onClick', 'href', 'to', 'suffix', 'inline')
   
   if (
     args.to && args.to != ''
@@ -101,7 +127,8 @@ const Link : React.FC<Props> = (
 Link.defaultProps = {
   isDisabled: false,
   isLoading: false, 
-  colorScheme: LinkColors.APP
+  colorScheme: LinkColors.APP,
+  inline: false
 }
 
 export default Link

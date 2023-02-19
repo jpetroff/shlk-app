@@ -4,11 +4,13 @@ import * as _ from 'underscore'
 import classNames from 'classnames'
 import { useNavigate, Link as RouterLink } from 'react-router-dom'
 
-import Icon, { Logo, LogoC, Avatar, IconSize, CaretLeft } from '../../components/icons'
+import Icon, { Logo, LogoC, Avatar, IconSize, CaretLeft, Logout, LinkIcon, Snooze } from '../../components/icons'
 import { checkMobileMQ } from '../../js/utils'
 import AppContext from '../../js/app.context'
 
 import Link from '../../components/link'
+import DropdownMenu, { DropdownPosition } from '../../components/dropdown-menu'
+import MenuItem from '../../components/menu-item'
 
 
 type Props = {
@@ -26,6 +28,7 @@ const Header : React.FC<Props> = (
   const appContext = React.useContext(AppContext)
   const hasLoggedUser = !_.isEmpty(appContext.user)
   const navigate = useNavigate()
+  const [showDropdown, setDropdown] = React.useState(false)
 
   const loginLink = hasLoggedUser ? '/app' : '/login'
 
@@ -37,6 +40,14 @@ const Header : React.FC<Props> = (
     [`${globalClass}_has-back-button`]: !!backButton,
     [`${globalClass}_sticky`]: sticky
   })
+
+  function handleLoginClick(event: React.SyntheticEvent) {
+    if(hasLoggedUser) {
+      setDropdown(true)
+    } else {
+      navigate(loginLink)
+    }
+  }
 
   return (
     <div className={`${headerClasses}`}>
@@ -58,7 +69,7 @@ const Header : React.FC<Props> = (
           )}
         </div>
         <div className={`${globalClass}__user`}>
-          <Link className={`${globalClass}__account-link`} isDisabled={false} to={loginLink}
+          <Link className={`${globalClass}__account-link`} isDisabled={false} onClick={handleLoginClick}
           >
             {!hasLoggedUser && 
               (<>
@@ -70,7 +81,29 @@ const Header : React.FC<Props> = (
               (<>
                 { appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`} style={ { backgroundImage: `url(${appContext.user.avatar})` } }></div> }
                 {!appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`}>{_.first(appContext.user.name.toUpperCase())}</div> }
-                <div className={`${globalClass}__account-link__text`}>{appContext.user.name}</div>
+                <div className={`${globalClass}__account-link__text`}>
+                  {appContext.user.name}
+                </div>
+                <DropdownMenu className={`${globalClass}__dropdown`} onClose={() => setDropdown(false)} show={showDropdown} position={[DropdownPosition.top, DropdownPosition.right]}>
+                    <div className={`${globalClass}__dropdown-header`}>
+                      { appContext.user?.avatar && 
+                        <div className={`${globalClass}__dropdown-header__avatar`} style={ { backgroundImage: `url(${appContext.user.avatar})` } }></div>
+                      }
+                      {!appContext.user?.avatar &&
+                        <div className={`${globalClass}__dropdown-header__avatar`}>{_.first(appContext.user.name.toUpperCase())}</div>
+                      }
+                      <div className={`${globalClass}__dropdown-header__name-block`}>
+                        <div className={`${globalClass}__dropdown-header__name-block__name`}>{appContext.user.name}</div>
+                        <div className={`${globalClass}__dropdown-header__name-block__email`}>{appContext.user.email}</div>
+                      </div>
+                    </div>
+                    <MenuItem.Separator />
+                    <MenuItem label='Profile' icon={Avatar} onClick={() => { navigate('/app/profile'); setDropdown(false) } }/>
+                    <MenuItem label='My shortlinks' icon={LinkIcon} onClick={() => { navigate('/app'); setDropdown(false) } }/>
+                    <MenuItem label='Snoozed links' icon={Snooze} onClick={() => { navigate('/app/snoozed'); setDropdown(false) } }/>
+                    <MenuItem.Separator />
+                    <MenuItem label='Logout' icon={Logout} onClick={() => { window.location.href = '/logout'; setDropdown(false) } }/>
+                  </DropdownMenu>
               </>)
             }
           </Link>

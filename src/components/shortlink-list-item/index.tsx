@@ -7,8 +7,7 @@ import Link, { LinkColors } from '../link'
 
 enum ActionLabels {
   copy = 'Copy',
-  copied = 'Copied!',
-  open = 'Open'
+  copied = 'Copied'
 }
 
 type Props = {
@@ -53,6 +52,8 @@ const ShortlinkListItem : React.FC<Props> = (
   const displayShortlink =  descriptor?.descriptionTag && descriptor.descriptionTag != '' ? 
                             LinkTools.makeDisplayShortlink( descriptor ) :
                             LinkTools.makeDisplayShortlink(hash)
+  
+  const favicon = (urlMetadata?.favicons && urlMetadata?.favicons[0] && urlMetadata?.favicons[0].src) ? urlMetadata?.favicons[0].src : '/assets/default-favicon.png'
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
 
@@ -65,29 +66,21 @@ const ShortlinkListItem : React.FC<Props> = (
         href={location}
         colorScheme={LinkColors.USER}
         >
-        <div className={`${globalClass}__display-full-link__subheader`}>
-          {urlMetadata?.favicons && (
-            <img className={`${globalClass}__display-full-link__favicon`} src={urlMetadata?.favicons[0].src} />
-          )}
-          {LinkTools.makeDisplayUrl(location)}
-        </div>
         <div className={`${globalClass}__display-full-link__main`}>
           <div className={`${globalClass}__display-full-link__title`}>{siteTitle}</div>
-          <div className={`${globalClass}__display-full-link__description`}>{siteDescription}</div>
+          {siteDescription && <div className={`${globalClass}__display-full-link__description`}>{siteDescription}</div>}
+        </div>
+        <div className={`${globalClass}__display-full-link__subheader`}>
+          <img className={`${globalClass}__display-full-link__favicon`} src={favicon} />
+          <span className={`${globalClass}__display-full-link__subheader__span`}>{LinkTools.makeDisplayUrl(location)}</span>
         </div>
       </Link>
       <Link
         onClick={handleClick}
-        className={`${globalClass}__display-shortlink`} 
+        className={`${globalClass}__display-shortlink`}
+        suffix={`${ActionLabels.copy}+${ActionLabels.copied}`}
         >
         <span className={`${globalClass}__shortlink`}>{displayShortlink}</span>
-        <span className={`${globalClass}__separator`} >·</span>
-        <span className={`${globalClass}__action-hint`}>
-          <span className={`${globalClass}__action-hint__animated-inner`}>
-            {ActionLabels.copy}<br/>
-            {ActionLabels.copied}
-          </span>
-        </span>
       </Link>
       {(tags || snooze) &&
         <div className={`${globalClass}__display-full-link__app-meta`}></div>

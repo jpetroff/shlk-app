@@ -8,10 +8,14 @@ class BrowserApi {
   public isInit : boolean
 
   constructor() {
-    if(!chrome) {
+    try {
+      if(!chrome) {
+        this.isInit = false
+      } else {
+        this.isInit = true	
+      }
+    } catch {
       this.isInit = false
-    } else {
-      this.isInit = true	
     }
   }
 
