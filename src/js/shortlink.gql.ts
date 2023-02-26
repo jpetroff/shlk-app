@@ -71,7 +71,7 @@ class GQLShortlinkQuery {
     return response.createDescriptiveShortlink
   }
 
-  public async getUserShortlinks<T = AnyObject>( { limit, skip, sort, order, search } : QICommon) : Promise<T[]> {
+  public async getUserShortlinks<T = AnyObject>( { limit, skip, sort, order, search, isSnooze } : QICommon) : Promise<T[]> {
     const query = gql`
     query getUserShortlinksWithVars (
       $limit: Int
@@ -109,9 +109,50 @@ class GQLShortlinkQuery {
     }
     `
 
-    const response = await this.gqlClient.request(query, { limit, skip, sort, order, search })
+    const response = await this.gqlClient.request(query, { limit, skip, sort, order, search, isSnooze })
     console.log('[GQL] getUserShortlinks\n', response)
     return response.getUserShortlinks
+  }
+
+  public async createOrUpdateShortlinkTimer(args: QISnoozeArgs) {
+    const query = gql`
+    mutation createOrUpdateShortlinkTimerWithVars(
+      $location: String
+      $hash: String
+      $id: String
+      $standardTimer: String
+      $customDay: Mixed
+      $customTime: Mixed
+      $baseDateISOString: String
+    ) {
+      createOrUpdateShortlinkTimer (
+        args: {
+          location: $location
+          hash: $hash
+          id: $id
+          standardTimer: $standardTimer
+          customDay: $customDay
+          customTime: $customTime
+          baseDateISOString: $baseDateISOString
+        }
+      ) {
+        hash
+        location
+        snooze {
+          awake
+          description
+        }
+        descriptor {
+          userTag
+          descriptionTag
+        }
+      }
+    }
+    `
+
+    const response = await this.gqlClient.request(query, args)
+    console.log('[GQL] createOrUpdateShortlinkTimer\n', response)
+    return response.createOrUpdateShortlinkTimer
   }
 }
 

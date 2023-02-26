@@ -3,13 +3,15 @@ import * as React from 'react'
 import styles from './styles-hero-input.less'
 
 import Button, { ButtonSize, ButtonType } from '../button'
-import { Cross, Enter } from '../icons'
+import { Cross, Enter, Snooze } from '../icons'
 import { canShortcutPasteWithKeyboard, checkMobileMQ } from '../../js/utils'
 import clipboardTools from '../../js/clipboard.tools'
+import AppContext from '../../js/app.context'
 
 type Props = {
   onChange: (str: string, isClearPress?: boolean) => void;
   onSubmit: () => void;
+  onSnooze: () => void;
   placeholder: string;
   name: string;
   value?: string;
@@ -24,6 +26,7 @@ const HeroInput : React.FC<Props> = function(
   {
     onChange,
     onSubmit,
+    onSnooze,
     name,
     placeholder,
     value = '',
@@ -37,6 +40,8 @@ const HeroInput : React.FC<Props> = function(
 
   const [isFocus, setFocus] = React.useState(false)
   const inputId = React.useId()
+
+  const appContext = React.useContext(AppContext)
 
   const handleKeyDown = (event: any) => {
     if (event.keyCode == 13 && _.isFunction(onSubmit)) {
@@ -107,6 +112,16 @@ const HeroInput : React.FC<Props> = function(
             onClick={handlePaste}
             />
         </label>
+        {appContext.user && 
+        <Button
+          icon={Snooze}
+          className={`${globalClass}__snooze`}
+          label='Snooze'
+          type={ButtonType.SECONDARY}
+          size={ButtonSize.LARGE}
+          onClick={onSnooze}
+          />
+        }
         <Button
           icon={Enter}
           className={`${globalClass}__create`}

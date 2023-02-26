@@ -547,6 +547,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/snooze-list/styles-snooze-list.less":
+/*!************************************************************!*\
+  !*** ./src/components/snooze-list/styles-snooze-list.less ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"wrapperClass":"KbEthUECGr25JBYlfj7L"});
+
+/***/ }),
+
 /***/ "./src/components/tooltip/styles-tooltip.less":
 /*!****************************************************!*\
   !*** ./src/components/tooltip/styles-tooltip.less ***!
@@ -1255,14 +1271,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_hero_input_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/hero-input/index */ "./src/components/hero-input/index.tsx");
 /* harmony import */ var _components_shortlink_display__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/shortlink-display */ "./src/components/shortlink-display/index.tsx");
 /* harmony import */ var _components_shortlink_slug_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/shortlink-slug-input */ "./src/components/shortlink-slug-input/index.tsx");
-/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
+/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
+/* harmony import */ var _components_snooze_list__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/snooze-list */ "./src/components/snooze-list/index.tsx");
 /* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
 /* harmony import */ var _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _js_cache__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/cache */ "./src/js/cache.ts");
 /* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./errors */ "./src/apps/ShortlinkBar/errors.ts");
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
-/* harmony import */ var _History__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../History */ "./src/apps/History/index.tsx");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _History__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../History */ "./src/apps/History/index.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1350,6 +1367,7 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
 
 
 
+
 var config = __webpack_require__(/*! ../../js/config */ "./src/js/config.js");
 var globalCommands;
 (function (globalCommands) {
@@ -1375,8 +1393,10 @@ var ShortlinkBar = /** @class */ (function (_super) {
                 createLinkIsLoading: false,
                 createDescriptiveLinkIsLoading: false
             },
+            successState: {},
             mobileConvenienceInput: false,
-            cachedShortlinks: []
+            cachedShortlinks: [],
+            showSnoozeOptions: false
         };
         underscore__WEBPACK_IMPORTED_MODULE_2__.bindAll.apply(underscore__WEBPACK_IMPORTED_MODULE_2__, __spreadArray([_this], underscore__WEBPACK_IMPORTED_MODULE_2__.functions(_this), false));
         _this.submitDescriptor = underscore__WEBPACK_IMPORTED_MODULE_2__.debounce(_this._submitDescriptor, 500);
@@ -1431,7 +1451,8 @@ var ShortlinkBar = /** @class */ (function (_super) {
             generatedDescriptiveShortlink: undefined,
             generatedHash: undefined,
             userTag: this.defaultUserTag(),
-            descriptionTag: ''
+            descriptionTag: '',
+            showSnoozeOptions: false
         });
         if (isClearPress)
             this._setMobileConvenienceInput(false);
@@ -1535,6 +1556,7 @@ var ShortlinkBar = /** @class */ (function (_super) {
                 switch (_c.label) {
                     case 0:
                         this._clearErrorState();
+                        this.snoozeOptions(false);
                         _c.label = 1;
                     case 1:
                         _c.trys.push([1, 4, , 5]);
@@ -1574,6 +1596,12 @@ var ShortlinkBar = /** @class */ (function (_super) {
                         return [2 /*return*/];
                 }
             });
+        });
+    };
+    ShortlinkBar.prototype.snoozeOptions = function (val) {
+        if (val === void 0) { val = true; }
+        this.setState({
+            showSnoozeOptions: val
         });
     };
     ShortlinkBar.prototype.handleSuccessPaste = function (clipText) {
@@ -1659,6 +1687,9 @@ var ShortlinkBar = /** @class */ (function (_super) {
     ShortlinkBar.prototype._clearErrorState = function () {
         this.setState({ errorState: {} });
     };
+    ShortlinkBar.prototype._clearSuccessState = function () {
+        this.setState({ successState: {} });
+    };
     ShortlinkBar.prototype.defaultUserTag = function () {
         return (0,_js_utils__WEBPACK_IMPORTED_MODULE_4__.getCookie)('userTag');
     };
@@ -1670,26 +1701,77 @@ var ShortlinkBar = /** @class */ (function (_super) {
     ShortlinkBar.prototype._onHeroInputElementFocus = function (event) {
         this._setMobileConvenienceInput(true);
     };
+    ShortlinkBar.prototype.handleStandardSnooze = function (predefinedValue) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var baseDateISOString, location_1, result, trimLocation, description, err_3;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        baseDateISOString = (new Date()).toISOString();
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        location_1 = _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].fixUrl(this.state.location);
+                        return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_7__["default"].createOrUpdateShortlinkTimer({
+                                baseDateISOString: baseDateISOString,
+                                location: location_1,
+                                hash: this.state.generatedHash,
+                                standardTimer: predefinedValue
+                            })];
+                    case 2:
+                        result = _b.sent();
+                        if (!result)
+                            return [2 /*return*/, null];
+                        this.updateLocation('');
+                        trimLocation = result.location.length > 30 ? result.location.slice(0, 29) + '…' : result.location;
+                        description = (((_a = result.snooze) === null || _a === void 0 ? void 0 : _a.description) || '').toLowerCase();
+                        this.setState({
+                            successState: {
+                                successMessage: "Snoozed until ".concat(description, ": ").concat(trimLocation)
+                            }
+                        });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_3 = _b.sent();
+                        console.error(err_3);
+                        this.setState({ errorState: {
+                                lastError: _errors__WEBPACK_IMPORTED_MODULE_8__["default"].process(err_3) || undefined,
+                                createLinkResult: true
+                            }
+                        });
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     ShortlinkBar.prototype.render = function () {
+        var _this = this;
         var globalClass = _styles_shortlink_bar_less__WEBPACK_IMPORTED_MODULE_0__["default"].homepage + '_app-body';
         var mobileConvenienceClass = this.state.mobileConvenienceInput ? '__mobile-convenience-state' : '';
         return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass) },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__layout") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__shortlink-block ").concat(mobileConvenienceClass) },
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__offset-wrapper") },
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_hero_input_index__WEBPACK_IMPORTED_MODULE_10__["default"], { inputRef: this.heroInputRef, onChange: this.updateLocation, onSubmit: this.submitLocation, name: "URL", placeholder: "Type or paste a link", value: this.state.location, onFocus: this._onHeroInputElementFocus, hasCta: !this.state.generatedShortlink || this.state.generatedShortlink == '' })),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_display__WEBPACK_IMPORTED_MODULE_11__["default"], { placeholder: config.displayServiceUrl, shortlink: this.state.generatedShortlink, isLoading: this.state.loadingState.createLinkIsLoading, hasCta: (!!this.state.generatedShortlink || this.state.generatedShortlink != '') && (!this.state.generatedDescriptiveShortlink), error: this.state.errorState.createLinkResult }),
-                    this.state.generatedShortlink &&
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_slug_input__WEBPACK_IMPORTED_MODULE_9__["default"], { text: this._generateTextPattern(), onChange: this.handleDescriptorChange, show: this.state.generatedShortlink ? true : false, generatedLink: this.state.generatedDescriptiveShortlink, isLoading: this.state.loadingState.createDescriptiveLinkIsLoading, hasCta: !this.state.generatedDescriptiveShortlink || this.state.generatedDescriptiveShortlink != '', error: this.state.errorState.createDescriptiveLinkResult }),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") }, this.state.errorState.lastError &&
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_12__["default"], { message: this.state.errorState.lastError.message, canDismiss: true, onDismiss: this._clearErrorState }))),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_hero_input_index__WEBPACK_IMPORTED_MODULE_10__["default"], { inputRef: this.heroInputRef, onChange: this.updateLocation, onSubmit: this.submitLocation, onSnooze: function () { return _this.snoozeOptions(true); }, name: "URL", placeholder: "Type or paste a link", value: this.state.location, onFocus: this._onHeroInputElementFocus, hasCta: !this.state.generatedShortlink || this.state.generatedShortlink == '' })),
+                    !this.state.showSnoozeOptions && (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null,
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_display__WEBPACK_IMPORTED_MODULE_11__["default"], { placeholder: config.displayServiceUrl, shortlink: this.state.generatedShortlink, isLoading: this.state.loadingState.createLinkIsLoading, hasCta: (!!this.state.generatedShortlink || this.state.generatedShortlink != '') && (!this.state.generatedDescriptiveShortlink), error: this.state.errorState.createLinkResult }),
+                        this.state.generatedShortlink &&
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_slug_input__WEBPACK_IMPORTED_MODULE_9__["default"], { text: this._generateTextPattern(), onChange: this.handleDescriptorChange, show: this.state.generatedShortlink ? true : false, generatedLink: this.state.generatedDescriptiveShortlink, isLoading: this.state.loadingState.createDescriptiveLinkIsLoading, hasCta: !this.state.generatedDescriptiveShortlink || this.state.generatedDescriptiveShortlink != '', error: this.state.errorState.createDescriptiveLinkResult }))),
+                    this.state.showSnoozeOptions && (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snooze_list__WEBPACK_IMPORTED_MODULE_12__["default"], { onSnooze: this.handleStandardSnooze })),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") },
+                        this.state.errorState.lastError &&
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_13__["default"], { message: this.state.errorState.lastError.message, canDismiss: true, onDismiss: this._clearErrorState }),
+                        this.state.successState.successMessage &&
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_13__["default"], { message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__footer-wrapper") },
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_History__WEBPACK_IMPORTED_MODULE_13__.HistoryWidget, { list: this.state.cachedShortlinks, totalCount: this.state.cachedShortlinks.length })))));
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_History__WEBPACK_IMPORTED_MODULE_14__.HistoryWidget, { list: this.state.cachedShortlinks, totalCount: this.state.cachedShortlinks.length })))));
     };
     return ShortlinkBar;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShortlinkBar);
-ShortlinkBar.contextType = _js_app_context__WEBPACK_IMPORTED_MODULE_14__["default"];
+ShortlinkBar.contextType = _js_app_context__WEBPACK_IMPORTED_MODULE_15__["default"];
 
 
 /***/ }),
@@ -2049,10 +2131,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _styles_hero_input_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles-hero-input.less */ "./src/components/hero-input/styles-hero-input.less");
-/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../button */ "./src/components/button/index.tsx");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
-/* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
-/* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
+/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../button */ "./src/components/button/index.tsx");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
+/* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2096,11 +2179,13 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HeroInput = function (_a) {
     var _this = this;
-    var onChange = _a.onChange, onSubmit = _a.onSubmit, name = _a.name, placeholder = _a.placeholder, _b = _a.value, value = _b === void 0 ? '' : _b, inputRef = _a.inputRef, onFocus = _a.onFocus, onBlur = _a.onBlur, mobileTip = _a.mobileTip, _c = _a.hasCta, hasCta = _c === void 0 ? true : _c;
+    var onChange = _a.onChange, onSubmit = _a.onSubmit, onSnooze = _a.onSnooze, name = _a.name, placeholder = _a.placeholder, _b = _a.value, value = _b === void 0 ? '' : _b, inputRef = _a.inputRef, onFocus = _a.onFocus, onBlur = _a.onBlur, mobileTip = _a.mobileTip, _c = _a.hasCta, hasCta = _c === void 0 ? true : _c;
     var _d = react__WEBPACK_IMPORTED_MODULE_1__.useState(false), isFocus = _d[0], setFocus = _d[1];
     var inputId = react__WEBPACK_IMPORTED_MODULE_1__.useId();
+    var appContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
     var handleKeyDown = function (event) {
         if (event.keyCode == 13 && underscore__WEBPACK_IMPORTED_MODULE_0__.isFunction(onSubmit)) {
             onSubmit();
@@ -2110,7 +2195,7 @@ var HeroInput = function (_a) {
         var clipText;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_3__["default"].paste()];
+                case 0: return [4 /*yield*/, _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_4__["default"].paste()];
                 case 1:
                     clipText = _a.sent();
                     if (clipText && clipText != '') {
@@ -2135,7 +2220,7 @@ var HeroInput = function (_a) {
     var wrapperMods = [];
     if (isFocus)
         wrapperMods.push(globalClass + '_focus');
-    if ((0,_js_utils__WEBPACK_IMPORTED_MODULE_4__.canShortcutPasteWithKeyboard)())
+    if ((0,_js_utils__WEBPACK_IMPORTED_MODULE_5__.canShortcutPasteWithKeyboard)())
         wrapperMods.push(globalClass + '_can-shortcut-paste');
     if (value && value != '') {
         wrapperMods.push(globalClass + '_not-empty');
@@ -2146,12 +2231,14 @@ var HeroInput = function (_a) {
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, " ").concat(wrapperMods.join(' ')) },
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", { className: "".concat(globalClass, "__input-elem"), id: inputId, ref: inputRef, onChange: function (event) { return onChange(event.target.value); }, onKeyDown: handleKeyDown, onFocus: handleFocus, onBlur: handleBlur, name: name, value: value, autoComplete: 'off', type: 'url', tabIndex: 1 }),
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", { htmlFor: inputId, className: "".concat(globalClass, "__actions ").concat(globalClass, "__clear") },
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_5__["default"], { icon: _icons__WEBPACK_IMPORTED_MODULE_6__.Cross, type: _button__WEBPACK_IMPORTED_MODULE_5__.ButtonType.GHOST, size: _button__WEBPACK_IMPORTED_MODULE_5__.ButtonSize.LARGE, onClick: handleClear })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_6__["default"], { icon: _icons__WEBPACK_IMPORTED_MODULE_7__.Cross, type: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.GHOST, size: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, onClick: handleClear })),
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__actions ").concat(globalClass, "__cta-actions") },
             mobileTip && react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__cta-actions__mobile-tip") }, mobileTip),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", { htmlFor: inputId, className: "".concat(globalClass, "__paste") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_5__["default"], { label: 'Paste', type: _button__WEBPACK_IMPORTED_MODULE_5__.ButtonType.SECONDARY, size: _button__WEBPACK_IMPORTED_MODULE_5__.ButtonSize.LARGE, onClick: handlePaste })),
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_5__["default"], { icon: _icons__WEBPACK_IMPORTED_MODULE_6__.Enter, className: "".concat(globalClass, "__create"), label: 'Create', type: hasCta ? _button__WEBPACK_IMPORTED_MODULE_5__.ButtonType.PRIMARY : _button__WEBPACK_IMPORTED_MODULE_5__.ButtonType.SECONDARY, size: _button__WEBPACK_IMPORTED_MODULE_5__.ButtonSize.LARGE, onClick: onSubmit })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_6__["default"], { label: 'Paste', type: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.SECONDARY, size: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, onClick: handlePaste })),
+            appContext.user &&
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_6__["default"], { icon: _icons__WEBPACK_IMPORTED_MODULE_7__.Snooze, className: "".concat(globalClass, "__snooze"), label: 'Snooze', type: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.SECONDARY, size: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, onClick: onSnooze }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_6__["default"], { icon: _icons__WEBPACK_IMPORTED_MODULE_7__.Enter, className: "".concat(globalClass, "__create"), label: 'Create', type: hasCta ? _button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY : _button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.SECONDARY, size: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, onClick: onSubmit })),
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__placeholder ").concat(globalClass, "__placeholder_").concat((value != '') ? 'hide' : 'show') }, placeholder)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeroInput);
@@ -2832,6 +2919,49 @@ var Snackbar = function (_a) {
 
 /***/ }),
 
+/***/ "./src/components/snooze-list/index.tsx":
+/*!**********************************************!*\
+  !*** ./src/components/snooze-list/index.tsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _styles_snooze_list_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-snooze-list.less */ "./src/components/snooze-list/styles-snooze-list.less");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+
+
+
+
+
+var SnoozeList = function (_a) {
+    var _b;
+    var onSnooze = _a.onSnooze;
+    var globalClass = "".concat(_styles_snooze_list_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass, "_snooze-list");
+    var snoozeClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_b = {},
+        _b["".concat(globalClass)] = true,
+        _b));
+    var appContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(snoozeClasses) },
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__subheader") }, "Snooze link until:"),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snooze-list-wrapper") }, appContext.user.predefinedTimers.map(function (timer, key) {
+            return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snooze-item"), key: key },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__link"), onClick: function () { return onSnooze(timer.value); } }, timer.label)));
+        }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SnoozeList);
+
+
+/***/ }),
+
 /***/ "./src/components/tooltip/flyover.tsx":
 /*!********************************************!*\
   !*** ./src/components/tooltip/flyover.tsx ***!
@@ -2974,8 +3104,8 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-var appContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (appContext);
+var AppContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppContext);
 function getInitAppContext() {
     return __awaiter(this, void 0, void 0, function () {
         var result, activeTab, currentUser;
@@ -3110,6 +3240,53 @@ var BrowserApi = /** @class */ (function () {
             return;
         chrome.tabs.create({ url: url });
     };
+    BrowserApi.prototype.setAlarm = function (name, alarm) {
+        if (!this.isInit)
+            return;
+        chrome.alarms.create(name, alarm);
+    };
+    BrowserApi.prototype.onAlarm = function (callback) {
+        if (!this.isInit)
+            return;
+        chrome.alarms.onAlarm.addListener(callback);
+    };
+    BrowserApi.prototype.onInstalled = function (callback) {
+        if (!this.isInit)
+            return null;
+        chrome.runtime.onInstalled.addListener(callback);
+    };
+    BrowserApi.prototype.onStartup = function (callback) {
+        if (!this.isInit)
+            return void 0;
+        chrome.runtime.onStartup.addListener(callback);
+    };
+    BrowserApi.prototype.getAlarms = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (!this.isInit)
+                    return [2 /*return*/, []];
+                return [2 /*return*/, chrome.alarms.getAll()];
+            });
+        });
+    };
+    BrowserApi.prototype.removeAlarm = function (name) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (!this.isInit)
+                    return [2 /*return*/, void 0];
+                return [2 /*return*/, chrome.alarms.clear(name)];
+            });
+        });
+    };
+    BrowserApi.prototype.removeAllAlarms = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (!this.isInit)
+                    return [2 /*return*/, void 0];
+                return [2 /*return*/, chrome.alarms.clearAll()];
+            });
+        });
+    };
     return BrowserApi;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new BrowserApi());
@@ -3130,7 +3307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.webapp.ts");
+/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.extension.ts");
 /* harmony import */ var _link_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _shortlink_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/js/utils.ts");
@@ -3660,9 +3837,11 @@ var LinkTools = /** @class */ (function () {
             result = result.replace(/\/$/, '');
         if (this.validateURL(url))
             return result;
-        result = 'https://' + result;
-        if (this.validateURL(result))
-            return result;
+        if (!/^(https?|ftp):\/\/.*/ig.test(result)) {
+            result = 'https://' + result;
+            if (this.validateURL(result))
+                return result;
+        }
         throw new Error("URL ".concat(result, " is not valid"));
     };
     /*
@@ -3705,10 +3884,10 @@ var LinkTools = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/js/proxy-storage.webapp.ts":
-/*!****************************************!*\
-  !*** ./src/js/proxy-storage.webapp.ts ***!
-  \****************************************/
+/***/ "./src/js/proxy-storage.extension.ts":
+/*!*******************************************!*\
+  !*** ./src/js/proxy-storage.extension.ts ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3771,51 +3950,64 @@ var proxyStorage = {
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
-                result = window.localStorage.getItem(key);
-                return [2 /*return*/, result || null];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage.sync.get([key])];
+                    case 1:
+                        result = _a.sent();
+                        console.log(key, result);
+                        return [2 /*return*/, result[key]];
+                }
             });
         });
     },
     setItem: function (key, value) {
         return __awaiter(this, void 0, void 0, function () {
+            var newItem;
             return __generator(this, function (_a) {
-                window.localStorage.setItem(key, value);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        newItem = {};
+                        newItem[key] = value;
+                        return [4 /*yield*/, chrome.storage.sync.set(newItem)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
-    },
-    canUse: function () {
-        if (window.localStorage)
-            return true;
-        return false;
     },
     getAllItems: function (parse) {
         if (parse === void 0) { parse = true; }
         return __awaiter(this, void 0, void 0, function () {
-            var result, keys;
+            var result, objResult;
             return __generator(this, function (_a) {
-                result = [];
-                keys = underscore__WEBPACK_IMPORTED_MODULE_0__.keys(window.localStorage);
-                underscore__WEBPACK_IMPORTED_MODULE_0__.each(keys, function (key) {
-                    var retrievedItem = window.localStorage.getItem(key);
-                    if (parse) {
-                        try {
-                            result.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
-                        }
-                        catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
-                    }
-                    else {
-                        result.push(retrievedItem);
-                    }
-                });
-                return [2 /*return*/, result];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage.sync.get()];
+                    case 1:
+                        result = _a.sent();
+                        if (!parse)
+                            return [2 /*return*/, underscore__WEBPACK_IMPORTED_MODULE_0__.values(result)];
+                        objResult = [];
+                        underscore__WEBPACK_IMPORTED_MODULE_0__.each(result, function (retrievedItem, key) {
+                            try {
+                                objResult.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
+                            }
+                            catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
+                        });
+                        return [2 /*return*/, objResult];
+                }
             });
         });
+    },
+    canUse: function () {
+        if (chrome.storage.sync)
+            return true;
+        return false;
     },
     removeItem: function (key) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                window.localStorage.removeItem(key);
+                chrome.storage.sync.remove(key);
                 return [2 /*return*/];
             });
         });
@@ -3977,14 +4169,14 @@ var GQLShortlinkQuery = /** @class */ (function () {
         });
     };
     GQLShortlinkQuery.prototype.getUserShortlinks = function (_a) {
-        var limit = _a.limit, skip = _a.skip, sort = _a.sort, order = _a.order, search = _a.search;
+        var limit = _a.limit, skip = _a.skip, sort = _a.sort, order = _a.order, search = _a.search, isSnooze = _a.isSnooze;
         return __awaiter(this, void 0, void 0, function () {
             var query, response;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n        }\n      ) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    "], ["\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n        }\n      ) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    "])));
-                        return [4 /*yield*/, this.gqlClient.request(query, { limit: limit, skip: skip, sort: sort, order: order, search: search })];
+                        return [4 /*yield*/, this.gqlClient.request(query, { limit: limit, skip: skip, sort: sort, order: order, search: search, isSnooze: isSnooze })];
                     case 1:
                         response = _b.sent();
                         console.log('[GQL] getUserShortlinks\n', response);
@@ -3993,10 +4185,26 @@ var GQLShortlinkQuery = /** @class */ (function () {
             });
         });
     };
+    GQLShortlinkQuery.prototype.createOrUpdateShortlinkTimer = function (args) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    mutation createOrUpdateShortlinkTimerWithVars(\n      $location: String\n      $hash: String\n      $id: String\n      $standardTimer: String\n      $customDay: Mixed\n      $customTime: Mixed\n      $baseDateISOString: String\n    ) {\n      createOrUpdateShortlinkTimer (\n        args: {\n          location: $location\n          hash: $hash\n          id: $id\n          standardTimer: $standardTimer\n          customDay: $customDay\n          customTime: $customTime\n          baseDateISOString: $baseDateISOString\n        }\n      ) {\n        hash\n        location\n        snooze {\n          awake\n          description\n        }\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createOrUpdateShortlinkTimerWithVars(\n      $location: String\n      $hash: String\n      $id: String\n      $standardTimer: String\n      $customDay: Mixed\n      $customTime: Mixed\n      $baseDateISOString: String\n    ) {\n      createOrUpdateShortlinkTimer (\n        args: {\n          location: $location\n          hash: $hash\n          id: $id\n          standardTimer: $standardTimer\n          customDay: $customDay\n          customTime: $customTime\n          baseDateISOString: $baseDateISOString\n        }\n      ) {\n        hash\n        location\n        snooze {\n          awake\n          description\n        }\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        return [4 /*yield*/, this.gqlClient.request(query, args)];
+                    case 1:
+                        response = _a.sent();
+                        console.log('[GQL] createOrUpdateShortlinkTimer\n', response);
+                        return [2 /*return*/, response.createOrUpdateShortlinkTimer];
+                }
+            });
+        });
+    };
     return GQLShortlinkQuery;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new GQLShortlinkQuery());
-var templateObject_1, templateObject_2, templateObject_3;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
 
 
 /***/ }),
@@ -4069,7 +4277,7 @@ var GQLUserQuery = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    query {\n      getLoggedInUser {\n        name,\n        userTag,\n        email,\n        avatar\n      }\n    }\n    "], ["\n    query {\n      getLoggedInUser {\n        name,\n        userTag,\n        email,\n        avatar\n      }\n    }\n    "])));
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    query {\n      getLoggedInUser {\n        name,\n        userTag,\n        email,\n        avatar,\n        predefinedTimers\n      }\n    }\n    "], ["\n    query {\n      getLoggedInUser {\n        name,\n        userTag,\n        email,\n        avatar,\n        predefinedTimers\n      }\n    }\n    "])));
                         return [4 /*yield*/, this.gqlClient.request(query)];
                     case 1:
                         response = _a.sent();
@@ -4079,10 +4287,26 @@ var GQLUserQuery = /** @class */ (function () {
             });
         });
     };
+    GQLUserQuery.prototype.getPredefinedTimers = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    query {\n      getPredefinedTimers\n    }\n    "], ["\n    query {\n      getPredefinedTimers\n    }\n    "])));
+                        return [4 /*yield*/, this.gqlClient.request(query)];
+                    case 1:
+                        response = _a.sent();
+                        console.log('[GQL] getPredefinedTimers\n', response);
+                        return [2 /*return*/, response.getPredefinedTimers];
+                }
+            });
+        });
+    };
     return GQLUserQuery;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new GQLUserQuery());
-var templateObject_1;
+var templateObject_1, templateObject_2;
 
 
 /***/ }),
@@ -4436,13 +4660,13 @@ webpackContext.id = "./src/assets sync recursive ^\\.\\/.*$";
 
 const tmpAddr = 'http://localhost:8002'
 
-if (false) {} else if (true) {
+if (true) {
   module.exports = {
-    serviceUrl: window.location.origin,
+    serviceUrl: tmpAddr,
     displayServiceUrl: 'shlk.cc',
-    target: 'webapp',
+    target: 'extension',
     mode: 'development'
-  } 
+  }
 } else {}
 
 /***/ }),
@@ -6049,20 +6273,7 @@ Detects whether or not elements can be animated using CSS
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/ 	
-/******/ 		        // webpack-livereload-plugin
-/******/ 		        (function() {
-/******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-9ef34a5d9458cb3e";
-/******/ 		          if (document.getElementById(id)) { return; }
-/******/ 		          var el = document.createElement("script");
-/******/ 		          el.id = id;
-/******/ 		          el.async = true;
-/******/ 		          el.src = "http://localhost:35729/livereload.js";
-/******/ 		          document.getElementsByTagName("head")[0].appendChild(el);
-/******/ 		          console.log("[Live Reload] enabled");
-/******/ 		        }());
-/******/ 		        // Check if module is in cache
+/******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;

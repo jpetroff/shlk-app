@@ -8,7 +8,8 @@ import * as _ from 'underscore'
 import HeroInput from '../../components/hero-input/index'
 import ShortlinkDisplay from '../../components/shortlink-display'
 import ShortlinkSlugInput, { TextPattern, SlugInputSpecialChars } from '../../components/shortlink-slug-input'
-import Snackbar from '../../components/snackbar' 
+import Snackbar from '../../components/snackbar'
+import SnoozeList from '../../components/snooze-list'
 
 import linkTools from '../../js/link.tools'
 import clipboardTools from '../../js/clipboard.tools'
@@ -42,6 +43,9 @@ type State = {
     lastError?: GracefulErrorType
     createLinkResult?: boolean
     createDescriptiveLinkResult?: boolean
+  },
+  successState: {
+    successMessage?: string
   }
   loadingState: {
     createLinkIsLoading?: boolean
@@ -49,6 +53,7 @@ type State = {
   }
   mobileConvenienceInput: boolean
   cachedShortlinks: Array<TCachedLink>
+  showSnoozeOptions: boolean
 }
 
 
@@ -74,8 +79,10 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         createLinkIsLoading: false,
         createDescriptiveLinkIsLoading: false
       },
+      successState: {},
       mobileConvenienceInput: false,
-      cachedShortlinks: []
+      cachedShortlinks: [],
+      showSnoozeOptions: false
     }
     
     _.bindAll(this, ..._.functions(this))
@@ -138,7 +145,8 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       generatedDescriptiveShortlink: undefined,
       generatedHash: undefined,
       userTag: this.defaultUserTag(),
-      descriptionTag: ''
+      descriptionTag: '',
+      showSnoozeOptions: false
     })
     if(isClearPress) this._setMobileConvenienceInput(false)
   }
@@ -220,6 +228,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
   async submitLocation() {
     this._clearErrorState()
+    this.snoozeOptions(false)
 
     try {
       const locationUrl = linkTools.fixUrl(this.state.location.trim())
@@ -248,6 +257,12 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       console.error(err) 
     }
     this.setState({loadingState: {createLinkIsLoading: false}})
+  }
+
+  snoozeOptions(val: boolean = true) {
+    this.setState({
+      showSnoozeOptions: val
+    })
   }
 
   handleSuccessPaste(clipText: string) {
@@ -324,6 +339,10 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     this.setState({ errorState: {} })
   }
 
+  private _clearSuccessState(): void {
+    this.setState({ successState: {} })
+  }
+
   public defaultUserTag() : string {
     return getCookie('userTag')
   }
@@ -338,6 +357,36 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     this._setMobileConvenienceInput(true)
   }
 
+  public async handleStandardSnooze(predefinedValue: string) {
+    const baseDateISOString = (new Date()).toISOString()
+    try {
+      const location = linkTools.fixUrl(this.state.location)
+      const result = await Query.createOrUpdateShortlinkTimer({
+        baseDateISOString,
+        location,
+        hash: this.state.generatedHash,
+        standardTimer: predefinedValue
+      })
+      if(!result) return null
+
+      this.updateLocation('')
+      const trimLocation = result.location.length > 30 ? result.location.slice(0,29) + '…' : result.location
+      const description = (result.snooze?.description || '').toLowerCase()
+      this.setState({
+        successState: {
+          successMessage: `Snoozed until ${description}: ${trimLocation}`
+        }
+      })
+    } catch(err) {
+      console.error(err)
+      this.setState({errorState: {
+        lastError: GracefulError.process(err) || undefined,
+        createLinkResult: true
+      }
+    })
+    }
+  }
+
   render() {
     const globalClass = styles.homepage+'_app-body'
     const mobileConvenienceClass = this.state.mobileConvenienceInput ? '__mobile-convenience-state' : ''
@@ -350,6 +399,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
                   inputRef={this.heroInputRef}
                   onChange={this.updateLocation}
                   onSubmit={this.submitLocation}
+                  onSnooze={() => this.snoozeOptions(true)}
                   name="URL"
                   placeholder="Type or paste a link"
                   value={this.state.location}
@@ -357,30 +407,47 @@ export default class ShortlinkBar extends React.Component<Props, State> {
                   hasCta={!this.state.generatedShortlink || this.state.generatedShortlink == ''}
                 />
               </div>
-              <ShortlinkDisplay
-                placeholder={config.displayServiceUrl}
-                shortlink={this.state.generatedShortlink}
-                isLoading={this.state.loadingState.createLinkIsLoading}
-                hasCta={(!!this.state.generatedShortlink || this.state.generatedShortlink != '') && (!this.state.generatedDescriptiveShortlink)}
-                error={this.state.errorState.createLinkResult}
-              />
-              {this.state.generatedShortlink && 
-                <ShortlinkSlugInput
-                  text={this._generateTextPattern()}
-                  onChange={this.handleDescriptorChange}
-                  show={this.state.generatedShortlink ? true : false}
-                  generatedLink={this.state.generatedDescriptiveShortlink}
-                  isLoading={this.state.loadingState.createDescriptiveLinkIsLoading}
-                  hasCta={!this.state.generatedDescriptiveShortlink || this.state.generatedDescriptiveShortlink != ''}
-                  error={this.state.errorState.createDescriptiveLinkResult}
+              {!this.state.showSnoozeOptions && (
+                <>
+                <ShortlinkDisplay
+                  placeholder={config.displayServiceUrl}
+                  shortlink={this.state.generatedShortlink}
+                  isLoading={this.state.loadingState.createLinkIsLoading}
+                  hasCta={(!!this.state.generatedShortlink || this.state.generatedShortlink != '') && (!this.state.generatedDescriptiveShortlink)}
+                  error={this.state.errorState.createLinkResult}
                 />
+                {this.state.generatedShortlink && 
+                  <ShortlinkSlugInput
+                    text={this._generateTextPattern()}
+                    onChange={this.handleDescriptorChange}
+                    show={this.state.generatedShortlink ? true : false}
+                    generatedLink={this.state.generatedDescriptiveShortlink}
+                    isLoading={this.state.loadingState.createDescriptiveLinkIsLoading}
+                    hasCta={!this.state.generatedDescriptiveShortlink || this.state.generatedDescriptiveShortlink != ''}
+                    error={this.state.errorState.createDescriptiveLinkResult}
+                  />
+                }
+                </>)
               }
+              {this.state.showSnoozeOptions && (
+                <SnoozeList
+                  onSnooze={this.handleStandardSnooze}
+                />
+              )}
               <div className={`${globalClass}__snackbar-container`}>
                 { this.state.errorState.lastError && 
                   <Snackbar 
                     message={this.state.errorState.lastError.message}
                     canDismiss={true}
                     onDismiss={this._clearErrorState}
+                    />
+                }
+                { this.state.successState.successMessage && 
+                  <Snackbar 
+                    message={this.state.successState.successMessage}
+                    canDismiss={true}
+                    timer={2000}
+                    onDismiss={this._clearSuccessState}
                     />
                 }
               </div>

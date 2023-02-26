@@ -50,7 +50,7 @@ module.exports = (env, argv) => {
         filename: 'css/main.css'
       }),
       new LiveReloadPlugin({
-        appendScriptTag: !isProduction,
+        appendScriptTag: !isProduction && appTarget != 'extension',
         hostname: 'localhost',
         protocol: 'http'
       }),
@@ -61,7 +61,6 @@ module.exports = (env, argv) => {
             /\.webapp/,
             `.${appTarget}`
           )
-          // console.log(`${resource.request} -> ${newRequest}`)
           resource.request = newRequest
         }
       ),

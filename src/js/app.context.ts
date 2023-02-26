@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
 import * as _ from 'underscore'
 import config from './config'
 
@@ -9,7 +9,8 @@ declare type LoginContext = {
   name: string,
   email: string,
   avatar?: Maybe<string>,
-  userTag?: Maybe<string>
+  userTag?: Maybe<string>,
+  predefinedTimers?: AnyObject[]
 }
 
 declare type ExtensionContext = {
@@ -21,9 +22,9 @@ declare type AppContextT = {
   user?: Maybe<LoginContext>
 }
 
-const appContext = createContext<AppContextT>( {} )
+let AppContext = createContext<AppContextT>( {} )
 
-export default appContext
+export default AppContext
 
 export async function getInitAppContext(): Promise<AppContextT> {
   let result : AppContextT = {}

@@ -20,7 +20,8 @@ class GQLUserQuery {
         name,
         userTag,
         email,
-        avatar
+        avatar,
+        predefinedTimers
       }
     }
     `
@@ -28,6 +29,17 @@ class GQLUserQuery {
     const response = await this.gqlClient.request(query)
     console.log('[GQL] getLoggedInUser\n', response)
     return response.getLoggedInUser
+  }
+
+  public async getPredefinedTimers() : Promise<AnyObject[]> {
+    const query = gql`
+    query {
+      getPredefinedTimers
+    }
+    `
+    const response = await this.gqlClient.request(query)
+    console.log('[GQL] getPredefinedTimers\n', response)
+    return response.getPredefinedTimers
   }
 }
 

@@ -10,4 +10,15 @@ declare interface QICommon {
   sort?: string
   order?: string | number 
   search?: string
+  isSnooze?: boolean
+}
+
+declare interface QISnoozeArgs {
+  location?: string
+  hash?: string
+  id?: string
+  standardTimer?: string
+  customDay?: AnyObject
+  customTime?: AnyObject
+  baseDateISOString?: string
 }

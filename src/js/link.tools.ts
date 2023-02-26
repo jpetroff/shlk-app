@@ -42,8 +42,10 @@ class LinkTools {
     
     if(this.validateURL(url)) return result
     
-    result = 'https://' + result
-    if(this.validateURL(result)) return result
+    if(!/^(https?|ftp):\/\/.*/ig.test(result)) {
+      result = 'https://' + result
+      if(this.validateURL(result)) return result
+    }
 
     throw new Error(`URL ${result} is not valid`)
   }
