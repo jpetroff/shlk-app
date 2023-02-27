@@ -20,6 +20,7 @@ import GracefulError, { GracefulErrorType } from './errors'
 import AppContext from '../../js/app.context'
 
 import { HistoryWidget } from '../History'
+import browserApi from '../../js/browser.api'
 
 const config = require('../../js/config')
 
@@ -377,6 +378,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
           successMessage: `Snoozed until ${description}: ${trimLocation}`
         }
       })
+      if(browserApi.isInit) {
+        browserApi.sendMessage({command: 'sync'})
+      }
     } catch(err) {
       console.error(err)
       this.setState({errorState: {

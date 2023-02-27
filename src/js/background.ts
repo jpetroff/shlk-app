@@ -1,5 +1,5 @@
 import config from './config'
-import browserApi, { ExtensionAlarm } from './browser.api'
+import browserApi, { ExtensionAlarm, ExtensionMessageSender } from './browser.api'
 
 function indexAlarms(alarms: ExtensionAlarm[]) : { [name: string]: ExtensionAlarm } {
   let result : { [name: string]: ExtensionAlarm } = {}
@@ -34,8 +34,9 @@ async function resetAlarms(links: AnyObject[]) {
   const alarms = await browserApi.getAlarms()
   let indexedAlarms = indexAlarms(alarms)
   links.forEach( (shortlink) => {
+    const time = /test\-snooze/ig.test(shortlink.location) ? Date.now() + 1000 : shortlink.snooze.awake
     browserApi.setAlarm(shortlink.location, {
-      when: shortlink.snooze.awake
+      when: time
     })
     if(indexAlarms[shortlink.location]) indexAlarms[shortlink.location] = undefined
   })
@@ -65,6 +66,15 @@ async function syncSnoozedTabs() {
 
 function awakeTab(url: string) {
   browserApi.openExternal(url)
+  browserApi.createNotification({
+    type: 'basic',
+    title: 'Woke up snoozed tab',
+    message: url,
+    iconUrl: '/assets/favicon/android-chrome-192x192.png',
+    priority: 2
+  }, url, (result: any) => {
+    console.log('Notification: '+result)
+  })
 }
 
 async function registerPeriodicSync() {
@@ -74,18 +84,37 @@ async function registerPeriodicSync() {
   })
 }
 
+async function notificationClickHandle(url: string) {
+  const tabs = await browserApi.findTab(url)
+  if(!tabs[0]) return
+  chrome.tabs.update(tabs[0].id, { active: true })
+}
+
+function messageHandler(message: any, sender: ExtensionMessageSender, sendResponse?: () => void) : boolean {
+  if(message.command == 'sync') syncSnoozedTabs()
+  return true
+}
+
 browserApi.onInstalled( async () => {
   try {
     console.log('installed')
     await registerPeriodicSync()
-    browserApi.onAlarm( (alarm) => {
-      if(alarm.name == 'syncSnoozedTabs') {
-        syncSnoozedTabs()
-      } else {
-        awakeTab(alarm.name)
-      }
-    })
   } catch (err) {
     console.error(err)
   }
 })
+
+browserApi.onStartup( async () => {
+  await syncSnoozedTabs()
+})
+
+browserApi.onAlarm( (alarm) => {
+  if(alarm.name == 'syncSnoozedTabs') {
+    syncSnoozedTabs()
+  } else {
+    awakeTab(alarm.name)
+  }
+})
+
+browserApi.onNotificationClick(notificationClickHandle)
+browserApi.onMessage(messageHandler)

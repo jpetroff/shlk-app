@@ -2,10 +2,10 @@ import _ from 'underscore'
 
 export type ExtensionAlarm = chrome.alarms.Alarm
 export type ExtensionAlarmCreateInfo = chrome.alarms.AlarmCreateInfo
+export type ExtensionNotificationOptions = chrome.notifications.NotificationOptions
+export type ExtensionMessageSender = chrome.runtime.MessageSender
 
-export type TabObject = {
-  url: string
-}
+export type TabObject = Partial<chrome.tabs.Tab>
 
 class BrowserApi {
   public isInit : boolean
@@ -33,11 +33,19 @@ class BrowserApi {
     return null
   }
 
+  public async findTab(url: string) : Promise<TabObject[] | null> {
+    if(!this.isInit) return null
+    return chrome.tabs.query({
+      url
+    })
+  }
+
   public extensionId() {
     return chrome.runtime.id
   }
 
   public async sendMessage(msg: AnyObject) : Promise<any> {
+    await chrome.runtime.reload
     const response = await chrome.runtime.sendMessage(this.extensionId(), msg)
   }
 
@@ -91,6 +99,20 @@ class BrowserApi {
   public async removeAllAlarms() : Promise<boolean> {
     if(!this.isInit) return void 0
     return chrome.alarms.clearAll()
+  }
+
+  public createNotification(options: ExtensionNotificationOptions, id?: string, callback?: (result: any) => void) : void {
+    if(!this.isInit) return void 0
+    if(id) {
+      chrome.notifications.create(id, options, callback)
+    } else {
+      chrome.notifications.create(options, callback)
+    }
+  }
+
+  public onNotificationClick( callback: (id: string) => void ) {
+    if(!this.isInit) return void 0
+    chrome.notifications.onClicked.addListener(callback)
   }
 }
 

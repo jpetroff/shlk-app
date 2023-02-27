@@ -36,8 +36,8 @@
 	"commands": {
 		"_execute_action": {
 			"suggested_key": {
-				"default": "Ctrl+Shift+C",
-				"mac": "Command+Shift+C"
+				"default": "Ctrl+Shift+S",
+				"mac": "Command+Shift+S"
 			},
 			"description": "Shorten active tab URL"
 		}

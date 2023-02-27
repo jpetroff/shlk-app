@@ -81,6 +81,17 @@ var BrowserApi = /** @class */ (function () {
             });
         });
     };
+    BrowserApi.prototype.findTab = function (url) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (!this.isInit)
+                    return [2 /*return*/, null];
+                return [2 /*return*/, chrome.tabs.query({
+                        url: url
+                    })];
+            });
+        });
+    };
     BrowserApi.prototype.extensionId = function () {
         return chrome.runtime.id;
     };
@@ -89,8 +100,11 @@ var BrowserApi = /** @class */ (function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.runtime.sendMessage(this.extensionId(), msg)];
+                    case 0: return [4 /*yield*/, chrome.runtime.reload];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, chrome.runtime.sendMessage(this.extensionId(), msg)];
+                    case 2:
                         response = _a.sent();
                         return [2 /*return*/];
                 }
@@ -154,6 +168,21 @@ var BrowserApi = /** @class */ (function () {
                 return [2 /*return*/, chrome.alarms.clearAll()];
             });
         });
+    };
+    BrowserApi.prototype.createNotification = function (options, id, callback) {
+        if (!this.isInit)
+            return void 0;
+        if (id) {
+            chrome.notifications.create(id, options, callback);
+        }
+        else {
+            chrome.notifications.create(options, callback);
+        }
+    };
+    BrowserApi.prototype.onNotificationClick = function (callback) {
+        if (!this.isInit)
+            return void 0;
+        chrome.notifications.onClicked.addListener(callback);
     };
     return BrowserApi;
 }());
@@ -342,8 +371,9 @@ function resetAlarms(links) {
                     alarms = _a.sent();
                     indexedAlarms = indexAlarms(alarms);
                     links.forEach(function (shortlink) {
+                        var time = /test\-snooze/ig.test(shortlink.location) ? Date.now() + 1000 : shortlink.snooze.awake;
                         _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].setAlarm(shortlink.location, {
-                            when: shortlink.snooze.awake
+                            when: time
                         });
                         if (indexAlarms[shortlink.location])
                             indexAlarms[shortlink.location] = undefined;
@@ -387,6 +417,15 @@ function syncSnoozedTabs() {
 }
 function awakeTab(url) {
     _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].openExternal(url);
+    _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].createNotification({
+        type: 'basic',
+        title: 'Woke up snoozed tab',
+        message: url,
+        iconUrl: '/assets/favicon/android-chrome-192x192.png',
+        priority: 2
+    }, url, function (result) {
+        console.log('Notification: ' + result);
+    });
 }
 function registerPeriodicSync() {
     return __awaiter(this, void 0, void 0, function () {
@@ -403,6 +442,27 @@ function registerPeriodicSync() {
         });
     });
 }
+function notificationClickHandle(url) {
+    return __awaiter(this, void 0, void 0, function () {
+        var tabs;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].findTab(url)];
+                case 1:
+                    tabs = _a.sent();
+                    if (!tabs[0])
+                        return [2 /*return*/];
+                    chrome.tabs.update(tabs[0].id, { active: true });
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function messageHandler(message, sender, sendResponse) {
+    if (message.command == 'sync')
+        syncSnoozedTabs();
+    return true;
+}
 _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onInstalled(function () { return __awaiter(void 0, void 0, void 0, function () {
     var err_1;
     return __generator(this, function (_a) {
@@ -413,14 +473,6 @@ _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onInstalled(function () { r
                 return [4 /*yield*/, registerPeriodicSync()];
             case 1:
                 _a.sent();
-                _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onAlarm(function (alarm) {
-                    if (alarm.name == 'syncSnoozedTabs') {
-                        syncSnoozedTabs();
-                    }
-                    else {
-                        awakeTab(alarm.name);
-                    }
-                });
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -430,6 +482,26 @@ _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onInstalled(function () { r
         }
     });
 }); });
+_browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onStartup(function () { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, syncSnoozedTabs()];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });
+_browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onAlarm(function (alarm) {
+    if (alarm.name == 'syncSnoozedTabs') {
+        syncSnoozedTabs();
+    }
+    else {
+        awakeTab(alarm.name);
+    }
+});
+_browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onNotificationClick(notificationClickHandle);
+_browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].onMessage(messageHandler);
 
 })();
 

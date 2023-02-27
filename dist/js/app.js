@@ -1268,18 +1268,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _components_hero_input_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/hero-input/index */ "./src/components/hero-input/index.tsx");
-/* harmony import */ var _components_shortlink_display__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/shortlink-display */ "./src/components/shortlink-display/index.tsx");
+/* harmony import */ var _components_hero_input_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/hero-input/index */ "./src/components/hero-input/index.tsx");
+/* harmony import */ var _components_shortlink_display__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/shortlink-display */ "./src/components/shortlink-display/index.tsx");
 /* harmony import */ var _components_shortlink_slug_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/shortlink-slug-input */ "./src/components/shortlink-slug-input/index.tsx");
-/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
-/* harmony import */ var _components_snooze_list__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/snooze-list */ "./src/components/snooze-list/index.tsx");
+/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
+/* harmony import */ var _components_snooze_list__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/snooze-list */ "./src/components/snooze-list/index.tsx");
 /* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
 /* harmony import */ var _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _js_cache__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/cache */ "./src/js/cache.ts");
 /* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./errors */ "./src/apps/ShortlinkBar/errors.ts");
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
-/* harmony import */ var _History__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../History */ "./src/apps/History/index.tsx");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _History__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../History */ "./src/apps/History/index.tsx");
+/* harmony import */ var _js_browser_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../js/browser.api */ "./src/js/browser.api.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1352,6 +1353,7 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 /* eslint-disable @typescript-eslint/ban-types */
+
 
 
 
@@ -1731,6 +1733,9 @@ var ShortlinkBar = /** @class */ (function (_super) {
                                 successMessage: "Snoozed until ".concat(description, ": ").concat(trimLocation)
                             }
                         });
+                        if (_js_browser_api__WEBPACK_IMPORTED_MODULE_10__["default"].isInit) {
+                            _js_browser_api__WEBPACK_IMPORTED_MODULE_10__["default"].sendMessage({ command: 'sync' });
+                        }
                         return [3 /*break*/, 4];
                     case 3:
                         err_3 = _b.sent();
@@ -1754,24 +1759,24 @@ var ShortlinkBar = /** @class */ (function (_super) {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__layout") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__shortlink-block ").concat(mobileConvenienceClass) },
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__offset-wrapper") },
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_hero_input_index__WEBPACK_IMPORTED_MODULE_10__["default"], { inputRef: this.heroInputRef, onChange: this.updateLocation, onSubmit: this.submitLocation, onSnooze: function () { return _this.snoozeOptions(true); }, name: "URL", placeholder: "Type or paste a link", value: this.state.location, onFocus: this._onHeroInputElementFocus, hasCta: !this.state.generatedShortlink || this.state.generatedShortlink == '' })),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_hero_input_index__WEBPACK_IMPORTED_MODULE_11__["default"], { inputRef: this.heroInputRef, onChange: this.updateLocation, onSubmit: this.submitLocation, onSnooze: function () { return _this.snoozeOptions(true); }, name: "URL", placeholder: "Type or paste a link", value: this.state.location, onFocus: this._onHeroInputElementFocus, hasCta: !this.state.generatedShortlink || this.state.generatedShortlink == '' })),
                     !this.state.showSnoozeOptions && (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null,
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_display__WEBPACK_IMPORTED_MODULE_11__["default"], { placeholder: config.displayServiceUrl, shortlink: this.state.generatedShortlink, isLoading: this.state.loadingState.createLinkIsLoading, hasCta: (!!this.state.generatedShortlink || this.state.generatedShortlink != '') && (!this.state.generatedDescriptiveShortlink), error: this.state.errorState.createLinkResult }),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_display__WEBPACK_IMPORTED_MODULE_12__["default"], { placeholder: config.displayServiceUrl, shortlink: this.state.generatedShortlink, isLoading: this.state.loadingState.createLinkIsLoading, hasCta: (!!this.state.generatedShortlink || this.state.generatedShortlink != '') && (!this.state.generatedDescriptiveShortlink), error: this.state.errorState.createLinkResult }),
                         this.state.generatedShortlink &&
                             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_slug_input__WEBPACK_IMPORTED_MODULE_9__["default"], { text: this._generateTextPattern(), onChange: this.handleDescriptorChange, show: this.state.generatedShortlink ? true : false, generatedLink: this.state.generatedDescriptiveShortlink, isLoading: this.state.loadingState.createDescriptiveLinkIsLoading, hasCta: !this.state.generatedDescriptiveShortlink || this.state.generatedDescriptiveShortlink != '', error: this.state.errorState.createDescriptiveLinkResult }))),
-                    this.state.showSnoozeOptions && (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snooze_list__WEBPACK_IMPORTED_MODULE_12__["default"], { onSnooze: this.handleStandardSnooze })),
+                    this.state.showSnoozeOptions && (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snooze_list__WEBPACK_IMPORTED_MODULE_13__["default"], { onSnooze: this.handleStandardSnooze })),
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") },
                         this.state.errorState.lastError &&
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_13__["default"], { message: this.state.errorState.lastError.message, canDismiss: true, onDismiss: this._clearErrorState }),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_14__["default"], { message: this.state.errorState.lastError.message, canDismiss: true, onDismiss: this._clearErrorState }),
                         this.state.successState.successMessage &&
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_13__["default"], { message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_14__["default"], { message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__footer-wrapper") },
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_History__WEBPACK_IMPORTED_MODULE_14__.HistoryWidget, { list: this.state.cachedShortlinks, totalCount: this.state.cachedShortlinks.length })))));
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_History__WEBPACK_IMPORTED_MODULE_15__.HistoryWidget, { list: this.state.cachedShortlinks, totalCount: this.state.cachedShortlinks.length })))));
     };
     return ShortlinkBar;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShortlinkBar);
-ShortlinkBar.contextType = _js_app_context__WEBPACK_IMPORTED_MODULE_15__["default"];
+ShortlinkBar.contextType = _js_app_context__WEBPACK_IMPORTED_MODULE_16__["default"];
 
 
 /***/ }),
@@ -3213,6 +3218,17 @@ var BrowserApi = /** @class */ (function () {
             });
         });
     };
+    BrowserApi.prototype.findTab = function (url) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (!this.isInit)
+                    return [2 /*return*/, null];
+                return [2 /*return*/, chrome.tabs.query({
+                        url: url
+                    })];
+            });
+        });
+    };
     BrowserApi.prototype.extensionId = function () {
         return chrome.runtime.id;
     };
@@ -3221,8 +3237,11 @@ var BrowserApi = /** @class */ (function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.runtime.sendMessage(this.extensionId(), msg)];
+                    case 0: return [4 /*yield*/, chrome.runtime.reload];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, chrome.runtime.sendMessage(this.extensionId(), msg)];
+                    case 2:
                         response = _a.sent();
                         return [2 /*return*/];
                 }
@@ -3286,6 +3305,21 @@ var BrowserApi = /** @class */ (function () {
                 return [2 /*return*/, chrome.alarms.clearAll()];
             });
         });
+    };
+    BrowserApi.prototype.createNotification = function (options, id, callback) {
+        if (!this.isInit)
+            return void 0;
+        if (id) {
+            chrome.notifications.create(id, options, callback);
+        }
+        else {
+            chrome.notifications.create(options, callback);
+        }
+    };
+    BrowserApi.prototype.onNotificationClick = function (callback) {
+        if (!this.isInit)
+            return void 0;
+        chrome.notifications.onClicked.addListener(callback);
     };
     return BrowserApi;
 }());
