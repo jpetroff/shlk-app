@@ -12,17 +12,22 @@ import Link from '../../components/link'
 import DropdownMenu, { DropdownPosition } from '../../components/dropdown-menu'
 import MenuItem from '../../components/menu-item'
 
+export enum HeaderPosition {
+  sticky = 0,
+  fixed = 1
+}
+
 
 type Props = {
   backButton?: string
   title?: string
-  sticky?: boolean
+  position?: HeaderPosition
 }
 
 type State = {}
 
 const Header : React.FC<Props> = (
-  { backButton, title, sticky } : Props
+  { backButton, title, position } : Props
 ) => {
 	const isMobile: boolean = checkMobileMQ()
   const appContext = React.useContext(AppContext)
@@ -38,7 +43,8 @@ const Header : React.FC<Props> = (
     [`${globalClass}_logged-user`]: hasLoggedUser,
     [`${globalClass}_has-avatar`]: !!appContext.user?.avatar,
     [`${globalClass}_has-back-button`]: !!backButton,
-    [`${globalClass}_sticky`]: sticky
+    [`${globalClass}_sticky`]: position == HeaderPosition.sticky,
+    [`${globalClass}_fixed`]: position == HeaderPosition.fixed,
   })
 
   function handleLoginClick(event: React.SyntheticEvent) {
@@ -98,9 +104,9 @@ const Header : React.FC<Props> = (
                       </div>
                     </div>
                     <MenuItem.Separator />
-                    <MenuItem label='Profile' icon={Avatar} onClick={() => { navigate('/app/profile'); setDropdown(false) } }/>
                     <MenuItem label='My shortlinks' icon={LinkIcon} onClick={() => { navigate('/app'); setDropdown(false) } }/>
                     <MenuItem label='Snoozed links' icon={Snooze} onClick={() => { navigate('/app/snoozed'); setDropdown(false) } }/>
+                    <MenuItem label='Profile' icon={Avatar} onClick={() => { navigate('/app/profile'); setDropdown(false) } }/>
                     <MenuItem.Separator />
                     <MenuItem label='Logout' icon={Logout} onClick={() => { window.location.href = '/logout'; setDropdown(false) } }/>
                   </DropdownMenu>

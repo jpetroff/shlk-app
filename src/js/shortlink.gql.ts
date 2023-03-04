@@ -79,6 +79,7 @@ class GQLShortlinkQuery {
       $sort: String
       $order: String
       $search: String
+      $isSnooze: Boolean
     ){
       getUserShortlinks(
         args: {
@@ -87,6 +88,7 @@ class GQLShortlinkQuery {
           sort: $sort
           order: $order
           search: $search
+          isSnooze: $isSnooze
         }
       ) {
         hash

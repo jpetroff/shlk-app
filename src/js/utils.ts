@@ -49,3 +49,15 @@ export function deleteURLQueryParam(param: string) {
   _modifiedSearch.delete(param)
   window.location.search = _modifiedSearch.toString()
 }
+
+export function valueByPath(object: AnyObject, path: string[]) : unknown {
+  try {
+    let result : unknown = object
+    for(let i = 0; i < path.length; i++) {
+      result = result[path[i]]
+    }
+    return result
+  } catch {
+    return null
+  }
+}

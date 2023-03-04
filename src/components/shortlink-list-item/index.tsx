@@ -23,7 +23,7 @@ type Props = {
   urlMetadata?: AnyObject
   snooze?: {
     awake: number
-    description: string
+    description?: string
   }
   tags?: string[]
 }

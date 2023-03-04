@@ -4,6 +4,27 @@ declare type AnyObject = { [key: string]: any }
 
 declare type HTMLAnyInput = HTMLInputElement & HTMLTextAreaElement
 
+declare interface ShortlinkDocument {
+  _id?: string
+  createdAt?: string
+  updatedAt?: string
+  hash: string
+  location: string
+  descriptor?: {
+    userTag?: string
+    descriptionTag: string 
+  }
+  owner?: string
+  urlMetadata?: AnyObject
+  siteTitle?: string
+  siteDescription?: string
+  snooze?: {
+    awake: number
+    description?: string
+  },
+  tags?: string[]
+}
+
 declare interface QICommon {
   limit?: number
   skip?: number

@@ -78,7 +78,10 @@
   -webkit-overflow-scrolling: none;
 
   @media @mq-mobile {
-    height: 100%;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 100%;
+    padding-top: 3.875rem + 7.75rem;
   }
 
   &__layout {
@@ -93,17 +96,14 @@
 
   &__body {
     .mixin-narrow-body;
-    // flex-grow: 1;
     height: 100%;
-    margin: 2rem 0;
     flex-direction: column;
     background-color: @blue-95;
     border-radius: 4px;
   }
   @media @mq-mobile {
     &__body {
-      height: ~"calc(100vh - 3.875rem)";
-      overflow: hidden;
+      height: auto;
       border-radius: 0;
     }
   }

@@ -11,6 +11,15 @@
   &_sticky {
     position: sticky;
     top: 0;
+    z-index: @z-static-top;
+  }
+
+  &_fixed {
+    position: fixed;
+    top: 0;
+    z-index: @z-static-top;
+    left: 0;
+    right: 0;
   }
 
   @media @mq-mobile {

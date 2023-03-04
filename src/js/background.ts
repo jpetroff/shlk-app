@@ -1,8 +1,8 @@
 import config from './config'
 import browserApi, { ExtensionAlarm, ExtensionMessageSender } from './browser.api'
 
-function indexAlarms(alarms: ExtensionAlarm[]) : { [name: string]: ExtensionAlarm } {
-  let result : { [name: string]: ExtensionAlarm } = {}
+function indexAlarms(alarms: AnyObject[]) : { [name: string]: AnyObject } {
+  let result : { [name: string]: AnyObject } = {}
   alarms.forEach( (alarm) => {
     result[alarm.name] = alarm
   })

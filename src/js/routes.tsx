@@ -22,6 +22,10 @@ export default function createRouter() {
     {
       path: '/app',
       element: (<AppMain />)
+    },
+    {
+      path: '/app/snoozed',
+      element: (<AppMain />)
     }
   ])
 
