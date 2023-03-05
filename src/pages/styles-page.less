@@ -113,3 +113,23 @@
     flex-direction: column;
   }
 }
+
+:local(.profileClass)_profile {
+  .mixin-fullscreen-page;
+
+  &__layout {
+    .mixin-centered-content;
+  }
+
+  &__body {
+    .mixin-narrow-body;
+    justify-content: center;
+    margin: 1.25rem 0;
+    padding: 1.25rem;
+
+    @media @mq-mobile {
+      margin: 0;
+      padding: 1.25rem;
+    }
+  }
+}

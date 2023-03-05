@@ -43,3 +43,19 @@ declare interface QISnoozeArgs {
   customTime?: AnyObject
   baseDateISOString?: string
 }
+
+declare interface QIUser {
+  name?: string
+  avatar?: string
+  userTag?: string
+}
+
+declare interface User {
+  _id: string | import('mongoose').ObjectId
+  name: string
+  email: string
+
+  avatar?: string
+  userTag?: string
+  predefinedTimers?: AnyObject
+}

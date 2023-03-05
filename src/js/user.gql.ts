@@ -41,6 +41,33 @@ class GQLUserQuery {
     console.log('[GQL] getPredefinedTimers\n', response)
     return response.getPredefinedTimers
   }
+
+  public async updateLoggedInUser(args: QIUser) : Promise<User | null> {
+    const query = gql`
+    mutation updateLoggedInUserWithVars(
+      $name: String
+      $avatar: String
+      $userTag: String
+    ){
+      updateLoggedInUser(
+        args: {
+          name: $name
+          avatar: $avatar
+          userTag: $userTag
+        }
+      ) {
+        name,
+        userTag,
+        email,
+        avatar,
+        predefinedTimers
+      }
+    }
+    `
+    const response = await this.gqlClient.request(query, args)
+    console.log('[GQL] updateLoggedInUser\n', response)
+    return response.updateLoggedInUser
+  }
 }
 
 export default new GQLUserQuery()

@@ -371,6 +371,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/apps/UserSettings/styles-user-settings.less":
+/*!*********************************************************!*\
+  !*** ./src/apps/UserSettings/styles-user-settings.less ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"wrapperClass":"lWo9lTZGDLfpnj41D9Ma"});
+
+/***/ }),
+
 /***/ "./src/components/button/styles-button.less":
 /*!**************************************************!*\
   !*** ./src/components/button/styles-button.less ***!
@@ -623,7 +639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"homeClass":"MfCsBhGn6M2PdP_exAlg","loginClass":"oU7PEn8gl5r2vm5AA4Ko","appMainClass":"QMDj2SeFg1FU8zxpOFDV"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"homeClass":"MfCsBhGn6M2PdP_exAlg","loginClass":"oU7PEn8gl5r2vm5AA4Ko","appMainClass":"QMDj2SeFg1FU8zxpOFDV","profileClass":"nS6xAe3LW4__tO4iOinK"});
 
 /***/ }),
 
@@ -2036,6 +2052,185 @@ var ShortlinkList = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/apps/UserSettings/index.tsx":
+/*!*****************************************!*\
+  !*** ./src/apps/UserSettings/index.tsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _styles_user_settings_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-user-settings.less */ "./src/apps/UserSettings/styles-user-settings.less");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/input */ "./src/components/input/index.tsx");
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/button */ "./src/components/button/index.tsx");
+/* harmony import */ var _js_user_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/user.gql */ "./src/js/user.gql.ts");
+/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+
+
+
+
+
+
+
+
+var UserSettings = /** @class */ (function (_super) {
+    __extends(UserSettings, _super);
+    function UserSettings(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            userTag: _this.props.context.user.userTag || _this.props.context.user.name || 'someone',
+            successState: {},
+            errorState: {}
+        };
+        underscore__WEBPACK_IMPORTED_MODULE_2__.bindAll.apply(underscore__WEBPACK_IMPORTED_MODULE_2__, __spreadArray([_this], underscore__WEBPACK_IMPORTED_MODULE_2__.functions(_this), false));
+        return _this;
+    }
+    UserSettings.prototype.handleSave = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, _js_user_gql__WEBPACK_IMPORTED_MODULE_4__["default"].updateLoggedInUser({ userTag: this.state.userTag })];
+                    case 1:
+                        result = _a.sent();
+                        this.setState({
+                            userTag: result.userTag,
+                            successState: {
+                                successMessage: 'Profile updated'
+                            }
+                        });
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        this.setState({
+                            errorState: {
+                                errorMessage: "Sorry, something didn\u2019t go well. Please, try again"
+                            }
+                        });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserSettings.prototype._clearErrorState = function () {
+        this.setState({
+            errorState: {}
+        });
+    };
+    UserSettings.prototype._clearSuccessState = function () {
+        this.setState({
+            successState: {}
+        });
+    };
+    UserSettings.prototype.saveDisabled = function () {
+        return !(this.state.userTag != '');
+    };
+    UserSettings.prototype.render = function () {
+        var _a;
+        var _this = this;
+        var globalClass = "".concat(_styles_user_settings_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass, "_user-settings");
+        var userSettingsClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_a = {},
+            _a["".concat(globalClass)] = true,
+            _a));
+        return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(userSettingsClasses) },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__header") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__header__avatar") }, this.props.context.user.avatar &&
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("img", { className: "".concat(globalClass, "__header__img-source"), src: this.props.context.user.avatar })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__name-block") },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__header__name") },
+                        "Hello ",
+                        this.props.context.user.name,
+                        ","),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__header__email") }, this.props.context.user.email))),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__field") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", { htmlFor: 'slug-input-field', className: "".concat(globalClass, "__field__label") }, "Choose a slug:"),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__field__input"), id: 'slug-input-field', value: this.state.userTag, onChange: function (value, event) { return _this.setState({ userTag: value }); } })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__submit") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { isDisabled: this.saveDisabled(), size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY, label: 'Save profile settings', onClick: this.handleSave })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") },
+                this.state.errorState.errorMessage &&
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__profile-error"), message: this.state.errorState.errorMessage, canDismiss: true, onDismiss: this._clearErrorState }),
+                this.state.successState.successMessage &&
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__profile-success"), message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))));
+    };
+    return UserSettings;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserSettings);
+
+
+/***/ }),
+
 /***/ "./src/components/button/index.tsx":
 /*!*****************************************!*\
   !*** ./src/components/button/index.tsx ***!
@@ -3003,9 +3198,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
-/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-transition-group */ "./node_modules/react-transition-group/esm/CSSTransition.js");
-/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-transition-group */ "./node_modules/react-transition-group/esm/CSSTransition.js");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -3019,13 +3217,16 @@ var SnackbarType;
     SnackbarType["WARNING"] = "warning";
 })(SnackbarType || (SnackbarType = {}));
 var Snackbar = function (_a) {
-    var _b = _a.type, type = _b === void 0 ? SnackbarType.MESSAGE : _b, _c = _a.canDismiss, canDismiss = _c === void 0 ? false : _c, _d = _a.message, message = _d === void 0 ? '' : _d, action = _a.action, onAction = _a.onAction, onDismiss = _a.onDismiss, timer = _a.timer;
-    var _e = react__WEBPACK_IMPORTED_MODULE_1__.useState(true), state = _e[0], setState = _e[1];
+    var _b;
+    var _c = _a.type, type = _c === void 0 ? SnackbarType.MESSAGE : _c, _d = _a.canDismiss, canDismiss = _d === void 0 ? false : _d, _e = _a.message, message = _e === void 0 ? '' : _e, action = _a.action, onAction = _a.onAction, onDismiss = _a.onDismiss, timer = _a.timer, className = _a.className;
+    var _f = react__WEBPACK_IMPORTED_MODULE_1__.useState(true), state = _f[0], setState = _f[1];
     var globalClass = _styles_snackbar_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass + '_snackbar';
+    var snackBarClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_b = {},
+        _b["".concat(globalClass)] = true,
+        _b["".concat(globalClass, "_has-action")] = !!action,
+        _b["".concat(className)] = !!className,
+        _b));
     var snackbarNode = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
-    var snackbarMods = [];
-    if (action)
-        snackbarMods.push("".concat(globalClass, "_has-action"));
     var timeout = parseInt(_styles_snackbar_less__WEBPACK_IMPORTED_MODULE_0__["default"].transitionDuration);
     var timerDivStyle = {
         animationDuration: timer ? "".concat(timer, "ms") : undefined,
@@ -3042,14 +3243,14 @@ var Snackbar = function (_a) {
             };
         });
     }
-    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_3__["default"], { appear: true, in: state, nodeRef: snackbarNode, timeout: timeout, classNames: "".concat(globalClass, "__transition") },
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { ref: snackbarNode, className: "".concat(globalClass, " ").concat(snackbarMods.join(' ')) },
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_4__["default"], { appear: true, in: state, nodeRef: snackbarNode, timeout: timeout, classNames: "".concat(globalClass, "__transition") },
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { ref: snackbarNode, className: "".concat(snackBarClasses) },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__content-wrapper") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__message") }, message),
                 canDismiss &&
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_4__.Cross_16, { className: "".concat(globalClass, "__dismiss"), onClick: handleDismiss })),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__.Cross_16, { className: "".concat(globalClass, "__dismiss"), onClick: handleDismiss })),
             action &&
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__snackbar-action"), label: action, onClick: onAction }),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_6__["default"], { className: "".concat(globalClass, "__snackbar-action"), label: action, onClick: onAction }),
             timer &&
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__timer-progress"), style: timerDivStyle }))));
 };
@@ -4258,10 +4459,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/home */ "./src/pages/home.tsx");
 /* harmony import */ var _pages_login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/login */ "./src/pages/login.tsx");
 /* harmony import */ var _pages_app_main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/app-main */ "./src/pages/app-main.tsx");
+/* harmony import */ var _pages_profile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/profile */ "./src/pages/profile.tsx");
 
 
 
 /* PAGES */
+
 
 
 
@@ -4283,6 +4486,10 @@ function createRouter() {
         {
             path: '/app/snoozed',
             element: (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_app_main__WEBPACK_IMPORTED_MODULE_5__["default"], null))
+        },
+        {
+            path: '/app/profile',
+            element: (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_profile__WEBPACK_IMPORTED_MODULE_6__["default"], null))
         }
     ]);
     return router;
@@ -4528,10 +4735,26 @@ var GQLUserQuery = /** @class */ (function () {
             });
         });
     };
+    GQLUserQuery.prototype.updateLoggedInUser = function (args) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    mutation updateLoggedInUserWithVars(\n      $name: String\n      $avatar: String\n      $userTag: String\n    ){\n      updateLoggedInUser(\n        args: {\n          name: $name\n          avatar: $avatar\n          userTag: $userTag\n        }\n      ) {\n        name,\n        userTag,\n        email,\n        avatar,\n        predefinedTimers\n      }\n    }\n    "], ["\n    mutation updateLoggedInUserWithVars(\n      $name: String\n      $avatar: String\n      $userTag: String\n    ){\n      updateLoggedInUser(\n        args: {\n          name: $name\n          avatar: $avatar\n          userTag: $userTag\n        }\n      ) {\n        name,\n        userTag,\n        email,\n        avatar,\n        predefinedTimers\n      }\n    }\n    "])));
+                        return [4 /*yield*/, this.gqlClient.request(query, args)];
+                    case 1:
+                        response = _a.sent();
+                        console.log('[GQL] updateLoggedInUser\n', response);
+                        return [2 /*return*/, response.updateLoggedInUser];
+                }
+            });
+        });
+    };
     return GQLUserQuery;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new GQLUserQuery());
-var templateObject_1, templateObject_2;
+var templateObject_1, templateObject_2, templateObject_3;
 
 
 /***/ }),
@@ -4808,6 +5031,70 @@ function useExtension() {
     });
     return { activeTabUrl: activeTabUrl };
 }
+
+
+/***/ }),
+
+/***/ "./src/pages/profile.tsx":
+/*!*******************************!*\
+  !*** ./src/pages/profile.tsx ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _styles_page_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-page.less */ "./src/pages/styles-page.less");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/link */ "./src/components/link/index.tsx");
+/* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
+/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
+/* harmony import */ var _apps_UserSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../apps/UserSettings */ "./src/apps/UserSettings/index.tsx");
+/* harmony import */ var _page_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page-hooks */ "./src/pages/page-hooks.ts");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.ts");
+
+
+
+
+
+
+
+
+
+
+
+var Profile = function (_a) {
+    var _b;
+    var router = (0,_page_hooks__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+    var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
+    var appContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_5__["default"]);
+    var globalClass = _styles_page_less__WEBPACK_IMPORTED_MODULE_0__["default"].profileClass + '_profile';
+    var profileClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_b = {},
+        _b["".concat(globalClass)] = true,
+        _b));
+    react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+        var _a;
+        if (!((_a = appContext.user) === null || _a === void 0 ? void 0 : _a.email)) {
+            navigate('/login');
+        }
+    });
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(profileClasses) },
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Header__WEBPACK_IMPORTED_MODULE_6__["default"], { backButton: '/', title: 'My profile', position: _apps_Header__WEBPACK_IMPORTED_MODULE_6__.HeaderPosition.sticky }),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__layout") },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__body") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_7__["default"], { to: '/', className: "narrow-body__back-button" },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_8__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_8__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_8__.IconSize.LARGE })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_UserSettings__WEBPACK_IMPORTED_MODULE_9__["default"], { router: router, context: appContext }))),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Profile);
 
 
 /***/ }),
@@ -6512,7 +6799,7 @@ Detects whether or not elements can be animated using CSS
 /******/ 		        // webpack-livereload-plugin
 /******/ 		        (function() {
 /******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-3e4e0d20a94362f0";
+/******/ 		          var id = "webpack-livereload-plugin-script-1fbff887d5cc5471";
 /******/ 		          if (document.getElementById(id)) { return; }
 /******/ 		          var el = document.createElement("script");
 /******/ 		          el.id = id;
