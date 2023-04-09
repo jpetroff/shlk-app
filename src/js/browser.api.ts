@@ -23,6 +23,7 @@ class BrowserApi {
   }
 
   public async getTab(active?: boolean) : Promise<TabObject | null> {
+    if(!this.isInit) return null
     const tabs = await chrome.tabs.query({active: active, lastFocusedWindow: true})
     const tab = tabs[0]
     if(tab && tab.url) {
@@ -38,6 +39,13 @@ class BrowserApi {
     return chrome.tabs.query({
       url
     })
+  }
+
+  public async closeActiveTab() : Promise<void> {
+    if(!this.isInit) return null
+    const tabs = await chrome.tabs.query({active: true, lastFocusedWindow: true})
+    const tab = tabs[0]
+    await chrome.tabs.remove(tab.id)
   }
 
   public extensionId() {

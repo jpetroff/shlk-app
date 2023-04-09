@@ -15,6 +15,7 @@ import SnoozeSvg from '../../assets/svg/icon/snooze.svg'
 import LogoutSvg from '../../assets/svg/icon/logout.svg'
 import CaretDownSvg from '../../assets/svg/icon/caret-down.svg'
 import LinkSvg from '../../assets/svg/icon/link.svg'
+import MoreVSvg from '../../assets/svg/icon/more.svg'
 
 
 export const Logo = LogoSvg
@@ -30,6 +31,7 @@ export const Snooze = SnoozeSvg
 export const Search = SearchSvg 
 export const Logout = LogoutSvg 
 export const LinkIcon = LinkSvg 
+export const MoreVertical = MoreVSvg 
 
 export const Cross_16 = CrossSvg_16
 

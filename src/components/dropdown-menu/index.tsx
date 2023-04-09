@@ -16,8 +16,12 @@ export enum DropdownPosition {
 type Props = {
   show: boolean
   position?: [DropdownPosition, DropdownPosition]
-  onClose: () => void,
+  onClose: () => void
+  onEnter?: (isAppearing: boolean) => void
   className?: string
+  hasIcons?: boolean
+  divRef?: React.RefObject<HTMLDivElement | null>
+  style?: React.CSSProperties
 }
 
 const DropdownMenu : React.FC<React.PropsWithChildren<Props>> = (
@@ -25,8 +29,11 @@ const DropdownMenu : React.FC<React.PropsWithChildren<Props>> = (
     show,
     children,
     onClose,
+    onEnter,
     position,
-    className
+    className,
+    divRef,
+    style
   } : React.PropsWithChildren<Props>
 ) => {
 
@@ -38,16 +45,20 @@ const DropdownMenu : React.FC<React.PropsWithChildren<Props>> = (
     [`${className}`]: className
   })
 
-  const nodeRef = React.useRef()
+
   const transitionDuration = parseInt(styles.appearTransition)
 
   function handleClickOutside(event: MouseEvent) {
     if(_.isFunction(onClose)) onClose()
   }
 
+  function handleCSSEnter(isAppearing: boolean) {
+    if(_.isFunction(onEnter)) onEnter(isAppearing)
+  }
+
   React.useEffect( () => {
     if(show) {
-      document.addEventListener('click', handleClickOutside)
+      _.delay(() => document.addEventListener('click', handleClickOutside), transitionDuration)
     } else {
       document.removeEventListener('click', handleClickOutside)
     }
@@ -57,12 +68,13 @@ const DropdownMenu : React.FC<React.PropsWithChildren<Props>> = (
 
   return (
     <>
-    <CSSTransition nodeRef={nodeRef} 
+    <CSSTransition nodeRef={divRef} 
       in={show} 
       timeout={transitionDuration}
       classNames={`${globalClass}`}
+      onEnter={handleCSSEnter}
     >
-    <div ref={nodeRef} className={`${dropdownMenuClasses}`}> 
+    <div ref={divRef} className={`${dropdownMenuClasses}`} style={style}> 
       {children}
     </div>
     </CSSTransition>
@@ -71,7 +83,9 @@ const DropdownMenu : React.FC<React.PropsWithChildren<Props>> = (
 }
 
 DropdownMenu.defaultProps = {
-  position: [DropdownPosition.bottom, DropdownPosition.wide]
+  position: [DropdownPosition.bottom, DropdownPosition.wide],
+  divRef: React.createRef<HTMLDivElement | null>(),
+  style: {}
 }
 
 export default DropdownMenu

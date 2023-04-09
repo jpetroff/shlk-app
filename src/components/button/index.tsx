@@ -26,7 +26,7 @@ type Props = {
   icon?: ReactIcon
   size: ButtonSize
   type: ButtonType
-  onClick?: React.ReactEventHandler<HTMLAnchorElement>
+  onClick?: (event: React.SyntheticEvent<HTMLAnchorElement, Event>, element?: HTMLElement) => void
   isDisabled?: boolean
   isLoading?: boolean
   isCaret?: boolean
@@ -53,6 +53,7 @@ const Button : React.FC<Props> = function(
   if(!args.label && args.icon) buttonClassMods.push(globalClass+'_icon-only')
 
   const htmlAnchorProps = _.omit(args, 'size', 'type', 'isDisabled', 'isCaret', 'label', 'icon', 'isLoading', 'onClick')
+  const btnRef = React.useRef<HTMLAnchorElement | null>(null)
 
   const handleClick : (event: React.MouseEvent<HTMLAnchorElement>) => void = (event) => {
     if(args.isDisabled || args.isLoading) {
@@ -62,8 +63,7 @@ const Button : React.FC<Props> = function(
     } 
 
     if(_.isFunction(args.onClick)) {
-      // _.delay(() => args.onClick(event), 100)
-      args.onClick(event)
+      _.delay(() => args.onClick(event, btnRef.current), 100)
     }
 
     if(config.target == 'extension' && args.href) {
@@ -79,6 +79,7 @@ const Button : React.FC<Props> = function(
     <a {...htmlAnchorProps} 
       className={`${args.className || ''} ${globalClass} ${buttonClassMods.join(' ')}`}
       onClick={handleClick}
+      ref={btnRef}
     >
         {args.icon && 
           <Icon 

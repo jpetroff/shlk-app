@@ -67,7 +67,10 @@ var BrowserApi = /** @class */ (function () {
             var tabs, tab;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.tabs.query({ active: active, lastFocusedWindow: true })];
+                    case 0:
+                        if (!this.isInit)
+                            return [2 /*return*/, null];
+                        return [4 /*yield*/, chrome.tabs.query({ active: active, lastFocusedWindow: true })];
                     case 1:
                         tabs = _a.sent();
                         tab = tabs[0];
@@ -89,6 +92,26 @@ var BrowserApi = /** @class */ (function () {
                 return [2 /*return*/, chrome.tabs.query({
                         url: url
                     })];
+            });
+        });
+    };
+    BrowserApi.prototype.closeActiveTab = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var tabs, tab;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.isInit)
+                            return [2 /*return*/, null];
+                        return [4 /*yield*/, chrome.tabs.query({ active: true, lastFocusedWindow: true })];
+                    case 1:
+                        tabs = _a.sent();
+                        tab = tabs[0];
+                        return [4 /*yield*/, chrome.tabs.remove(tab.id)];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -221,7 +244,7 @@ if (false) {} else if (true) {
 /******/ 		        // webpack-livereload-plugin
 /******/ 		        (function() {
 /******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-1fbff887d5cc5471";
+/******/ 		          var id = "webpack-livereload-plugin-script-95587f05d55987a6";
 /******/ 		          if (document.getElementById(id)) { return; }
 /******/ 		          var el = document.createElement("script");
 /******/ 		          el.id = id;
@@ -384,7 +407,7 @@ function resetAlarms(links) {
                     alarms = _a.sent();
                     indexedAlarms = indexAlarms(alarms);
                     links.forEach(function (shortlink) {
-                        var time = /test\-snooze/ig.test(shortlink.location) ? Date.now() + 1000 : shortlink.snooze.awake;
+                        var time = shortlink.snooze.awake;
                         _browser_api__WEBPACK_IMPORTED_MODULE_1__["default"].setAlarm(shortlink.location, {
                             when: time
                         });

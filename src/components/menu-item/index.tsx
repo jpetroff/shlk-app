@@ -46,7 +46,7 @@ const MenuItem : React.FC<Props> & { Separator: React.FC } = (
 }
 
 MenuItem.defaultProps = {
-  keepIconSpace: true,
+  keepIconSpace: false,
   isDisabled: false
 }
 

@@ -5,12 +5,15 @@ import Input from '../../components/input'
 import ShortlinkListItem from '../../components/shortlink-list-item'
 import shortlinkQueries from '../../js/shortlink.gql'
 import classNames from 'classnames'
-import { Search } from '../../components/icons'
 import dateTimeTools, { DateGrouped } from '../../js/datetime.tools'
 import RadioGroup from '../../components/radio-group'
 import { NavigateFunction } from 'react-router-dom'
+import DropdownMenu, { DropdownPosition } from '../../components/dropdown-menu'
+import MenuItem from '../../components/menu-item'
+import clipboardTools from '../../js/clipboard.tools'
+import linkTools from '../../js/link.tools'
 
-type ShortlinkDisplayListItem = DateGrouped<Partial<ShortlinkDocument>> & {isSubheader?: boolean, timestamp?: any}
+type ShortlinkDisplayListItem = DateGrouped<Partial<ShortlinkDocument>> & {isSubheader?: boolean, timestamp?: any, originalIndex: number}
 
 enum LoadMode {
   append = 'append',
@@ -31,13 +34,20 @@ type Props = {
 type State = {
   shortlinks: ShortlinkDocument[],
   groupedShortlinks: ShortlinkDisplayListItem[]
-  searchQuery: string,
-  pointer: number,
-  limit: number,
+  searchQuery: string
+  pointer: number
+  limit: number
   staleResults: boolean
+  contextMenu: {
+    key: number
+    top: number
+    left: number
+    show: boolean
+  }
 }
 
 export default class ShortlinkList extends React.Component<Props, State> {
+  private contextMenuRef : React.RefObject<HTMLDivElement | null>
 
   constructor(props) {
     super(props)
@@ -47,9 +57,16 @@ export default class ShortlinkList extends React.Component<Props, State> {
       searchQuery: '',
       pointer: 0,
       limit: props.limit || 30,
-      staleResults: false
+      staleResults: false,
+      contextMenu: {
+        key: -1,
+        top: -99999,
+        left: -999999,
+        show: false
+      }
     }
     this.loadShortlinks(LoadMode.append)
+    this.contextMenuRef = React.createRef<HTMLDivElement | null>()
     _.bindAll(this, ..._.functions(this))
   }
 
@@ -94,20 +111,41 @@ export default class ShortlinkList extends React.Component<Props, State> {
       }
     }
     const result = await shortlinkQueries.getUserShortlinks(params)
-
-    const dateGroupKey = this.getSubsection() == ShortlinkListSubsection.snoozed ? ['snooze', 'awake'] : ['updatedAt']
-    const _enrichedLabelGroups = dateTimeTools.groupDatedItems(result, dateGroupKey)
-    let groupedShortlinks : Array<ShortlinkDisplayListItem> = []
-    _.each(_enrichedLabelGroups, (item, index, array) => {
-      if (index == 0 || array[index - 1].group != item.group) {
-        groupedShortlinks.push({isSubheader: true, group: item.group})
-      }
-      groupedShortlinks.push( _.extend({timestamp: item.updatedAt || item.createdAt || null}, item) )
-    })
+    const groupedResult = this.groupShortlinks(result as ShortlinkDocument[])
+  
     this.setState({
       pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
       shortlinks: load == LoadMode.replace ? result : Array().concat(this.state.shortlinks, result),
-      groupedShortlinks,
+      groupedShortlinks: groupedResult,
+      staleResults: false
+    })
+  }
+
+  private groupShortlinks(shortlinks: ShortlinkDocument[]) : ShortlinkDisplayListItem[] {
+    const dateGroupKey = ( this.getSubsection() == ShortlinkListSubsection.snoozed ) ? ['snooze', 'awake'] : ['updatedAt']
+    const _enrichedLabelGroups = dateTimeTools.groupDatedItems(shortlinks, dateGroupKey)
+
+    let groupedShortlinks : Array<ShortlinkDisplayListItem> = []
+    _.each(_enrichedLabelGroups, (item, index, array) => {
+      if (index == 0 || array[index - 1].group != item.group) {
+        groupedShortlinks.push({isSubheader: true, group: item.group, originalIndex: -1})
+      }
+      groupedShortlinks.push( _.extend({timestamp: item.updatedAt || item.createdAt || null, originalIndex: index}, item) )
+    })
+    return groupedShortlinks
+  }
+
+  private removeCachedShortlink(id: string) {
+    const index = _.findIndex(this.state.shortlinks, {_id: id})
+    console.log(id, index)
+    const updatedShortlinks = this.state.shortlinks
+    updatedShortlinks.splice(index, 1)
+    const groupedShortlinks = this.groupShortlinks(updatedShortlinks)
+
+    this.setState({
+      pointer: this.state.pointer - 1,
+      shortlinks: updatedShortlinks,
+      groupedShortlinks: groupedShortlinks,
       staleResults: false
     })
   }
@@ -118,6 +156,76 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
     if(key == ShortlinkListSubsection.snoozed)
       this.props.navigate('/app/snoozed')
+  }
+
+  handleContextClick(key: number, element: HTMLElement) {
+    _.defer(() => {
+      const top = element.offsetTop + element.offsetHeight
+      const left = element.offsetLeft + element.offsetWidth
+      this.setState({
+        contextMenu: {
+          show: true,
+          top: -top,
+          left: -left,
+          key: key,
+        }
+      })
+    })
+  }
+
+  handleContextPortal(isAppearing: boolean) {
+    const contextMenuParams = this.contextMenuRef.current.getClientRects()
+    this.setState({
+      contextMenu: {
+        show: true,
+        top: Math.abs(this.state.contextMenu.top) - contextMenuParams[0].height,
+        left: Math.abs(this.state.contextMenu.left) - contextMenuParams[0].width,
+        key: this.state.contextMenu.key,
+      }
+    })
+  }
+
+  async handleRemoveSnoozeTimer() {
+    const id = this.state.shortlinks[this.state.contextMenu.key]?._id
+    const result = await shortlinkQueries.deleteShortlinkSnoozeTimer({id})
+    if(result && result._id) {
+      this.removeCachedShortlink(result._id)
+    }
+    _.defer(this.resetContextMenu)
+  }
+
+  async handleDeleteShortlink() {
+    const id = this.state.shortlinks[this.state.contextMenu.key]?._id
+    const result = await shortlinkQueries.deleteShortlink(id)
+    console.log(result)
+    if(result && result._id) {
+      this.removeCachedShortlink(result._id)
+    }
+    _.defer(this.resetContextMenu)
+  }
+
+  private resetContextMenu() {
+    this.setState({
+      contextMenu: {
+        key: -1,
+        top: -99999,
+        left: -999999,
+        show: false
+      }
+    })
+  }
+
+  handleCopyClick(key: number) {
+    if(!this.state.groupedShortlinks[key]) return
+
+    const hash = this.state.groupedShortlinks[key].hash
+    const descriptor = this.state.groupedShortlinks[key].descriptor
+
+    const shortlink = this.state.groupedShortlinks[key].descriptor ? 
+                      linkTools.generateDescriptiveShortlink(this.state.groupedShortlinks[key].descriptor) :
+                      linkTools.generateShortlinkFromHash(this.state.groupedShortlinks[key].hash)
+
+    clipboardTools.copy(shortlink)
   }
 
   render() {
@@ -134,7 +242,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
             onDebouncedChange={this.onSearch} 
             value={this.state.searchQuery}
             placeholder='Search your links'
-            rightIcon={Search} />
+           />
           <RadioGroup
             items={[
               {label: 'All links', key: ShortlinkListSubsection.all},
@@ -148,7 +256,6 @@ export default class ShortlinkList extends React.Component<Props, State> {
         <div className={`${globalClass}__list`}>
           { 
             this.state.groupedShortlinks.map( (item, index, array) => {
-              console.log(item)
               if(item.isSubheader) {
                 return <span key={index} className={`${globalClass}__subheader`}>{item.group}</span>
               } else {
@@ -158,11 +265,25 @@ export default class ShortlinkList extends React.Component<Props, State> {
                     {..._.omit(item, 'hash', 'location')}
                     hash={item.hash}
                     location={item.location}
+                    onCopyClick={() => this.handleCopyClick(item.originalIndex)}
+                    onContextClick={(elem) => { this.handleContextClick(item.originalIndex, elem) } }
                   />
                 )
               }
             })
           }
+          <DropdownMenu
+            divRef={this.contextMenuRef}
+            show={this.state.contextMenu.show}
+            onClose={this.resetContextMenu}
+            onEnter={this.handleContextPortal}
+            style={ { top: this.state.contextMenu.top, left: this.state.contextMenu.left} }
+            >
+            <MenuItem label='Delete' onClick={this.handleDeleteShortlink}/>
+            <MenuItem.Separator />
+            {this.getSubsection() == ShortlinkListSubsection.snoozed && <MenuItem label='Remove snooze' onClick={this.handleRemoveSnoozeTimer}/>}
+            <MenuItem isDisabled={true} label='Edit shortlink' onClick={() => {  } }/>
+          </DropdownMenu>
         </div>
       </div>
     )

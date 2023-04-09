@@ -34,7 +34,7 @@ async function resetAlarms(links: AnyObject[]) {
   const alarms = await browserApi.getAlarms()
   let indexedAlarms = indexAlarms(alarms)
   links.forEach( (shortlink) => {
-    const time = /test\-snooze/ig.test(shortlink.location) ? Date.now() + 1000 : shortlink.snooze.awake
+    const time = shortlink.snooze.awake
     browserApi.setAlarm(shortlink.location, {
       when: time
     })

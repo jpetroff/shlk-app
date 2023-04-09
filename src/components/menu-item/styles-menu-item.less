@@ -18,15 +18,6 @@
     padding-left: 2rem;
   }
 
-  &_disabled {
-    color: @black-50;
-
-    &:hover {
-      background-color: @black-100;
-      cursor: not-allowed;
-    }
-  }
-
   &:hover {
     background-color: @black-95;
     color: @black-20;
@@ -34,6 +25,16 @@
 
   &__icon {
     margin: 0 0.75rem 0 0;
+  }
+
+  &_disabled {
+    color: @black-50;
+
+    &:hover {
+      background-color: @black-100;
+      color: @black-50;
+      cursor: not-allowed;
+    }
   }
 }
 

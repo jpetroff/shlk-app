@@ -25,12 +25,14 @@ import browserApi from '../../js/browser.api'
 const config = require('../../js/config')
 
 enum globalCommands {
-  submitAndCopy = 0
+  submitAndCopy = 'submit_copy',
+  snooze = 'snooze'
 }
 
 type Props = {
   router?: PageRouterProps
-  extension?: PageExtensionProps
+  extension?: PageExtensionProps,
+  context?: React.ContextType<typeof AppContext>
 }
 
 type State = {
@@ -60,7 +62,6 @@ type State = {
 
 export default class ShortlinkBar extends React.Component<Props, State> {
   private heroInputRef: React.RefObject<HTMLAnyInput>
-  declare context: React.ContextType<typeof AppContext>
 
   constructor(props) {
     super(props)
@@ -108,8 +109,8 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
     this.loadAllCachedShortlinks()
 
-    if(this.context?.extension?.activeTabUrl) this.setState({
-      location: this.context.extension.activeTabUrl
+    if(this.props.context?.extension?.activeTabUrl) this.setState({
+      location: this.props.context.extension.activeTabUrl
     })
   }
 
@@ -118,6 +119,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   }
 
   private handleGlobalEvents(bind : boolean = true) {
+    console.log('global event binder ', bind)
     if(bind) {
       window.addEventListener('keypress', this.onGlobalKeypress)
     } else {
@@ -126,8 +128,15 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   }
 
   private onGlobalKeypress(event: KeyboardEvent) {
-    if(event.ctrlKey && event.shiftKey && event.code == 'KeyC' ) {
+    console.log(event)
+    if( (event.ctrlKey || event.metaKey) && event.code == 'KeyC' ) {
+      event.preventDefault()
+      event.stopPropagation()
       this.handleGlobalCommand(globalCommands.submitAndCopy)
+    } else if ( (event.ctrlKey || event.metaKey) && event.code == 'KeyS' ) {
+      event.preventDefault()
+      event.stopPropagation()
+      this.handleGlobalCommand(globalCommands.snooze)
     }
   }
 
@@ -152,13 +161,23 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     if(isClearPress) this._setMobileConvenienceInput(false)
   }
 
-  public async handleGlobalCommand(command: number) {
+  public async handleGlobalCommand(command: globalCommands) {
     console.log('global command:', command)
     switch(command) {
       case globalCommands.submitAndCopy: {
         await this.submitLocation()
+        this.setState({
+          successState: {
+            successMessage: 'Shortlink copied to clipboard'
+          }
+        })
         clipboardTools.copy(this.state.generatedShortlink || '')
         return
+      }
+      case globalCommands.snooze: {
+        this.setState({
+          showSnoozeOptions: true
+        })
       }
     }
   }
@@ -329,7 +348,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   private _generateTextPattern(): Array<TextPattern | string> {
     return [
       linkTools.displayServiceUrl+'/',
-      { key: 'userTag', value: this.state.userTag, placeholder: 'name' },
+      (this.props.context?.user?.userTag ? this.props.context?.user?.userTag : 'you'),
       '@',
       SlugInputSpecialChars.mobileLineBreak,
       { key: 'descriptionTag', value: this.state.descriptionTag, placeholder: 'your-custom-url' },
@@ -379,6 +398,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         }
       })
       if(browserApi.isInit) {
+        browserApi.closeActiveTab()
         browserApi.sendMessage({command: 'sync'})
       }
     } catch(err) {

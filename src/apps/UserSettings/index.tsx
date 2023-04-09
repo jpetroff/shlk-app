@@ -15,6 +15,7 @@ type Props = {
 
 type State = {
   userTag: string
+  savingInProgress: boolean
   successState: {
     successMessage?: string
   }
@@ -29,6 +30,7 @@ export default class UserSettings extends React.Component<Props, State> {
     super(props)
     this.state = {
       userTag: this.props.context.user.userTag || this.props.context.user.name || 'someone',
+      savingInProgress: false,
       successState: {},
       errorState: {}
     }
@@ -37,9 +39,14 @@ export default class UserSettings extends React.Component<Props, State> {
 
   async handleSave() {
     try {
+      this.setState({savingInProgress: true})
+
       const result = await users.updateLoggedInUser({ userTag: this.state.userTag })
+      await this.props.context.requestUpdate()
+
       this.setState({
         userTag: result.userTag,
+        savingInProgress: false,
         successState: {
           successMessage: 'Profile updated'
         }
@@ -55,13 +62,15 @@ export default class UserSettings extends React.Component<Props, State> {
 
   private _clearErrorState() {
     this.setState({
-      errorState: {}
+      errorState: {},
+      savingInProgress: false
     })
   }
 
   private _clearSuccessState() {
     this.setState({
-      successState: {}
+      successState: {},
+      savingInProgress: false
     })
   }
 
@@ -105,6 +114,7 @@ export default class UserSettings extends React.Component<Props, State> {
         <div className={`${globalClass}__submit`}>
           <Button 
             isDisabled={this.saveDisabled()}
+            isLoading={this.state.savingInProgress}
             size={ButtonSize.LARGE}
             type={ButtonType.PRIMARY}
             label='Save profile settings'

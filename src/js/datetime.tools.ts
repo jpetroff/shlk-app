@@ -16,7 +16,6 @@ export default {
 
     _.each(items, (item) => {
       const value = valueByPath(item, timestampKey) as Maybe<string>
-      console.log(item, value)
       if(!value) return
       try {
         const itemDate : dayjs.Dayjs = dayjs(parseInt(value as string))

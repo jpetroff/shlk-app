@@ -11,7 +11,7 @@ import config from './config'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
-import AppContext, { getInitAppContext } from './app.context'
+import AppContext, { getInitAppContext, AppContextProvider } from './app.context'
 import createRouter from './routes'
 import cache, { CacheMode } from './cache'
 
@@ -25,9 +25,9 @@ async function main() {
   const container = (document.getElementById('app') as HTMLElement)
   const root = createRoot(container)
   root.render(
-    <AppContext.Provider value={appContext}>
+    <AppContextProvider initValue={appContext}>
       <RouterProvider router={router} />
-    </AppContext.Provider>
+    </AppContextProvider>
   )
 }
 

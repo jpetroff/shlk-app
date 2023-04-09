@@ -895,6 +895,27 @@ Logout.default = Logout;
 
 /***/ }),
 
+/***/ "./src/assets/svg/icon/more.svg":
+/*!**************************************!*\
+  !*** ./src/assets/svg/icon/more.svg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function More (props) {
+    return React.createElement("svg",props,[React.createElement("circle",{"cx":"12","cy":"6","r":"1.5","key":0}),React.createElement("circle",{"cx":"12","cy":"12","r":"1.5","key":1}),React.createElement("circle",{"cx":"12","cy":"18","r":"1.5","key":2})]);
+}
+
+More.defaultProps = {"width":"24","height":"24","viewBox":"0 0 24 24","fill":"currentColor"};
+
+module.exports = More;
+
+More.default = More;
+
+
+/***/ }),
+
 /***/ "./src/assets/svg/icon/search.svg":
 /*!****************************************!*\
   !*** ./src/assets/svg/icon/search.svg ***!
@@ -1063,7 +1084,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
 /* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/link */ "./src/components/link/index.tsx");
 /* harmony import */ var _components_dropdown_menu__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/dropdown-menu */ "./src/components/dropdown-menu/index.tsx");
 /* harmony import */ var _components_menu_item__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/menu-item */ "./src/components/menu-item/index.tsx");
@@ -1317,7 +1338,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _js_cache__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/cache */ "./src/js/cache.ts");
 /* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./errors */ "./src/apps/ShortlinkBar/errors.ts");
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
 /* harmony import */ var _History__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../History */ "./src/apps/History/index.tsx");
 /* harmony import */ var _js_browser_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../js/browser.api */ "./src/js/browser.api.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -1412,7 +1433,8 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
 var config = __webpack_require__(/*! ../../js/config */ "./src/js/config.js");
 var globalCommands;
 (function (globalCommands) {
-    globalCommands[globalCommands["submitAndCopy"] = 0] = "submitAndCopy";
+    globalCommands["submitAndCopy"] = "submit_copy";
+    globalCommands["snooze"] = "snooze";
 })(globalCommands || (globalCommands = {}));
 var ShortlinkBar = /** @class */ (function (_super) {
     __extends(ShortlinkBar, _super);
@@ -1456,9 +1478,9 @@ var ShortlinkBar = /** @class */ (function (_super) {
         }
         this.handleGlobalEvents(true);
         this.loadAllCachedShortlinks();
-        if ((_b = (_a = this.context) === null || _a === void 0 ? void 0 : _a.extension) === null || _b === void 0 ? void 0 : _b.activeTabUrl)
+        if ((_b = (_a = this.props.context) === null || _a === void 0 ? void 0 : _a.extension) === null || _b === void 0 ? void 0 : _b.activeTabUrl)
             this.setState({
-                location: this.context.extension.activeTabUrl
+                location: this.props.context.extension.activeTabUrl
             });
     };
     ShortlinkBar.prototype.componentWillUnmount = function () {
@@ -1466,6 +1488,7 @@ var ShortlinkBar = /** @class */ (function (_super) {
     };
     ShortlinkBar.prototype.handleGlobalEvents = function (bind) {
         if (bind === void 0) { bind = true; }
+        console.log('global event binder ', bind);
         if (bind) {
             window.addEventListener('keypress', this.onGlobalKeypress);
         }
@@ -1474,8 +1497,16 @@ var ShortlinkBar = /** @class */ (function (_super) {
         }
     };
     ShortlinkBar.prototype.onGlobalKeypress = function (event) {
-        if (event.ctrlKey && event.shiftKey && event.code == 'KeyC') {
+        console.log(event);
+        if ((event.ctrlKey || event.metaKey) && event.code == 'KeyC') {
+            event.preventDefault();
+            event.stopPropagation();
             this.handleGlobalCommand(globalCommands.submitAndCopy);
+        }
+        else if ((event.ctrlKey || event.metaKey) && event.code == 'KeyS') {
+            event.preventDefault();
+            event.stopPropagation();
+            this.handleGlobalCommand(globalCommands.snooze);
         }
     };
     ShortlinkBar.prototype.componentDidUpdate = function () {
@@ -1508,14 +1539,27 @@ var ShortlinkBar = /** @class */ (function (_super) {
                         _a = command;
                         switch (_a) {
                             case globalCommands.submitAndCopy: return [3 /*break*/, 1];
+                            case globalCommands.snooze: return [3 /*break*/, 3];
                         }
-                        return [3 /*break*/, 3];
+                        return [3 /*break*/, 4];
                     case 1: return [4 /*yield*/, this.submitLocation()];
                     case 2:
                         _b.sent();
+                        this.setState({
+                            successState: {
+                                successMessage: 'Shortlink copied to clipboard'
+                            }
+                        });
                         _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_5__["default"].copy(this.state.generatedShortlink || '');
                         return [2 /*return*/];
-                    case 3: return [2 /*return*/];
+                    case 3:
+                        {
+                            this.setState({
+                                showSnoozeOptions: true
+                            });
+                        }
+                        _b.label = 4;
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -1717,9 +1761,10 @@ var ShortlinkBar = /** @class */ (function (_super) {
         });
     };
     ShortlinkBar.prototype._generateTextPattern = function () {
+        var _a, _b, _c, _d;
         return [
             _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].displayServiceUrl + '/',
-            { key: 'userTag', value: this.state.userTag, placeholder: 'name' },
+            (((_b = (_a = this.props.context) === null || _a === void 0 ? void 0 : _a.user) === null || _b === void 0 ? void 0 : _b.userTag) ? (_d = (_c = this.props.context) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.userTag : 'you'),
             '@',
             _components_shortlink_slug_input__WEBPACK_IMPORTED_MODULE_9__.SlugInputSpecialChars.mobileLineBreak,
             { key: 'descriptionTag', value: this.state.descriptionTag, placeholder: 'your-custom-url' },
@@ -1773,6 +1818,7 @@ var ShortlinkBar = /** @class */ (function (_super) {
                             }
                         });
                         if (_js_browser_api__WEBPACK_IMPORTED_MODULE_10__["default"].isInit) {
+                            _js_browser_api__WEBPACK_IMPORTED_MODULE_10__["default"].closeActiveTab();
                             _js_browser_api__WEBPACK_IMPORTED_MODULE_10__["default"].sendMessage({ command: 'sync' });
                         }
                         return [3 /*break*/, 4];
@@ -1836,14 +1882,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/input */ "./src/components/input/index.tsx");
-/* harmony import */ var _components_shortlink_list_item__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/shortlink-list-item */ "./src/components/shortlink-list-item/index.tsx");
+/* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/input */ "./src/components/input/index.tsx");
+/* harmony import */ var _components_shortlink_list_item__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/shortlink-list-item */ "./src/components/shortlink-list-item/index.tsx");
 /* harmony import */ var _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var _js_datetime_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/datetime.tools */ "./src/js/datetime.tools.ts");
-/* harmony import */ var _components_radio_group__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/radio-group */ "./src/components/radio-group/index.tsx");
+/* harmony import */ var _components_radio_group__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/radio-group */ "./src/components/radio-group/index.tsx");
+/* harmony import */ var _components_dropdown_menu__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/dropdown-menu */ "./src/components/dropdown-menu/index.tsx");
+/* harmony import */ var _components_menu_item__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/menu-item */ "./src/components/menu-item/index.tsx");
+/* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
+/* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1925,6 +1974,9 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
 
 
 
+
+
+
 var LoadMode;
 (function (LoadMode) {
     LoadMode["append"] = "append";
@@ -1945,9 +1997,16 @@ var ShortlinkList = /** @class */ (function (_super) {
             searchQuery: '',
             pointer: 0,
             limit: props.limit || 30,
-            staleResults: false
+            staleResults: false,
+            contextMenu: {
+                key: -1,
+                top: -99999,
+                left: -999999,
+                show: false
+            }
         };
         _this.loadShortlinks(LoadMode.append);
+        _this.contextMenuRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         underscore__WEBPACK_IMPORTED_MODULE_2__.bindAll.apply(underscore__WEBPACK_IMPORTED_MODULE_2__, __spreadArray([_this], underscore__WEBPACK_IMPORTED_MODULE_2__.functions(_this), false));
         return _this;
     }
@@ -1970,7 +2029,7 @@ var ShortlinkList = /** @class */ (function (_super) {
     };
     ShortlinkList.prototype.loadShortlinks = function (load) {
         return __awaiter(this, void 0, void 0, function () {
-            var params, result, dateGroupKey, _enrichedLabelGroups, groupedShortlinks;
+            var params, result, groupedResult;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1994,19 +2053,11 @@ var ShortlinkList = /** @class */ (function (_super) {
                         return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].getUserShortlinks(params)];
                     case 1:
                         result = _a.sent();
-                        dateGroupKey = this.getSubsection() == ShortlinkListSubsection.snoozed ? ['snooze', 'awake'] : ['updatedAt'];
-                        _enrichedLabelGroups = _js_datetime_tools__WEBPACK_IMPORTED_MODULE_5__["default"].groupDatedItems(result, dateGroupKey);
-                        groupedShortlinks = [];
-                        underscore__WEBPACK_IMPORTED_MODULE_2__.each(_enrichedLabelGroups, function (item, index, array) {
-                            if (index == 0 || array[index - 1].group != item.group) {
-                                groupedShortlinks.push({ isSubheader: true, group: item.group });
-                            }
-                            groupedShortlinks.push(underscore__WEBPACK_IMPORTED_MODULE_2__.extend({ timestamp: item.updatedAt || item.createdAt || null }, item));
-                        });
+                        groupedResult = this.groupShortlinks(result);
                         this.setState({
                             pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
                             shortlinks: load == LoadMode.replace ? result : Array().concat(this.state.shortlinks, result),
-                            groupedShortlinks: groupedShortlinks,
+                            groupedShortlinks: groupedResult,
                             staleResults: false
                         });
                         return [2 /*return*/];
@@ -2014,11 +2065,123 @@ var ShortlinkList = /** @class */ (function (_super) {
             });
         });
     };
+    ShortlinkList.prototype.groupShortlinks = function (shortlinks) {
+        var dateGroupKey = (this.getSubsection() == ShortlinkListSubsection.snoozed) ? ['snooze', 'awake'] : ['updatedAt'];
+        var _enrichedLabelGroups = _js_datetime_tools__WEBPACK_IMPORTED_MODULE_5__["default"].groupDatedItems(shortlinks, dateGroupKey);
+        var groupedShortlinks = [];
+        underscore__WEBPACK_IMPORTED_MODULE_2__.each(_enrichedLabelGroups, function (item, index, array) {
+            if (index == 0 || array[index - 1].group != item.group) {
+                groupedShortlinks.push({ isSubheader: true, group: item.group, originalIndex: -1 });
+            }
+            groupedShortlinks.push(underscore__WEBPACK_IMPORTED_MODULE_2__.extend({ timestamp: item.updatedAt || item.createdAt || null, originalIndex: index }, item));
+        });
+        return groupedShortlinks;
+    };
+    ShortlinkList.prototype.removeCachedShortlink = function (id) {
+        var index = underscore__WEBPACK_IMPORTED_MODULE_2__.findIndex(this.state.shortlinks, { _id: id });
+        console.log(id, index);
+        var updatedShortlinks = this.state.shortlinks;
+        updatedShortlinks.splice(index, 1);
+        var groupedShortlinks = this.groupShortlinks(updatedShortlinks);
+        this.setState({
+            pointer: this.state.pointer - 1,
+            shortlinks: updatedShortlinks,
+            groupedShortlinks: groupedShortlinks,
+            staleResults: false
+        });
+    };
     ShortlinkList.prototype.handleInternalNavigate = function (key) {
         if (key == ShortlinkListSubsection.all)
             this.props.navigate('/app');
         if (key == ShortlinkListSubsection.snoozed)
             this.props.navigate('/app/snoozed');
+    };
+    ShortlinkList.prototype.handleContextClick = function (key, element) {
+        var _this = this;
+        underscore__WEBPACK_IMPORTED_MODULE_2__.defer(function () {
+            var top = element.offsetTop + element.offsetHeight;
+            var left = element.offsetLeft + element.offsetWidth;
+            _this.setState({
+                contextMenu: {
+                    show: true,
+                    top: -top,
+                    left: -left,
+                    key: key,
+                }
+            });
+        });
+    };
+    ShortlinkList.prototype.handleContextPortal = function (isAppearing) {
+        var contextMenuParams = this.contextMenuRef.current.getClientRects();
+        this.setState({
+            contextMenu: {
+                show: true,
+                top: Math.abs(this.state.contextMenu.top) - contextMenuParams[0].height,
+                left: Math.abs(this.state.contextMenu.left) - contextMenuParams[0].width,
+                key: this.state.contextMenu.key,
+            }
+        });
+    };
+    ShortlinkList.prototype.handleRemoveSnoozeTimer = function () {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var id, result;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        id = (_a = this.state.shortlinks[this.state.contextMenu.key]) === null || _a === void 0 ? void 0 : _a._id;
+                        return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].deleteShortlinkSnoozeTimer({ id: id })];
+                    case 1:
+                        result = _b.sent();
+                        if (result && result._id) {
+                            this.removeCachedShortlink(result._id);
+                        }
+                        underscore__WEBPACK_IMPORTED_MODULE_2__.defer(this.resetContextMenu);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ShortlinkList.prototype.handleDeleteShortlink = function () {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var id, result;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        id = (_a = this.state.shortlinks[this.state.contextMenu.key]) === null || _a === void 0 ? void 0 : _a._id;
+                        return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].deleteShortlink(id)];
+                    case 1:
+                        result = _b.sent();
+                        console.log(result);
+                        if (result && result._id) {
+                            this.removeCachedShortlink(result._id);
+                        }
+                        underscore__WEBPACK_IMPORTED_MODULE_2__.defer(this.resetContextMenu);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ShortlinkList.prototype.resetContextMenu = function () {
+        this.setState({
+            contextMenu: {
+                key: -1,
+                top: -99999,
+                left: -999999,
+                show: false
+            }
+        });
+    };
+    ShortlinkList.prototype.handleCopyClick = function (key) {
+        if (!this.state.groupedShortlinks[key])
+            return;
+        var hash = this.state.groupedShortlinks[key].hash;
+        var descriptor = this.state.groupedShortlinks[key].descriptor;
+        var shortlink = this.state.groupedShortlinks[key].descriptor ?
+            _js_link_tools__WEBPACK_IMPORTED_MODULE_6__["default"].generateDescriptiveShortlink(this.state.groupedShortlinks[key].descriptor) :
+            _js_link_tools__WEBPACK_IMPORTED_MODULE_6__["default"].generateShortlinkFromHash(this.state.groupedShortlinks[key].hash);
+        _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_7__["default"].copy(shortlink);
     };
     ShortlinkList.prototype.render = function () {
         var _a;
@@ -2030,20 +2193,25 @@ var ShortlinkList = /** @class */ (function (_super) {
             _a));
         return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(listClasses) },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__search") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_6__["default"], { onChange: this.onSearchQueryChange, onDebouncedChange: this.onSearch, value: this.state.searchQuery, placeholder: 'Search your links', rightIcon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.Search }),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_radio_group__WEBPACK_IMPORTED_MODULE_8__["default"], { items: [
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_8__["default"], { onChange: this.onSearchQueryChange, onDebouncedChange: this.onSearch, value: this.state.searchQuery, placeholder: 'Search your links' }),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_radio_group__WEBPACK_IMPORTED_MODULE_9__["default"], { items: [
                         { label: 'All links', key: ShortlinkListSubsection.all },
                         { label: 'Snoozed links', key: ShortlinkListSubsection.snoozed }
                     ], value: this.getSubsection(), onChange: function (key) { _this.handleInternalNavigate(key); }, fullWidth: true })),
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list") }, this.state.groupedShortlinks.map(function (item, index, array) {
-                console.log(item);
-                if (item.isSubheader) {
-                    return react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { key: index, className: "".concat(globalClass, "__subheader") }, item.group);
-                }
-                else {
-                    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_list_item__WEBPACK_IMPORTED_MODULE_9__["default"], __assign({ key: index, timestamp: item.timestamp }, underscore__WEBPACK_IMPORTED_MODULE_2__.omit(item, 'hash', 'location'), { hash: item.hash, location: item.location })));
-                }
-            }))));
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list") },
+                this.state.groupedShortlinks.map(function (item, index, array) {
+                    if (item.isSubheader) {
+                        return react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { key: index, className: "".concat(globalClass, "__subheader") }, item.group);
+                    }
+                    else {
+                        return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_list_item__WEBPACK_IMPORTED_MODULE_10__["default"], __assign({ key: index, timestamp: item.timestamp }, underscore__WEBPACK_IMPORTED_MODULE_2__.omit(item, 'hash', 'location'), { hash: item.hash, location: item.location, onCopyClick: function () { return _this.handleCopyClick(item.originalIndex); }, onContextClick: function (elem) { _this.handleContextClick(item.originalIndex, elem); } })));
+                    }
+                }),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_11__["default"], { divRef: this.contextMenuRef, show: this.state.contextMenu.show, onClose: this.resetContextMenu, onEnter: this.handleContextPortal, style: { top: this.state.contextMenu.top, left: this.state.contextMenu.left } },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { label: 'Delete', onClick: this.handleDeleteShortlink }),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"].Separator, null),
+                    this.getSubsection() == ShortlinkListSubsection.snoozed && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { label: 'Remove snooze', onClick: this.handleRemoveSnoozeTimer }),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { isDisabled: true, label: 'Edit shortlink', onClick: function () { } })))));
     };
     return ShortlinkList;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
@@ -2147,6 +2315,7 @@ var UserSettings = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             userTag: _this.props.context.user.userTag || _this.props.context.user.name || 'someone',
+            savingInProgress: false,
             successState: {},
             errorState: {}
         };
@@ -2159,38 +2328,45 @@ var UserSettings = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _a.trys.push([0, 3, , 4]);
+                        this.setState({ savingInProgress: true });
                         return [4 /*yield*/, _js_user_gql__WEBPACK_IMPORTED_MODULE_4__["default"].updateLoggedInUser({ userTag: this.state.userTag })];
                     case 1:
                         result = _a.sent();
+                        return [4 /*yield*/, this.props.context.requestUpdate()];
+                    case 2:
+                        _a.sent();
                         this.setState({
                             userTag: result.userTag,
+                            savingInProgress: false,
                             successState: {
                                 successMessage: 'Profile updated'
                             }
                         });
-                        return [3 /*break*/, 3];
-                    case 2:
+                        return [3 /*break*/, 4];
+                    case 3:
                         error_1 = _a.sent();
                         this.setState({
                             errorState: {
                                 errorMessage: "Sorry, something didn\u2019t go well. Please, try again"
                             }
                         });
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     UserSettings.prototype._clearErrorState = function () {
         this.setState({
-            errorState: {}
+            errorState: {},
+            savingInProgress: false
         });
     };
     UserSettings.prototype._clearSuccessState = function () {
         this.setState({
-            successState: {}
+            successState: {},
+            savingInProgress: false
         });
     };
     UserSettings.prototype.saveDisabled = function () {
@@ -2217,7 +2393,7 @@ var UserSettings = /** @class */ (function (_super) {
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", { htmlFor: 'slug-input-field', className: "".concat(globalClass, "__field__label") }, "Choose a slug:"),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__field__input"), id: 'slug-input-field', value: this.state.userTag, onChange: function (value, event) { return _this.setState({ userTag: value }); } })),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__submit") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { isDisabled: this.saveDisabled(), size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY, label: 'Save profile settings', onClick: this.handleSave })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { isDisabled: this.saveDisabled(), isLoading: this.state.savingInProgress, size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY, label: 'Save profile settings', onClick: this.handleSave })),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") },
                 this.state.errorState.errorMessage &&
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__profile-error"), message: this.state.errorState.errorMessage, canDismiss: true, onDismiss: this._clearErrorState }),
@@ -2299,6 +2475,7 @@ var Button = function (args) {
     if (!args.label && args.icon)
         buttonClassMods.push(globalClass + '_icon-only');
     var htmlAnchorProps = underscore__WEBPACK_IMPORTED_MODULE_2__.omit(args, 'size', 'type', 'isDisabled', 'isCaret', 'label', 'icon', 'isLoading', 'onClick');
+    var btnRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
     var handleClick = function (event) {
         if (args.isDisabled || args.isLoading) {
             event.preventDefault();
@@ -2306,8 +2483,7 @@ var Button = function (args) {
             return;
         }
         if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(args.onClick)) {
-            // _.delay(() => args.onClick(event), 100)
-            args.onClick(event);
+            underscore__WEBPACK_IMPORTED_MODULE_2__.delay(function () { return args.onClick(event, btnRef.current); }, 100);
         }
         if ((_js_config__WEBPACK_IMPORTED_MODULE_4___default().target) == 'extension' && args.href) {
             event.preventDefault();
@@ -2317,7 +2493,7 @@ var Button = function (args) {
         if (args.flyover)
             setShowFlyover(true);
     };
-    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", __assign({}, htmlAnchorProps, { className: "".concat(args.className || '', " ").concat(globalClass, " ").concat(buttonClassMods.join(' ')), onClick: handleClick }),
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", __assign({}, htmlAnchorProps, { className: "".concat(args.className || '', " ").concat(globalClass, " ").concat(buttonClassMods.join(' ')), onClick: handleClick, ref: btnRef }),
         args.icon &&
             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "".concat(globalClass, "__icon"), useIcon: args.icon, size: BtnIcnMap[args.size] || _icons__WEBPACK_IMPORTED_MODULE_3__.IconSize.SMALL }),
         args.label &&
@@ -2367,7 +2543,7 @@ var DropdownPosition;
 })(DropdownPosition || (DropdownPosition = {}));
 var DropdownMenu = function (_a) {
     var _b;
-    var show = _a.show, children = _a.children, onClose = _a.onClose, position = _a.position, className = _a.className;
+    var show = _a.show, children = _a.children, onClose = _a.onClose, onEnter = _a.onEnter, position = _a.position, className = _a.className, divRef = _a.divRef, style = _a.style;
     var globalClass = "".concat(_styles_dropdown_menu_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass, "_dropdown-menu");
     var dropdownMenuClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_b = {},
         _b["".concat(globalClass)] = true,
@@ -2375,15 +2551,18 @@ var DropdownMenu = function (_a) {
         _b["".concat(globalClass, "_").concat(position[1])] = true,
         _b["".concat(className)] = className,
         _b));
-    var nodeRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef();
     var transitionDuration = parseInt(_styles_dropdown_menu_less__WEBPACK_IMPORTED_MODULE_0__["default"].appearTransition);
     function handleClickOutside(event) {
         if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(onClose))
             onClose();
     }
+    function handleCSSEnter(isAppearing) {
+        if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(onEnter))
+            onEnter(isAppearing);
+    }
     react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
         if (show) {
-            document.addEventListener('click', handleClickOutside);
+            underscore__WEBPACK_IMPORTED_MODULE_2__.delay(function () { return document.addEventListener('click', handleClickOutside); }, transitionDuration);
         }
         else {
             document.removeEventListener('click', handleClickOutside);
@@ -2391,11 +2570,13 @@ var DropdownMenu = function (_a) {
         return function () { document.removeEventListener('click', handleClickOutside); };
     }, [show]);
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null,
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_4__["default"], { nodeRef: nodeRef, in: show, timeout: transitionDuration, classNames: "".concat(globalClass) },
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { ref: nodeRef, className: "".concat(dropdownMenuClasses) }, children))));
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_4__["default"], { nodeRef: divRef, in: show, timeout: transitionDuration, classNames: "".concat(globalClass), onEnter: handleCSSEnter },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { ref: divRef, className: "".concat(dropdownMenuClasses), style: style }, children))));
 };
 DropdownMenu.defaultProps = {
-    position: [DropdownPosition.bottom, DropdownPosition.wide]
+    position: [DropdownPosition.bottom, DropdownPosition.wide],
+    divRef: react__WEBPACK_IMPORTED_MODULE_1__.createRef(),
+    style: {}
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DropdownMenu);
 
@@ -2421,7 +2602,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
 /* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2554,6 +2735,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Logo": () => (/* binding */ Logo),
 /* harmony export */   "LogoC": () => (/* binding */ LogoC),
 /* harmony export */   "Logout": () => (/* binding */ Logout),
+/* harmony export */   "MoreVertical": () => (/* binding */ MoreVertical),
 /* harmony export */   "Search": () => (/* binding */ Search),
 /* harmony export */   "Snooze": () => (/* binding */ Snooze),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2589,6 +2771,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_svg_icon_caret_down_svg__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_icon_caret_down_svg__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _assets_svg_icon_link_svg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/svg/icon/link.svg */ "./src/assets/svg/icon/link.svg");
 /* harmony import */ var _assets_svg_icon_link_svg__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_icon_link_svg__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _assets_svg_icon_more_svg__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../assets/svg/icon/more.svg */ "./src/assets/svg/icon/more.svg");
+/* harmony import */ var _assets_svg_icon_more_svg__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_assets_svg_icon_more_svg__WEBPACK_IMPORTED_MODULE_16__);
+
 
 
 
@@ -2618,6 +2803,7 @@ var Snooze = (_assets_svg_icon_snooze_svg__WEBPACK_IMPORTED_MODULE_12___default(
 var Search = (_assets_svg_icon_search_svg__WEBPACK_IMPORTED_MODULE_11___default());
 var Logout = (_assets_svg_icon_logout_svg__WEBPACK_IMPORTED_MODULE_13___default());
 var LinkIcon = (_assets_svg_icon_link_svg__WEBPACK_IMPORTED_MODULE_15___default());
+var MoreVertical = (_assets_svg_icon_more_svg__WEBPACK_IMPORTED_MODULE_16___default());
 var Cross_16 = (_assets_svg_icon_cross_16_svg__WEBPACK_IMPORTED_MODULE_8___default());
 var IconSize;
 (function (IconSize) {
@@ -2901,7 +3087,7 @@ var MenuItem = function (_a) {
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__label") }, label)));
 };
 MenuItem.defaultProps = {
-    keepIconSpace: true,
+    keepIconSpace: false,
     isDisabled: false
 };
 MenuItem.Separator = function (props) {
@@ -3049,10 +3235,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_shortlink_list_item_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-shortlink-list-item.less */ "./src/components/shortlink-list-item/styles-shortlink-list-item.less");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
-/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
+/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../button */ "./src/components/button/index.tsx");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
+
+
+
 
 
 
@@ -3065,32 +3257,41 @@ var ActionLabels;
 })(ActionLabels || (ActionLabels = {}));
 var ShortlinkListItem = function (_a) {
     var _b;
-    var location = _a.location, hash = _a.hash, descriptor = _a.descriptor, timestamp = _a.timestamp, siteTitle = _a.siteTitle, siteDescription = _a.siteDescription, urlMetadata = _a.urlMetadata, snooze = _a.snooze, tags = _a.tags;
+    var location = _a.location, hash = _a.hash, descriptor = _a.descriptor, timestamp = _a.timestamp, siteTitle = _a.siteTitle, siteDescription = _a.siteDescription, urlMetadata = _a.urlMetadata, snooze = _a.snooze, tags = _a.tags, onContextClick = _a.onContextClick, onCopyClick = _a.onCopyClick;
     var globalClass = "".concat(_styles_shortlink_list_item_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass, "_shortlink-item");
-    var shortlinkItemClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_b = {},
+    var shortlinkItemClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_b = {},
         _b["".concat(globalClass)] = true,
         _b));
     var shortlink = (descriptor === null || descriptor === void 0 ? void 0 : descriptor.descriptionTag) && descriptor.descriptionTag != '' ?
-        _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].generateDescriptiveShortlink(descriptor) :
-        _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].generateShortlinkFromHash(hash);
+        _js_link_tools__WEBPACK_IMPORTED_MODULE_4__["default"].generateDescriptiveShortlink(descriptor) :
+        _js_link_tools__WEBPACK_IMPORTED_MODULE_4__["default"].generateShortlinkFromHash(hash);
     var displayShortlink = (descriptor === null || descriptor === void 0 ? void 0 : descriptor.descriptionTag) && descriptor.descriptionTag != '' ?
-        _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].makeDisplayShortlink(descriptor) :
-        _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].makeDisplayShortlink(hash);
+        _js_link_tools__WEBPACK_IMPORTED_MODULE_4__["default"].makeDisplayShortlink(descriptor) :
+        _js_link_tools__WEBPACK_IMPORTED_MODULE_4__["default"].makeDisplayShortlink(hash);
     var favicon = ((urlMetadata === null || urlMetadata === void 0 ? void 0 : urlMetadata.favicons) && (urlMetadata === null || urlMetadata === void 0 ? void 0 : urlMetadata.favicons[0]) && (urlMetadata === null || urlMetadata === void 0 ? void 0 : urlMetadata.favicons[0].src)) ? urlMetadata === null || urlMetadata === void 0 ? void 0 : urlMetadata.favicons[0].src : '/assets/default-favicon.png';
-    function handleClick(event) {
+    function handleCopyClick(event) {
+        if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(onCopyClick))
+            onCopyClick();
+        return void 0;
     }
+    function handleContextClick(event, elem) {
+        if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(onContextClick))
+            onContextClick(elem || null);
+        return void 0;
+    }
+    var noDescription = (siteDescription = undefined) ? "" : "".concat(globalClass, "__display-full-link_no-description");
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(shortlinkItemClasses) },
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__display-full-link"), href: location, colorScheme: _link__WEBPACK_IMPORTED_MODULE_4__.LinkColors.USER },
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__display-full-link ").concat(noDescription), href: location, colorScheme: _link__WEBPACK_IMPORTED_MODULE_5__.LinkColors.USER },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__display-full-link__main") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__display-full-link__title") }, siteTitle),
                 siteDescription && react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__display-full-link__description") }, siteDescription)),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__display-full-link__subheader") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("img", { className: "".concat(globalClass, "__display-full-link__favicon"), src: favicon }),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__display-full-link__subheader__span") }, _js_link_tools__WEBPACK_IMPORTED_MODULE_3__["default"].makeDisplayUrl(location)))),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_4__["default"], { onClick: handleClick, className: "".concat(globalClass, "__display-shortlink"), suffix: "".concat(ActionLabels.copy, "+").concat(ActionLabels.copied) },
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__shortlink") }, displayShortlink)),
-        (tags || snooze) &&
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__display-full-link__app-meta") })));
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__display-full-link__subheader__span") }, _js_link_tools__WEBPACK_IMPORTED_MODULE_4__["default"].makeDisplayUrl(location)))),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__shortlink-meta") },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_5__["default"], { onClick: handleCopyClick, className: "".concat(globalClass, "__display-shortlink"), suffix: "".concat(ActionLabels.copy, "+").concat(ActionLabels.copied) },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__shortlink") }, displayShortlink)),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button__WEBPACK_IMPORTED_MODULE_6__["default"], { icon: _icons__WEBPACK_IMPORTED_MODULE_7__.MoreVertical, size: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.SMALL, type: _button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.GHOST, onClick: handleContextClick }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShortlinkListItem);
 
@@ -3276,7 +3477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
 
 
 
@@ -3386,15 +3587,16 @@ var Tooltip = function (_a) {
 
 /***/ }),
 
-/***/ "./src/js/app.context.ts":
-/*!*******************************!*\
-  !*** ./src/js/app.context.ts ***!
-  \*******************************/
+/***/ "./src/js/app.context.tsx":
+/*!********************************!*\
+  !*** ./src/js/app.context.tsx ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AppContextProvider": () => (/* binding */ AppContextProvider),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "getInitAppContext": () => (/* binding */ getInitAppContext)
 /* harmony export */ });
@@ -3404,6 +3606,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _browser_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./browser.api */ "./src/js/browser.api.ts");
 /* harmony import */ var _user_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user.gql */ "./src/js/user.gql.ts");
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -3444,8 +3657,33 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-var AppContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({});
+var AppContext = react__WEBPACK_IMPORTED_MODULE_0__.createContext({
+    requestUpdate: function () { }
+});
+var AppContextProvider = function (_a) {
+    var initValue = _a.initValue, children = _a.children;
+    var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState(initValue), contextState = _b[0], setContextState = _b[1];
+    function requestUpdate() {
+        return __awaiter(this, void 0, void 0, function () {
+            var contextState;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, getInitAppContext()];
+                    case 1:
+                        contextState = _a.sent();
+                        setContextState(contextState);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    var value = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
+        return __assign(__assign({}, contextState), { requestUpdate: requestUpdate });
+    }, [contextState]);
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(AppContext.Provider, { value: value }, children));
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppContext);
+
 function getInitAppContext() {
     return __awaiter(this, void 0, void 0, function () {
         var result, activeTab, currentUser;
@@ -3539,7 +3777,10 @@ var BrowserApi = /** @class */ (function () {
             var tabs, tab;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.tabs.query({ active: active, lastFocusedWindow: true })];
+                    case 0:
+                        if (!this.isInit)
+                            return [2 /*return*/, null];
+                        return [4 /*yield*/, chrome.tabs.query({ active: active, lastFocusedWindow: true })];
                     case 1:
                         tabs = _a.sent();
                         tab = tabs[0];
@@ -3561,6 +3802,26 @@ var BrowserApi = /** @class */ (function () {
                 return [2 /*return*/, chrome.tabs.query({
                         url: url
                     })];
+            });
+        });
+    };
+    BrowserApi.prototype.closeActiveTab = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var tabs, tab;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.isInit)
+                            return [2 /*return*/, null];
+                        return [4 /*yield*/, chrome.tabs.query({ active: true, lastFocusedWindow: true })];
+                    case 1:
+                        tabs = _a.sent();
+                        tab = tabs[0];
+                        return [4 /*yield*/, chrome.tabs.remove(tab.id)];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -4090,7 +4351,6 @@ __webpack_require__.r(__webpack_exports__);
         var result = [];
         underscore__WEBPACK_IMPORTED_MODULE_0__.each(items, function (item) {
             var value = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.valueByPath)(item, timestampKey);
-            console.log(item, value);
             if (!value)
                 return;
             try {
@@ -4143,7 +4403,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.context */ "./src/js/app.context.tsx");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./routes */ "./src/js/routes.tsx");
 /* harmony import */ var _cache__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cache */ "./src/js/cache.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -4214,7 +4474,7 @@ function main() {
                     router = (0,_routes__WEBPACK_IMPORTED_MODULE_7__["default"])();
                     container = document.getElementById('app');
                     root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_4__.createRoot)(container);
-                    root.render(react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_app_context__WEBPACK_IMPORTED_MODULE_5__["default"].Provider, { value: appContext },
+                    root.render(react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_app_context__WEBPACK_IMPORTED_MODULE_5__.AppContextProvider, { initValue: appContext },
                         react__WEBPACK_IMPORTED_MODULE_3___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.RouterProvider, { router: router })));
                     return [2 /*return*/];
             }
@@ -4571,7 +4831,7 @@ var GQLShortlinkQuery = /** @class */ (function () {
                         if ((0,_utils__WEBPACK_IMPORTED_MODULE_2__.validateURL)(location) == false) {
                             throw new Error("Not a valid URL: '".concat(location, "'"));
                         }
-                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    mutation createShortlinkWithVars (\n      $location: String!\n    ){\n      createShortlink(location: $location) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createShortlinkWithVars (\n      $location: String!\n    ){\n      createShortlink(location: $location) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    mutation createShortlinkWithVars (\n      $location: String!\n    ){\n      createShortlink(location: $location) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createShortlinkWithVars (\n      $location: String!\n    ){\n      createShortlink(location: $location) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
                         return [4 /*yield*/, this.gqlClient.request(query, { location: location })];
                     case 1:
                         response = _a.sent();
@@ -4590,7 +4850,7 @@ var GQLShortlinkQuery = /** @class */ (function () {
                     case 0:
                         if (!descriptionTag || !location)
                             return [2 /*return*/, null];
-                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    mutation createDescriptiveShortlinkWithVars(\n      $userTag: String\n      $descriptionTag: String!\n      $location: String!\n      $hash: String\n    ) {\n      createDescriptiveShortlink(\n        userTag: $userTag, \n        descriptionTag: $descriptionTag, \n        location: $location, \n        hash: $hash\n      ) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createDescriptiveShortlinkWithVars(\n      $userTag: String\n      $descriptionTag: String!\n      $location: String!\n      $hash: String\n    ) {\n      createDescriptiveShortlink(\n        userTag: $userTag, \n        descriptionTag: $descriptionTag, \n        location: $location, \n        hash: $hash\n      ) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    mutation createDescriptiveShortlinkWithVars(\n      $userTag: String\n      $descriptionTag: String!\n      $location: String!\n      $hash: String\n    ) {\n      createDescriptiveShortlink(\n        userTag: $userTag, \n        descriptionTag: $descriptionTag, \n        location: $location, \n        hash: $hash\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createDescriptiveShortlinkWithVars(\n      $userTag: String\n      $descriptionTag: String!\n      $location: String!\n      $hash: String\n    ) {\n      createDescriptiveShortlink(\n        userTag: $userTag, \n        descriptionTag: $descriptionTag, \n        location: $location, \n        hash: $hash\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
                         return [4 /*yield*/, this.gqlClient.request(query, { userTag: userTag, descriptionTag: descriptionTag, location: location, hash: hash })];
                     case 1:
                         response = _b.sent();
@@ -4607,7 +4867,7 @@ var GQLShortlinkQuery = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n      $isSnooze: Boolean\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n          isSnooze: $isSnooze\n        }\n      ) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    "], ["\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n      $isSnooze: Boolean\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n          isSnooze: $isSnooze\n        }\n      ) {\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    "])));
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n      $isSnooze: Boolean\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n          isSnooze: $isSnooze\n        }\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    "], ["\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n      $isSnooze: Boolean\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n          isSnooze: $isSnooze\n        }\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    "])));
                         return [4 /*yield*/, this.gqlClient.request(query, { limit: limit, skip: skip, sort: sort, order: order, search: search, isSnooze: isSnooze })];
                     case 1:
                         response = _b.sent();
@@ -4623,7 +4883,7 @@ var GQLShortlinkQuery = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    mutation createOrUpdateShortlinkTimerWithVars(\n      $location: String\n      $hash: String\n      $id: String\n      $standardTimer: String\n      $customDay: Mixed\n      $customTime: Mixed\n      $baseDateISOString: String\n    ) {\n      createOrUpdateShortlinkTimer (\n        args: {\n          location: $location\n          hash: $hash\n          id: $id\n          standardTimer: $standardTimer\n          customDay: $customDay\n          customTime: $customTime\n          baseDateISOString: $baseDateISOString\n        }\n      ) {\n        hash\n        location\n        snooze {\n          awake\n          description\n        }\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createOrUpdateShortlinkTimerWithVars(\n      $location: String\n      $hash: String\n      $id: String\n      $standardTimer: String\n      $customDay: Mixed\n      $customTime: Mixed\n      $baseDateISOString: String\n    ) {\n      createOrUpdateShortlinkTimer (\n        args: {\n          location: $location\n          hash: $hash\n          id: $id\n          standardTimer: $standardTimer\n          customDay: $customDay\n          customTime: $customTime\n          baseDateISOString: $baseDateISOString\n        }\n      ) {\n        hash\n        location\n        snooze {\n          awake\n          description\n        }\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    mutation createOrUpdateShortlinkTimerWithVars(\n      $location: String\n      $hash: String\n      $id: String\n      $standardTimer: String\n      $customDay: Mixed\n      $customTime: Mixed\n      $baseDateISOString: String\n    ) {\n      createOrUpdateShortlinkTimer (\n        args: {\n          location: $location\n          hash: $hash\n          id: $id\n          standardTimer: $standardTimer\n          customDay: $customDay\n          customTime: $customTime\n          baseDateISOString: $baseDateISOString\n        }\n      ) {\n        _id\n        hash\n        location\n        snooze {\n          awake\n          description\n        }\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation createOrUpdateShortlinkTimerWithVars(\n      $location: String\n      $hash: String\n      $id: String\n      $standardTimer: String\n      $customDay: Mixed\n      $customTime: Mixed\n      $baseDateISOString: String\n    ) {\n      createOrUpdateShortlinkTimer (\n        args: {\n          location: $location\n          hash: $hash\n          id: $id\n          standardTimer: $standardTimer\n          customDay: $customDay\n          customTime: $customTime\n          baseDateISOString: $baseDateISOString\n        }\n      ) {\n        _id\n        hash\n        location\n        snooze {\n          awake\n          description\n        }\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
                         return [4 /*yield*/, this.gqlClient.request(query, args)];
                     case 1:
                         response = _a.sent();
@@ -4633,10 +4893,42 @@ var GQLShortlinkQuery = /** @class */ (function () {
             });
         });
     };
+    GQLShortlinkQuery.prototype.deleteShortlinkSnoozeTimer = function (args) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n    mutation deleteShortlinkSnoozeTimerWithVars(\n      $location: String\n      $id: String\n      $awake: Long\n    ) {\n      deleteShortlinkSnoozeTimer (\n        location: $location\n        awake: $awake\n        id: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation deleteShortlinkSnoozeTimerWithVars(\n      $location: String\n      $id: String\n      $awake: Long\n    ) {\n      deleteShortlinkSnoozeTimer (\n        location: $location\n        awake: $awake\n        id: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        return [4 /*yield*/, this.gqlClient.request(query, args)];
+                    case 1:
+                        response = _a.sent();
+                        console.log('[GQL] deleteShortlinkSnoozeTimer\n', response);
+                        return [2 /*return*/, response.deleteShortlinkSnoozeTimer];
+                }
+            });
+        });
+    };
+    GQLShortlinkQuery.prototype.deleteShortlink = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n    mutation deleteShortlink(\n      $id: String!\n    ) {\n      deleteShortlink (\n        id: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation deleteShortlink(\n      $id: String!\n    ) {\n      deleteShortlink (\n        id: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        return [4 /*yield*/, this.gqlClient.request(query, { id: id })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('[GQL] deleteShortlink\n', response);
+                        return [2 /*return*/, response.deleteShortlink];
+                }
+            });
+        });
+    };
     return GQLShortlinkQuery;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new GQLShortlinkQuery());
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;
 
 
 /***/ }),
@@ -4860,7 +5152,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.tsx");
 /* harmony import */ var _apps_ShortlinkList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../apps/ShortlinkList */ "./src/apps/ShortlinkList/index.tsx");
 /* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../js/utils */ "./src/js/utils.ts");
 
@@ -4917,10 +5209,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_page_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-page.less */ "./src/pages/styles-page.less");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
-/* harmony import */ var _apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apps/ShortlinkBar */ "./src/apps/ShortlinkBar/index.tsx");
-/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
+/* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
+/* harmony import */ var _apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../apps/ShortlinkBar */ "./src/apps/ShortlinkBar/index.tsx");
+/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
 /* harmony import */ var _page_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page-hooks */ "./src/pages/page-hooks.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.tsx");
+
 
 
 
@@ -4932,10 +5226,11 @@ var Home = function () {
     var globalClass = _styles_page_less__WEBPACK_IMPORTED_MODULE_0__["default"].homeClass + '_home';
     var router = (0,_page_hooks__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     var extension = config.target == 'extension' ? (0,_page_hooks__WEBPACK_IMPORTED_MODULE_2__.useExtension)() : undefined;
+    var context = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass) },
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_4__["default"], { router: router, extension: extension }),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Header__WEBPACK_IMPORTED_MODULE_4__["default"], null),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_5__["default"], { router: router, extension: extension, context: context }),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
@@ -5058,7 +5353,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.ts");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.tsx");
 
 
 
@@ -5145,6 +5440,7 @@ var map = {
 	"./svg/icon/google.svg": "./src/assets/svg/icon/google.svg",
 	"./svg/icon/link.svg": "./src/assets/svg/icon/link.svg",
 	"./svg/icon/logout.svg": "./src/assets/svg/icon/logout.svg",
+	"./svg/icon/more.svg": "./src/assets/svg/icon/more.svg",
 	"./svg/icon/search.svg": "./src/assets/svg/icon/search.svg",
 	"./svg/icon/snooze.svg": "./src/assets/svg/icon/snooze.svg",
 	"./svg/logo-compact.svg": "./src/assets/svg/logo-compact.svg",
@@ -6799,7 +7095,7 @@ Detects whether or not elements can be animated using CSS
 /******/ 		        // webpack-livereload-plugin
 /******/ 		        (function() {
 /******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-1fbff887d5cc5471";
+/******/ 		          var id = "webpack-livereload-plugin-script-95587f05d55987a6";
 /******/ 		          if (document.getElementById(id)) { return; }
 /******/ 		          var el = document.createElement("script");
 /******/ 		          el.id = id;
