@@ -81,9 +81,7 @@
     color: @black-100;
   }
 
-  &__logo {display: none; cursor: pointer;}
-  @media @mq-mobile { &__logo_m {display: block; } }
-  @media @mq-not-mobile { &__logo_d {display: block;} }
+  &__logo {display: block; cursor: pointer;}
   @media @mq-mobile {
     &_has-back-button &__logo_wrapper { display: none; }
   }

@@ -18,7 +18,7 @@ const Home : React.FC = () => {
   
   return (
     <div className={`${globalClass}`}>
-      <Header />
+      <Header hideLogo={true} />
       <ShortlinkBar router={ router } extension={ extension } context={ context }/>
       <Footer />
     </div>

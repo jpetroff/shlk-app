@@ -63,7 +63,7 @@ const Button : React.FC<Props> = function(
     } 
 
     if(_.isFunction(args.onClick)) {
-      _.delay(() => args.onClick(event, btnRef.current), 100)
+      args.onClick(event, btnRef.current)
     }
 
     if(config.target == 'extension' && args.href) {

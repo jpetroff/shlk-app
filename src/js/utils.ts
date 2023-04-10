@@ -61,3 +61,11 @@ export function valueByPath(object: AnyObject, path: string[]) : unknown {
     return null
   }
 }
+
+export function DOMContentLoaded(fn: () => void) {
+  if(document.readyState !== 'loading') {
+    _.defer(fn)
+  } else {
+    document.addEventListener('DOMContentLoaded', fn)
+  }
+}

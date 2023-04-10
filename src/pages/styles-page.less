@@ -1,14 +1,8 @@
 @import (reference) '../css/_constants.less';
 
 .mixin-fullscreen-page {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   box-sizing: border-box;
-
-  @media @mq-mobile {
-    height: ~"calc(100% + 3.0625rem)";
-  }
 }
 
 .mixin-centered-content {
@@ -63,6 +57,7 @@
   &__body {
     .mixin-narrow-body;
     justify-content: center;
+    align-items: center;
     margin: 1.25rem 0;
 
     @media @mq-mobile {
@@ -70,27 +65,48 @@
       padding: 1.25rem 0;
     }
   }
+
+  &__login_content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.25rem;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  &__video {
+    width: auto;
+    aspect-ratio: 1200 / 360;
+  }
+
+  &__intro_text {
+    .t-secondary-header_18-24;
+    text-align: center;
+    color: transparent;
+    background-image: linear-gradient(60deg, @red-50 0%, @purple-40 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
 }
 
 :local(.appMainClass)_app-main {
   .mixin-fullscreen-page;
   height: 100vh;
   -webkit-overflow-scrolling: none;
+  overflow: hidden;
 
   @media @mq-mobile {
     box-sizing: border-box;
-    height: auto;
-    min-height: 100%;
-    padding-top: 3.875rem + 7.75rem;
   }
 
   &__layout {
     .mixin-centered-content;
     box-sizing: border-box;
+    height: ~"calc(100vh - 3.875rem)";
+    overflow: hidden;
+
     @media @mq-not-mobile {
       padding: 2rem 0;
-      height: ~"calc(100vh - 3.875rem)";
-      overflow: hidden;
     }
   }
 
@@ -103,7 +119,7 @@
   }
   @media @mq-mobile {
     &__body {
-      height: auto;
+      // height: auto;
       border-radius: 0;
     }
   }

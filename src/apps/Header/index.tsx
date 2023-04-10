@@ -17,17 +17,17 @@ export enum HeaderPosition {
   fixed = 1
 }
 
-
 type Props = {
   backButton?: string
   title?: string
   position?: HeaderPosition
+  hideLogo?: boolean
 }
 
 type State = {}
 
 const Header : React.FC<Props> = (
-  { backButton, title, position } : Props
+  { backButton, title, position, hideLogo } : Props
 ) => {
 	const isMobile: boolean = checkMobileMQ()
   const appContext = React.useContext(AppContext)
@@ -62,10 +62,9 @@ const Header : React.FC<Props> = (
           <div onClick={() => navigate(backButton)}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></div>
         </div>
       )}
-        <div className={`${globalClass}__logo_wrapper`} onClick={() => navigate('/')} >
-          <Logo className={`${globalClass}__logo ${globalClass}__logo_d`} />
-          <LogoC className={`${globalClass}__logo ${globalClass}__logo_m`} />
-        </div>
+        {!hideLogo && <div className={`${globalClass}__logo_wrapper`} onClick={() => navigate('/')} >
+          <LogoC className={`${globalClass}__logo ${globalClass}__logo_compact`} />
+        </div>}
         <div className={`${globalClass}__middle`}>
           {title && (
             <div className={`${globalClass}__title_wrapper`}>
@@ -85,11 +84,11 @@ const Header : React.FC<Props> = (
             }
             {hasLoggedUser && 
               (<>
-                { appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`} style={ { backgroundImage: `url(${appContext.user.avatar})` } }></div> }
-                {!appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`}>{_.first(appContext.user.name.toUpperCase())}</div> }
                 <div className={`${globalClass}__account-link__text`}>
                   {appContext.user.name}
                 </div>
+                { appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`} style={ { backgroundImage: `url(${appContext.user.avatar})` } }></div> }
+                {!appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`}>{_.first(appContext.user.name.toUpperCase())}</div> }
                 <DropdownMenu className={`${globalClass}__dropdown`} onClose={() => setDropdown(false)} show={showDropdown} position={[DropdownPosition.top, DropdownPosition.right]}>
                     <div className={`${globalClass}__dropdown-header`}>
                       { appContext.user?.avatar && 
@@ -116,6 +115,11 @@ const Header : React.FC<Props> = (
         </div>
     </div>
   )
+}
+
+Header.defaultProps = {
+  hideLogo: false,
+  backButton: ''
 }
 
 export default Header

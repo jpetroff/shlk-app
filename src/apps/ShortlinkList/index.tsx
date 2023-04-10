@@ -10,6 +10,7 @@ import RadioGroup from '../../components/radio-group'
 import { NavigateFunction } from 'react-router-dom'
 import DropdownMenu, { DropdownPosition } from '../../components/dropdown-menu'
 import MenuItem from '../../components/menu-item'
+import Scroller from '../../components/scroller'
 import clipboardTools from '../../js/clipboard.tools'
 import linkTools from '../../js/link.tools'
 
@@ -17,7 +18,8 @@ type ShortlinkDisplayListItem = DateGrouped<Partial<ShortlinkDocument>> & {isSub
 
 enum LoadMode {
   append = 'append',
-  replace = 'replace'
+  replace = 'replace',
+  none = 'none'
 }
 
 export enum ShortlinkListSubsection {
@@ -38,6 +40,7 @@ type State = {
   pointer: number
   limit: number
   staleResults: boolean
+  isLoading: LoadMode
   contextMenu: {
     key: number
     top: number
@@ -56,8 +59,9 @@ export default class ShortlinkList extends React.Component<Props, State> {
       groupedShortlinks: [],
       searchQuery: '',
       pointer: 0,
-      limit: props.limit || 30,
+      limit: props.limit || 8,
       staleResults: false,
+      isLoading: LoadMode.none,
       contextMenu: {
         key: -1,
         top: -99999,
@@ -65,7 +69,6 @@ export default class ShortlinkList extends React.Component<Props, State> {
         show: false
       }
     }
-    this.loadShortlinks(LoadMode.append)
     this.contextMenuRef = React.createRef<HTMLDivElement | null>()
     _.bindAll(this, ..._.functions(this))
   }
@@ -76,6 +79,10 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
   onSearchQueryChange(value: string, event: React.SyntheticEvent<any>, isClear: boolean) {
     this.setState({ searchQuery: value, staleResults: true })
+  }
+
+  componentDidMount(): void {
+    this.loadShortlinks(LoadMode.append)
   }
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
@@ -94,6 +101,12 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
   async loadShortlinks(load: LoadMode) {
     let params : AnyObject
+
+    this.setState({
+      isLoading: load,
+      staleResults: load == LoadMode.replace ? true : false
+    })
+
     if(this.getSubsection() == ShortlinkListSubsection.snoozed) {
       params = { 
         search: this.state.searchQuery || undefined,
@@ -110,14 +123,22 @@ export default class ShortlinkList extends React.Component<Props, State> {
         limit: this.state.limit
       }
     }
+
     const result = await shortlinkQueries.getUserShortlinks(params)
-    const groupedResult = this.groupShortlinks(result as ShortlinkDocument[])
+    const newShortlinks = load == LoadMode.replace ? result : Array().concat(this.state.shortlinks, result)
+    const groupedResult = this.groupShortlinks(newShortlinks as ShortlinkDocument[])
   
     this.setState({
       pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
-      shortlinks: load == LoadMode.replace ? result : Array().concat(this.state.shortlinks, result),
+      shortlinks: newShortlinks,
       groupedShortlinks: groupedResult,
-      staleResults: false
+      staleResults: false,
+      isLoading: LoadMode.none
+    })
+
+    _.defer( () => {
+      console.log(load)
+      console.log(this.state.shortlinks)
     })
   }
 
@@ -228,6 +249,16 @@ export default class ShortlinkList extends React.Component<Props, State> {
     clipboardTools.copy(shortlink)
   }
 
+  handleScroll(scrollTop: number, scrollHeight: number, clientHeight: number, direction: number) {
+    const isThreshold : boolean = (scrollTop + clientHeight) > (scrollHeight * 0.96)
+
+    if(
+      isThreshold && 
+      this.state.isLoading == LoadMode.none && 
+      direction > 0
+    ) this.loadShortlinks(LoadMode.append)
+  }
+
   render() {
     const globalClass = `${styles.wrapperClass}_shortlink-list-app`
     const listClasses = classNames({
@@ -235,7 +266,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
       [`${globalClass}_loading`]: this.state.staleResults
     })
     return (
-      <div className={`${listClasses}`}>
+      <div className={`${listClasses}`} >
         <div className={`${globalClass}__search`}>
           <Input 
             onChange={this.onSearchQueryChange}
@@ -253,7 +284,8 @@ export default class ShortlinkList extends React.Component<Props, State> {
             fullWidth={true}
             />
         </div>
-        <div className={`${globalClass}__list`}>
+        <Scroller className={`${globalClass}__scroller`} onScroll={this.handleScroll}>
+          <div className={`${globalClass}__list`}>
           { 
             this.state.groupedShortlinks.map( (item, index, array) => {
               if(item.isSubheader) {
@@ -272,6 +304,15 @@ export default class ShortlinkList extends React.Component<Props, State> {
               }
             })
           }
+          </div>
+          <div className={`${globalClass}__list-footer`}>
+            {this.state.isLoading == LoadMode.append &&  
+              <div className={`${globalClass}__list-footer__loading`}>Loading more…</div>
+            }
+            {this.state.shortlinks.length == 0 && this.state.isLoading == LoadMode.none &&
+              <div className={`${globalClass}__list-footer__empty`}>Nothing found</div>
+            }
+          </div>
           <DropdownMenu
             divRef={this.contextMenuRef}
             show={this.state.contextMenu.show}
@@ -284,7 +325,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
             {this.getSubsection() == ShortlinkListSubsection.snoozed && <MenuItem label='Remove snooze' onClick={this.handleRemoveSnoozeTimer}/>}
             <MenuItem isDisabled={true} label='Edit shortlink' onClick={() => {  } }/>
           </DropdownMenu>
-        </div>
+        </Scroller>
       </div>
     )
   }

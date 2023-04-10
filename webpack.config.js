@@ -147,13 +147,13 @@ module.exports = (env, argv) => {
           Asset loader
         */
         {
-          test: /\.(woff2?|eot|gif|png|jpe?g|webmanifest|xml|svg|ico)$/,
+          test: /\.(woff2?|eot|gif|png|jpe?g|webmanifest|xml|svg|ico|mp4)$/,
           loader: 'file-loader',
           exclude: /assets\/svg/,
           options: {
             esModule: false,
             emitFile: true,
-            name(resourcePath, resourceQuery) {		
+            name(resourcePath, resourceQuery) {
               const newPathBreakdown = path.dirname(resourcePath).split(path.sep)
               const prefixPath = _.rest(newPathBreakdown, _.indexOf(newPathBreakdown, path.basename(sourceDir)) + 1).join(path.sep)
               return `${prefixPath}/[name].[ext]`;

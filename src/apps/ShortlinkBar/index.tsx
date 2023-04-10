@@ -21,6 +21,7 @@ import AppContext from '../../js/app.context'
 
 import { HistoryWidget } from '../History'
 import browserApi from '../../js/browser.api'
+import Video from '../../components/video'
 
 const config = require('../../js/config')
 
@@ -419,6 +420,17 @@ export default class ShortlinkBar extends React.Component<Props, State> {
           <div className={`${globalClass}__layout`}>
             <div className={`${globalClass}__shortlink-block ${mobileConvenienceClass}`}>
               <div className={`${globalClass}__offset-wrapper`}>
+                {!this.state.mobileConvenienceInput && 
+                  <Video
+                    className={`${globalClass}__video`}
+                    thumbnail={`/assets/shlk_logo.jpg`}
+                    src={
+                      [{link:'/assets/shlk_logo.mp4', type:'video/mp4'}]
+                    }
+                    aspectRatio={1200/360}
+                    timeout={1000}
+                    />
+                }
                 <HeroInput 
                   inputRef={this.heroInputRef}
                   onChange={this.updateLocation}
