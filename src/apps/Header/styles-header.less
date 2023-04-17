@@ -1,26 +1,17 @@
 @import (reference) '../../css/_constants.less';
 
 :local(.wrapperClass)_app-header {
-  position: relative;
+  position: fixed;
   padding-top: 1.75rem;
   padding-left: 2rem;
   padding-right: 2rem;
   display: flex;
   background-color: rgba(@black-100, 0.98);
-
-  &_sticky {
-    position: sticky;
-    top: 0;
-    z-index: @z-static-top;
-  }
-
-  &_fixed {
-    position: fixed;
-    top: 0;
-    z-index: @z-static-top;
-    left: 0;
-    right: 0;
-  }
+  position: fixed;
+  top: 0;
+  z-index: @z-static-top;
+  left: 0;
+  right: 0;
 
   @media @mq-mobile {
     padding: 1rem 1.25rem;

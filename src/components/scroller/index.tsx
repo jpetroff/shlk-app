@@ -9,6 +9,7 @@ type Props = {
   padding?: number
   offsetTop?: number
   offsetBottom?: number
+  hideScroll?: boolean
 } & Omit<JSX.IntrinsicElements['div'], 'onScroll'>
 
 const Scroller : React.FC<Props> = (
@@ -31,6 +32,8 @@ const Scroller : React.FC<Props> = (
     const scrollTop = contentRef.current.scrollTop
     const scrollHeight = contentRef.current.scrollHeight
     const clientHeight = contentRef.current.clientHeight
+
+    if(args.hideScroll) return
 
     if(_.isFunction(args.onScroll) && event) args.onScroll(scrollTop, scrollHeight, clientHeight, scrollTop - scrollPos)
 

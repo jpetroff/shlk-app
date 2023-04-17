@@ -7,10 +7,12 @@ import Input from '../../components/input'
 import Button, { ButtonSize, ButtonType } from '../../components/button'
 import users from '../../js/user.gql'
 import Snackbar from '../../components/snackbar'
+import Link from '../../components/link'
 
 type Props = {
   router?: PageRouterProps
   context: React.ContextType<typeof AppContext>
+  className?: string
 }
 
 type State = {
@@ -83,7 +85,8 @@ export default class UserSettings extends React.Component<Props, State> {
   render() {
     const globalClass = `${styles.wrapperClass}_user-settings`
     const userSettingsClasses = classNames({
-      [`${globalClass}`]: true
+      [`${globalClass}`]: true,
+      [`${this.props.className}`]: !!this.props.className
     })
     return (
       <div className={`${userSettingsClasses}`}>
@@ -111,6 +114,12 @@ export default class UserSettings extends React.Component<Props, State> {
             onChange={(value, event) => this.setState( {userTag: value} ) }
             />
         </div>
+        <div className={`${globalClass}__download`}>
+          <span className={`${globalClass}__download__label`}>Install browser extension:</span>
+          <Link href={``} className={`${globalClass}__download__link`} >
+            <img src={`/assets/chrome_store.jpg`} srcSet={`/assets/chrome_store@2x.jpg 2x`} className={`${globalClass}__download__link-content`} />
+          </Link>
+        </div>
         <div className={`${globalClass}__submit`}>
           <Button 
             isDisabled={this.saveDisabled()}
@@ -119,6 +128,7 @@ export default class UserSettings extends React.Component<Props, State> {
             type={ButtonType.PRIMARY}
             label='Save profile settings'
             onClick={this.handleSave}
+            fullWidth={true}
             />
         </div>
         <div className={`${globalClass}__snackbar-container`}>

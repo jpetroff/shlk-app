@@ -22,6 +22,7 @@ import AppContext from '../../js/app.context'
 import { HistoryWidget } from '../History'
 import browserApi from '../../js/browser.api'
 import Video from '../../components/video'
+import Footer from '../../apps/Footer'
 
 const config = require('../../js/config')
 
@@ -34,6 +35,7 @@ type Props = {
   router?: PageRouterProps
   extension?: PageExtensionProps,
   context?: React.ContextType<typeof AppContext>
+  onToggleHeaderDisplay?: (visible: boolean) => void
 }
 
 type State = {
@@ -371,6 +373,8 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   private _setMobileConvenienceInput(mode: boolean) {
     if(checkMobileMQ() && this.state.mobileConvenienceInput != mode) {
       this.setState({ mobileConvenienceInput: mode })
+      if(_.isFunction(this.props.onToggleHeaderDisplay)) this.props.onToggleHeaderDisplay(mode)
+      _.delay(() => document.body.scrollTo(0,0), 1000)
     }
   }
 
@@ -493,6 +497,8 @@ export default class ShortlinkBar extends React.Component<Props, State> {
               <HistoryWidget list={this.state.cachedShortlinks} totalCount={this.state.cachedShortlinks.length} />
             </div>
           </div>
+          
+          <Footer />
         </div>
     )
   }

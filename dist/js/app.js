@@ -11,6 +11,26 @@ module.exports = __webpack_require__.p + "/manifest.json";
 
 /***/ }),
 
+/***/ "./src/assets/chrome_store.jpg":
+/*!*************************************!*\
+  !*** ./src/assets/chrome_store.jpg ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/chrome_store.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/chrome_store@2x.jpg":
+/*!****************************************!*\
+  !*** ./src/assets/chrome_store@2x.jpg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/chrome_store@2x.jpg";
+
+/***/ }),
+
 /***/ "./src/assets/default-favicon.png":
 /*!****************************************!*\
   !*** ./src/assets/default-favicon.png ***!
@@ -701,7 +721,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"homeClass":"MfCsBhGn6M2PdP_exAlg","loginClass":"oU7PEn8gl5r2vm5AA4Ko","appMainClass":"QMDj2SeFg1FU8zxpOFDV","profileClass":"nS6xAe3LW4__tO4iOinK"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"homeClass":"MfCsBhGn6M2PdP_exAlg","loginClass":"oU7PEn8gl5r2vm5AA4Ko","appMainClass":"QMDj2SeFg1FU8zxpOFDV","profileClass":"nS6xAe3LW4__tO4iOinK","legalClass":"FXZGPs8zbsN_YlGlU5Ve"});
 
 /***/ }),
 
@@ -1112,13 +1132,13 @@ var Footer = function () {
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__wrapper") },
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass) },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__item") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement((_assets_svg_flag_fi_16_svg__WEBPACK_IMPORTED_MODULE_2___default()), { className: "".concat(globalClass, "__flag-icon") }),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", null, "Valmistettu Suomessa")),
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__item") },
                 "Personal project by ",
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_4__["default"], { href: "https://portfolio.designpr.one" }, "designpr.one"),
                 "\u00B7 PP Mori typeface ",
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement((_assets_svg_w_love_14_svg__WEBPACK_IMPORTED_MODULE_3___default()), { className: "".concat(globalClass, "__with-love-icon") })))));
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement((_assets_svg_w_love_14_svg__WEBPACK_IMPORTED_MODULE_3___default()), { className: "".concat(globalClass, "__with-love-icon") })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__item") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement((_assets_svg_flag_fi_16_svg__WEBPACK_IMPORTED_MODULE_2___default()), { className: "".concat(globalClass, "__flag-icon") }),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", null, "Valmistettu Suomessa")))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
 
@@ -1144,12 +1164,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
 /* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
-/* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/link */ "./src/components/link/index.tsx");
-/* harmony import */ var _components_dropdown_menu__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/dropdown-menu */ "./src/components/dropdown-menu/index.tsx");
-/* harmony import */ var _components_menu_item__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/menu-item */ "./src/components/menu-item/index.tsx");
+/* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/link */ "./src/components/link/index.tsx");
+/* harmony import */ var _components_dropdown_menu__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/dropdown-menu */ "./src/components/dropdown-menu/index.tsx");
+/* harmony import */ var _components_menu_item__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/menu-item */ "./src/components/menu-item/index.tsx");
+/* harmony import */ var _js_browser_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../js/browser.api */ "./src/js/browser.api.ts");
+/* harmony import */ var _js_config__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/config */ "./src/js/config.js");
+/* harmony import */ var _js_config__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_js_config__WEBPACK_IMPORTED_MODULE_7__);
+
+
 
 
 
@@ -1193,28 +1218,37 @@ var Header = function (_a) {
             navigate(loginLink);
         }
     }
+    function handleLogoutClick() {
+        if ((_js_config__WEBPACK_IMPORTED_MODULE_7___default().target) == 'extension') {
+            _js_browser_api__WEBPACK_IMPORTED_MODULE_8__["default"].openExternal("".concat((_js_config__WEBPACK_IMPORTED_MODULE_7___default().serviceUrl), "/logout"));
+        }
+        else {
+            window.location.href = '/logout';
+            setDropdown(false);
+        }
+    }
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(headerClasses) },
         backButton && (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__back_wrapper") },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { onClick: function () { return navigate(backButton); } },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_7__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_7__.IconSize.LARGE })))),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_9__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_9__.IconSize.LARGE })))),
         !hideLogo && react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__logo_wrapper"), onClick: function () { return navigate('/'); } },
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_7__.LogoC, { className: "".concat(globalClass, "__logo ").concat(globalClass, "__logo_compact") })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_9__.LogoC, { className: "".concat(globalClass, "__logo ").concat(globalClass, "__logo_compact") })),
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__middle") }, title && (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__title_wrapper") },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__sub-header") }, "shlk.cc"),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", { className: "".concat(globalClass, "__header") }, title)))),
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__user") },
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_8__["default"], { className: "".concat(globalClass, "__account-link"), isDisabled: false, onClick: handleLoginClick },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_10__["default"], { className: "".concat(globalClass, "__account-link"), isDisabled: false, onClick: handleLoginClick },
                 !hasLoggedUser &&
                     (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null,
                         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__account-link__avatar") },
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_7__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.Avatar, size: _components_icons__WEBPACK_IMPORTED_MODULE_7__.IconSize.LARGE })),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_9__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.Avatar, size: _components_icons__WEBPACK_IMPORTED_MODULE_9__.IconSize.LARGE })),
                         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__account-link__text") }, "Sign in"))),
                 hasLoggedUser &&
                     (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null,
                         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__account-link__text") }, appContext.user.name),
                         appContext.user.avatar && react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__account-link__avatar"), style: { backgroundImage: "url(".concat(appContext.user.avatar, ")") } }),
                         !appContext.user.avatar && react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__account-link__avatar") }, underscore__WEBPACK_IMPORTED_MODULE_2__.first(appContext.user.name.toUpperCase())),
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_9__["default"], { className: "".concat(globalClass, "__dropdown"), onClose: function () { return setDropdown(false); }, show: showDropdown, position: [_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_9__.DropdownPosition.top, _components_dropdown_menu__WEBPACK_IMPORTED_MODULE_9__.DropdownPosition.right] },
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_11__["default"], { className: "".concat(globalClass, "__dropdown"), onClose: function () { return setDropdown(false); }, show: showDropdown, position: [_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_11__.DropdownPosition.top, _components_dropdown_menu__WEBPACK_IMPORTED_MODULE_11__.DropdownPosition.right] },
                             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__dropdown-header") },
                                 ((_d = appContext.user) === null || _d === void 0 ? void 0 : _d.avatar) &&
                                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__dropdown-header__avatar"), style: { backgroundImage: "url(".concat(appContext.user.avatar, ")") } }),
@@ -1223,12 +1257,12 @@ var Header = function (_a) {
                                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__dropdown-header__name-block") },
                                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__dropdown-header__name-block__name") }, appContext.user.name),
                                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__dropdown-header__name-block__email") }, appContext.user.email))),
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_10__["default"].Separator, null),
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_10__["default"], { label: 'My shortlinks', icon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.LinkIcon, onClick: function () { navigate('/app'); setDropdown(false); } }),
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_10__["default"], { label: 'Snoozed links', icon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.Snooze, onClick: function () { navigate('/app/snoozed'); setDropdown(false); } }),
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_10__["default"], { label: 'Profile', icon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.Avatar, onClick: function () { navigate('/app/profile'); setDropdown(false); } }),
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_10__["default"].Separator, null),
-                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_10__["default"], { label: 'Logout', icon: _components_icons__WEBPACK_IMPORTED_MODULE_7__.Logout, onClick: function () { window.location.href = '/logout'; setDropdown(false); } }))))))));
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"].Separator, null),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { label: 'My shortlinks', icon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.LinkIcon, onClick: function () { navigate('/app'); setDropdown(false); } }),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { label: 'Snoozed links', icon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.Snooze, onClick: function () { navigate('/app/snoozed'); setDropdown(false); } }),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { label: 'Profile', icon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.Avatar, onClick: function () { navigate('/app/profile'); setDropdown(false); } }),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"].Separator, null),
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_12__["default"], { label: 'Logout', icon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.Logout, onClick: handleLogoutClick }))))))));
 };
 Header.defaultProps = {
     hideLogo: false,
@@ -1403,10 +1437,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _js_cache__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/cache */ "./src/js/cache.ts");
 /* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./errors */ "./src/apps/ShortlinkBar/errors.ts");
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
 /* harmony import */ var _History__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../History */ "./src/apps/History/index.tsx");
 /* harmony import */ var _js_browser_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../js/browser.api */ "./src/js/browser.api.ts");
 /* harmony import */ var _components_video__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/video */ "./src/components/video/index.tsx");
+/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../apps/Footer */ "./src/apps/Footer/index.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1479,6 +1514,7 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 /* eslint-disable @typescript-eslint/ban-types */
+
 
 
 
@@ -1849,6 +1885,9 @@ var ShortlinkBar = /** @class */ (function (_super) {
     ShortlinkBar.prototype._setMobileConvenienceInput = function (mode) {
         if ((0,_js_utils__WEBPACK_IMPORTED_MODULE_4__.checkMobileMQ)() && this.state.mobileConvenienceInput != mode) {
             this.setState({ mobileConvenienceInput: mode });
+            if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(this.props.onToggleHeaderDisplay))
+                this.props.onToggleHeaderDisplay(mode);
+            underscore__WEBPACK_IMPORTED_MODULE_2__.delay(function () { return document.body.scrollTo(0, 0); }, 1000);
         }
     };
     ShortlinkBar.prototype._onHeroInputElementFocus = function (event) {
@@ -1925,12 +1964,13 @@ var ShortlinkBar = /** @class */ (function (_super) {
                         this.state.successState.successMessage &&
                             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_15__["default"], { message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__footer-wrapper") },
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_History__WEBPACK_IMPORTED_MODULE_16__.HistoryWidget, { list: this.state.cachedShortlinks, totalCount: this.state.cachedShortlinks.length })))));
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_History__WEBPACK_IMPORTED_MODULE_16__.HistoryWidget, { list: this.state.cachedShortlinks, totalCount: this.state.cachedShortlinks.length }))),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_17__["default"], null)));
     };
     return ShortlinkBar;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShortlinkBar);
-ShortlinkBar.contextType = _js_app_context__WEBPACK_IMPORTED_MODULE_17__["default"];
+ShortlinkBar.contextType = _js_app_context__WEBPACK_IMPORTED_MODULE_18__["default"];
 
 
 /***/ }),
@@ -2292,24 +2332,25 @@ var ShortlinkList = /** @class */ (function (_super) {
                         { label: 'Snoozed links', key: ShortlinkListSubsection.snoozed }
                     ], value: this.getSubsection(), onChange: function (key) { _this.handleInternalNavigate(key); }, fullWidth: true })),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_scroller__WEBPACK_IMPORTED_MODULE_10__["default"], { className: "".concat(globalClass, "__scroller"), onScroll: this.handleScroll },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list") }, this.state.groupedShortlinks.map(function (item, index, array) {
-                    if (item.isSubheader) {
-                        return react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { key: index, className: "".concat(globalClass, "__subheader") }, item.group);
-                    }
-                    else {
-                        return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_list_item__WEBPACK_IMPORTED_MODULE_11__["default"], __assign({ key: index, timestamp: item.timestamp }, underscore__WEBPACK_IMPORTED_MODULE_2__.omit(item, 'hash', 'location'), { hash: item.hash, location: item.location, onCopyClick: function () { return _this.handleCopyClick(item.originalIndex); }, onContextClick: function (elem) { _this.handleContextClick(item.originalIndex, elem); } })));
-                    }
-                })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list") },
+                    this.state.groupedShortlinks.map(function (item, index, array) {
+                        if (item.isSubheader) {
+                            return react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { key: index, className: "".concat(globalClass, "__subheader") }, item.group);
+                        }
+                        else {
+                            return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_shortlink_list_item__WEBPACK_IMPORTED_MODULE_11__["default"], __assign({ key: index, timestamp: item.timestamp }, underscore__WEBPACK_IMPORTED_MODULE_2__.omit(item, 'hash', 'location'), { hash: item.hash, location: item.location, onCopyClick: function () { return _this.handleCopyClick(item.originalIndex); }, onContextClick: function (elem) { _this.handleContextClick(item.originalIndex, elem); } })));
+                        }
+                    }),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_12__["default"], { divRef: this.contextMenuRef, show: this.state.contextMenu.show, onClose: this.resetContextMenu, onEnter: this.handleContextPortal, style: { top: this.state.contextMenu.top, left: this.state.contextMenu.left } },
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"], { label: 'Delete', onClick: this.handleDeleteShortlink }),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"].Separator, null),
+                        this.getSubsection() == ShortlinkListSubsection.snoozed && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"], { label: 'Remove snooze', onClick: this.handleRemoveSnoozeTimer }),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"], { isDisabled: true, label: 'Edit shortlink', onClick: function () { } }))),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list-footer") },
                     this.state.isLoading == LoadMode.append &&
                         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list-footer__loading") }, "Loading more\u2026"),
                     this.state.shortlinks.length == 0 && this.state.isLoading == LoadMode.none &&
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list-footer__empty") }, "Nothing found")),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_dropdown_menu__WEBPACK_IMPORTED_MODULE_12__["default"], { divRef: this.contextMenuRef, show: this.state.contextMenu.show, onClose: this.resetContextMenu, onEnter: this.handleContextPortal, style: { top: this.state.contextMenu.top, left: this.state.contextMenu.left } },
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"], { label: 'Delete', onClick: this.handleDeleteShortlink }),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"].Separator, null),
-                    this.getSubsection() == ShortlinkListSubsection.snoozed && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"], { label: 'Remove snooze', onClick: this.handleRemoveSnoozeTimer }),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_13__["default"], { isDisabled: true, label: 'Edit shortlink', onClick: function () { } })))));
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__list-footer__empty") }, "Nothing found")))));
     };
     return ShortlinkList;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
@@ -2336,9 +2377,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/input */ "./src/components/input/index.tsx");
-/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/button */ "./src/components/button/index.tsx");
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/button */ "./src/components/button/index.tsx");
 /* harmony import */ var _js_user_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/user.gql */ "./src/js/user.gql.ts");
-/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
+/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
+/* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/link */ "./src/components/link/index.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2399,6 +2441,7 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+
 
 
 
@@ -2476,6 +2519,7 @@ var UserSettings = /** @class */ (function (_super) {
         var globalClass = "".concat(_styles_user_settings_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass, "_user-settings");
         var userSettingsClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_a = {},
             _a["".concat(globalClass)] = true,
+            _a["".concat(this.props.className)] = !!this.props.className,
             _a));
         return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(userSettingsClasses) },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__header") },
@@ -2490,13 +2534,17 @@ var UserSettings = /** @class */ (function (_super) {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__field") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", { htmlFor: 'slug-input-field', className: "".concat(globalClass, "__field__label") }, "Choose a slug:"),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__field__input"), id: 'slug-input-field', value: this.state.userTag, onChange: function (value, event) { return _this.setState({ userTag: value }); } })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__download") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__download__label") }, "Install browser extension:"),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_6__["default"], { href: "", className: "".concat(globalClass, "__download__link") },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("img", { src: "/assets/chrome_store.jpg", srcSet: "/assets/chrome_store@2x.jpg 2x", className: "".concat(globalClass, "__download__link-content") }))),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__submit") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { isDisabled: this.saveDisabled(), isLoading: this.state.savingInProgress, size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY, label: 'Save profile settings', onClick: this.handleSave })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_7__["default"], { isDisabled: this.saveDisabled(), isLoading: this.state.savingInProgress, size: _components_button__WEBPACK_IMPORTED_MODULE_7__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_7__.ButtonType.PRIMARY, label: 'Save profile settings', onClick: this.handleSave, fullWidth: true })),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") },
                 this.state.errorState.errorMessage &&
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__profile-error"), message: this.state.errorState.errorMessage, canDismiss: true, onDismiss: this._clearErrorState }),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_8__["default"], { className: "".concat(globalClass, "__profile-error"), message: this.state.errorState.errorMessage, canDismiss: true, onDismiss: this._clearErrorState }),
                 this.state.successState.successMessage &&
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__profile-success"), message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))));
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_8__["default"], { className: "".concat(globalClass, "__profile-success"), message: this.state.successState.successMessage, canDismiss: true, timer: 2000, onDismiss: this._clearSuccessState }))));
     };
     return UserSettings;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
@@ -2522,12 +2570,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tooltip */ "./src/components/tooltip/index.tsx");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
-/* harmony import */ var _js_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/config */ "./src/js/config.js");
-/* harmony import */ var _js_config__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_js_config__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _js_browser_api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/browser.api */ "./src/js/browser.api.ts");
-/* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
+/* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tooltip */ "./src/components/tooltip/index.tsx");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var _js_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/config */ "./src/js/config.js");
+/* harmony import */ var _js_config__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_js_config__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _js_browser_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/browser.api */ "./src/js/browser.api.ts");
+/* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -2548,6 +2598,7 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 
+
 var ButtonSize;
 (function (ButtonSize) {
     ButtonSize["LARGE"] = "large";
@@ -2559,20 +2610,22 @@ var ButtonType;
     ButtonType["GHOST"] = "ghost";
     ButtonType["SECONDARY"] = "secondary";
 })(ButtonType || (ButtonType = {}));
-var BtnIcnMap = underscore__WEBPACK_IMPORTED_MODULE_2__.object([ButtonSize.LARGE, ButtonSize.SMALL,], [_icons__WEBPACK_IMPORTED_MODULE_3__.IconSize.LARGE, _icons__WEBPACK_IMPORTED_MODULE_3__.IconSize.SMALL,]);
+var BtnIcnMap = underscore__WEBPACK_IMPORTED_MODULE_2__.object([ButtonSize.LARGE, ButtonSize.SMALL,], [_icons__WEBPACK_IMPORTED_MODULE_4__.IconSize.LARGE, _icons__WEBPACK_IMPORTED_MODULE_4__.IconSize.SMALL,]);
 var Button = function (args) {
-    var _a = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false), showFlyover = _a[0], setShowFlyover = _a[1];
+    var _a;
+    var _b = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false), showFlyover = _b[0], setShowFlyover = _b[1];
     var globalClass = _styles_button_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass + '_button';
-    var buttonClassMods = [];
-    buttonClassMods.push(globalClass + '_' + args.size);
-    buttonClassMods.push(globalClass + '_' + args.type);
-    if (args.isDisabled || args.isLoading)
-        buttonClassMods.push(globalClass + '_disabled');
-    if (args.isLoading)
-        buttonClassMods.push(globalClass + '_loading');
-    if (!args.label && args.icon)
-        buttonClassMods.push(globalClass + '_icon-only');
-    var htmlAnchorProps = underscore__WEBPACK_IMPORTED_MODULE_2__.omit(args, 'size', 'type', 'isDisabled', 'isCaret', 'label', 'icon', 'isLoading', 'onClick');
+    var buttonClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_a = {},
+        _a["".concat(globalClass)] = true,
+        _a["".concat(globalClass, "_").concat(args.size)] = true,
+        _a["".concat(globalClass, "_").concat(args.type)] = true,
+        _a["".concat(globalClass, "_disabled")] = args.isDisabled || args.isLoading,
+        _a["".concat(globalClass, "_loading")] = args.isDisabled || args.isLoading,
+        _a["".concat(globalClass, "_icon-only")] = !args.label && args.icon,
+        _a["".concat(globalClass, "_full-width")] = args.fullWidth,
+        _a["".concat(args.className)] = !!args.className,
+        _a));
+    var htmlAnchorProps = underscore__WEBPACK_IMPORTED_MODULE_2__.omit(args, 'size', 'type', 'isDisabled', 'isCaret', 'label', 'icon', 'isLoading', 'onClick', 'fullWidth', 'flyover', 'tooltip');
     var btnRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
     var handleClick = function (event) {
         if (args.isDisabled || args.isLoading) {
@@ -2583,24 +2636,32 @@ var Button = function (args) {
         if (underscore__WEBPACK_IMPORTED_MODULE_2__.isFunction(args.onClick)) {
             args.onClick(event, btnRef.current);
         }
-        if ((_js_config__WEBPACK_IMPORTED_MODULE_4___default().target) == 'extension' && args.href) {
+        if ((_js_config__WEBPACK_IMPORTED_MODULE_5___default().target) == 'extension' && args.href) {
             event.preventDefault();
-            var fullUrl = new URL(args.href, _js_link_tools__WEBPACK_IMPORTED_MODULE_5__["default"].baseUrl);
-            _js_browser_api__WEBPACK_IMPORTED_MODULE_6__["default"].openExternal(fullUrl.toString());
+            var fullUrl = new URL(args.href, _js_link_tools__WEBPACK_IMPORTED_MODULE_6__["default"].baseUrl);
+            _js_browser_api__WEBPACK_IMPORTED_MODULE_7__["default"].openExternal(fullUrl.toString());
         }
         if (args.flyover)
             setShowFlyover(true);
     };
-    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", __assign({}, htmlAnchorProps, { className: "".concat(args.className || '', " ").concat(globalClass, " ").concat(buttonClassMods.join(' ')), onClick: handleClick, ref: btnRef }),
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", __assign({}, htmlAnchorProps, { className: "".concat(buttonClasses), onClick: handleClick, ref: btnRef }),
         args.icon &&
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "".concat(globalClass, "__icon"), useIcon: args.icon, size: BtnIcnMap[args.size] || _icons__WEBPACK_IMPORTED_MODULE_3__.IconSize.SMALL }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__icon"), useIcon: args.icon, size: BtnIcnMap[args.size] || _icons__WEBPACK_IMPORTED_MODULE_4__.IconSize.SMALL }),
         args.label &&
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__label") },
                 args.label,
                 args.icon ? react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, "\u00A0") : ''),
         args.isCaret &&
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__["default"], { useIcon: _icons__WEBPACK_IMPORTED_MODULE_3__.CaretRight, size: _icons__WEBPACK_IMPORTED_MODULE_3__.IconSize.SMALL }),
-        args.flyover && showFlyover && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_7__.Flyover, { label: args.flyover, onDone: function () { return setShowFlyover(false); } })));
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_icons__WEBPACK_IMPORTED_MODULE_4__["default"], { useIcon: _icons__WEBPACK_IMPORTED_MODULE_4__.CaretRight, size: _icons__WEBPACK_IMPORTED_MODULE_4__.IconSize.SMALL }),
+        args.flyover && showFlyover && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_8__.Flyover, { label: args.flyover, onDone: function () { return setShowFlyover(false); } })));
+};
+Button.defaultProps = {
+    size: ButtonSize.SMALL,
+    type: ButtonType.PRIMARY,
+    isDisabled: false,
+    isLoading: false,
+    isCaret: false,
+    fullWidth: false
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button);
 
@@ -3293,6 +3354,8 @@ var Scroller = function (args) {
         var scrollTop = contentRef.current.scrollTop;
         var scrollHeight = contentRef.current.scrollHeight;
         var clientHeight = contentRef.current.clientHeight;
+        if (args.hideScroll)
+            return;
         if (underscore__WEBPACK_IMPORTED_MODULE_3__.isFunction(args.onScroll) && event)
             args.onScroll(scrollTop, scrollHeight, clientHeight, scrollTop - scrollPos);
         if (scrollHeight <= clientHeight) {
@@ -3796,15 +3859,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
-
 
 
 
 
 var Video = function (_a) {
     var _b;
-    var src = _a.src, thumbnail = _a.thumbnail, width = _a.width, height = _a.height, className = _a.className, aspectRatio = _a.aspectRatio, timeout = _a.timeout;
+    var src = _a.src, thumbnail = _a.thumbnail, width = _a.width, height = _a.height, className = _a.className, aspectRatio = _a.aspectRatio, timeout = _a.timeout, muted = _a.muted;
     var _c = react__WEBPACK_IMPORTED_MODULE_2__.useState(false), loaded = _c[0], setLoaded = _c[1];
     var videoNode = react__WEBPACK_IMPORTED_MODULE_2__.useRef();
     var globalClass = "".concat(_styles_video_less__WEBPACK_IMPORTED_MODULE_1__["default"].wrapperClass, "_video");
@@ -3813,29 +3874,30 @@ var Video = function (_a) {
         _b["".concat(className)] = !!className,
         _b));
     var initLazyVideo = function () {
+        setLoaded(true);
+        underscore__WEBPACK_IMPORTED_MODULE_3__.defer(function () {
+            var _a;
+            (_a = videoNode === null || videoNode === void 0 ? void 0 : videoNode.current) === null || _a === void 0 ? void 0 : _a.load();
+        });
         underscore__WEBPACK_IMPORTED_MODULE_3__.delay(function () {
             var _a;
-            setLoaded(true);
-            (_a = videoNode === null || videoNode === void 0 ? void 0 : videoNode.current) === null || _a === void 0 ? void 0 : _a.load();
-            // _.defer( () => videoNode?.current?.load() )
+            (_a = videoNode === null || videoNode === void 0 ? void 0 : videoNode.current) === null || _a === void 0 ? void 0 : _a.play();
         }, timeout);
     };
     react__WEBPACK_IMPORTED_MODULE_2__.useEffect(function () {
         if (!loaded)
-            (0,_js_utils__WEBPACK_IMPORTED_MODULE_4__.DOMContentLoaded)(initLazyVideo);
-        return function () {
-            document.removeEventListener('DOMContentLoaded', initLazyVideo);
-        };
+            underscore__WEBPACK_IMPORTED_MODULE_3__.defer(initLazyVideo);
     });
     var responsiveVideoClass = !(width && height) && aspectRatio ? "".concat(globalClass, "__video-node_responsive") : '';
     var inlineStyle = aspectRatio ? { aspectRatio: aspectRatio } : {};
     return (react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(videoClasses) }, src.length > 0 &&
-        react__WEBPACK_IMPORTED_MODULE_2__.createElement("video", { poster: thumbnail, ref: videoNode, className: "".concat(globalClass, "__video-node ").concat(responsiveVideoClass), autoPlay: true, muted: true, controls: false, preload: "none", playsInline: true, height: height, width: width, style: inlineStyle }, src.map(function (sourceObj, key) {
+        react__WEBPACK_IMPORTED_MODULE_2__.createElement("video", { poster: thumbnail, ref: videoNode, className: "".concat(globalClass, "__video-node ").concat(responsiveVideoClass), autoPlay: false, muted: muted, controls: false, preload: "none", playsInline: true, height: height, width: width, style: inlineStyle }, src.map(function (sourceObj, key) {
             return react__WEBPACK_IMPORTED_MODULE_2__.createElement("source", { src: loaded ? sourceObj.link : '', type: sourceObj.type, key: key });
         }))));
 };
 Video.defaultProps = {
-    timeout: 100
+    timeout: 100,
+    muted: true
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Video);
 
@@ -4192,7 +4254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.webapp.ts");
+/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.extension.ts");
 /* harmony import */ var _link_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _shortlink_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/js/utils.ts");
@@ -4834,10 +4896,10 @@ var LinkTools = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/js/proxy-storage.webapp.ts":
-/*!****************************************!*\
-  !*** ./src/js/proxy-storage.webapp.ts ***!
-  \****************************************/
+/***/ "./src/js/proxy-storage.extension.ts":
+/*!*******************************************!*\
+  !*** ./src/js/proxy-storage.extension.ts ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4900,51 +4962,64 @@ var proxyStorage = {
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
-                result = window.localStorage.getItem(key);
-                return [2 /*return*/, result || null];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage.sync.get([key])];
+                    case 1:
+                        result = _a.sent();
+                        console.log(key, result);
+                        return [2 /*return*/, result[key]];
+                }
             });
         });
     },
     setItem: function (key, value) {
         return __awaiter(this, void 0, void 0, function () {
+            var newItem;
             return __generator(this, function (_a) {
-                window.localStorage.setItem(key, value);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        newItem = {};
+                        newItem[key] = value;
+                        return [4 /*yield*/, chrome.storage.sync.set(newItem)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
-    },
-    canUse: function () {
-        if (window.localStorage)
-            return true;
-        return false;
     },
     getAllItems: function (parse) {
         if (parse === void 0) { parse = true; }
         return __awaiter(this, void 0, void 0, function () {
-            var result, keys;
+            var result, objResult;
             return __generator(this, function (_a) {
-                result = [];
-                keys = underscore__WEBPACK_IMPORTED_MODULE_0__.keys(window.localStorage);
-                underscore__WEBPACK_IMPORTED_MODULE_0__.each(keys, function (key) {
-                    var retrievedItem = window.localStorage.getItem(key);
-                    if (parse) {
-                        try {
-                            result.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
-                        }
-                        catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
-                    }
-                    else {
-                        result.push(retrievedItem);
-                    }
-                });
-                return [2 /*return*/, result];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage.sync.get()];
+                    case 1:
+                        result = _a.sent();
+                        if (!parse)
+                            return [2 /*return*/, underscore__WEBPACK_IMPORTED_MODULE_0__.values(result)];
+                        objResult = [];
+                        underscore__WEBPACK_IMPORTED_MODULE_0__.each(result, function (retrievedItem, key) {
+                            try {
+                                objResult.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
+                            }
+                            catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
+                        });
+                        return [2 /*return*/, objResult];
+                }
             });
         });
+    },
+    canUse: function () {
+        if (chrome.storage.sync)
+            return true;
+        return false;
     },
     removeItem: function (key) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                window.localStorage.removeItem(key);
+                chrome.storage.sync.remove(key);
                 return [2 /*return*/];
             });
         });
@@ -4975,10 +5050,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/login */ "./src/pages/login.tsx");
 /* harmony import */ var _pages_app_main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/app-main */ "./src/pages/app-main.tsx");
 /* harmony import */ var _pages_profile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/profile */ "./src/pages/profile.tsx");
+/* harmony import */ var _pages_legal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/legal */ "./src/pages/legal.tsx");
 
 
 
 /* PAGES */
+
 
 
 
@@ -5005,6 +5082,10 @@ function createRouter() {
         {
             path: '/app/profile',
             element: (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_profile__WEBPACK_IMPORTED_MODULE_6__["default"], null))
+        },
+        {
+            path: '/privacy-policy',
+            element: (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_legal__WEBPACK_IMPORTED_MODULE_7__["default"], null))
         }
     ]);
     return router;
@@ -5476,10 +5557,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
-/* harmony import */ var _apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../apps/ShortlinkBar */ "./src/apps/ShortlinkBar/index.tsx");
-/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
+/* harmony import */ var _apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../apps/ShortlinkBar */ "./src/apps/ShortlinkBar/index.tsx");
 /* harmony import */ var _page_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page-hooks */ "./src/pages/page-hooks.ts");
 /* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.tsx");
+/* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/scroller */ "./src/components/scroller/index.tsx");
 
 
 
@@ -5489,16 +5570,161 @@ __webpack_require__.r(__webpack_exports__);
 
 var config = __webpack_require__(/*! ../js/config */ "./src/js/config.js");
 var Home = function () {
+    var _a = react__WEBPACK_IMPORTED_MODULE_1__.useState(true), visibleHeader = _a[0], setVisibleHeader = _a[1];
     var globalClass = _styles_page_less__WEBPACK_IMPORTED_MODULE_0__["default"].homeClass + '_home';
     var router = (0,_page_hooks__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     var extension = config.target == 'extension' ? (0,_page_hooks__WEBPACK_IMPORTED_MODULE_2__.useExtension)() : undefined;
     var context = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
-    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass) },
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Header__WEBPACK_IMPORTED_MODULE_4__["default"], { hideLogo: true }),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_5__["default"], { router: router, extension: extension, context: context }),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, " ").concat(visibleHeader ? "" : "".concat(globalClass, "_no-header")) },
+        visibleHeader && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Header__WEBPACK_IMPORTED_MODULE_4__["default"], { hideLogo: true }),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_scroller__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__body"), hideScroll: true },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_ShortlinkBar__WEBPACK_IMPORTED_MODULE_6__["default"], { router: router, extension: extension, context: context, onToggleHeaderDisplay: function (notVisible) { return setVisibleHeader(!notVisible); } }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
+
+
+/***/ }),
+
+/***/ "./src/pages/legal.tsx":
+/*!*****************************!*\
+  !*** ./src/pages/legal.tsx ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _styles_page_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-page.less */ "./src/pages/styles-page.less");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/link */ "./src/components/link/index.tsx");
+/* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
+/* harmony import */ var _page_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page-hooks */ "./src/pages/page-hooks.ts");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/scroller */ "./src/components/scroller/index.tsx");
+
+
+
+
+
+
+
+
+var Legal = function () {
+    var globalClass = _styles_page_less__WEBPACK_IMPORTED_MODULE_0__["default"].legalClass + '_legal';
+    var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
+    var router = (0,_page_hooks__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass) },
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Header__WEBPACK_IMPORTED_MODULE_4__["default"], { backButton: '/', title: 'Privacy policy' }),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__layout") },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__body") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_5__["default"], { onClick: function () { return navigate(-1); }, className: "narrow-body__back-button" },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_6__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_6__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_6__.IconSize.LARGE })),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_scroller__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__scroller") },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__legal-content") },
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Last updated: April 17, 2023"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the\u00A0Free Privacy Policy Generator."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Interpretation and Definitions"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Interpretation"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Definitions"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "For the purposes of this Privacy Policy:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Account\u00A0means a unique account created for You to access our Service or parts of our Service."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Affiliate\u00A0means an entity that controls, is controlled by or is under common control with a party, where \"control\" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Company\u00A0(referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement) refers to Share Link Generator."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Cookies\u00A0are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Country\u00A0refers to: Finland"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Device\u00A0means any device that can access the Service such as a computer, a cellphone or a digital tablet."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Personal Data\u00A0is any information that relates to an identified or identifiable individual."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Service\u00A0refers to the Website."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Service Provider\u00A0means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Usage Data\u00A0refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit)."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Website\u00A0refers to Share Link Generator, accessible from\u00A0https://shlk.cc"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 You\u00A0means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Collecting and Using Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Types of Data Collected"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Email address"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 First name and last name"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Usage Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Usage Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Usage Data is collected automatically when using the Service."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Tracking Technologies and Cookies"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Cookies or Browser Cookies.\u00A0A cookie is a small file placed on Your Device. You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being sent. However, if You do not accept Cookies, You may not be able to use some parts of our Service. Unless you have adjusted Your browser setting so that it will refuse Cookies, our Service may use Cookies."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Web Beacons.\u00A0Certain sections of our Service and our emails may contain small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and single-pixel gifs) that permit the Company, for example, to count users who have visited those pages or opened an email and for other related website statistics (for example, recording the popularity of a certain section and verifying system and server integrity)."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Cookies can be \"Persistent\" or \"Session\" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. Learn more about cookies on the\u00A0Free Privacy Policy website\u00A0article."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We use both Session and Persistent Cookies for the purposes set out below:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Necessary / Essential CookiesType: Session CookiesAdministered by: UsPurpose: These Cookies are essential to provide You with services available through the Website and to enable You to use some of its features. They help to authenticate users and prevent fraudulent use of user accounts. Without these Cookies, the services that You have asked for cannot be provided, and We only use these Cookies to provide You with those services."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Cookies Policy / Notice Acceptance CookiesType: Persistent CookiesAdministered by: UsPurpose: These Cookies identify if users have accepted the use of cookies on the Website."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Functionality CookiesType: Persistent CookiesAdministered by: UsPurpose: These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your preferences every time You use the Website."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of our Privacy Policy."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Use of Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The Company may use Personal Data for the following purposes:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 To provide and maintain our Service, including to monitor the usage of our Service."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 To manage Your Account:\u00A0to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 For the performance of a contract:\u00A0the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 To contact You:\u00A0To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 To provide You\u00A0with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 To manage Your requests:\u00A0To attend and manage Your requests to Us."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 For business transfers:\u00A0We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 For other purposes: We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We may share Your personal information in the following situations:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 With Service Providers:\u00A0We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 For business transfers:\u00A0We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 With Affiliates:\u00A0We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 With business partners:\u00A0We may share Your information with Our business partners to offer You certain products, services or promotions."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 With other users:\u00A0when You share personal information or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 With Your consent: We may disclose Your personal information for any other purpose with Your consent."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Retention of Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of Our Service, or We are legally obligated to retain this data for longer time periods."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Transfer of Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to \u2014 and maintained on \u2014 computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Delete Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Our Service may give You the ability to delete certain information about You from within the Service."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any personal information that You have provided to Us."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Disclosure of Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Business Transactions"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Law enforcement"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency)."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Other legal requirements"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Comply with a legal obligation"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Protect and defend the rights or property of the Company"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Prevent or investigate possible wrongdoing in connection with the Service"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Protect the personal safety of Users of the Service or the public"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 Protect against legal liability"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Security of Your Personal Data"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Children's Privacy"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Links to Other Websites"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Changes to this Privacy Policy"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the \"Last updated\" date at the top of this Privacy Policy."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page."),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Contact Us"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "If you have any questions about this Privacy Policy, You can contact us:"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "  \u2022 By email:\u00A0work.petroff@gmail.com")))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Legal);
 
 
 /***/ }),
@@ -5520,11 +5746,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/link */ "./src/components/link/index.tsx");
 /* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
-/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
+/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
 /* harmony import */ var _page_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page-hooks */ "./src/pages/page-hooks.ts");
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.tsx");
-/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/button */ "./src/components/button/index.tsx");
-/* harmony import */ var _components_video__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/video */ "./src/components/video/index.tsx");
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/button */ "./src/components/button/index.tsx");
+/* harmony import */ var _components_video__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/video */ "./src/components/video/index.tsx");
+/* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/scroller */ "./src/components/scroller/index.tsx");
+
 
 
 
@@ -5546,14 +5774,22 @@ var Login = function () {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__body") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_5__["default"], { to: '/', className: "narrow-body__back-button" },
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_6__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_6__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_6__.IconSize.LARGE })),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__login_content") },
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_video__WEBPACK_IMPORTED_MODULE_7__["default"], { className: "".concat(globalClass, "__video"), thumbnail: "/assets/shlk_logo.jpg", src: [{ link: '/assets/shlk_logo.mp4', type: 'video/mp4' }], aspectRatio: 1200 / 360, timeout: 1000 }),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__intro_text") },
-                        "Create account using Google",
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("br", null),
-                        "or log into an exiting one"),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_8__["default"], { href: '/oauth/google', label: 'Log in with Google', size: _components_button__WEBPACK_IMPORTED_MODULE_8__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_8__.ButtonType.PRIMARY, icon: _components_icons__WEBPACK_IMPORTED_MODULE_6__.Google })))),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_9__["default"], null)));
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_scroller__WEBPACK_IMPORTED_MODULE_7__["default"], { hideScroll: true, className: "".concat(globalClass, "__scroller") },
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__login_content") },
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_video__WEBPACK_IMPORTED_MODULE_8__["default"], { className: "".concat(globalClass, "__video"), thumbnail: "/assets/shlk_logo.jpg", src: [{ link: '/assets/shlk_logo.mp4', type: 'video/mp4' }], aspectRatio: 1200 / 360, timeout: 1000 }),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__intro_text") },
+                            "Create account using Google",
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement("br", null),
+                            "or log into an exiting one"),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_9__["default"], { href: '/oauth/google', label: 'Log in with Google', size: _components_button__WEBPACK_IMPORTED_MODULE_9__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_9__.ButtonType.PRIMARY, icon: _components_icons__WEBPACK_IMPORTED_MODULE_6__.Google }),
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__legal") },
+                            "By clicking ",
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement("strong", null, "Log in"),
+                            ",",
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement("br", null),
+                            "you agree to our ",
+                            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_5__["default"], { inline: true, to: "/privacy-policy" }, "Privacy policy")))))),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
 
@@ -5621,13 +5857,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/link */ "./src/components/link/index.tsx");
 /* harmony import */ var _apps_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../apps/Header */ "./src/apps/Header/index.tsx");
-/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
-/* harmony import */ var _apps_UserSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../apps/UserSettings */ "./src/apps/UserSettings/index.tsx");
+/* harmony import */ var _apps_Footer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../apps/Footer */ "./src/apps/Footer/index.tsx");
+/* harmony import */ var _apps_UserSettings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../apps/UserSettings */ "./src/apps/UserSettings/index.tsx");
 /* harmony import */ var _page_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page-hooks */ "./src/pages/page-hooks.ts");
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/icons */ "./src/components/icons/index.tsx");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/app.context */ "./src/js/app.context.tsx");
+/* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/scroller */ "./src/components/scroller/index.tsx");
+
 
 
 
@@ -5660,8 +5898,9 @@ var Profile = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__body") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_7__["default"], { to: '/', className: "narrow-body__back-button" },
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_8__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_8__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_8__.IconSize.LARGE })),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_UserSettings__WEBPACK_IMPORTED_MODULE_9__["default"], { router: router, context: appContext }))),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_scroller__WEBPACK_IMPORTED_MODULE_9__["default"], null,
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_UserSettings__WEBPACK_IMPORTED_MODULE_10__["default"], { className: "".concat(globalClass, "__profile-content"), router: router, context: appContext })))),
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_Footer__WEBPACK_IMPORTED_MODULE_11__["default"], null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Profile);
 
@@ -5675,6 +5914,8 @@ var Profile = function (_a) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./chrome_store.jpg": "./src/assets/chrome_store.jpg",
+	"./chrome_store@2x.jpg": "./src/assets/chrome_store@2x.jpg",
 	"./default-favicon.png": "./src/assets/default-favicon.png",
 	"./favicon/android-chrome-192x192.png": "./src/assets/favicon/android-chrome-192x192.png",
 	"./favicon/android-chrome-512x512.png": "./src/assets/favicon/android-chrome-512x512.png",
@@ -5755,13 +5996,13 @@ webpackContext.id = "./src/assets sync recursive ^\\.\\/.*$";
 
 const tmpAddr = 'http://localhost:8002'
 
-if (false) {} else if (true) {
+if (true) {
   module.exports = {
-    serviceUrl: window.location.origin,
+    serviceUrl: tmpAddr,
     displayServiceUrl: 'shlk.cc',
-    target: 'webapp',
+    target: 'extension',
     mode: 'development'
-  } 
+  }
 } else {}
 
 /***/ }),
@@ -7368,20 +7609,7 @@ Detects whether or not elements can be animated using CSS
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/ 	
-/******/ 		        // webpack-livereload-plugin
-/******/ 		        (function() {
-/******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-cf00af669d9ef2ea";
-/******/ 		          if (document.getElementById(id)) { return; }
-/******/ 		          var el = document.createElement("script");
-/******/ 		          el.id = id;
-/******/ 		          el.async = true;
-/******/ 		          el.src = "http://localhost:35729/livereload.js";
-/******/ 		          document.getElementsByTagName("head")[0].appendChild(el);
-/******/ 		          console.log("[Live Reload] enabled");
-/******/ 		        }());
-/******/ 		        // Check if module is in cache
+/******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;

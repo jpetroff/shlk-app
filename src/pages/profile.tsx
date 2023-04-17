@@ -13,6 +13,7 @@ import { useRouter } from './page-hooks'
 import Icon, { CaretLeft, IconSize } from '../components/icons'
 import classNames from 'classnames'
 import AppContext from '../js/app.context'
+import Scroller from '../components/scroller'
 
 type Props = {
 
@@ -43,7 +44,9 @@ const Profile : React.FC<Props> = (
       <div className={`${globalClass}__layout`}>
         <div className={`${globalClass}__body`}>
           <Link to='/' className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></Link>
-          <UserSettings router={router} context={appContext} />
+          <Scroller>
+            <UserSettings className={`${globalClass}__profile-content`} router={router} context={appContext} />
+          </Scroller>
         </div>
       </div>
       <Footer />

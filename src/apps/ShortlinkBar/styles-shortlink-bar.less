@@ -1,5 +1,8 @@
 @import (reference) '../../css/_constants.less';
 
+@mq-footer-height: 1.875rem;
+@mq-mobile-footer-height: 3.0625rem;
+
 :local(.homepage) {
   background-color: white;
 }
@@ -7,8 +10,12 @@
 :local(.homepage)_app-body {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  height: 100%;
   margin: 0;
+  
+  @media @mq-mobile {
+    height: ~"calc(100% + @{mq-mobile-footer-height})";
+  }
 
   &__layout {
     display: flex;
@@ -37,7 +44,7 @@
   }
 
   &__offset-wrapper {
-    height: ~"calc(50vh - 4.725rem)"; // 4.725rem - header height
+    height: ~"calc(50vh - @{mq-header-height})"; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +71,7 @@
   @media @mq-mobile {
     .__mobile-convenience-state&__shortlink-block {
       position: absolute;
-      z-index: 2;
+      z-index: @z-static-top + 2;
       top: 0;
       left: 0;
       right: 0;
@@ -85,11 +92,10 @@
 
   &__snackbar-container {
     position: absolute;
-    // bottom: 2rem;
-      top: 100%;
-      padding-top: 1.25rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
+    top: 100%;
+    padding-top: 1.25rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     left: 50%;
     transform: translateX(-50%);
   }

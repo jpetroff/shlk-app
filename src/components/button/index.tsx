@@ -9,6 +9,7 @@ import { useState } from 'react'
 import config from '../../js/config'
 import browserApi from '../../js/browser.api'
 import linkTools from '../../js/link.tools'
+import classNames from 'classnames'
 
 export enum ButtonSize {
   LARGE = 'large',
@@ -24,14 +25,15 @@ export enum ButtonType {
 type Props = {
   label?: string
   icon?: ReactIcon
-  size: ButtonSize
-  type: ButtonType
+  size?: ButtonSize
+  type?: ButtonType
   onClick?: (event: React.SyntheticEvent<HTMLAnchorElement, Event>, element?: HTMLElement) => void
   isDisabled?: boolean
   isLoading?: boolean
   isCaret?: boolean
   flyover?: string
   tooltip?: TooltipProps
+  fullWidth?: boolean
 } & JSX.IntrinsicElements["a"]
 
 const BtnIcnMap = _.object(
@@ -45,14 +47,19 @@ const Button : React.FC<Props> = function(
   const [showFlyover, setShowFlyover] = useState(false)
   const globalClass = styles.wrapperClass+'_button'
 
-  let buttonClassMods : Array<string> = []
-  buttonClassMods.push(globalClass + '_' + args.size)
-  buttonClassMods.push(globalClass + '_' + args.type)
-  if(args.isDisabled || args.isLoading) buttonClassMods.push(globalClass+'_disabled')
-  if(args.isLoading) buttonClassMods.push(globalClass+'_loading')
-  if(!args.label && args.icon) buttonClassMods.push(globalClass+'_icon-only')
+  const buttonClasses = classNames({
+    [`${globalClass}`]: true,
+    [`${globalClass}_${args.size}`]: true,
+    [`${globalClass}_${args.type}`]: true,
+    [`${globalClass}_disabled`]: args.isDisabled || args.isLoading,
+    [`${globalClass}_loading`]: args.isDisabled || args.isLoading,
+    [`${globalClass}_icon-only`]: !args.label && args.icon,
+    [`${globalClass}_full-width`]: args.fullWidth,
+    [`${args.className}`]: !!args.className,
+  })
 
-  const htmlAnchorProps = _.omit(args, 'size', 'type', 'isDisabled', 'isCaret', 'label', 'icon', 'isLoading', 'onClick')
+
+  const htmlAnchorProps = _.omit(args, 'size', 'type', 'isDisabled', 'isCaret', 'label', 'icon', 'isLoading', 'onClick', 'fullWidth', 'flyover', 'tooltip')
   const btnRef = React.useRef<HTMLAnchorElement | null>(null)
 
   const handleClick : (event: React.MouseEvent<HTMLAnchorElement>) => void = (event) => {
@@ -77,7 +84,7 @@ const Button : React.FC<Props> = function(
 
   return (
     <a {...htmlAnchorProps} 
-      className={`${args.className || ''} ${globalClass} ${buttonClassMods.join(' ')}`}
+      className={`${buttonClasses}`}
       onClick={handleClick}
       ref={btnRef}
     >
@@ -99,6 +106,15 @@ const Button : React.FC<Props> = function(
         {args.flyover && showFlyover && <Flyover label={args.flyover} onDone={() => setShowFlyover(false)} />}
     </a>
   )
+}
+
+Button.defaultProps = {
+  size: ButtonSize.SMALL,
+  type: ButtonType.PRIMARY,
+  isDisabled: false,
+  isLoading: false,
+  isCaret: false,
+  fullWidth: false
 }
 
 export default Button

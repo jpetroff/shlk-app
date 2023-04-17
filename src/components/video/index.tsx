@@ -12,6 +12,7 @@ type Props = {
   className?: string
   aspectRatio?: number
   timeout?: number
+  muted?: boolean
 }
 
 const Video : React.FC<Props> = (
@@ -22,7 +23,8 @@ const Video : React.FC<Props> = (
     height,
     className,
     aspectRatio,
-    timeout
+    timeout,
+    muted
   } : Props
 ) => {
   const [loaded, setLoaded] = React.useState(false)
@@ -34,19 +36,17 @@ const Video : React.FC<Props> = (
   })
 
   const initLazyVideo = () => {
+    setLoaded(true)
+    _.defer( () => {
+      videoNode?.current?.load() 
+    })
     _.delay(() => {
-      setLoaded(true)
-      videoNode?.current?.load()
-      // _.defer( () => videoNode?.current?.load() )
+      videoNode?.current?.play()
     }, timeout)
   }
 
   React.useEffect( () => {
-    if(!loaded) DOMContentLoaded(initLazyVideo)
-
-    return () => {
-      document.removeEventListener('DOMContentLoaded', initLazyVideo)
-    }
+    if(!loaded) _.defer(initLazyVideo)
   })
 
   const responsiveVideoClass = !(width && height) && aspectRatio ? `${globalClass}__video-node_responsive` : ''
@@ -59,8 +59,8 @@ const Video : React.FC<Props> = (
           poster={thumbnail}
           ref={videoNode}
           className={`${globalClass}__video-node ${responsiveVideoClass}`} 
-          autoPlay={true}
-          muted={true}
+          autoPlay={false}
+          muted={muted}
           controls={false}
           preload={`none`}
           playsInline={true}
@@ -80,7 +80,8 @@ const Video : React.FC<Props> = (
 }
 
 Video.defaultProps = {
-  timeout: 100
+  timeout: 100,
+  muted: true
 }
 
 export default Video

@@ -3,6 +3,7 @@
 interface CssExports {
   'appMainClass': string;
   'homeClass': string;
+  'legalClass': string;
   'loginClass': string;
   'profileClass': string;
 }

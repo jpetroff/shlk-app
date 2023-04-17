@@ -11,6 +11,9 @@ import AppContext from '../../js/app.context'
 import Link from '../../components/link'
 import DropdownMenu, { DropdownPosition } from '../../components/dropdown-menu'
 import MenuItem from '../../components/menu-item'
+import browserApi from '../../js/browser.api'
+
+import config from '../../js/config'
 
 export enum HeaderPosition {
   sticky = 0,
@@ -52,6 +55,16 @@ const Header : React.FC<Props> = (
       setDropdown(true)
     } else {
       navigate(loginLink)
+    }
+  }
+
+  function handleLogoutClick() {
+    if(config.target == 'extension') {
+      browserApi.openExternal(`${config.serviceUrl}/logout`)
+      
+    } else {
+      window.location.href = '/logout'
+      setDropdown(false)
     }
   }
 
@@ -107,7 +120,7 @@ const Header : React.FC<Props> = (
                     <MenuItem label='Snoozed links' icon={Snooze} onClick={() => { navigate('/app/snoozed'); setDropdown(false) } }/>
                     <MenuItem label='Profile' icon={Avatar} onClick={() => { navigate('/app/profile'); setDropdown(false) } }/>
                     <MenuItem.Separator />
-                    <MenuItem label='Logout' icon={Logout} onClick={() => { window.location.href = '/logout'; setDropdown(false) } }/>
+                    <MenuItem label='Logout' icon={Logout} onClick={handleLogoutClick}/>
                   </DropdownMenu>
               </>)
             }

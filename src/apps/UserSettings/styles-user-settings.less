@@ -1,10 +1,12 @@
 @import (reference) '../../css/_constants.less';
 
+@field-padding: 0.75rem;
+
 :local(.wrapperClass)_user-settings {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   flex: 1;
 
   &__header {
@@ -12,12 +14,14 @@
     flex-direction: row;
     gap: 1.25rem;
     align-items: flex-end;
+    padding: 0 @field-padding;
 
     &__avatar {
       width: 3.875rem;
       height: 3.875rem;
       border-radius: 3.875rem;
       overflow: hidden;
+      margin-left: -0.25rem;
     }
 
     &__img-source {
@@ -50,12 +54,14 @@
 
     &__label {
       .t-micricopy_13-16;
+      padding-left: @field-padding;
     }
   }
 
   &__submit {
     display: flex;
     flex-direction: row;
+    margin-top: 1rem;
   }
 
   &__snackbar-container {
@@ -72,5 +78,31 @@
   &__profile-success {
     width: 100%;
     min-width: auto;
+  }
+
+  &__download {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.25rem;
+
+    &__label {
+      .t-micricopy_13-16;
+      color: @black-30;
+      flex-grow: 1;
+      padding-left: @field-padding;
+    }
+
+    &__link {
+      border-radius: 4px;
+      box-shadow: @shadow-light-20, @thin-shadow-stroke;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__link-content {
+      width: 160px;
+    }
   }
 }

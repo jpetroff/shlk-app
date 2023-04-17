@@ -286,24 +286,36 @@ export default class ShortlinkList extends React.Component<Props, State> {
         </div>
         <Scroller className={`${globalClass}__scroller`} onScroll={this.handleScroll}>
           <div className={`${globalClass}__list`}>
-          { 
-            this.state.groupedShortlinks.map( (item, index, array) => {
-              if(item.isSubheader) {
-                return <span key={index} className={`${globalClass}__subheader`}>{item.group}</span>
-              } else {
-                return (
-                  <ShortlinkListItem key={index}
-                    timestamp={item.timestamp}
-                    {..._.omit(item, 'hash', 'location')}
-                    hash={item.hash}
-                    location={item.location}
-                    onCopyClick={() => this.handleCopyClick(item.originalIndex)}
-                    onContextClick={(elem) => { this.handleContextClick(item.originalIndex, elem) } }
-                  />
-                )
-              }
-            })
-          }
+            { 
+              this.state.groupedShortlinks.map( (item, index, array) => {
+                if(item.isSubheader) {
+                  return <span key={index} className={`${globalClass}__subheader`}>{item.group}</span>
+                } else {
+                  return (
+                    <ShortlinkListItem key={index}
+                      timestamp={item.timestamp}
+                      {..._.omit(item, 'hash', 'location')}
+                      hash={item.hash}
+                      location={item.location}
+                      onCopyClick={() => this.handleCopyClick(item.originalIndex)}
+                      onContextClick={(elem) => { this.handleContextClick(item.originalIndex, elem) } }
+                    />
+                  )
+                }
+              })
+            }
+            <DropdownMenu
+              divRef={this.contextMenuRef}
+              show={this.state.contextMenu.show}
+              onClose={this.resetContextMenu}
+              onEnter={this.handleContextPortal}
+              style={ { top: this.state.contextMenu.top, left: this.state.contextMenu.left} }
+              >
+              <MenuItem label='Delete' onClick={this.handleDeleteShortlink}/>
+              <MenuItem.Separator />
+              {this.getSubsection() == ShortlinkListSubsection.snoozed && <MenuItem label='Remove snooze' onClick={this.handleRemoveSnoozeTimer}/>}
+              <MenuItem isDisabled={true} label='Edit shortlink' onClick={() => {  } }/>
+            </DropdownMenu>
           </div>
           <div className={`${globalClass}__list-footer`}>
             {this.state.isLoading == LoadMode.append &&  
@@ -313,18 +325,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
               <div className={`${globalClass}__list-footer__empty`}>Nothing found</div>
             }
           </div>
-          <DropdownMenu
-            divRef={this.contextMenuRef}
-            show={this.state.contextMenu.show}
-            onClose={this.resetContextMenu}
-            onEnter={this.handleContextPortal}
-            style={ { top: this.state.contextMenu.top, left: this.state.contextMenu.left} }
-            >
-            <MenuItem label='Delete' onClick={this.handleDeleteShortlink}/>
-            <MenuItem.Separator />
-            {this.getSubsection() == ShortlinkListSubsection.snoozed && <MenuItem label='Remove snooze' onClick={this.handleRemoveSnoozeTimer}/>}
-            <MenuItem isDisabled={true} label='Edit shortlink' onClick={() => {  } }/>
-          </DropdownMenu>
+          
         </Scroller>
       </div>
     )
