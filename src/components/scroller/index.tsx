@@ -68,7 +68,7 @@ const Scroller : React.FC<Props> = (
     internalScroll()
   })
 
-  const transientProps = _.omit(args, 'onScroll', 'ref', 'className', 'padding', 'offsetTop', 'offsetBottom')
+  const transientProps = _.omit(args, 'onScroll', 'ref', 'className', 'padding', 'offsetTop', 'offsetBottom', 'hideScroll')
   return (
     <div
       className={`${scrollerClasses}`}

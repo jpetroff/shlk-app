@@ -222,13 +222,13 @@ var BrowserApi = /** @class */ (function () {
 
 const tmpAddr = 'http://localhost:8002'
 
-if (true) {
+if (false) {} else if (true) {
   module.exports = {
-    serviceUrl: tmpAddr,
+    serviceUrl: window.location.origin,
     displayServiceUrl: 'shlk.cc',
-    target: 'extension',
+    target: 'webapp',
     mode: 'development'
-  }
+  } 
 } else {}
 
 /***/ })
@@ -240,7 +240,20 @@ if (true) {
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
+/******/ 	
+/******/ 		        // webpack-livereload-plugin
+/******/ 		        (function() {
+/******/ 		          if (typeof window === "undefined") { return };
+/******/ 		          var id = "webpack-livereload-plugin-script-21f5ce6d77307731";
+/******/ 		          if (document.getElementById(id)) { return; }
+/******/ 		          var el = document.createElement("script");
+/******/ 		          el.id = id;
+/******/ 		          el.async = true;
+/******/ 		          el.src = "http://localhost:35729/livereload.js";
+/******/ 		          document.getElementsByTagName("head")[0].appendChild(el);
+/******/ 		          console.log("[Live Reload] enabled");
+/******/ 		        }());
+/******/ 		        // Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;

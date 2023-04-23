@@ -81,6 +81,16 @@ module.exports = __webpack_require__.p + "assets/favicon/browserconfig.xml";
 
 /***/ }),
 
+/***/ "./src/assets/favicon/chrome_extension_icon.png":
+/*!******************************************************!*\
+  !*** ./src/assets/favicon/chrome_extension_icon.png ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/favicon/chrome_extension_icon.png";
+
+/***/ }),
+
 /***/ "./src/assets/favicon/favicon-16x16.png":
 /*!**********************************************!*\
   !*** ./src/assets/favicon/favicon-16x16.png ***!
@@ -1601,7 +1611,7 @@ var ShortlinkBar = /** @class */ (function (_super) {
     };
     ShortlinkBar.prototype.onGlobalKeypress = function (event) {
         console.log(event);
-        if ((event.ctrlKey || event.metaKey) && event.code == 'KeyC') {
+        if ((event.ctrlKey || event.metaKey) && event.code == 'KeyD') {
             event.preventDefault();
             event.stopPropagation();
             this.handleGlobalCommand(globalCommands.submitAndCopy);
@@ -3384,7 +3394,7 @@ var Scroller = function (args) {
     react__WEBPACK_IMPORTED_MODULE_2__.useEffect(function () {
         internalScroll();
     });
-    var transientProps = underscore__WEBPACK_IMPORTED_MODULE_3__.omit(args, 'onScroll', 'ref', 'className', 'padding', 'offsetTop', 'offsetBottom');
+    var transientProps = underscore__WEBPACK_IMPORTED_MODULE_3__.omit(args, 'onScroll', 'ref', 'className', 'padding', 'offsetTop', 'offsetBottom', 'hideScroll');
     return (react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", __assign({ className: "".concat(scrollerClasses) }, transientProps),
         react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__scroller-wrapper"), ref: wrapperRef },
             react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__scroller-content"), ref: contentRef, onScroll: internalScroll }, args.children)),
@@ -3919,10 +3929,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config */ "./src/js/config.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _browser_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./browser.api */ "./src/js/browser.api.ts");
-/* harmony import */ var _user_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user.gql */ "./src/js/user.gql.ts");
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config */ "./src/js/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _browser_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./browser.api */ "./src/js/browser.api.ts");
+/* harmony import */ var _user_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user.gql */ "./src/js/user.gql.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -3974,7 +3985,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var AppContext = react__WEBPACK_IMPORTED_MODULE_0__.createContext({
+    screenSize: [window.innerWidth, window.innerHeight],
     requestUpdate: function () { }
 });
 var AppContextProvider = function (_a) {
@@ -3994,6 +4007,14 @@ var AppContextProvider = function (_a) {
             });
         });
     }
+    function resizeHandler() {
+        var newContext = underscore__WEBPACK_IMPORTED_MODULE_1__.extend({ screenSize: [window.innerWidth, window.innerHeight] }, contextState);
+        setContextState(newContext);
+    }
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        window.addEventListener('onresize', resizeHandler);
+        return function () { return window.removeEventListener('onresize', resizeHandler); };
+    });
     var value = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
         return __assign(__assign({}, contextState), { requestUpdate: requestUpdate });
     }, [contextState]);
@@ -4007,15 +4028,17 @@ function getInitAppContext() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    result = {};
-                    if (!((_config__WEBPACK_IMPORTED_MODULE_1___default().target) == 'extension' && _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].isInit)) return [3 /*break*/, 2];
-                    return [4 /*yield*/, _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].getTab(true)];
+                    result = {
+                        screenSize: [window.innerWidth, window.innerHeight]
+                    };
+                    if (!((_config__WEBPACK_IMPORTED_MODULE_2___default().target) == 'extension' && _browser_api__WEBPACK_IMPORTED_MODULE_3__["default"].isInit)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, _browser_api__WEBPACK_IMPORTED_MODULE_3__["default"].getTab(true)];
                 case 1:
                     activeTab = _a.sent();
                     if (activeTab === null || activeTab === void 0 ? void 0 : activeTab.url)
                         result.extension = { activeTabUrl: activeTab.url };
                     _a.label = 2;
-                case 2: return [4 /*yield*/, _user_gql__WEBPACK_IMPORTED_MODULE_3__["default"].getLoggedInUser()];
+                case 2: return [4 /*yield*/, _user_gql__WEBPACK_IMPORTED_MODULE_4__["default"].getLoggedInUser()];
                 case 3:
                     currentUser = _a.sent();
                     result.user = currentUser;
@@ -4254,7 +4277,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.extension.ts");
+/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.webapp.ts");
 /* harmony import */ var _link_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _shortlink_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/js/utils.ts");
@@ -4896,10 +4919,10 @@ var LinkTools = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/js/proxy-storage.extension.ts":
-/*!*******************************************!*\
-  !*** ./src/js/proxy-storage.extension.ts ***!
-  \*******************************************/
+/***/ "./src/js/proxy-storage.webapp.ts":
+/*!****************************************!*\
+  !*** ./src/js/proxy-storage.webapp.ts ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4962,64 +4985,51 @@ var proxyStorage = {
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.storage.sync.get([key])];
-                    case 1:
-                        result = _a.sent();
-                        console.log(key, result);
-                        return [2 /*return*/, result[key]];
-                }
+                result = window.localStorage.getItem(key);
+                return [2 /*return*/, result || null];
             });
         });
     },
     setItem: function (key, value) {
         return __awaiter(this, void 0, void 0, function () {
-            var newItem;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        newItem = {};
-                        newItem[key] = value;
-                        return [4 /*yield*/, chrome.storage.sync.set(newItem)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    },
-    getAllItems: function (parse) {
-        if (parse === void 0) { parse = true; }
-        return __awaiter(this, void 0, void 0, function () {
-            var result, objResult;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.storage.sync.get()];
-                    case 1:
-                        result = _a.sent();
-                        if (!parse)
-                            return [2 /*return*/, underscore__WEBPACK_IMPORTED_MODULE_0__.values(result)];
-                        objResult = [];
-                        underscore__WEBPACK_IMPORTED_MODULE_0__.each(result, function (retrievedItem, key) {
-                            try {
-                                objResult.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
-                            }
-                            catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
-                        });
-                        return [2 /*return*/, objResult];
-                }
+                window.localStorage.setItem(key, value);
+                return [2 /*return*/];
             });
         });
     },
     canUse: function () {
-        if (chrome.storage.sync)
+        if (window.localStorage)
             return true;
         return false;
+    },
+    getAllItems: function (parse) {
+        if (parse === void 0) { parse = true; }
+        return __awaiter(this, void 0, void 0, function () {
+            var result, keys;
+            return __generator(this, function (_a) {
+                result = [];
+                keys = underscore__WEBPACK_IMPORTED_MODULE_0__.keys(window.localStorage);
+                underscore__WEBPACK_IMPORTED_MODULE_0__.each(keys, function (key) {
+                    var retrievedItem = window.localStorage.getItem(key);
+                    if (parse) {
+                        try {
+                            result.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
+                        }
+                        catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
+                    }
+                    else {
+                        result.push(retrievedItem);
+                    }
+                });
+                return [2 /*return*/, result];
+            });
+        });
     },
     removeItem: function (key) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                chrome.storage.sync.remove(key);
+                window.localStorage.removeItem(key);
                 return [2 /*return*/];
             });
         });
@@ -5921,6 +5931,7 @@ var map = {
 	"./favicon/android-chrome-512x512.png": "./src/assets/favicon/android-chrome-512x512.png",
 	"./favicon/apple-touch-icon.png": "./src/assets/favicon/apple-touch-icon.png",
 	"./favicon/browserconfig.xml": "./src/assets/favicon/browserconfig.xml",
+	"./favicon/chrome_extension_icon.png": "./src/assets/favicon/chrome_extension_icon.png",
 	"./favicon/favicon-16x16.png": "./src/assets/favicon/favicon-16x16.png",
 	"./favicon/favicon-32x32.png": "./src/assets/favicon/favicon-32x32.png",
 	"./favicon/favicon.ico": "./src/assets/favicon/favicon.ico",
@@ -5996,13 +6007,13 @@ webpackContext.id = "./src/assets sync recursive ^\\.\\/.*$";
 
 const tmpAddr = 'http://localhost:8002'
 
-if (true) {
+if (false) {} else if (true) {
   module.exports = {
-    serviceUrl: tmpAddr,
+    serviceUrl: window.location.origin,
     displayServiceUrl: 'shlk.cc',
-    target: 'extension',
+    target: 'webapp',
     mode: 'development'
-  }
+  } 
 } else {}
 
 /***/ }),
@@ -7609,7 +7620,20 @@ Detects whether or not elements can be animated using CSS
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
+/******/ 	
+/******/ 		        // webpack-livereload-plugin
+/******/ 		        (function() {
+/******/ 		          if (typeof window === "undefined") { return };
+/******/ 		          var id = "webpack-livereload-plugin-script-21f5ce6d77307731";
+/******/ 		          if (document.getElementById(id)) { return; }
+/******/ 		          var el = document.createElement("script");
+/******/ 		          el.id = id;
+/******/ 		          el.async = true;
+/******/ 		          el.src = "http://localhost:35729/livereload.js";
+/******/ 		          document.getElementsByTagName("head")[0].appendChild(el);
+/******/ 		          console.log("[Live Reload] enabled");
+/******/ 		        }());
+/******/ 		        // Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;

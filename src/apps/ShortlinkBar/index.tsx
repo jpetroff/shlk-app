@@ -132,7 +132,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
   private onGlobalKeypress(event: KeyboardEvent) {
     console.log(event)
-    if( (event.ctrlKey || event.metaKey) && event.code == 'KeyC' ) {
+    if( (event.ctrlKey || event.metaKey) && event.code == 'KeyD' ) {
       event.preventDefault()
       event.stopPropagation()
       this.handleGlobalCommand(globalCommands.submitAndCopy)

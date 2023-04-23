@@ -20,12 +20,14 @@ declare type ExtensionContext = {
 export type AppContextT = {
   extension?: Maybe<ExtensionContext>,
   user?: Maybe<LoginContext>,
+  screenSize: [number, number],
   requestUpdate: () => void
 }
 
 export type AppContextState = Omit<AppContextT, 'requestUpdate'>
 
 const AppContext = React.createContext<AppContextT>( {
+  screenSize: [window.innerWidth, window.innerHeight],
   requestUpdate: () => {}
 } )
 
@@ -46,6 +48,17 @@ const AppContextProvider : React.FC<React.PropsWithChildren<Props>> = (
     setContextState(contextState)
   }
 
+  function resizeHandler() {
+    const newContext = _.extend({ screenSize: [window.innerWidth, window.innerHeight] }, contextState)
+    setContextState(newContext)
+  }
+
+  React.useEffect( () => {
+    window.addEventListener('onresize', resizeHandler)
+
+    return () => window.removeEventListener('onresize', resizeHandler)
+  } )
+
   const value : AppContextT = React.useMemo( () => {
     return {
       ...contextState,
@@ -64,7 +77,9 @@ export default AppContext
 export { AppContextProvider }
 
 export async function getInitAppContext(): Promise<AppContextState> {
-  let result : AppContextState = {}
+  let result : AppContextState = {
+    screenSize: [window.innerWidth, window.innerHeight]
+  }
 
   // getting active tab
   if(config.target == 'extension' && browserApi.isInit) {
