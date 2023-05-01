@@ -1,33 +1,32 @@
 import * as _ from 'underscore'
 
+export enum StorageType {
+  local = 'local',
+  sync = 'sync',
+  session = 'session',
+  default = ''
+}
+
 export const proxyStorage = {
 
-  async getItem(key : string) : Promise<string> {
-    const result = await chrome.storage.sync.get([key])
-    console.log(key, result)
+  async getItem(key : string, storage: StorageType = StorageType.sync) : Promise<any> {
+    const result = await chrome.storage[storage].get(key)
     return result[key]
   },
 
-  async setItem(key: string, value: string) : Promise<void> {
+  async setItem(key: string, value: any, storage: StorageType = StorageType.sync) : Promise<void> {
     let newItem : AnyObject = {}
     newItem[key] = value
-    await chrome.storage.sync.set(newItem)
+    await chrome.storage[storage].set(newItem)
   },
 
-  async getAllItems(parse: boolean = true) : Promise<any[] | string[]> {
-    const result = await chrome.storage.sync.get()
-    
-    if(!parse) return _.values(result)
+  async getAllItems(keys: string[] = [], storage: StorageType = StorageType.sync) : Promise<any> {
+    const result = await chrome.storage[storage].get(keys)
+    return result
+  },
 
-    let objResult : AnyObject[] = []
-
-    _.each(result, (retrievedItem, key) => {
-      try {
-        objResult.push( { ...JSON.parse(retrievedItem as string), key })
-      } catch {  /* skip adding elements that cannot be parsed */  }
-    })
-
-    return objResult
+  async setAllItems(items: AnyObject, storage: StorageType = StorageType.sync) : Promise<void> {
+    const result = await chrome.storage[storage].set(items)
   },
 
   canUse() {
@@ -35,8 +34,12 @@ export const proxyStorage = {
     return false
   },
 
-  async removeItem(key: string) : Promise<void> {
-    chrome.storage.sync.remove(key)
+  async removeItem(key: string, storage: StorageType = StorageType.sync) : Promise<void> {
+    await chrome.storage[storage].remove(key)
+  },
+
+  async removeAllItems(keys: string[], storage: StorageType = StorageType.sync) : Promise<void> {
+    await chrome.storage[storage].remove(keys)
   }
 
 }

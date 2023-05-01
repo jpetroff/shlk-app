@@ -1,14 +1,36 @@
 import * as _ from 'underscore'
 
+export enum StorageType {
+  local = 'local',
+  sync = 'sync',
+  session = 'session',
+  default = 'null'
+}
+
 export const proxyStorage = {
 
-  async getItem(key : string) : Promise<string | null> {
-    const result = window.localStorage.getItem(key)
-    return result || null
+  async getItem(key : string, storage: StorageType = StorageType.default) : Promise<any> {
+    const item = window.localStorage.getItem(key)
+    try {
+      const result = JSON.parse(item)
+      return result
+    } catch {
+      return item || null
+    }
   },
 
-  async setItem(key: string, value: string) : Promise<void> {
-    window.localStorage.setItem(key, value)
+  async setItem(key: string, value: any, storage: StorageType = StorageType.default) : Promise<void> {
+    try {
+      let result : any
+      if(!_.isString(value)) {
+        result = JSON.stringify(value)
+      } else {
+        result = value
+      }
+      window.localStorage.setItem(key, result)
+    } catch {
+      return null
+    }
   },
 
   canUse() {
@@ -16,24 +38,37 @@ export const proxyStorage = {
     return false
   },
 
-  async getAllItems(parse: boolean = true) : Promise<any[] | string[]> {
-    let result : string[] = []
-    const keys = _.keys(window.localStorage)
+  async getAllItems(keys: string[] = [], storage: StorageType = StorageType.default) : Promise<any> {
+    let result : any = {}
+    const allKeys = _.keys(window.localStorage)
     _.each(keys, (key) => {
+      if(keys.length != 0 && keys.indexOf(key) == -1) return
+      
       const retrievedItem = window.localStorage.getItem(key)
-      if (parse) {
-        try {
-          result.push( { ...JSON.parse(retrievedItem as string), key })
-        } catch { /* skip adding elements that cannot be parsed */ }
-      } else {
-        result.push(retrievedItem as string)
+      try {
+        result[key] = JSON.parse(retrievedItem)
+      } catch { 
+        result[key] = retrievedItem
       }
     })
     return result
   },
 
-  async removeItem(key: string) : Promise<void> {
+  async setAllItems(items: AnyObject, storage: StorageType = StorageType.default) : Promise<any> {
+    const keys = _.keys(items)
+    _.each(keys, (key) => {
+      proxyStorage.setItem(key, items[key])
+    })
+  },
+
+  async removeItem(key: string, storage: StorageType = StorageType.default) : Promise<void> {
     window.localStorage.removeItem(key)
+  },
+
+  async removeAllItems(keys: string[], storage: StorageType = StorageType.default) : Promise<void> {
+    _.each(keys, (key) => {
+      proxyStorage.removeItem(key)
+    })
   }
 
 }

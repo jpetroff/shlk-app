@@ -35,13 +35,13 @@ const Scroller : React.FC<Props> = (
 
     if(args.hideScroll) return
 
-    if(_.isFunction(args.onScroll) && event) args.onScroll(scrollTop, scrollHeight, clientHeight, scrollTop - scrollPos)
-
     if(scrollHeight <= clientHeight) {
       if(scrollPos != -1) setScrollPos(-1)
       return
     }
     if(scrollTop == scrollPos && scrollHeight == prevScrollheight.current) return
+    
+    if(_.isFunction(args.onScroll) && event) args.onScroll(scrollTop, scrollHeight, clientHeight, scrollTop - scrollPos)
 
     prevScrollheight.current = scrollHeight
     setScrollPos(scrollTop)

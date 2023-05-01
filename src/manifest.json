@@ -1,29 +1,23 @@
 {
   "manifest_version":3,
-  "version":"1.0.1",
+  "version":"1.1.1",
   "name":"shlk.cc — copy and create shortlinks",
   "icons": {
-    "48": "/assets/favicon/mstile-70x70.png",
-    "96": "/assets/favicon/mstile-70x70.png"
+    "128": "/assets/favicon/chrome_extension_icon.png"
   },
   "permissions": [
     "tabs",
-    "bookmarks",
     "clipboardRead",
     "clipboardWrite",
-    "bookmarks",
     "alarms",
-    "cookies",
     "storage",
-    "browsingData"
-  ],
-  "optional_permissions": [
     "notifications"
   ],
+  "optional_permissions": [
+  ],
   "host_permissions": [
-    "http://localhost:8002/",
     "https://shlk.cc/",
-    "https://localhost/"
+    "http://localhost:8002/"
   ],
   "action":{
     "default_popup": "index.html",
@@ -31,7 +25,7 @@
   },
   "background": {
     "service_worker": "js/background.js",
-    "type": "module" //optional
+    "type": "module"
   },
   "commands": {
     "_execute_action": {
@@ -39,7 +33,7 @@
         "default": "Ctrl+Shift+S",
         "mac": "Command+Shift+S"
       },
-      "description": "Shorten active tab URL"
+      "description": "Open share link extension popup to shorten URL or snooze it"
     }
   }
 }

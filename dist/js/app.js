@@ -1730,7 +1730,7 @@ var ShortlinkBar = /** @class */ (function (_super) {
     };
     ShortlinkBar.prototype.loadAllCachedShortlinks = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var storage;
+            var storage, length;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1738,8 +1738,9 @@ var ShortlinkBar = /** @class */ (function (_super) {
                         return [4 /*yield*/, _js_cache__WEBPACK_IMPORTED_MODULE_6__["default"].awaitStorage()];
                     case 1:
                         storage = _a.sent();
+                        length = (0,_js_utils__WEBPACK_IMPORTED_MODULE_4__.checkMobileMQ)() ? 2 : 3;
                         this.setState({
-                            cachedShortlinks: underscore__WEBPACK_IMPORTED_MODULE_2__.first(storage, 3)
+                            cachedShortlinks: underscore__WEBPACK_IMPORTED_MODULE_2__.first(storage, length)
                         });
                         return [2 /*return*/];
                 }
@@ -2139,7 +2140,7 @@ var ShortlinkList = /** @class */ (function (_super) {
         this.setState({ searchQuery: value, staleResults: true });
     };
     ShortlinkList.prototype.componentDidMount = function () {
-        this.loadShortlinks(LoadMode.append);
+        this.loadShortlinks(LoadMode.replace);
     };
     ShortlinkList.prototype.componentDidUpdate = function (prevProps, prevState, snapshot) {
         if (this.getSubsection() != this.getSubsection(prevProps.router.location.pathname))
@@ -2185,8 +2186,10 @@ var ShortlinkList = /** @class */ (function (_super) {
                         result = _a.sent();
                         newShortlinks = load == LoadMode.replace ? result : Array().concat(this.state.shortlinks, result);
                         groupedResult = this.groupShortlinks(newShortlinks);
+                        console.log(load, result);
                         this.setState({
-                            pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
+                            // pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
+                            pointer: load == LoadMode.replace ? result.length : this.state.shortlinks.length + result.length,
                             shortlinks: newShortlinks,
                             groupedShortlinks: groupedResult,
                             staleResults: false,
@@ -2323,8 +2326,10 @@ var ShortlinkList = /** @class */ (function (_super) {
         var isThreshold = (scrollTop + clientHeight) > (scrollHeight * 0.96);
         if (isThreshold &&
             this.state.isLoading == LoadMode.none &&
-            direction > 0)
+            direction > 0) {
+            console.log('scroll load');
             this.loadShortlinks(LoadMode.append);
+        }
     };
     ShortlinkList.prototype.render = function () {
         var _a;
@@ -3366,8 +3371,6 @@ var Scroller = function (args) {
         var clientHeight = contentRef.current.clientHeight;
         if (args.hideScroll)
             return;
-        if (underscore__WEBPACK_IMPORTED_MODULE_3__.isFunction(args.onScroll) && event)
-            args.onScroll(scrollTop, scrollHeight, clientHeight, scrollTop - scrollPos);
         if (scrollHeight <= clientHeight) {
             if (scrollPos != -1)
                 setScrollPos(-1);
@@ -3375,6 +3378,8 @@ var Scroller = function (args) {
         }
         if (scrollTop == scrollPos && scrollHeight == prevScrollheight.current)
             return;
+        if (underscore__WEBPACK_IMPORTED_MODULE_3__.isFunction(args.onScroll) && event)
+            args.onScroll(scrollTop, scrollHeight, clientHeight, scrollTop - scrollPos);
         prevScrollheight.current = scrollHeight;
         setScrollPos(scrollTop);
         setScrollbarStyles({ top: calcScrollbarTop(scrollPos), height: calcScrollbarHeight() });
@@ -3737,12 +3742,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _styles_snooze_list_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-snooze-list.less */ "./src/components/snooze-list/styles-snooze-list.less");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../link */ "./src/components/link/index.tsx");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _js_app_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/app.context */ "./src/js/app.context.tsx");
+
 
 
 
@@ -3752,15 +3759,52 @@ var SnoozeList = function (_a) {
     var _b;
     var onSnooze = _a.onSnooze;
     var globalClass = "".concat(_styles_snooze_list_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass, "_snooze-list");
-    var snoozeClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_b = {},
+    var snoozeClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_b = {},
         _b["".concat(globalClass)] = true,
         _b));
-    var appContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_3__["default"]);
-    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(snoozeClasses) },
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__subheader") }, "Snooze link until:"),
-        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snooze-list-wrapper") }, appContext.user.predefinedTimers.map(function (timer, key) {
-            return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snooze-item"), key: key },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__link"), onClick: function () { return onSnooze(timer.value); } }, timer.label)));
+    var appContext = react__WEBPACK_IMPORTED_MODULE_2__.useContext(_js_app_context__WEBPACK_IMPORTED_MODULE_4__["default"]);
+    function displayTime(value, standardSnooze) {
+        var now = new Date();
+        var setDate = new Date(value);
+        var preDate = '';
+        var actualTime = '';
+        if (standardSnooze && /random/.test(standardSnooze)) {
+            preDate = '~3 months';
+        }
+        else if (standardSnooze &&
+            !(/today/.test(standardSnooze) ||
+                /tomorrow/.test(standardSnooze))) {
+            preDate = setDate.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ', ';
+        }
+        if (standardSnooze && !/random/.test(standardSnooze)) {
+            actualTime = setDate.toLocaleTimeString(['en-GB'], { hour: '2-digit', minute: '2-digit' });
+        }
+        return preDate + actualTime;
+    }
+    function displayDate(value) {
+        return (new Date(value)).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+    var groupedTimers = underscore__WEBPACK_IMPORTED_MODULE_1__.groupBy(appContext.user.predefinedTimers, 'groupLabel');
+    console.log(groupedTimers);
+    var groups = Object.getOwnPropertyNames(groupedTimers);
+    return (react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(snoozeClasses) },
+        react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__subheader") }, "Snooze link until:"),
+        react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__wrapper") }, groups.map(function (groupProp, key) {
+            var group = groupedTimers[groupProp];
+            return (react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__group ").concat(globalClass, "__group_").concat(key), key: key },
+                react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__group__subheader") },
+                    react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", { className: "".concat(globalClass, "__group__subheader__label") }, group[0].groupLabel),
+                    react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", { className: "".concat(globalClass, "__group__subheader__meta") },
+                        group[0].groupDate[0] && ' · ' + displayDate(group[0].groupDate[0]),
+                        group[0].groupDate[1] && '–' + displayDate(group[0].groupDate[1]))),
+                react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__group-bullet") }),
+                react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__group-line") }),
+                react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__group__wrapper") }, group.map(function (timer, key) {
+                    return (react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", { className: "".concat(globalClass, "__item"), key: key },
+                        react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__link"), onClick: function () { return onSnooze(timer.value); }, key: key },
+                            react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", { className: "".concat(globalClass, "__link__label") }, timer.label),
+                            react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", { className: "".concat(globalClass, "__link__time") }, displayTime(timer.dateValue, timer.value)))));
+                }))));
         }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SnoozeList);
@@ -4277,7 +4321,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.webapp.ts");
+/* harmony import */ var _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./proxy-storage.webapp */ "./src/js/proxy-storage.extension.ts");
 /* harmony import */ var _link_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _shortlink_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shortlink.gql */ "./src/js/shortlink.gql.ts");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/js/utils.ts");
@@ -4463,7 +4507,7 @@ var ShortlinkCache = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems(true)];
+                    case 0: return [4 /*yield*/, _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems()];
                     case 1:
                         storageContent = _a.sent();
                         result = [];
@@ -4919,30 +4963,19 @@ var LinkTools = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/js/proxy-storage.webapp.ts":
-/*!****************************************!*\
-  !*** ./src/js/proxy-storage.webapp.ts ***!
-  \****************************************/
+/***/ "./src/js/proxy-storage.extension.ts":
+/*!*******************************************!*\
+  !*** ./src/js/proxy-storage.extension.ts ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "StorageType": () => (/* binding */ StorageType),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "proxyStorage": () => (/* binding */ proxyStorage)
 /* harmony export */ });
-/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
-var __assign = (undefined && undefined.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -4979,58 +5012,102 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-
+var StorageType;
+(function (StorageType) {
+    StorageType["local"] = "local";
+    StorageType["sync"] = "sync";
+    StorageType["session"] = "session";
+    StorageType["default"] = "";
+})(StorageType || (StorageType = {}));
 var proxyStorage = {
-    getItem: function (key) {
+    getItem: function (key, storage) {
+        if (storage === void 0) { storage = StorageType.sync; }
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
-                result = window.localStorage.getItem(key);
-                return [2 /*return*/, result || null];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage[storage].get(key)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result[key]];
+                }
             });
         });
     },
-    setItem: function (key, value) {
+    setItem: function (key, value, storage) {
+        if (storage === void 0) { storage = StorageType.sync; }
         return __awaiter(this, void 0, void 0, function () {
+            var newItem;
             return __generator(this, function (_a) {
-                window.localStorage.setItem(key, value);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        newItem = {};
+                        newItem[key] = value;
+                        return [4 /*yield*/, chrome.storage[storage].set(newItem)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    },
+    getAllItems: function (keys, storage) {
+        if (keys === void 0) { keys = []; }
+        if (storage === void 0) { storage = StorageType.sync; }
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage[storage].get(keys)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    },
+    setAllItems: function (items, storage) {
+        if (storage === void 0) { storage = StorageType.sync; }
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage[storage].set(items)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     },
     canUse: function () {
-        if (window.localStorage)
+        if (chrome.storage.sync)
             return true;
         return false;
     },
-    getAllItems: function (parse) {
-        if (parse === void 0) { parse = true; }
+    removeItem: function (key, storage) {
+        if (storage === void 0) { storage = StorageType.sync; }
         return __awaiter(this, void 0, void 0, function () {
-            var result, keys;
             return __generator(this, function (_a) {
-                result = [];
-                keys = underscore__WEBPACK_IMPORTED_MODULE_0__.keys(window.localStorage);
-                underscore__WEBPACK_IMPORTED_MODULE_0__.each(keys, function (key) {
-                    var retrievedItem = window.localStorage.getItem(key);
-                    if (parse) {
-                        try {
-                            result.push(__assign(__assign({}, JSON.parse(retrievedItem)), { key: key }));
-                        }
-                        catch ( /* skip adding elements that cannot be parsed */_a) { /* skip adding elements that cannot be parsed */ }
-                    }
-                    else {
-                        result.push(retrievedItem);
-                    }
-                });
-                return [2 /*return*/, result];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage[storage].remove(key)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     },
-    removeItem: function (key) {
+    removeAllItems: function (keys, storage) {
+        if (storage === void 0) { storage = StorageType.sync; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                window.localStorage.removeItem(key);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, chrome.storage[storage].remove(keys)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     }
@@ -6007,13 +6084,13 @@ webpackContext.id = "./src/assets sync recursive ^\\.\\/.*$";
 
 const tmpAddr = 'http://localhost:8002'
 
-if (false) {} else if (true) {
+if (true) {
   module.exports = {
-    serviceUrl: window.location.origin,
+    serviceUrl: tmpAddr,
     displayServiceUrl: 'shlk.cc',
-    target: 'webapp',
+    target: 'extension',
     mode: 'development'
-  } 
+  }
 } else {}
 
 /***/ }),
@@ -7620,20 +7697,7 @@ Detects whether or not elements can be animated using CSS
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/ 	
-/******/ 		        // webpack-livereload-plugin
-/******/ 		        (function() {
-/******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-21f5ce6d77307731";
-/******/ 		          if (document.getElementById(id)) { return; }
-/******/ 		          var el = document.createElement("script");
-/******/ 		          el.id = id;
-/******/ 		          el.async = true;
-/******/ 		          el.src = "http://localhost:35729/livereload.js";
-/******/ 		          document.getElementsByTagName("head")[0].appendChild(el);
-/******/ 		          console.log("[Live Reload] enabled");
-/******/ 		        }());
-/******/ 		        // Check if module is in cache
+/******/ 		// Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;

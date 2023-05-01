@@ -244,8 +244,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   private async loadAllCachedShortlinks() {
     Cache.setStorage()
     const storage = await Cache.awaitStorage()
+    const length = checkMobileMQ() ? 2 : 3
     this.setState({
-      cachedShortlinks: _.first(storage, 3)
+      cachedShortlinks: _.first(storage, length)
     })
   }
 

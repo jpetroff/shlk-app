@@ -82,7 +82,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    this.loadShortlinks(LoadMode.append)
+    this.loadShortlinks(LoadMode.replace)
   }
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
@@ -127,9 +127,11 @@ export default class ShortlinkList extends React.Component<Props, State> {
     const result = await shortlinkQueries.getUserShortlinks(params)
     const newShortlinks = load == LoadMode.replace ? result : Array().concat(this.state.shortlinks, result)
     const groupedResult = this.groupShortlinks(newShortlinks as ShortlinkDocument[])
-  
+    
+    console.log(load, result)
     this.setState({
-      pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
+      // pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
+      pointer: load == LoadMode.replace ? result.length : this.state.shortlinks.length + result.length,
       shortlinks: newShortlinks,
       groupedShortlinks: groupedResult,
       staleResults: false,
@@ -251,12 +253,15 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
   handleScroll(scrollTop: number, scrollHeight: number, clientHeight: number, direction: number) {
     const isThreshold : boolean = (scrollTop + clientHeight) > (scrollHeight * 0.96)
-
+    
     if(
       isThreshold && 
       this.state.isLoading == LoadMode.none && 
       direction > 0
-    ) this.loadShortlinks(LoadMode.append)
+    ) { 
+      console.log('scroll load')
+      this.loadShortlinks(LoadMode.append)
+    }
   }
 
   render() {

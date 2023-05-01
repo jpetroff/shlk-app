@@ -126,7 +126,7 @@ class ShortlinkCache {
   }
 
   private async getAllFromLocalStorage( limit?: number ) : Promise<Array<TCachedLink>> {
-    const storageContent = await proxyStorage.getAllItems(true)
+    const storageContent = await proxyStorage.getAllItems()
     let result : TCachedLink[] = []
 
     if(_.isEmpty(storageContent)) return result
