@@ -80,7 +80,7 @@ class ShortlinkCache {
   }
 
   private async purgeOutdatedShortlinks() {
-    let items = await proxyStorage.getAllItems()
+    let items = await proxyStorage.getAllItems(null)
     if(!items) return
 
     const forcePurge = linkTools.queryUrlSearchParams(['purge'], window.location.search)
@@ -126,7 +126,7 @@ class ShortlinkCache {
   }
 
   private async getAllFromLocalStorage( limit?: number ) : Promise<Array<TCachedLink>> {
-    const storageContent = await proxyStorage.getAllItems()
+    const storageContent = await proxyStorage.getAllItems(null)
     let result : TCachedLink[] = []
 
     if(_.isEmpty(storageContent)) return result

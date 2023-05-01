@@ -9,7 +9,7 @@ export enum StorageType {
 
 export const proxyStorage = {
 
-  async getItem(key : string, storage: StorageType = StorageType.sync) : Promise<any> {
+  async getItem(key: string, storage: StorageType = StorageType.sync) : Promise<any> {
     const result = await chrome.storage[storage].get(key)
     return result[key]
   },
@@ -20,8 +20,8 @@ export const proxyStorage = {
     await chrome.storage[storage].set(newItem)
   },
 
-  async getAllItems(keys: string[] = [], storage: StorageType = StorageType.sync) : Promise<any> {
-    const result = await chrome.storage[storage].get(keys)
+  async getAllItems(keys: string[] | null, storage: StorageType = StorageType.sync) : Promise<any> {
+    const result = await chrome.storage[storage].get( (keys && keys.length > 0) ? keys : undefined)
     return result
   },
 
@@ -38,8 +38,12 @@ export const proxyStorage = {
     await chrome.storage[storage].remove(key)
   },
 
-  async removeAllItems(keys: string[], storage: StorageType = StorageType.sync) : Promise<void> {
-    await chrome.storage[storage].remove(keys)
+  async removeAllItems(keys: string[] | null, storage: StorageType = StorageType.sync) : Promise<void> {
+    if(!keys || keys.length == 0) {
+      await chrome.storage[storage].clear()
+    } else {
+      await chrome.storage[storage].remove( keys )
+    }
   }
 
 }

@@ -38,11 +38,11 @@ export const proxyStorage = {
     return false
   },
 
-  async getAllItems(keys: string[] = [], storage: StorageType = StorageType.default) : Promise<any> {
+  async getAllItems(keys: string[] | null, storage: StorageType = StorageType.default) : Promise<any> {
     let result : any = {}
     const allKeys = _.keys(window.localStorage)
     _.each(keys, (key) => {
-      if(keys.length != 0 && keys.indexOf(key) == -1) return
+      if(keys && keys.length != 0 && keys.indexOf(key) == -1) return
       
       const retrievedItem = window.localStorage.getItem(key)
       try {
@@ -65,7 +65,8 @@ export const proxyStorage = {
     window.localStorage.removeItem(key)
   },
 
-  async removeAllItems(keys: string[], storage: StorageType = StorageType.default) : Promise<void> {
+  async removeAllItems(keys: string[] | null, storage: StorageType = StorageType.default) : Promise<void> {
+    if(!keys) return 
     _.each(keys, (key) => {
       proxyStorage.removeItem(key)
     })

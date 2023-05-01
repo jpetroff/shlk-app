@@ -303,13 +303,12 @@ var proxyStorage = {
         });
     },
     getAllItems: function (keys, storage) {
-        if (keys === void 0) { keys = []; }
         if (storage === void 0) { storage = StorageType.sync; }
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.storage[storage].get(keys)];
+                    case 0: return [4 /*yield*/, chrome.storage[storage].get((keys && keys.length > 0) ? keys : undefined)];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result];
@@ -354,10 +353,17 @@ var proxyStorage = {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.storage[storage].remove(keys)];
+                    case 0:
+                        if (!(!keys || keys.length == 0)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, chrome.storage[storage].clear()];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, chrome.storage[storage].remove(keys)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -506,6 +512,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+var ALARM_NAME = 'checkInTact';
 var AppNetwork = {
     updateRestoredTabs: function (ids) {
         var _a;
@@ -519,7 +526,7 @@ var AppNetwork = {
                                 "Content-Type": "application/json"
                             },
                             body: JSON.stringify({
-                                query: "\n        mutation (\n          $ids: String[]\n        )\n        {\n          deleteShortlinkSnoozeTimer(\n            ids: $ids\n          ) {\n            _id\n          }\n        }\n        ",
+                                query: "\n        mutation (\n          $ids: [String]\n        )\n        {\n          deleteShortlinkSnoozeTimer(\n            ids: $ids\n          ) {\n            _id\n          }\n        }\n        ",
                                 variables: {
                                     ids: ids
                                 }
@@ -600,8 +607,8 @@ var BackgroundApp = {
         return threshold.valueOf();
     },
     setCheckInAlarm: function () {
-        _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].setAlarm('checkInTact', {
-            periodInMinutes: 10
+        _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].setAlarm(ALARM_NAME, {
+            periodInMinutes: 1
         });
     },
     install: function () {
@@ -628,8 +635,9 @@ var BackgroundApp = {
                     case 0: return [4 /*yield*/, _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].getAlarms()];
                     case 1:
                         alarms = _a.sent();
-                        if (!alarms['checkInTact'])
+                        if (!alarms[ALARM_NAME])
                             BackgroundApp.setCheckInAlarm();
+                        BackgroundApp.updateAlarms();
                         return [2 /*return*/];
                 }
             });
@@ -704,7 +712,7 @@ var BackgroundApp = {
                         return [4 /*yield*/, BackgroundApp.loadSnoozedTabs()];
                     case 3:
                         synced = _a.sent();
-                        return [4 /*yield*/, _proxy_storage_extension__WEBPACK_IMPORTED_MODULE_1__["default"].removeAllItems([])];
+                        return [4 /*yield*/, _proxy_storage_extension__WEBPACK_IMPORTED_MODULE_1__["default"].removeAllItems(null)];
                     case 4:
                         _a.sent();
                         BackgroundApp.createAlarms(synced);
@@ -727,11 +735,12 @@ var BackgroundApp = {
             var allSyncStorage, keys, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _proxy_storage_extension__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems()];
+                    case 0: return [4 /*yield*/, _proxy_storage_extension__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems(null)];
                     case 1:
                         allSyncStorage = _a.sent();
                         keys = Object.getOwnPropertyNames(allSyncStorage);
                         result = {};
+                        console.log(allSyncStorage);
                         keys.forEach(function (key) {
                             try {
                                 if (/^link_/.test(key)) {
@@ -816,7 +825,7 @@ var BackgroundApp = {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(alarm.name == 'checkInAlarm')) return [3 /*break*/, 2];
+                        if (!(alarm.name == ALARM_NAME)) return [3 /*break*/, 2];
                         return [4 /*yield*/, _proxy_storage_extension__WEBPACK_IMPORTED_MODULE_1__["default"].getItem('appState', _proxy_storage_extension__WEBPACK_IMPORTED_MODULE_1__.StorageType.local)];
                     case 1:
                         appState = _a.sent();
@@ -844,6 +853,7 @@ var BackgroundApp = {
                     case 1:
                         existingAlarms = _a.sent();
                         existingAlarmKeys = Object.getOwnPropertyNames(existingAlarms);
+                        console.log(existingAlarms);
                         restoredTabs = {};
                         awakeTime = BackgroundApp.getRestoreTimerThreshold();
                         existingAlarmKeys.forEach(function (id) {
@@ -851,6 +861,7 @@ var BackgroundApp = {
                                 restoredTabs[id] = existingAlarms[id];
                             }
                         });
+                        console.log(restoredTabs);
                         restoredTabIDs = Object.getOwnPropertyNames(restoredTabs);
                         if (restoredTabIDs.length > 0) {
                             BackgroundApp.removeAlarms(restoredTabIDs);
@@ -858,7 +869,7 @@ var BackgroundApp = {
                                 BackgroundApp.openTab(restoredTabs[id].location);
                             });
                             title = "Shlk.cc woke up tabs (".concat(restoredTabIDs.length, ")");
-                            message = "".concat(restoredTabs[0].siteTitle);
+                            message = "".concat(restoredTabs[restoredTabIDs[0]].siteTitle);
                             message += restoredTabIDs.length > 1 ? "and ".concat(restoredTabIDs.length - 1, " more") : "";
                             _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].createNotification({
                                 type: 'basic',
@@ -882,7 +893,7 @@ var BackgroundApp = {
     }
 };
 _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].onInstalled(BackgroundApp.install);
-_browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].onStartup(BackgroundApp.updateAlarms);
+_browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].onStartup(BackgroundApp.startup);
 _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].onAlarm(BackgroundApp.handleAlarm);
 _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].onNotificationClick(BackgroundApp.handleNotificationClick);
 _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].onMessage(BackgroundApp.handleMessage);

@@ -20,6 +20,8 @@ type StorageData = {
   [id: string]: ShortlinksDocument 
 }
 
+const ALARM_NAME = 'checkInTact'
+
 const AppNetwork = {
 
   updateRestoredTabs: async function (ids: string[]) : Promise<string> {
@@ -31,7 +33,7 @@ const AppNetwork = {
       body: JSON.stringify({
         query: `
         mutation (
-          $ids: String[]
+          $ids: [String]
         )
         {
           deleteShortlinkSnoozeTimer(
@@ -106,8 +108,8 @@ const BackgroundApp = {
   },
 
   setCheckInAlarm: function() {
-    browserApi.setAlarm('checkInTact', {
-      periodInMinutes: 10
+    browserApi.setAlarm(ALARM_NAME, {
+      periodInMinutes: 1
     })
   },
 
@@ -121,9 +123,9 @@ const BackgroundApp = {
 
   startup: async function() {
     const alarms = await browserApi.getAlarms()
-    if(!alarms['checkInTact']) BackgroundApp.setCheckInAlarm()
+    if(!alarms[ALARM_NAME]) BackgroundApp.setCheckInAlarm()
 
-
+    BackgroundApp.updateAlarms()
   },
 
   loadSnoozedTabs: async function() : Promise<StorageData> {
@@ -175,7 +177,7 @@ const BackgroundApp = {
 
     const synced = await BackgroundApp.loadSnoozedTabs()
 
-    await proxyStorage.removeAllItems([])
+    await proxyStorage.removeAllItems(null)
     BackgroundApp.createAlarms(synced)
 
     await BackgroundApp.appState({
@@ -187,10 +189,12 @@ const BackgroundApp = {
   },
 
   getAllAlarms: async function() : Promise<StorageData> {
-    const allSyncStorage = await proxyStorage.getAllItems()
+    const allSyncStorage = await proxyStorage.getAllItems(null)
     const keys = Object.getOwnPropertyNames(allSyncStorage)
 
     let result : StorageData = {}
+
+    console.log(allSyncStorage)
 
     keys.forEach( (key) => {
       try {
@@ -236,7 +240,7 @@ const BackgroundApp = {
   },
 
   handleAlarm: async function(alarm: ExtensionAlarm) {
-    if(alarm.name == 'checkInAlarm') {
+    if(alarm.name == ALARM_NAME) {
 
       // check if update is in progress
       const appState = await proxyStorage.getItem('appState', StorageType.local)
@@ -255,6 +259,8 @@ const BackgroundApp = {
     const existingAlarms = await BackgroundApp.getAllAlarms()
     const existingAlarmKeys = Object.getOwnPropertyNames(existingAlarms)
 
+    console.log(existingAlarms)
+
     let restoredTabs : StorageData = {}
     const awakeTime = BackgroundApp.getRestoreTimerThreshold()
 
@@ -263,6 +269,8 @@ const BackgroundApp = {
         restoredTabs[id] = existingAlarms[id]
       }
     })
+
+    console.log(restoredTabs)
 
     const restoredTabIDs = Object.getOwnPropertyNames(restoredTabs)
     if(restoredTabIDs.length > 0) {
@@ -273,7 +281,7 @@ const BackgroundApp = {
       })
 
       const title = `Shlk.cc woke up tabs (${restoredTabIDs.length})`
-      let message = `${restoredTabs[0].siteTitle}`
+      let message = `${restoredTabs[restoredTabIDs[0]].siteTitle}`
       message += restoredTabIDs.length > 1 ? `and ${restoredTabIDs.length - 1} more` : ``
 
       browserApi.createNotification({
@@ -297,7 +305,7 @@ const BackgroundApp = {
 
 browserApi.onInstalled(BackgroundApp.install)
 
-browserApi.onStartup(BackgroundApp.updateAlarms)
+browserApi.onStartup(BackgroundApp.startup)
 
 browserApi.onAlarm(BackgroundApp.handleAlarm)
 

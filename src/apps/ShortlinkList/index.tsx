@@ -210,7 +210,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
   async handleRemoveSnoozeTimer() {
     const id = this.state.shortlinks[this.state.contextMenu.key]?._id
-    const result = await shortlinkQueries.deleteShortlinkSnoozeTimer({id})
+    const result = await shortlinkQueries.deleteShortlinkSnoozeTimer([id])
     if(result && result._id) {
       this.removeCachedShortlink(result._id)
     }

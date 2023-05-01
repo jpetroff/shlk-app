@@ -2269,7 +2269,7 @@ var ShortlinkList = /** @class */ (function (_super) {
                 switch (_b.label) {
                     case 0:
                         id = (_a = this.state.shortlinks[this.state.contextMenu.key]) === null || _a === void 0 ? void 0 : _a._id;
-                        return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].deleteShortlinkSnoozeTimer({ id: id })];
+                        return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].deleteShortlinkSnoozeTimer([id])];
                     case 1:
                         result = _b.sent();
                         if (result && result._id) {
@@ -4446,7 +4446,7 @@ var ShortlinkCache = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems()];
+                    case 0: return [4 /*yield*/, _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems(null)];
                     case 1:
                         items = _a.sent();
                         if (!items)
@@ -4507,7 +4507,7 @@ var ShortlinkCache = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems()];
+                    case 0: return [4 /*yield*/, _proxy_storage_webapp__WEBPACK_IMPORTED_MODULE_1__["default"].getAllItems(null)];
                     case 1:
                         storageContent = _a.sent();
                         result = [];
@@ -5052,13 +5052,12 @@ var proxyStorage = {
         });
     },
     getAllItems: function (keys, storage) {
-        if (keys === void 0) { keys = []; }
         if (storage === void 0) { storage = StorageType.sync; }
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.storage[storage].get(keys)];
+                    case 0: return [4 /*yield*/, chrome.storage[storage].get((keys && keys.length > 0) ? keys : undefined)];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result];
@@ -5103,10 +5102,17 @@ var proxyStorage = {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome.storage[storage].remove(keys)];
+                    case 0:
+                        if (!(!keys || keys.length == 0)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, chrome.storage[storage].clear()];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, chrome.storage[storage].remove(keys)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -5316,14 +5322,14 @@ var GQLShortlinkQuery = /** @class */ (function () {
             });
         });
     };
-    GQLShortlinkQuery.prototype.deleteShortlinkSnoozeTimer = function (args) {
+    GQLShortlinkQuery.prototype.deleteShortlinkSnoozeTimer = function (ids) {
         return __awaiter(this, void 0, void 0, function () {
             var query, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n    mutation deleteShortlinkSnoozeTimerWithVars(\n      $location: String\n      $id: String\n      $awake: Long\n    ) {\n      deleteShortlinkSnoozeTimer (\n        location: $location\n        awake: $awake\n        id: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation deleteShortlinkSnoozeTimerWithVars(\n      $location: String\n      $id: String\n      $awake: Long\n    ) {\n      deleteShortlinkSnoozeTimer (\n        location: $location\n        awake: $awake\n        id: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
-                        return [4 /*yield*/, this.gqlClient.request(query, args)];
+                        query = (0,graphql_request__WEBPACK_IMPORTED_MODULE_0__.gql)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n    mutation deleteShortlinkSnoozeTimerWithVars(\n      $ids: [String]\n    ) {\n      deleteShortlinkSnoozeTimer (\n        ids: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "], ["\n    mutation deleteShortlinkSnoozeTimerWithVars(\n      $ids: [String]\n    ) {\n      deleteShortlinkSnoozeTimer (\n        ids: $id\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    "])));
+                        return [4 /*yield*/, this.gqlClient.request(query, { ids: ids })];
                     case 1:
                         response = _a.sent();
                         console.log('[GQL] deleteShortlinkSnoozeTimer\n', response);
