@@ -106,4 +106,29 @@
       padding: 0 0.75rem;
     }
   }
+
+  &__loading {
+
+  }
+  &__loading &__shortlink__label,
+  &__loading &__full-link__label {
+    display: block;
+    background: linear-gradient(to right, 
+      rgba(@black-95, 1) 0%,
+      rgba(@black-95, 1) 30%,
+      rgba(@black-95, 0) 48%,
+      rgba(@black-95, 0) 52%,
+      rgba(@black-95, 1) 70%,
+      rgba(@black-95, 1) 100%
+    );
+    background-size: 200% 100%;
+    animation: loading 2s linear infinite;
+    border-radius: 4px;
+  }
+  &__loading &__shortlink__label {
+    width: 40%;
+  }
+  &__loading &__full-link__label {
+    width: 70%;
+  }
 }

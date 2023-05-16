@@ -8,6 +8,7 @@ import Button, { ButtonSize, ButtonType } from '../../components/button'
 import users from '../../js/user.gql'
 import Snackbar from '../../components/snackbar'
 import Link from '../../components/link'
+import config from '../../js/config'
 
 type Props = {
   router?: PageRouterProps
@@ -114,12 +115,12 @@ export default class UserSettings extends React.Component<Props, State> {
             onChange={(value, event) => this.setState( {userTag: value} ) }
             />
         </div>
-        <div className={`${globalClass}__download`}>
+        {config.target != 'extension' && <div className={`${globalClass}__download`}>
           <span className={`${globalClass}__download__label`}>Install browser extension:</span>
           <Link href={``} className={`${globalClass}__download__link`} >
             <img src={`/assets/chrome_store.jpg`} srcSet={`/assets/chrome_store@2x.jpg 2x`} className={`${globalClass}__download__link-content`} />
           </Link>
-        </div>
+        </div>}
         <div className={`${globalClass}__submit`}>
           <Button 
             isDisabled={this.saveDisabled()}

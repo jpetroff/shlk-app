@@ -32,7 +32,7 @@ type Props = {
   onCopyClick?: () => void
 }
 
-const ShortlinkListItem : React.FC<Props> = (
+const ShortlinkListItem : React.FC<Props> & { Loading: React.FC } = (
   {
     location,
     hash,
@@ -102,6 +102,23 @@ const ShortlinkListItem : React.FC<Props> = (
           type={ButtonType.GHOST}
           onClick={handleContextClick}
           />
+      </div>
+    </div>
+  )
+}
+
+ShortlinkListItem.Loading = function (props: {}) : React.ReactElement<{}, any> | null {
+  const globalClass = styles.wrapperClass + '_shortlink-item'
+  return (
+    <div className={`${globalClass} ${globalClass}_loading`}>
+      <div className={`${globalClass}__display-full-link`}>
+        <div className={`${globalClass}__display-full-link__main`}>
+          <div className={`${globalClass}__display-full-link__title`}>&nbsp;</div>
+        </div>
+        <div className={`${globalClass}__display-full-link__subheader`}>
+          <img className={`${globalClass}__display-full-link__favicon`} src={`/assets/default-favicon.png`} />
+          <span className={`${globalClass}__display-full-link__subheader__span`}>&nbsp;</span>
+        </div>
       </div>
     </div>
   )

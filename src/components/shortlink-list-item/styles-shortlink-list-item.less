@@ -132,6 +132,28 @@
     }
   }
 
+  &_loading {
+    width: 100%;
+  }
+  &_loading &__display-full-link { border: none;}
+  &_loading &__display-full-link__title,
+  &_loading &__display-full-link__subheader__span {
+    display: block;
+    background: linear-gradient(to right, 
+      rgba(@black-95, 1) 0%,
+      rgba(@black-95, 1) 30%,
+      rgba(@black-95, 0) 48%,
+      rgba(@black-95, 0) 52%,
+      rgba(@black-95, 1) 70%,
+      rgba(@black-95, 1) 100%
+    );
+    background-size: 200% 100%;
+    animation: loading 2s linear infinite;
+    border-radius: 4px;
+  }
+  &_loading &__display-full-link__title { width: 60% }
+  &_loading &__display-full-link__subheader__span { width: 70% }
+
 }
 
 @keyframes test-swap {

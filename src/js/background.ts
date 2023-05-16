@@ -22,6 +22,8 @@ type StorageData = {
 
 const ALARM_NAME = 'checkInTact'
 
+const ALARM_PERIOD = config.target == 'production' ? 10 : 1
+
 const AppNetwork = {
 
   updateRestoredTabs: async function (ids: string[]) : Promise<string> {
@@ -109,7 +111,7 @@ const BackgroundApp = {
 
   setCheckInAlarm: function() {
     browserApi.setAlarm(ALARM_NAME, {
-      periodInMinutes: 1
+      periodInMinutes: ALARM_PERIOD
     })
   },
 
@@ -124,8 +126,6 @@ const BackgroundApp = {
   startup: async function() {
     const alarms = await browserApi.getAlarms()
     if(!alarms[ALARM_NAME]) BackgroundApp.setCheckInAlarm()
-
-    BackgroundApp.updateAlarms()
   },
 
   loadSnoozedTabs: async function() : Promise<StorageData> {
@@ -281,7 +281,7 @@ const BackgroundApp = {
       })
 
       const title = `Shlk.cc woke up tabs (${restoredTabIDs.length})`
-      let message = `${restoredTabs[restoredTabIDs[0]].siteTitle}`
+      let message = `${restoredTabs[restoredTabIDs[0]].siteTitle || restoredTabs[restoredTabIDs[0]].location}`
       message += restoredTabIDs.length > 1 ? `and ${restoredTabIDs.length - 1} more` : ``
 
       browserApi.createNotification({
@@ -298,7 +298,7 @@ const BackgroundApp = {
   },
 
   handleMessage: function (message: any, sender: ExtensionMessageSender, sendResponse?: () => void) : boolean {
-    if(message.command == 'sync') BackgroundApp.updateAlarms()
+    //if(message.command == 'sync') BackgroundApp.updateAlarms()
     return true
   }
 }

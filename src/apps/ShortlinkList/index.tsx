@@ -145,7 +145,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
   }
 
   private groupShortlinks(shortlinks: ShortlinkDocument[]) : ShortlinkDisplayListItem[] {
-    const dateGroupKey = ( this.getSubsection() == ShortlinkListSubsection.snoozed ) ? ['snooze', 'awake'] : ['updatedAt']
+    const dateGroupKey = ( this.getSubsection() == ShortlinkListSubsection.snoozed ) ? ['snooze', 'awake'] : ['createdAt']
     const _enrichedLabelGroups = dateTimeTools.groupDatedItems(shortlinks, dateGroupKey)
 
     let groupedShortlinks : Array<ShortlinkDisplayListItem> = []
@@ -153,7 +153,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
       if (index == 0 || array[index - 1].group != item.group) {
         groupedShortlinks.push({isSubheader: true, group: item.group, originalIndex: -1})
       }
-      groupedShortlinks.push( _.extend({timestamp: item.updatedAt || item.createdAt || null, originalIndex: index}, item) )
+      groupedShortlinks.push( _.extend({timestamp: item.createdAt || item.updatedAt || null, originalIndex: index}, item) )
     })
     return groupedShortlinks
   }
@@ -211,8 +211,10 @@ export default class ShortlinkList extends React.Component<Props, State> {
   async handleRemoveSnoozeTimer() {
     const id = this.state.shortlinks[this.state.contextMenu.key]?._id
     const result = await shortlinkQueries.deleteShortlinkSnoozeTimer([id])
-    if(result && result._id) {
-      this.removeCachedShortlink(result._id)
+    if(result && result.length > 0) {
+      _.each(result, (item) => {
+        this.removeCachedShortlink(item._id)
+      })
     }
     _.defer(this.resetContextMenu)
   }
@@ -239,14 +241,14 @@ export default class ShortlinkList extends React.Component<Props, State> {
   }
 
   handleCopyClick(key: number) {
-    if(!this.state.groupedShortlinks[key]) return
+    if(!this.state.shortlinks[key]) return
 
-    const hash = this.state.groupedShortlinks[key].hash
-    const descriptor = this.state.groupedShortlinks[key].descriptor
+    const hash = this.state.shortlinks[key].hash
+    const descriptor = this.state.shortlinks[key].descriptor
 
-    const shortlink = this.state.groupedShortlinks[key].descriptor ? 
-                      linkTools.generateDescriptiveShortlink(this.state.groupedShortlinks[key].descriptor) :
-                      linkTools.generateShortlinkFromHash(this.state.groupedShortlinks[key].hash)
+    const shortlink = this.state.shortlinks[key].descriptor ? 
+                      linkTools.generateDescriptiveShortlink(this.state.shortlinks[key].descriptor) :
+                      linkTools.generateShortlinkFromHash(this.state.shortlinks[key].hash)
 
     clipboardTools.copy(shortlink)
   }
@@ -309,6 +311,15 @@ export default class ShortlinkList extends React.Component<Props, State> {
                 }
               })
             }
+            {this.state.isLoading == LoadMode.append &&  
+              <ShortlinkListItem.Loading />
+            }
+            {this.state.shortlinks.length == 0 && this.state.isLoading == LoadMode.none &&
+              <div className={`${globalClass}__list-footer_nothing`}>Nothing found</div>
+            }
+            {this.state.isLoading == LoadMode.none && this.state.shortlinks.length > 0 &&
+              <div className={`${globalClass}__list-footer_empty`}>&nbsp;</div>
+            }
             <DropdownMenu
               divRef={this.contextMenuRef}
               show={this.state.contextMenu.show}
@@ -321,14 +332,6 @@ export default class ShortlinkList extends React.Component<Props, State> {
               {this.getSubsection() == ShortlinkListSubsection.snoozed && <MenuItem label='Remove snooze' onClick={this.handleRemoveSnoozeTimer}/>}
               <MenuItem isDisabled={true} label='Edit shortlink' onClick={() => {  } }/>
             </DropdownMenu>
-          </div>
-          <div className={`${globalClass}__list-footer`}>
-            {this.state.isLoading == LoadMode.append &&  
-              <div className={`${globalClass}__list-footer__loading`}>Loading more…</div>
-            }
-            {this.state.shortlinks.length == 0 && this.state.isLoading == LoadMode.none &&
-              <div className={`${globalClass}__list-footer__empty`}>Nothing found</div>
-            }
           </div>
           
         </Scroller>

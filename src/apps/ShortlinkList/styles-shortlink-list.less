@@ -68,23 +68,17 @@
     padding: 0.5rem 0.75rem 0 0.75rem;
   }
 
-  &__list-footer {
+  &__list-footer_nothing,
+  &__list-footer_empty {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 2.75rem;
+    height: 4rem;
     justify-content: center;
     align-items: center;
-
-    &__loading {
-      .t-secondary-header_18-24;
-      .faded-text-loading-mixin;
-      .faded-loading-gradient;
-    }
-
-    &__empty {
-      .t-secondary-header_18-24;
-      color: @black-60
-    }
+  }
+  &__list-footer_nothing {
+    .t-secondary-header_18-24;
+    color: @black-60;
   }
 }

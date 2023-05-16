@@ -8,8 +8,10 @@ import LinkTools from '../../js/link.tools'
 import classNames from 'classnames'
 
 type Props = {
-  list: TCachedLink[],
+  list: TCachedLink[]
   totalCount?: number
+  isLoading?: boolean
+  display?: number
 }
 
 enum ActionLabels {
@@ -21,28 +23,31 @@ enum ActionLabels {
 const HistoryWidget : React.FC<Props> = (
   {
     list,
-    totalCount = 0
+    totalCount,
+    isLoading,
+    display
   } : Props
 ) => {
   const globalClass = styles.widgetWrapper+'_history-widget'
   const widgetClasses = classNames({
     [`${globalClass}`]: true
   })
-  const [activeKey, setActiveKey] = React.useState<number | null>(null)
+  const loadingSkeletons = _.range(display)
 
   const handleClick = (url: string, key: number, event?: React.MouseEvent) => {
     if(clipboardTools.enabled) clipboardTools.copy(url)
-    setActiveKey(key) 
   }
 
-  if(totalCount == 0) return(<></>)
+  if(totalCount == 0 && !isLoading) return(<></>)
+
   return (
     <div 
       className={`${widgetClasses}`}
     >	
       <div className={`${globalClass}__header`}>Last created shortlinks</div>
       <div className={`${globalClass}__link-list`}>
-        {list.map( (item: TCachedLink, key: number) => {
+
+        {!isLoading && list.map( (item: TCachedLink, key: number) => {
           if(!item.hash) return null
           const shortlink = item.descriptor?.descriptionTag && item.descriptor.descriptionTag != '' ? 
                             LinkTools.generateDescriptiveShortlink( item.descriptor ) :
@@ -75,9 +80,29 @@ const HistoryWidget : React.FC<Props> = (
             </Link>
           </div>) 
         })}
+
+        {isLoading && loadingSkeletons.map( (_, index) => {
+          return (
+            <div className={`${globalClass}__link-block ${globalClass}__loading`} key={index}>
+              <div className={`${globalClass}__shortlink`}>
+                <span className={`${globalClass}__shortlink__label`}>&nbsp;</span>
+              </div>
+              <div className={`${globalClass}__full-link`}>
+                <span className={`${globalClass}__full-link__label`}>&nbsp;</span>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
+}
+
+HistoryWidget.defaultProps = {
+  list: [],
+  totalCount: 0,
+  isLoading: false,
+  display: 3
 }
 
 export default HistoryWidget

@@ -382,13 +382,13 @@ var proxyStorage = {
 
 const tmpAddr = 'http://localhost:8002'
 
-if (true) {
+if (false) {} else if (true) {
   module.exports = {
-    serviceUrl: tmpAddr,
+    serviceUrl: window.location.origin,
     displayServiceUrl: 'shlk.cc',
-    target: 'extension',
+    target: 'webapp',
     mode: 'development'
-  }
+  } 
 } else {}
 
 /***/ })
@@ -400,7 +400,20 @@ if (true) {
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
+/******/ 	
+/******/ 		        // webpack-livereload-plugin
+/******/ 		        (function() {
+/******/ 		          if (typeof window === "undefined") { return };
+/******/ 		          var id = "webpack-livereload-plugin-script-6cadaf9417cab5db";
+/******/ 		          if (document.getElementById(id)) { return; }
+/******/ 		          var el = document.createElement("script");
+/******/ 		          el.id = id;
+/******/ 		          el.async = true;
+/******/ 		          el.src = "http://localhost:35729/livereload.js";
+/******/ 		          document.getElementsByTagName("head")[0].appendChild(el);
+/******/ 		          console.log("[Live Reload] enabled");
+/******/ 		        }());
+/******/ 		        // Check if module is in cache
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
@@ -513,6 +526,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var ALARM_NAME = 'checkInTact';
+var ALARM_PERIOD = (_config__WEBPACK_IMPORTED_MODULE_0___default().target) == 'production' ? 10 : 1;
 var AppNetwork = {
     updateRestoredTabs: function (ids) {
         var _a;
@@ -608,7 +622,7 @@ var BackgroundApp = {
     },
     setCheckInAlarm: function () {
         _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].setAlarm(ALARM_NAME, {
-            periodInMinutes: 1
+            periodInMinutes: ALARM_PERIOD
         });
     },
     install: function () {
@@ -637,7 +651,6 @@ var BackgroundApp = {
                         alarms = _a.sent();
                         if (!alarms[ALARM_NAME])
                             BackgroundApp.setCheckInAlarm();
-                        BackgroundApp.updateAlarms();
                         return [2 /*return*/];
                 }
             });
@@ -869,7 +882,7 @@ var BackgroundApp = {
                                 BackgroundApp.openTab(restoredTabs[id].location);
                             });
                             title = "Shlk.cc woke up tabs (".concat(restoredTabIDs.length, ")");
-                            message = "".concat(restoredTabs[restoredTabIDs[0]].siteTitle);
+                            message = "".concat(restoredTabs[restoredTabIDs[0]].siteTitle || restoredTabs[restoredTabIDs[0]].location);
                             message += restoredTabIDs.length > 1 ? "and ".concat(restoredTabIDs.length - 1, " more") : "";
                             _browser_api__WEBPACK_IMPORTED_MODULE_2__["default"].createNotification({
                                 type: 'basic',
@@ -887,8 +900,7 @@ var BackgroundApp = {
         });
     },
     handleMessage: function (message, sender, sendResponse) {
-        if (message.command == 'sync')
-            BackgroundApp.updateAlarms();
+        //if(message.command == 'sync') BackgroundApp.updateAlarms()
         return true;
     }
 };

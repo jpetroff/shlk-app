@@ -161,13 +161,13 @@ class GQLShortlinkQuery {
     return response.createOrUpdateShortlinkTimer
   }
 
-  public async deleteShortlinkSnoozeTimer(ids: string[]) : Promise<Partial<ShortlinkDocument>> {
+  public async deleteShortlinkSnoozeTimer(ids: string[]) : Promise<Partial<ShortlinkDocument>[]> {
     const query = gql`
     mutation deleteShortlinkSnoozeTimerWithVars(
       $ids: [String]
     ) {
       deleteShortlinkSnoozeTimer (
-        ids: $id
+        ids: $ids
       ) {
         _id
         hash

@@ -58,7 +58,11 @@ type State = {
     createDescriptiveLinkIsLoading?: boolean
   }
   mobileConvenienceInput: boolean
+
   cachedShortlinks: Array<TCachedLink>
+  cachedShortlinksLoading: boolean
+  cachedShortlinksDisplayNumber: number
+
   showSnoozeOptions: boolean
 }
 
@@ -86,7 +90,11 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       },
       successState: {},
       mobileConvenienceInput: false,
+
       cachedShortlinks: [],
+      cachedShortlinksLoading: false,
+      cachedShortlinksDisplayNumber: checkMobileMQ() ? 2 : 3,
+
       showSnoozeOptions: false
     }
     
@@ -243,10 +251,16 @@ export default class ShortlinkBar extends React.Component<Props, State> {
 
   private async loadAllCachedShortlinks() {
     Cache.setStorage()
-    const storage = await Cache.awaitStorage()
-    const length = checkMobileMQ() ? 2 : 3
     this.setState({
-      cachedShortlinks: _.first(storage, length)
+      cachedShortlinks: [],
+      cachedShortlinksLoading: true,
+      cachedShortlinksDisplayNumber: checkMobileMQ() ? 2 : 3
+    })
+    const storage = await Cache.awaitStorage()
+    this.setState({
+      cachedShortlinks: _.first(storage, this.state.cachedShortlinksDisplayNumber),
+      cachedShortlinksLoading: false,
+      cachedShortlinksDisplayNumber: checkMobileMQ() ? 2 : 3
     })
   }
 
@@ -495,7 +509,12 @@ export default class ShortlinkBar extends React.Component<Props, State> {
             </div>
 
             <div className={`${globalClass}__footer-wrapper`}>
-              <HistoryWidget list={this.state.cachedShortlinks} totalCount={this.state.cachedShortlinks.length} />
+              <HistoryWidget 
+                list={this.state.cachedShortlinks}
+                totalCount={this.state.cachedShortlinks.length}
+                isLoading={this.state.cachedShortlinksLoading}
+                display={this.state.cachedShortlinksDisplayNumber}
+              />
             </div>
           </div>
           
