@@ -1,24 +1,29 @@
 import _ from 'underscore'
-import { GraphQLClient, gql } from 'graphql-request'
 import { validateURL } from './utils'
 import config from './config'
+
+import GQLRequest from './request-wrapper.gql'
 
 
 class GQLShortlinkQuery {
   private queryUrl : string
 
-  private gqlClient : GraphQLClient
+  private gqlClient : GQLRequest
 
   constructor() {
     this.queryUrl = config.serviceUrl + '/api'
-    this.gqlClient = new GraphQLClient(this.queryUrl, { headers: {} })
+    this.gqlClient = new GQLRequest({
+      baseURL: this.queryUrl,
+      method: 'POST',
+      headers: {} 
+    })
   }
 
   public async createShortlink (location: string) : Promise<Partial<ShortlinkDocument>> {
     if (validateURL(location) == false) {
       throw new Error(`Not a valid URL: '${location}'`)
     }
-    const query = gql`
+    const query = `
     mutation createShortlinkWithVars (
       $location: String!
     ){
@@ -44,7 +49,7 @@ class GQLShortlinkQuery {
   ) : Promise<Partial<ShortlinkDocument>> {
     if(!descriptionTag || !location) return null
 
-    const query = gql`
+    const query = `
     mutation createDescriptiveShortlinkWithVars(
       $userTag: String
       $descriptionTag: String!
@@ -74,7 +79,7 @@ class GQLShortlinkQuery {
   }
 
   public async getUserShortlinks<T = Partial<ShortlinkDocument>>( { limit, skip, sort, order, search, isSnooze } : QICommon) : Promise<T[]> {
-    const query = gql`
+    const query = `
     query getUserShortlinksWithVars (
       $limit: Int
       $skip: Int
@@ -120,7 +125,7 @@ class GQLShortlinkQuery {
   }
 
   public async createOrUpdateShortlinkTimer(args: QISnoozeArgs) : Promise<Partial<ShortlinkDocument>> {
-    const query = gql`
+    const query = `
     mutation createOrUpdateShortlinkTimerWithVars(
       $location: String
       $hash: String
@@ -162,7 +167,7 @@ class GQLShortlinkQuery {
   }
 
   public async deleteShortlinkSnoozeTimer(ids: string[]) : Promise<Partial<ShortlinkDocument>[]> {
-    const query = gql`
+    const query = `
     mutation deleteShortlinkSnoozeTimerWithVars(
       $ids: [String]
     ) {
@@ -186,7 +191,7 @@ class GQLShortlinkQuery {
   }
 
   public async deleteShortlink(id: string) : Promise<Partial<ShortlinkDocument>> {
-    const query = gql`
+    const query = `
     mutation deleteShortlink(
       $id: String!
     ) {

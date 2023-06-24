@@ -16,7 +16,7 @@ import clipboardTools from '../../js/clipboard.tools'
 
 import Query from '../../js/shortlink.gql'
 import Cache, {TCachedLink} from '../../js/cache'
-import GracefulError, { GracefulErrorType } from './errors'
+import GracefulError, { GracefulErrorType } from '../../js/extended-error'
 import AppContext from '../../js/app.context'
 
 import { HistoryWidget } from '../History'
@@ -286,13 +286,12 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         userTag: result.descriptor?.userTag || '',
         descriptionTag: result.descriptor?.descriptionTag || ''
       })
-    } catch (err) {
+    } catch(error) {
       this.setState({errorState: {
-          lastError: GracefulError.process(err) || undefined,
+          lastError: error || undefined,
           createLinkResult: true
         }
       })
-      console.error(err) 
     }
     this.setState({loadingState: {createLinkIsLoading: false}})
   }
@@ -353,9 +352,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         userTag: result.descriptor.userTag,
         descriptionTag: result.descriptor.descriptionTag
       })
-    } catch (err) {
+    } catch(error) {
       this.setState({errorState: {
-          lastError: GracefulError.process(err) || undefined,
+          lastError: error || undefined,
           createDescriptiveLinkResult: true
         }
       })
@@ -374,7 +373,10 @@ export default class ShortlinkBar extends React.Component<Props, State> {
   }
 
   private _clearErrorState(): void {
-    this.setState({ errorState: {} })
+    this.setState({ errorState: {
+      lastError: undefined,
+      createDescriptiveLinkResult: this.state.errorState.createDescriptiveLinkResult
+    } })
   }
 
   private _clearSuccessState(): void {
@@ -421,13 +423,12 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         browserApi.closeActiveTab()
         browserApi.sendMessage({command: 'sync'})
       }
-    } catch(err) {
-      console.error(err)
+    } catch(error) {
       this.setState({errorState: {
-        lastError: GracefulError.process(err) || undefined,
-        createLinkResult: true
-      }
-    })
+          lastError: error || undefined,
+          createLinkResult: true
+        }
+      })
     }
   }
 

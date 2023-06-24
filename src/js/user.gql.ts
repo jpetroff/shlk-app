@@ -1,20 +1,24 @@
 import _ from 'underscore'
-import { GraphQLClient, gql } from 'graphql-request'
+import GQLRequest from './request-wrapper.gql'
 import { validateURL } from './utils'
 import config from './config'
 
 class GQLUserQuery {
   private queryUrl : string
 
-  private gqlClient : GraphQLClient
+  private gqlClient : GQLRequest
 
   constructor() {
     this.queryUrl = config.serviceUrl + '/api'
-    this.gqlClient = new GraphQLClient(this.queryUrl, { headers: {} })
+    this.gqlClient = new GQLRequest({
+      baseURL: this.queryUrl,
+      method: 'POST',
+      headers: {} 
+    })
   }
 
   public async getLoggedInUser() : Promise<Maybe<AnyObject>> {
-    const query = gql`
+    const query = `
     query {
       getLoggedInUser {
         name,
@@ -32,7 +36,7 @@ class GQLUserQuery {
   }
 
   public async getPredefinedTimers() : Promise<AnyObject[]> {
-    const query = gql`
+    const query = `
     query {
       getPredefinedTimers
     }
@@ -43,7 +47,7 @@ class GQLUserQuery {
   }
 
   public async updateLoggedInUser(args: QIUser) : Promise<User | null> {
-    const query = gql`
+    const query = `
     mutation updateLoggedInUserWithVars(
       $name: String
       $avatar: String

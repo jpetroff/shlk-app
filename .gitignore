@@ -121,4 +121,5 @@ web_modules/
 
 # own
 .extension
+stats.json
 

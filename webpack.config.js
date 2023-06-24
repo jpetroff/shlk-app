@@ -1,22 +1,21 @@
 /* eslint-disable */
-const path = require('path');
-const glob = require('glob');
-const fs = require('fs');
-const _ = require('underscore');
+const path = require('path')
+const glob = require('glob')
+const fs = require('fs')
+const _ = require('underscore')
 const webpack = require('webpack')
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const LiveReloadPlugin = require('webpack-livereload-plugin');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const sourceDir = './src';
-const outputDir = './dist';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const LiveReloadPlugin = require('webpack-livereload-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = (env, argv) => {
-  const isProduction = !!(process.env.NODE_ENV == 'production');
-  const appTarget = process.env.APP_TARGET;
+  const isProduction = !!(process.env.NODE_ENV == 'production')
+  const appTarget = process.env.APP_TARGET || 'webapp'
+
+  const sourceDir = './src'
+  const outputDir = appTarget == 'extension' ? './dist_extension' : './dist'
 
   const config = {
     mode: process.env.NODE_ENV || 'production',
@@ -74,7 +73,6 @@ module.exports = (env, argv) => {
       splitChunks: {
         cacheGroups: {
           commons: {
-            // test: /[\\/]node_modules[\\/]/,
             test(module) {
               return (
                 module.resource &&
@@ -176,7 +174,8 @@ module.exports = (env, argv) => {
             { 
               loader: "css-modules-typescript-loader", 
               options: {
-                mode: 'emit'
+                mode: 'emit',
+                esModule: false
               }
             },
             { 
@@ -195,7 +194,8 @@ module.exports = (env, argv) => {
                 lessOptions: {
                   paths: ['.'],
                   rewriteUrls: 'all',
-                  rootpath: '/'
+                  rootpath: '/',
+                  esModule: false
                 }
               }
             }

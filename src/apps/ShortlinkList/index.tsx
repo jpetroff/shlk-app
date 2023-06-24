@@ -59,7 +59,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
       groupedShortlinks: [],
       searchQuery: '',
       pointer: 0,
-      limit: props.limit || 8,
+      limit: props.limit || 30,
       staleResults: false,
       isLoading: LoadMode.none,
       contextMenu: {
