@@ -14,8 +14,8 @@ const Footer : React.FC<{}> = () => {
           · PP Mori typeface <Heart className={`${globalClass}__with-love-icon`} />
         </div>
         <div className={`${globalClass}__item`}>
-          <Flag className={`${globalClass}__flag-icon`} />
           <span>Valmistettu Suomessa</span>
+          <Flag className={`${globalClass}__flag-icon`} />
         </div>
         
         {/* <div className={`${globalClass}__item`}>

@@ -107,17 +107,20 @@ export default class UserSettings extends React.Component<Props, State> {
           </div>
         </div>
         <div className={`${globalClass}__field`}>
-          <label htmlFor={'slug-input-field'} className={`${globalClass}__field__label`}>Choose a slug:</label>
-          <Input 
-            className={`${globalClass}__field__input`}
-            id={'slug-input-field'}
-            value={this.state.userTag} 
-            onChange={(value, event) => this.setState( {userTag: value} ) }
-            />
+          <label htmlFor={'slug-input-field'} className={`${globalClass}__field__label`}>Choose a personal shortlink prefix:</label>
+          <div className={`${globalClass}__field__composite-input`}>
+            <span className={`${globalClass}__field__composite-input__prefix`}>{config.displayServiceUrl}/</span>
+            <Input
+              className={`${globalClass}__field__input`}
+              id={'slug-input-field'}
+              value={this.state.userTag} 
+              onChange={(value, event) => this.setState( {userTag: value} ) }
+              />
+            </div>
         </div>
         {config.target != 'extension' && <div className={`${globalClass}__download`}>
           <span className={`${globalClass}__download__label`}>Install browser extension:</span>
-          <Link href={``} className={`${globalClass}__download__link`} >
+          <Link href={config.extensionLink} className={`${globalClass}__download__link`}>
             <img src={`/assets/chrome_store.jpg`} srcSet={`/assets/chrome_store@2x.jpg 2x`} className={`${globalClass}__download__link-content`} />
           </Link>
         </div>}

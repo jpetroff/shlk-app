@@ -387,7 +387,8 @@ if (false) {} else if (true) {
     serviceUrl: window.location.origin,
     displayServiceUrl: 'shlk.cc',
     target: 'webapp',
-    mode: 'development'
+    mode: 'development',
+    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?authuser=0&hl=en'
   } 
 } else {}
 
@@ -404,7 +405,7 @@ if (false) {} else if (true) {
 /******/ 		        // webpack-livereload-plugin
 /******/ 		        (function() {
 /******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-3eaf10e216a81bb0";
+/******/ 		          var id = "webpack-livereload-plugin-script-f7a538f8daf38de8";
 /******/ 		          if (document.getElementById(id)) { return; }
 /******/ 		          var el = document.createElement("script");
 /******/ 		          el.id = id;

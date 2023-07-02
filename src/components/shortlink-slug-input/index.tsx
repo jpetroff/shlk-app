@@ -20,8 +20,12 @@ export enum SlugInputSpecialChars {
 }
 
 type Props = {
-  text: Array<TextPattern | string>
-  onChange: (value: string, type: string) => void
+  displayLink: string
+  userTag: string
+  value: string
+  placeholder?: string
+  flyover?: React.ReactElement
+  onChange: (value: string) => void
   show?: boolean
   generatedLink?: string
   isLoading?: boolean
@@ -31,13 +35,17 @@ type Props = {
 
 export const ShortlinkSlugInput : React.FC<Props> = (
   {
-    text,
     onChange,
-    show = true,
-    isLoading = false,
+    show,
+    isLoading,
     generatedLink,
-    hasCta = true,
-    error = false
+    hasCta,
+    error,
+    displayLink,
+    userTag,
+    value,
+    placeholder,
+    flyover
   } : Props
 ) => {
 
@@ -71,30 +79,25 @@ export const ShortlinkSlugInput : React.FC<Props> = (
         onClick={handleCopy}
       >
         <div className={`${globalClass}__constructed-input`}>
-          {text.map((chunk: TextPattern | string, index ) => {
-              if (_.isString(chunk)) {
-                switch(chunk) {
-                  case SlugInputSpecialChars.mobileLineBreak : 
-                    return (<br key={index} className={`${globalClass}__mlbr`} />)
-                  case SlugInputSpecialChars.lineBreak : 
-                    return (<br key={index} className={`${globalClass}__lbr`} />)
-                  default : 
-                    return (<span key={index} className={`${globalClass}_text-filler ${globalClass}__input-common-style`}>{chunk}</span>)
-                }
-              } else {
-                return (
-                  <span key={index} className={`${globalClass}__input-resizable`}>
-                    <input 
-                      className={`${globalClass}__input-resizable__real-input ${globalClass}__input-common-style`}
-                      value={chunk.value}
-                      onChange={(event) => {onChange(event.target.value, chunk.key)}}
-                    />
-                    <span className={`${globalClass}__input-resizable__width-sizer ${globalClass}__input-common-style ${globalClass}__input-resizable__width-sizer_${chunk.value ? 'hide' : 'show'}`}>{chunk.value || chunk.placeholder}</span>
-                  </span>	
-                )
-              }
-            })
-          }
+          <span className={`${globalClass}_text-filler ${globalClass}__input-common-style`}>{displayLink}/</span>
+          <div className={`${globalClass}_text-filler ${globalClass}__input-common-style ${globalClass}__user-tag`}>
+            {userTag}
+            {flyover &&
+              <div className={`${globalClass}__flyover`}>
+                <div className={`${globalClass}__flyover__content`}>{flyover}</div>
+              </div>
+            }
+          </div>
+          <div className={`${globalClass}_text-filler ${globalClass}__input-common-style`}>@</div>
+          <br className={`${globalClass}__mlbr`} />
+          <span className={`${globalClass}__input-resizable`}>
+            <input 
+              className={`${globalClass}__input-resizable__real-input ${globalClass}__input-common-style`}
+              value={value}
+              onChange={(event) => {onChange(event.target.value)}}
+            />
+            <span className={`${globalClass}__input-resizable__width-sizer ${globalClass}__input-common-style ${globalClass}__input-resizable__width-sizer_${value ? 'hide' : 'show'}`}>{value || placeholder}</span>
+          </span>
         </div>
         <Link
             className={`${globalClass}__copy_pseudolink`}
@@ -122,6 +125,15 @@ export const ShortlinkSlugInput : React.FC<Props> = (
     </div>
   )
 
+}
+
+ShortlinkSlugInput.defaultProps = {
+  show: true,
+  isLoading: false,
+  hasCta: true,
+  error: false,
+  value: '',
+  placeholder: 'type-your-custom-value'
 }
 
 export default ShortlinkSlugInput

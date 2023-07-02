@@ -118,7 +118,8 @@ const Link : React.FC<Props> = (
   } else {
     return <a href={args.href} {...htmlAnchorAttributes} 
     className={`${linkClasses} ${args.className || ''}`}
-    onClick={handleClick}>
+    onClick={handleClick}
+    target='_blank'>
       {inner}
     </a>
   }

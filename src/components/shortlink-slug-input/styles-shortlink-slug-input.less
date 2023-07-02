@@ -56,6 +56,7 @@
 			.t-secondary-header_18-24;
       line-height: 1.625rem;
       vertical-align: baseline;
+      position: relative;
 		}
 	}
 
@@ -111,4 +112,63 @@
 	@media @mq-mobile {
 		&__lbr {display: none;}
 	}
+
+  &__user-tag {
+    border-bottom: 2px dotted @black-60;
+    cursor: help;
+    position: relative;
+    z-index: @z-static-low;
+  }
+  @media @mq-mobile {
+    .webapp &__user-tag {
+      border-bottom: none;
+      cursor: default;
+    }
+  }
+
+  &__flyover {
+    position: absolute;
+    left: 50%;
+    top: 110%;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out, top 0.15s ease-in-out, bottom 0.15s ease-in-out;
+    transform: translateX(-50%);
+    padding: 2rem;
+    padding-top: 0.75rem;
+    background-color: transparent;
+    pointer-events: none;
+
+    &__content {
+      cursor: default;
+      color: @black-30;
+      background-color: rgba(@black-100, 96);
+      padding: 1rem;
+      border-radius: 4px;
+      box-shadow: @shadow-light-30, @thin-shadow-stroke;
+    }
+  }
+  &__user-tag:hover &__flyover {
+    opacity: 1;
+    top: 100%;
+    pointer-events: all;
+  }
+  @media @mq-mobile {
+    .webapp &__flyover {
+      display: none;
+    }
+    .extension &__flyover {
+      top: auto;
+      bottom: 110%;
+      padding-top: 2rem;
+      padding-bottom: 0.25rem;
+      transform: none;
+      left: 0;
+    }
+    .extension &__user-tag:hover &__flyover {
+      opacity: 1;
+      top: auto;
+      bottom: 100%;
+      pointer-events: all;
+    }
+  }
 }

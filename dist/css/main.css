@@ -1150,7 +1150,8 @@ body {
   font-size: 1.12rem;
   line-height: 1.5rem;
   letter-spacing: 0.01em;
-  color: #4e495a;
+  font-weight: 400;
+  color: #1c1825;
   padding: 0;
   margin: 0;
 }
@@ -1606,150 +1607,174 @@ body {
     flex-grow: 0;
   }
 }
-
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-slug-input/styles-shortlink-slug-input.less ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
-.PNfNbDTmGG95JCxskKgQ_slug-input {
-  padding-top: 2rem;
-  color: #4e495a;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 1.25rem 1rem;
-  border-top: 2px solid #e4e1ea;
-  vertical-align: baseline;
-}
-@media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input {
-    padding: 1rem 0 0.75rem 0;
-    gap: 0rem;
-  }
-  .__mobile-convenience-state .PNfNbDTmGG95JCxskKgQ_slug-input {
-    padding-left: 1.25rem;
-    padding-right: 0.75rem;
-  }
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input__label {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.uX1loPVNRTk8j9VgmdWu_app-body__flyover {
   font-size: 0.81rem;
   line-height: 1rem;
-  letter-spacing: 0.02em;
-  color: #4e495a;
 }
-.PNfNbDTmGG95JCxskKgQ_slug-input__action-wrapper {
-  background: transparent;
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  display: flex;
-  align-items: baseline;
-  gap: 1.25rem;
-  margin-left: -0.25rem;
+.uX1loPVNRTk8j9VgmdWu_app-body__logged-content,
+.uX1loPVNRTk8j9VgmdWu_app-body__anonymous-content {
+  min-width: 10rem;
+  max-width: 14rem;
+  text-align: center;
 }
-@media screen and (max-width: 480px) {
-  .__mobile-convenience-state .PNfNbDTmGG95JCxskKgQ_slug-input__action-wrapper {
-    flex-grow: 1;
-  }
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  letter-spacing: 0.01em;
-  color: #4e495a;
-  padding: 0;
-  line-height: inherit;
-  display: inline-block;
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input_error .PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
-  color: #ba3312;
-}
-@media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
-    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.12rem;
-    line-height: 1.5rem;
-    letter-spacing: 0.01em;
-    line-height: 1.625rem;
-    vertical-align: baseline;
-  }
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable {
-  padding: 0;
-  min-width: 0.25rem;
+
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/video/styles-video.less ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+.ey9U83ttf8Pc_lL8hS6w_video {
+  box-sizing: border-box;
   position: relative;
-  display: inline-block;
 }
-.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__real-input {
-  position: absolute;
+.ey9U83ttf8Pc_lL8hS6w_video__video-node_responsive {
   width: 100%;
-  left: 0;
-  border: none;
-  padding: 0;
-  margin: 0;
-  height: auto;
-  background-color: transparent;
+}
+.ey9U83ttf8Pc_lL8hS6w_video__thumbnail {
+  width: 100%;
   z-index: 1;
-  outline: none;
-  border-radius: 0;
 }
-.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__real-input:focus {
-  border-bottom: 2px solid #4e495a;
+.ey9U83ttf8Pc_lL8hS6w_video_show {
+  display: block;
 }
-.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__width-sizer_hide {
-  opacity: 0;
-  z-index: 0;
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__width-sizer_show {
-  opacity: 1;
-  z-index: 0;
-  color: #b0adb9;
-}
-@media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable {
-    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1.12rem;
-    line-height: 1.5rem;
-    letter-spacing: 0.01em;
-    line-height: 1.625rem;
-    vertical-align: baseline;
-  }
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_pseudolink {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1rem;
-  line-height: 1.25rem;
-  letter-spacing: 0.014em;
-}
-@media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_pseudolink {
-    display: none;
-  }
-}
-.PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_button {
+.ey9U83ttf8Pc_lL8hS6w_video_hide {
   display: none;
 }
-@media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_button {
-    display: flex;
-  }
+
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/hero-input/styles-hero-input.less ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+.Ln1Azy9g3YaOiJSiDx3g_hero-input {
+  color: #1c1825;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #0045ff;
+  border-radius: 0.5rem;
+  position: relative;
+  box-sizing: border-box;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f5f8ff;
+  /* 
+    mods
+   */
 }
 @media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input__content-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input {
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input {
+    margin-left: 0;
+    margin-right: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    flex-wrap: wrap;
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    gap: 0.25rem;
+  }
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input_empty.Ln1Azy9g3YaOiJSiDx3g_hero-input_can-shortcut-paste {
+    gap: 0;
   }
 }
-@media screen and (min-width: 481px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input__mlbr {
-    display: none;
-  }
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_focus {
+  box-shadow: 0 0 0 0.125rem #d6e1ff;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__clear {
+  display: none;
+}
+.__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__clear {
+  display: flex;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_can-shortcut-paste .Ln1Azy9g3YaOiJSiDx3g_hero-input__paste {
+  display: none;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_not-empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__paste {
+  display: none;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__create {
+  display: none;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__snooze {
+  display: none;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01em;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  border: none;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 4rem;
+  outline: none;
+  display: block;
+  padding: 1rem;
+  padding-right: 0;
+  z-index: 1;
 }
 @media screen and (max-width: 480px) {
-  .PNfNbDTmGG95JCxskKgQ_slug-input__lbr {
-    display: none;
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.014em;
+    line-height: 1.5rem;
+    padding: 1rem 0 1rem 0.75rem;
+  }
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
+    padding: 0.5rem 0 0.5rem 1.25rem;
+  }
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input__cta-actions__mobile-tip {
+    display: block;
+  }
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__cta-actions {
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__mobile-tip {
+  display: none;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+  line-height: 1.5rem;
+  position: absolute;
+  z-index: 0;
+  color: #7c7887;
+  top: 1rem;
+  left: 1rem;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder_show {
+  visibility: visible;
+}
+.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder_hide {
+  visibility: hidden;
+}
+@media screen and (max-width: 480px) {
+  .Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.014em;
+    line-height: 1.5rem;
+    left: 0.75rem;
+  }
+  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
+    top: 1.25rem;
+    left: 1.25rem;
   }
 }
 
@@ -1935,166 +1960,6 @@ body {
   justify-content: center;
 }
 
-/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/video/styles-video.less ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************/
-.ey9U83ttf8Pc_lL8hS6w_video {
-  box-sizing: border-box;
-  position: relative;
-}
-.ey9U83ttf8Pc_lL8hS6w_video__video-node_responsive {
-  width: 100%;
-}
-.ey9U83ttf8Pc_lL8hS6w_video__thumbnail {
-  width: 100%;
-  z-index: 1;
-}
-.ey9U83ttf8Pc_lL8hS6w_video_show {
-  display: block;
-}
-.ey9U83ttf8Pc_lL8hS6w_video_hide {
-  display: none;
-}
-
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/hero-input/styles-hero-input.less ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
-.Ln1Azy9g3YaOiJSiDx3g_hero-input {
-  color: #1c1825;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  border: 2px solid #0045ff;
-  border-radius: 0.5rem;
-  position: relative;
-  box-sizing: border-box;
-  gap: 0.5rem;
-  padding-right: 0.5rem;
-  background-color: #f5f8ff;
-  /* 
-    mods
-   */
-}
-@media screen and (max-width: 480px) {
-  .Ln1Azy9g3YaOiJSiDx3g_hero-input {
-    margin-left: -2px;
-    margin-right: -2px;
-  }
-  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input {
-    margin-left: 0;
-    margin-right: 0;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
-    flex-wrap: wrap;
-    padding: 0.75rem 0.75rem 0.75rem 0;
-    gap: 0.25rem;
-  }
-  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input_empty.Ln1Azy9g3YaOiJSiDx3g_hero-input_can-shortcut-paste {
-    gap: 0;
-  }
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input_focus {
-  box-shadow: 0 0 0 0.125rem #d6e1ff;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__clear {
-  display: none;
-}
-.__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__clear {
-  display: flex;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input_can-shortcut-paste .Ln1Azy9g3YaOiJSiDx3g_hero-input__paste {
-  display: none;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input_not-empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__paste {
-  display: none;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__create {
-  display: none;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input_empty .Ln1Azy9g3YaOiJSiDx3g_hero-input__snooze {
-  display: none;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.12rem;
-  line-height: 1.5rem;
-  letter-spacing: 0.01em;
-  background-color: transparent;
-  border-radius: 0.5rem;
-  border: none;
-  flex-grow: 1;
-  flex-shrink: 1;
-  min-width: 4rem;
-  outline: none;
-  display: block;
-  padding: 1rem;
-  padding-right: 0;
-  z-index: 1;
-}
-@media screen and (max-width: 480px) {
-  .Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
-    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.014em;
-    line-height: 1.5rem;
-    padding: 1rem 0 1rem 0.75rem;
-  }
-  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__input-elem {
-    padding: 0.5rem 0 0.5rem 1.25rem;
-  }
-  .Ln1Azy9g3YaOiJSiDx3g_hero-input__cta-actions__mobile-tip {
-    display: block;
-  }
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input__actions {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-@media screen and (max-width: 480px) {
-  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__cta-actions {
-    justify-content: flex-end;
-    width: 100%;
-  }
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input__mobile-tip {
-  display: none;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
-  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.12rem;
-  letter-spacing: 0.01em;
-  line-height: 1.5rem;
-  position: absolute;
-  z-index: 0;
-  color: #7c7887;
-  top: 1rem;
-  left: 1rem;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder_show {
-  visibility: visible;
-}
-.Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder_hide {
-  visibility: hidden;
-}
-@media screen and (max-width: 480px) {
-  .Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
-    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.014em;
-    line-height: 1.5rem;
-    left: 0.75rem;
-  }
-  .__mobile-convenience-state .Ln1Azy9g3YaOiJSiDx3g_hero-input__placeholder {
-    top: 1.25rem;
-    left: 1.25rem;
-  }
-}
-
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-display/styles-shortlink-display.less ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -2223,6 +2088,209 @@ body {
   background-clip: text;
   animation: loading 2s linear infinite;
   color: transparent;
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-modules-typescript-loader/index.js??ruleSet[1].rules[4].use[1]!./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/shortlink-slug-input/styles-shortlink-slug-input.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+.PNfNbDTmGG95JCxskKgQ_slug-input {
+  padding-top: 2rem;
+  color: #4e495a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem 1rem;
+  border-top: 2px solid #e4e1ea;
+  vertical-align: baseline;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input {
+    padding: 1rem 0 0.75rem 0;
+    gap: 0rem;
+  }
+  .__mobile-convenience-state .PNfNbDTmGG95JCxskKgQ_slug-input {
+    padding-left: 1.25rem;
+    padding-right: 0.75rem;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__label {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.81rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  color: #4e495a;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__action-wrapper {
+  background: transparent;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-left: -0.25rem;
+}
+@media screen and (max-width: 480px) {
+  .__mobile-convenience-state .PNfNbDTmGG95JCxskKgQ_slug-input__action-wrapper {
+    flex-grow: 1;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.01em;
+  color: #4e495a;
+  padding: 0;
+  line-height: inherit;
+  display: inline-block;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input_error .PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
+  color: #ba3312;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__input-common-style {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+    line-height: 1.625rem;
+    vertical-align: baseline;
+    position: relative;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable {
+  padding: 0;
+  min-width: 0.25rem;
+  position: relative;
+  display: inline-block;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__real-input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  background-color: transparent;
+  z-index: 1;
+  outline: none;
+  border-radius: 0;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__real-input:focus {
+  border-bottom: 2px solid #4e495a;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__width-sizer_hide {
+  opacity: 0;
+  z-index: 0;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable__width-sizer_show {
+  opacity: 1;
+  z-index: 0;
+  color: #b0adb9;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__input-resizable {
+    font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.12rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+    line-height: 1.625rem;
+    vertical-align: baseline;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_pseudolink {
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_pseudolink {
+    display: none;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_button {
+  display: none;
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input .PNfNbDTmGG95JCxskKgQ_slug-input__copy_button {
+    display: flex;
+  }
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 481px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__mlbr {
+    display: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .PNfNbDTmGG95JCxskKgQ_slug-input__lbr {
+    display: none;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__user-tag {
+  border-bottom: 2px dotted #9692a0;
+  cursor: help;
+  position: relative;
+  z-index: 30;
+}
+@media screen and (max-width: 480px) {
+  .webapp .PNfNbDTmGG95JCxskKgQ_slug-input__user-tag {
+    border-bottom: none;
+    cursor: default;
+  }
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__flyover {
+  position: absolute;
+  left: 50%;
+  top: 110%;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out, top 0.15s ease-in-out, bottom 0.15s ease-in-out;
+  transform: translateX(-50%);
+  padding: 2rem;
+  padding-top: 0.75rem;
+  background-color: transparent;
+  pointer-events: none;
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__flyover__content {
+  cursor: default;
+  color: #4e495a;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px -5px rgba(78, 73, 90, 0.36), 0 0 0 1px rgba(78, 73, 90, 0.1);
+}
+.PNfNbDTmGG95JCxskKgQ_slug-input__user-tag:hover .PNfNbDTmGG95JCxskKgQ_slug-input__flyover {
+  opacity: 1;
+  top: 100%;
+  pointer-events: all;
+}
+@media screen and (max-width: 480px) {
+  .webapp .PNfNbDTmGG95JCxskKgQ_slug-input__flyover {
+    display: none;
+  }
+  .extension .PNfNbDTmGG95JCxskKgQ_slug-input__flyover {
+    top: auto;
+    bottom: 110%;
+    padding-top: 2rem;
+    padding-bottom: 0.25rem;
+    transform: none;
+    left: 0;
+  }
+  .extension .PNfNbDTmGG95JCxskKgQ_slug-input__user-tag:hover .PNfNbDTmGG95JCxskKgQ_slug-input__flyover {
+    opacity: 1;
+    top: auto;
+    bottom: 100%;
+    pointer-events: all;
+  }
 }
 
 /*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -3099,7 +3167,7 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
   flex: 1;
 }
 .lWo9lTZGDLfpnj41D9Ma_user-settings__header {
@@ -3151,6 +3219,21 @@ body {
   line-height: 1rem;
   letter-spacing: 0.02em;
   padding-left: 0.75rem;
+  color: #4e495a;
+}
+.lWo9lTZGDLfpnj41D9Ma_user-settings__field__composite-input {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.lWo9lTZGDLfpnj41D9Ma_user-settings__field__composite-input__prefix {
+  padding-left: 0.75rem;
+  padding-right: 0.25rem;
+  font-family: 'Mori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.014em;
+  color: #4e495a;
 }
 .lWo9lTZGDLfpnj41D9Ma_user-settings__submit {
   display: flex;
@@ -3197,6 +3280,7 @@ body {
 }
 .lWo9lTZGDLfpnj41D9Ma_user-settings__download__link-content {
   width: 160px;
+  height: 46px;
 }
 
 

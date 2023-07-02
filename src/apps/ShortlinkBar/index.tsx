@@ -23,6 +23,7 @@ import { HistoryWidget } from '../History'
 import browserApi from '../../js/browser.api'
 import Video from '../../components/video'
 import Footer from '../../apps/Footer'
+import Link from '../../components/link'
 
 const config = require('../../js/config')
 
@@ -158,16 +159,18 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     ) this._setMobileConvenienceInput(true)
   }
 
-  updateLocation(str: string, isClearPress: boolean = false) {
+  updateLocation(newLocation: string, isClearPress: boolean = false) {
+    const keepSnoozeOptionsOpen = newLocation != '' && this.state.showSnoozeOptions
+
     this._clearErrorState()
     this.setState({
-      location: str.trim(),
+      location: newLocation.trim(),
       generatedShortlink: undefined,
       generatedDescriptiveShortlink: undefined,
       generatedHash: undefined,
       userTag: this.defaultUserTag(),
       descriptionTag: '',
-      showSnoozeOptions: false
+      showSnoozeOptions: keepSnoozeOptionsOpen
     })
     if(isClearPress) this._setMobileConvenienceInput(false)
   }
@@ -310,12 +313,12 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     this.submitLocation()
   }
 
-  handleDescriptorChange(value: string, type: string) {
+  handleDescriptorChange(value: string) {
     this._clearErrorState()
-    if(type == 'userTag') this.setState( {userTag: modifyURLSlug(value)} )
-    else if(type == 'descriptionTag') this.setState( {descriptionTag: modifyURLSlug(value)} )
-
-    this.setState({loadingState: {createDescriptiveLinkIsLoading: true}})
+    this.setState({
+      descriptionTag: modifyURLSlug(value),
+      loadingState: {createDescriptiveLinkIsLoading: true}
+    })
     this.submitDescriptor()
   }
 
@@ -360,16 +363,6 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       })
     }
     this.setState({loadingState: {createDescriptiveLinkIsLoading: false}})
-  }
-
-  private _generateTextPattern(): Array<TextPattern | string> {
-    return [
-      linkTools.displayServiceUrl+'/',
-      (this.props.context?.user?.userTag ? this.props.context?.user?.userTag : 'you'),
-      '@',
-      SlugInputSpecialChars.mobileLineBreak,
-      { key: 'descriptionTag', value: this.state.descriptionTag, placeholder: 'your-custom-url' },
-    ]
   }
 
   private _clearErrorState(): void {
@@ -474,13 +467,30 @@ export default class ShortlinkBar extends React.Component<Props, State> {
                 />
                 {this.state.generatedShortlink && 
                   <ShortlinkSlugInput
-                    text={this._generateTextPattern()}
+                    displayLink={linkTools.displayServiceUrl}
+                    userTag={this.props.context?.user?.userTag ? this.props.context?.user?.userTag : 'someone'}
+                    value={this.state.descriptionTag}
+                    placeholder={`your-custom-url`}
                     onChange={this.handleDescriptorChange}
                     show={this.state.generatedShortlink ? true : false}
                     generatedLink={this.state.generatedDescriptiveShortlink}
                     isLoading={this.state.loadingState.createDescriptiveLinkIsLoading}
                     hasCta={!this.state.generatedDescriptiveShortlink || this.state.generatedDescriptiveShortlink != ''}
                     error={this.state.errorState.createDescriptiveLinkResult}
+                    flyover={
+                      <div className={`${globalClass}__flyover`}>
+                        {this.props.context?.user && 
+                          <div className={`${globalClass}__logged-content`}>
+                            You can choose different name in <Link inline={true} to='/app/profile'>Profile</Link>
+                          </div>
+                        }
+                        { !this.props.context?.user &&
+                          <div className={`${globalClass}__anonymous-content`}>
+                            You can make it unique by <Link inline={true} to='/login'>creating&nbsp;an&nbsp;account</Link>
+                          </div>
+                        }
+                      </div>
+                    }
                   />
                 }
                 </>)
