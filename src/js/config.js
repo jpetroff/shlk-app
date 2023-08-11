@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'extensi
     displayServiceUrl: 'shlk.cc',
     target: 'extension',
     mode: 'development',
-    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?authuser=0&hl=en'
+    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?hl=en'
   }
 } else if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'webapp') {
   module.exports = {
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'extensi
     displayServiceUrl: 'shlk.cc',
     target: 'webapp',
     mode: 'development',
-    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?authuser=0&hl=en'
+    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?hl=en'
   } 
 } else if (process.env.NODE_ENV === 'production' && process.env.APP_TARGET) {
   module.exports = {
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'extensi
     displayServiceUrl: 'shlk.cc',
     target: process.env.APP_TARGET,
     mode: 'production',
-    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?authuser=0&hl=en'
+    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?hl=en'
   }
 } else {
   module.exports = {
@@ -30,6 +30,6 @@ if (process.env.NODE_ENV === 'development' && process.env.APP_TARGET == 'extensi
     displayServiceUrl: 'shlk.cc',
     target: 'webapp',
     mode: 'production',
-    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?authuser=0&hl=en'
+    extensionLink: 'https://chrome.google.com/webstore/detail/nhmacemlmokklfnncnkncnboajhifepd?hl=en'
   }
 }

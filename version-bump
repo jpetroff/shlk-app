@@ -1,0 +1,73 @@
+#! /usr/local/bin/node
+const fs = require('fs')
+
+const packageFileName = './package.json'
+const manifestFileName = './src/manifest.json'
+
+const PURPLE='\033[1;35m'
+const BIRed='\033[1;91m'
+const IRed='\033[0;91m'
+const NC='\033[0m'
+
+let packageFile
+
+try {
+  packageFile = fs.readFileSync(packageFileName)
+} catch(err) {
+  console.log(`[x] ${IRed}Error reading ${BIRed}package.json${NC}`)
+  err && console.log(`    ${err.message}`)
+  return 1
+}
+
+let packageJSON
+
+try {
+  packageJSON =  JSON.parse(packageFile)
+} catch(err) {
+  console.log(`[x] ${IRed}Error parsing ${BIRed}package.json${NC}`)
+  err && console.log(`    ${err.message}`)
+  return 1
+}
+
+console.log(`[✓] Current version: ${packageJSON.version}`)
+
+const isUpdateMajor = process.argv.length >= 2 && process.argv[2] == 'major'
+let versionBreakdown = (new String(packageJSON.version)).split('.')
+if(versionBreakdown[1] == undefined) versionBreakdown[1] = '0'
+if(!versionBreakdown[2] == undefined) versionBreakdown[2] = '0'
+
+if(isUpdateMajor) {
+  versionBreakdown[1] = (parseInt(versionBreakdown[1]) || 0) + 1
+} else {
+  versionBreakdown[2] = (parseInt(versionBreakdown[2]) || 0) + 1
+}
+
+packageJSON.version = versionBreakdown.join('.')
+
+fs.writeFileSync(packageFileName, JSON.stringify(packageJSON, null, 4))
+
+let manifestFile
+
+try {
+  manifestFile = fs.readFileSync(manifestFileName)
+} catch(err) {
+  console.log(`[x] ${IRed}Error reading ${BIRed}${manifestFileName}${NC}`)
+  err && console.log(`    ${err.message}`)
+  return 1
+}
+
+let manifestJSON
+
+try {
+  manifestJSON =  JSON.parse(manifestFile)
+} catch(err) {
+  console.log(`[x] ${IRed}Error parsing ${BIRed}${manifestFileName}${NC}`)
+  err && console.log(`    ${err.message}`)
+  return 1
+}
+
+manifestJSON.version = versionBreakdown.join('.')
+
+fs.writeFileSync(manifestFileName, JSON.stringify(manifestJSON, null, 4))
+
+console.log(`[✓] New version: ${PURPLE}${versionBreakdown.join('.')}${NC}`)

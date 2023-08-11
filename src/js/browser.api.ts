@@ -1,4 +1,5 @@
 import _ from 'underscore'
+import config from './config'
 
 export type ExtensionAlarm = chrome.alarms.Alarm
 export type ExtensionAlarmCreateInfo = chrome.alarms.AlarmCreateInfo
