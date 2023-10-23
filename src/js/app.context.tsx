@@ -90,6 +90,7 @@ export async function getInitAppContext(): Promise<AppContextState> {
 
   // getting login data
   const currentUser = await UserQuery.getLoggedInUser()
+  console.log(currentUser)
   result.user = currentUser as LoginContext
 
   return result

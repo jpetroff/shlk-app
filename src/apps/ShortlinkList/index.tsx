@@ -13,6 +13,7 @@ import MenuItem from '../../components/menu-item'
 import Scroller from '../../components/scroller'
 import clipboardTools from '../../js/clipboard.tools'
 import linkTools from '../../js/link.tools'
+import { Search } from '../../components/icons'
 
 type ShortlinkDisplayListItem = DateGrouped<Partial<ShortlinkDocument>> & {isSubheader?: boolean, timestamp?: any, originalIndex: number}
 
@@ -280,6 +281,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
             onDebouncedChange={this.onSearch} 
             value={this.state.searchQuery}
             placeholder='Search your links'
+            rightIcon={Search}
            />
           <RadioGroup
             items={[

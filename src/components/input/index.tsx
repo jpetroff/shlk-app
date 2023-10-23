@@ -18,6 +18,9 @@ type Props = {
   leftIcon?: React.FunctionComponent<React.SVGAttributes<SVGElement>>
   rightIcon?: React.FunctionComponent<React.SVGAttributes<SVGElement>>
   ref?: HTMLInputElement | null
+
+  prefix?: React.ReactElement<any> | string
+  suffix?: React.ReactElement<any> | string
 } & Omit<JSX.IntrinsicElements['input'], 'onChange'>
 
 const Input : React.FC<Props> = (
@@ -47,6 +50,7 @@ const Input : React.FC<Props> = (
 
     if(_.isFunction(props.onDeferredChange))
       _.defer(props.onDeferredChange, event.target.value, event, false)
+
     if(_.isFunction(props.onDebouncedChange) && props.debounce) 
       debouncedFn( () => {
         props.onDebouncedChange(event.target.value, event, false)
@@ -68,22 +72,41 @@ const Input : React.FC<Props> = (
   return (
     <label className={`${inputClasses}`} >
       {props.label && <span className={`${globalClass}__label`}>{props.label}</span>}
+
       <div className={`${globalClass}__input-wrapper`}>
-        <span className={`${globalClass}__placeholder`}>{props.placeholder}</span>
-        <input ref={_ref}
-          className={`${globalClass}__input-element ${props.className}`}
-          onChange={handleChange}
-          {...passedProps} 
-          />
-        {props.leftIcon && <Icon size={IconSize.LARGE} className={`${globalClass}__left-icon`} useIcon={props.leftIcon} />}
-        {props.rightIcon && <Icon size={IconSize.LARGE} className={`${globalClass}__right-icon`} useIcon={props.rightIcon} />}
-        <Button 
-          className={`${globalClass}__clear`} 
-          size={ButtonSize.SMALL}
-          type={ButtonType.GHOST}
-          icon={Cross}
-          onClick={handleClear}
-          />
+        <div className={`${globalClass}__prefix`}>
+          {props.leftIcon && 
+            <Icon size={IconSize.LARGE} className={`${globalClass}__left-icon`} useIcon={props.leftIcon} />
+          }
+
+          {props.prefix}
+        </div>
+
+        <div className={`${globalClass}__input-inner`}>
+          <span className={`${globalClass}__placeholder`}>{props.placeholder}</span>
+
+          <input ref={_ref}
+            className={`${globalClass}__input-element ${props.className}`}
+            onChange={handleChange}
+            {...passedProps}
+            />
+        </div>
+
+        <div className={`${globalClass}__suffix`}>
+          {props.suffix}
+
+          {props.rightIcon && 
+            <Icon size={IconSize.LARGE} className={`${globalClass}__right-icon`} useIcon={props.rightIcon} />
+          }
+
+          <Button 
+            className={`${globalClass}__clear`} 
+            size={ButtonSize.SMALL}
+            type={ButtonType.GHOST}
+            icon={Cross}
+            onClick={handleClear}
+            />
+        </div>
       </div>
     </label>
   )

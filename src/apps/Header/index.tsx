@@ -35,6 +35,7 @@ const Header : React.FC<Props> = (
 	const isMobile: boolean = checkMobileMQ()
   const appContext = React.useContext(AppContext)
   const hasLoggedUser = !_.isEmpty(appContext.user)
+  console.log(appContext)
   const navigate = useNavigate()
   const [showDropdown, setDropdown] = React.useState(false)
 
@@ -104,16 +105,18 @@ const Header : React.FC<Props> = (
                 {!appContext.user.avatar && <div className={`${globalClass}__account-link__avatar`}>{_.first(appContext.user.name.toUpperCase())}</div> }
                 <DropdownMenu className={`${globalClass}__dropdown`} onClose={() => setDropdown(false)} show={showDropdown} position={[DropdownPosition.top, DropdownPosition.right]}>
                     <div className={`${globalClass}__dropdown-header`}>
+                      
+                      <div className={`${globalClass}__dropdown-header__name-block`}>
+                        <div className={`${globalClass}__dropdown-header__name-block__name`}>{appContext.user.name}</div>
+                        <div className={`${globalClass}__dropdown-header__name-block__email`}>{appContext.user.email}</div>
+                      </div>
+
                       { appContext.user?.avatar && 
                         <div className={`${globalClass}__dropdown-header__avatar`} style={ { backgroundImage: `url(${appContext.user.avatar})` } }></div>
                       }
                       {!appContext.user?.avatar &&
                         <div className={`${globalClass}__dropdown-header__avatar`}>{_.first(appContext.user.name.toUpperCase())}</div>
                       }
-                      <div className={`${globalClass}__dropdown-header__name-block`}>
-                        <div className={`${globalClass}__dropdown-header__name-block__name`}>{appContext.user.name}</div>
-                        <div className={`${globalClass}__dropdown-header__name-block__email`}>{appContext.user.email}</div>
-                      </div>
                     </div>
                     <MenuItem.Separator />
                     <MenuItem label='My shortlinks' icon={LinkIcon} onClick={() => { navigate('/app'); setDropdown(false) } }/>

@@ -9,6 +9,7 @@ import users from '../../js/user.gql'
 import Snackbar from '../../components/snackbar'
 import Link from '../../components/link'
 import config from '../../js/config'
+import { LinkIcon, Search } from '../../components/icons'
 
 type Props = {
   router?: PageRouterProps
@@ -107,14 +108,17 @@ export default class UserSettings extends React.Component<Props, State> {
           </div>
         </div>
         <div className={`${globalClass}__field`}>
-          <label htmlFor={'slug-input-field'} className={`${globalClass}__field__label`}>Choose a personal shortlink prefix:</label>
           <div className={`${globalClass}__field__composite-input`}>
-            <span className={`${globalClass}__field__composite-input__prefix`}>{config.displayServiceUrl}/</span>
             <Input
               className={`${globalClass}__field__input`}
               id={'slug-input-field'}
               value={this.state.userTag} 
               onChange={(value, event) => this.setState( {userTag: value} ) }
+              prefix={`${config.displayServiceUrl}/`}
+              suffix={`@url`}
+              label={`Choose personal shortlink prefix`}
+              placeholder={`me`}
+              autoComplete={'none'}
               />
             </div>
         </div>
