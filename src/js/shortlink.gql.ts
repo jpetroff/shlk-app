@@ -213,6 +213,34 @@ class GQLShortlinkQuery {
     console.log('[GQL] deleteShortlink\n', response)
     return response.deleteShortlink
   }
+
+  public async updateShortlink(id: string, shortlink: Partial<ShortlinkDocument>) {
+    const query = `
+    mutation updateShortlinkWithVars(
+      $id: String!
+      $shortlink: QIEditableShortlinkProps
+    ) {
+      updateShortlink (
+        id: $id
+        shortlink: $shortlink
+      ) {
+        _id
+        hash
+        location
+        siteTitle
+        siteDescription
+        descriptor {
+          userTag
+          descriptionTag
+        }
+      }
+    }
+    `
+    
+    const response = await this.gqlClient.request(query, {id, shortlink})
+    console.log('[GQL] updateShortlink\n', response)
+    return response.updateShortlink
+  }
 }
 
 export default new GQLShortlinkQuery()

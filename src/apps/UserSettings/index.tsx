@@ -115,15 +115,13 @@ export default class UserSettings extends React.Component<Props, State> {
               value={this.state.userTag} 
               onChange={(value, event) => this.setState( {userTag: value} ) }
               prefix={`${config.displayServiceUrl}/`}
-              suffix={`@url`}
-              label={`Choose personal shortlink prefix`}
+              label={`Personal shortlink prefix`}
               placeholder={`me`}
-              autoComplete={'none'}
               />
             </div>
         </div>
         {config.target != 'extension' && <div className={`${globalClass}__download`}>
-          <span className={`${globalClass}__download__label`}>Install browser extension:</span>
+          <span className={`${globalClass}__download__label`}>Install browser extension</span>
           <Link href={config.extensionLink} className={`${globalClass}__download__link`}>
             <img src={`/assets/chrome_store.jpg`} srcSet={`/assets/chrome_store@2x.jpg 2x`} className={`${globalClass}__download__link-content`} />
           </Link>

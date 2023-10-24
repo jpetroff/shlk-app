@@ -37,7 +37,7 @@ const AppMain : React.FC = () => {
         <div className={`${globalClass}__layout`}>
           <div className={`${globalClass}__body`}>
             <Link to='/' className={`narrow-body__back-button`}><Icon useIcon={CaretLeft} size={IconSize.LARGE} /></Link>
-            <ShortlinkList navigate={navigate} router={router} />
+            <ShortlinkList navigate={navigate} router={router} context={appContext} />
           </div>
         </div>
     </div>

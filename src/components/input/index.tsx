@@ -115,5 +115,6 @@ const Input : React.FC<Props> = (
 export default Input
 
 Input.defaultProps = {
-  debounce: 100
+  debounce: 100,
+  autoComplete: 'off'
 }

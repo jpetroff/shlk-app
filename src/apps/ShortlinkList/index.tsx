@@ -14,6 +14,9 @@ import Scroller from '../../components/scroller'
 import clipboardTools from '../../js/clipboard.tools'
 import linkTools from '../../js/link.tools'
 import { Search } from '../../components/icons'
+import UrlEdit from '../UrlEdit'
+import Snackbar from '../../components/snackbar'
+import AppContext from '../../js/app.context'
 
 type ShortlinkDisplayListItem = DateGrouped<Partial<ShortlinkDocument>> & {isSubheader?: boolean, timestamp?: any, originalIndex: number}
 
@@ -31,7 +34,8 @@ export enum ShortlinkListSubsection {
 type Props = {
   limit?: number,
   navigate: NavigateFunction,
-  router: PageRouterProps
+  router: PageRouterProps,
+  context: React.ContextType<typeof AppContext>
 }
 
 type State = {
@@ -47,6 +51,12 @@ type State = {
     top: number
     left: number
     show: boolean
+  }
+  selected: {
+    shortlink: ShortlinkDocument | null,
+    loading: boolean,
+    successState: string | null
+    errorState: string | null
   }
 }
 
@@ -68,6 +78,12 @@ export default class ShortlinkList extends React.Component<Props, State> {
         top: -99999,
         left: -999999,
         show: false
+      },
+      selected: {
+        shortlink: null,
+        loading: false,
+        errorState: null,
+        successState: null
       }
     }
     this.contextMenuRef = React.createRef<HTMLDivElement | null>()
@@ -267,6 +283,51 @@ export default class ShortlinkList extends React.Component<Props, State> {
     }
   }
 
+  async handleUrlChange(shortlink: ShortlinkDocument) { 
+    if(!shortlink) {
+      this.setState({
+        selected: _.defaults({
+          errorState: 'Couldn’t save this shortlink'
+        }, this.state.selected) 
+      })
+      console.error('No shortlink passed to onChange method from module UrlEdit', shortlink)
+    }
+    console.log('sending ',shortlink)
+    const result = await shortlinkQueries.updateShortlink(shortlink._id, shortlink)
+    console.log(result)
+  }
+
+  handleSelectShortlink() {
+    this.resetContextMenu()
+    if(!this.state.shortlinks[this.state.contextMenu.key]) return
+
+    this.setState({
+      selected: _.defaults({
+        shortlink: _.omit(this.state.shortlinks[this.state.contextMenu.key], 'group')
+      }, this.state.selected)
+    })
+  }
+
+  _clearSelected() {
+    this.setState({
+      selected: _.defaults({
+        shortlink: null
+      }, this.state.selected)
+    })
+  }
+
+  _clearSelectedErrorState() {
+    this.setState({
+      selected: _.defaults({errorState: null}, this.state.selected)
+    })
+  }
+
+  _clearSelectedSuccessState() {
+    this.setState({
+      selected: _.defaults({successState: null}, this.state.selected)
+    })
+  }
+
   render() {
     const globalClass = `${styles.wrapperClass}_shortlink-list-app`
     const listClasses = classNames({
@@ -332,11 +393,41 @@ export default class ShortlinkList extends React.Component<Props, State> {
               <MenuItem label='Delete' onClick={this.handleDeleteShortlink}/>
               <MenuItem.Separator />
               {this.getSubsection() == ShortlinkListSubsection.snoozed && <MenuItem label='Remove snooze' onClick={this.handleRemoveSnoozeTimer}/>}
-              <MenuItem isDisabled={true} label='Edit shortlink' onClick={() => {  } }/>
+              <MenuItem label='Edit shortlink' onClick={this.handleSelectShortlink}/>
             </DropdownMenu>
           </div>
           
         </Scroller>
+
+        {this.state.selected.shortlink && 
+          <UrlEdit 
+            onChange={this.handleUrlChange}
+            onCancel={this._clearSelected}
+            shortlink={this.state.selected.shortlink}
+            isLoading={this.state.selected.loading}
+            userContextName={this.props.context.user.userTag}
+            />
+        }
+
+        <div className={`${globalClass}__snackbar-container`}>
+          { this.state.selected.errorState && 
+            <Snackbar 
+              className={`${globalClass}__shortlink-list-error`}
+              message={this.state.selected.errorState}
+              canDismiss={true}
+              onDismiss={this._clearSelectedErrorState}
+              />
+          }
+          { this.state.selected.successState && 
+            <Snackbar 
+              className={`${globalClass}__shortlink-list-success`}
+              message={this.state.selected.successState}
+              canDismiss={true}
+              timer={2000}
+              onDismiss={this._clearSelectedSuccessState}
+              />
+          }
+        </div>
       </div>
     )
   }

@@ -81,4 +81,25 @@
     .t-secondary-header_18-24;
     color: @black-60;
   }
+
+  /* 
+    Snackbar and Url Edit modal
+   */
+
+  &__snackbar-container {
+    position: absolute;
+    bottom: 2.75rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    z-index: @z-popup-top;
+
+    @media @mq-mobile {
+      position: fixed;
+    }
+  }
+  &__shortlink-list-error,
+  &__shortlink-list-success {
+    width: 100%;
+    min-width: auto;
+  }
 }

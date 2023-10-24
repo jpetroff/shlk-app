@@ -421,6 +421,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/apps/UrlEdit/styles-url-edit.less":
+/*!***********************************************!*\
+  !*** ./src/apps/UrlEdit/styles-url-edit.less ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"wrapperClass":"eZ3Dqgf0Kc71TO_jVP85"});
+
+/***/ }),
+
 /***/ "./src/apps/UserSettings/styles-user-settings.less":
 /*!*********************************************************!*\
   !*** ./src/apps/UserSettings/styles-user-settings.less ***!
@@ -1981,6 +1997,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_clipboard_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/clipboard.tools */ "./src/js/clipboard.tools.ts");
 /* harmony import */ var _js_link_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/link.tools */ "./src/js/link.tools.ts");
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var _UrlEdit__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../UrlEdit */ "./src/apps/UrlEdit/index.tsx");
+/* harmony import */ var _components_snackbar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/snackbar */ "./src/components/snackbar/index.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2067,6 +2085,8 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
 
 
 
+
+
 var LoadMode;
 (function (LoadMode) {
     LoadMode["append"] = "append";
@@ -2095,6 +2115,12 @@ var ShortlinkList = /** @class */ (function (_super) {
                 top: -99999,
                 left: -999999,
                 show: false
+            },
+            selected: {
+                shortlink: null,
+                loading: false,
+                errorState: null,
+                successState: null
             }
         };
         _this.contextMenuRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
@@ -2302,6 +2328,57 @@ var ShortlinkList = /** @class */ (function (_super) {
             this.loadShortlinks(LoadMode.append);
         }
     };
+    ShortlinkList.prototype.handleUrlChange = function (shortlink) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!shortlink) {
+                            this.setState({
+                                selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({
+                                    errorState: 'Couldn’t save this shortlink'
+                                }, this.state.selected)
+                            });
+                            console.error('No shortlink passed to onChange method from module UrlEdit', shortlink);
+                        }
+                        console.log('sending ', shortlink);
+                        return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].updateShortlink(shortlink._id, shortlink)];
+                    case 1:
+                        result = _a.sent();
+                        console.log(result);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ShortlinkList.prototype.handleSelectShortlink = function () {
+        this.resetContextMenu();
+        if (!this.state.shortlinks[this.state.contextMenu.key])
+            return;
+        this.setState({
+            selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({
+                shortlink: underscore__WEBPACK_IMPORTED_MODULE_2__.omit(this.state.shortlinks[this.state.contextMenu.key], 'group')
+            }, this.state.selected)
+        });
+    };
+    ShortlinkList.prototype._clearSelected = function () {
+        this.setState({
+            selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({
+                shortlink: null
+            }, this.state.selected)
+        });
+    };
+    ShortlinkList.prototype._clearSelectedErrorState = function () {
+        this.setState({
+            selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({ errorState: null }, this.state.selected)
+        });
+    };
+    ShortlinkList.prototype._clearSelectedSuccessState = function () {
+        this.setState({
+            selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({ successState: null }, this.state.selected)
+        });
+    };
     ShortlinkList.prototype.render = function () {
         var _a;
         var _this = this;
@@ -2337,11 +2414,73 @@ var ShortlinkList = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_14__["default"], { label: 'Delete', onClick: this.handleDeleteShortlink }),
                         react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_14__["default"].Separator, null),
                         this.getSubsection() == ShortlinkListSubsection.snoozed && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_14__["default"], { label: 'Remove snooze', onClick: this.handleRemoveSnoozeTimer }),
-                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_14__["default"], { isDisabled: true, label: 'Edit shortlink', onClick: function () { } }))))));
+                        react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_menu_item__WEBPACK_IMPORTED_MODULE_14__["default"], { label: 'Edit shortlink', onClick: this.handleSelectShortlink })))),
+            this.state.selected.shortlink &&
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_UrlEdit__WEBPACK_IMPORTED_MODULE_15__["default"], { onChange: this.handleUrlChange, onCancel: this._clearSelected, shortlink: this.state.selected.shortlink, isLoading: this.state.selected.loading, userContextName: this.props.context.user.userTag }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__snackbar-container") },
+                this.state.selected.errorState &&
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_16__["default"], { className: "".concat(globalClass, "__shortlink-list-error"), message: this.state.selected.errorState, canDismiss: true, onDismiss: this._clearSelectedErrorState }),
+                this.state.selected.successState &&
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_snackbar__WEBPACK_IMPORTED_MODULE_16__["default"], { className: "".concat(globalClass, "__shortlink-list-success"), message: this.state.selected.successState, canDismiss: true, timer: 2000, onDismiss: this._clearSelectedSuccessState }))));
     };
     return ShortlinkList;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShortlinkList);
+
+
+/***/ }),
+
+/***/ "./src/apps/UrlEdit/index.tsx":
+/*!************************************!*\
+  !*** ./src/apps/UrlEdit/index.tsx ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _styles_url_edit_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles-url-edit.less */ "./src/apps/UrlEdit/styles-url-edit.less");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! underscore */ "./node_modules/underscore/modules/index-all.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/input */ "./src/components/input/index.tsx");
+/* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/button */ "./src/components/button/index.tsx");
+
+
+
+
+
+
+
+var UrlEdit = function (props) {
+    var _a;
+    var _b, _c;
+    var _d = react__WEBPACK_IMPORTED_MODULE_1__.useState(props.shortlink), shortlink = _d[0], setShortlink = _d[1];
+    var userTag = ((_b = shortlink.descriptor) === null || _b === void 0 ? void 0 : _b.userTag) || props.userContextName;
+    var globalClass = _styles_url_edit_less__WEBPACK_IMPORTED_MODULE_0__["default"].wrapperClass + '_url-edit';
+    var appClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()((_a = {},
+        _a["".concat(globalClass)] = true,
+        _a));
+    function updateShortlink(chunk) {
+        setShortlink(underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({}, chunk, shortlink));
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(appClasses) },
+        react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__url-form") },
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__title-input"), value: shortlink.siteTitle, onChange: function (value, event) { return updateShortlink({ siteTitle: value }); }, label: "Title", placeholder: "Set shortlink title" }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__location-input"), value: shortlink.location, leftIcon: _components_icons__WEBPACK_IMPORTED_MODULE_5__.LinkIcon, onChange: function (value, event) { return updateShortlink({ location: value }); }, label: "Url", placeholder: "Set url" }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__slug-input"), value: ((_c = shortlink.descriptor) === null || _c === void 0 ? void 0 : _c.descriptionTag) || '', prefix: "".concat(userTag, "@"), onChange: function (value, event) {
+                    return updateShortlink({ descriptor: { userTag: userTag, descriptionTag: value } });
+                }, label: "Custom shortlink", placeholder: "Choose custom slug" }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__url-form__controls") },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.SECONDARY, label: 'Cancel', onClick: function () { return props.onCancel(); }, fullWidth: true }),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { isDisabled: !(shortlink.location && shortlink.siteTitle), isLoading: props.isLoading, size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY, label: 'Save', onClick: function () { return props.onChange(shortlink); }, fullWidth: true })))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UrlEdit);
 
 
 /***/ }),
@@ -2523,9 +2662,9 @@ var UserSettings = /** @class */ (function (_super) {
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__header__email") }, this.props.context.user.email))),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__field") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__field__composite-input") },
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__field__input"), id: 'slug-input-field', value: this.state.userTag, onChange: function (value, event) { return _this.setState({ userTag: value }); }, prefix: "".concat((_js_config__WEBPACK_IMPORTED_MODULE_6___default().displayServiceUrl), "/"), suffix: "@url", label: "Choose personal shortlink prefix", placeholder: "me", autoComplete: 'none' }))),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_5__["default"], { className: "".concat(globalClass, "__field__input"), id: 'slug-input-field', value: this.state.userTag, onChange: function (value, event) { return _this.setState({ userTag: value }); }, prefix: "".concat((_js_config__WEBPACK_IMPORTED_MODULE_6___default().displayServiceUrl), "/"), label: "Personal shortlink prefix", placeholder: "me" }))),
             (_js_config__WEBPACK_IMPORTED_MODULE_6___default().target) != 'extension' && react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__download") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__download__label") }, "Install browser extension:"),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", { className: "".concat(globalClass, "__download__label") }, "Install browser extension"),
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_7__["default"], { href: (_js_config__WEBPACK_IMPORTED_MODULE_6___default().extensionLink), className: "".concat(globalClass, "__download__link") },
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement("img", { src: "/assets/chrome_store.jpg", srcSet: "/assets/chrome_store@2x.jpg 2x", className: "".concat(globalClass, "__download__link-content") }))),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__submit") },
@@ -3061,7 +3200,8 @@ var Input = function (props) {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Input);
 Input.defaultProps = {
-    debounce: 100
+    debounce: 100,
+    autoComplete: 'off'
 };
 
 
@@ -5498,6 +5638,22 @@ var GQLShortlinkQuery = /** @class */ (function () {
             });
         });
     };
+    GQLShortlinkQuery.prototype.updateShortlink = function (id, shortlink) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = "\n    mutation updateShortlinkWithVars(\n      $id: String!\n      $shortlink: QIEditableShortlinkProps\n    ) {\n      updateShortlink (\n        id: $id\n        shortlink: $shortlink\n      ) {\n        _id\n        hash\n        location\n        siteTitle\n        siteDescription\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    ";
+                        return [4 /*yield*/, this.gqlClient.request(query, { id: id, shortlink: shortlink })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('[GQL] updateShortlink\n', response);
+                        return [2 /*return*/, response.updateShortlink];
+                }
+            });
+        });
+    };
     return GQLShortlinkQuery;
 }());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new GQLShortlinkQuery());
@@ -5769,7 +5925,7 @@ var AppMain = function () {
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__body") },
                 react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_link__WEBPACK_IMPORTED_MODULE_8__["default"], { to: '/', className: "narrow-body__back-button" },
                     react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons__WEBPACK_IMPORTED_MODULE_9__["default"], { useIcon: _components_icons__WEBPACK_IMPORTED_MODULE_9__.CaretLeft, size: _components_icons__WEBPACK_IMPORTED_MODULE_9__.IconSize.LARGE })),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_ShortlinkList__WEBPACK_IMPORTED_MODULE_10__["default"], { navigate: navigate, router: router })))));
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_apps_ShortlinkList__WEBPACK_IMPORTED_MODULE_10__["default"], { navigate: navigate, router: router, context: appContext })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppMain);
 
@@ -7848,7 +8004,7 @@ Detects whether or not elements can be animated using CSS
 /******/ 		        // webpack-livereload-plugin
 /******/ 		        (function() {
 /******/ 		          if (typeof window === "undefined") { return };
-/******/ 		          var id = "webpack-livereload-plugin-script-61dd29394b4ae724";
+/******/ 		          var id = "webpack-livereload-plugin-script-67145063635c7420";
 /******/ 		          if (document.getElementById(id)) { return; }
 /******/ 		          var el = document.createElement("script");
 /******/ 		          el.id = id;

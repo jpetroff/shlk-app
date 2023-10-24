@@ -6,14 +6,12 @@
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
+  gap: @label-gap;
 
   &__label {
     .t-micricopy_13-16;
-    color: @black-20;
-  }
-
-  &:focus &__input-wrapper {
-    box-shadow: 0 0 0 2px @pure-blue-90;
+    color: @black-30;
+    padding: 0 0.75rem;
   }
 
   &__input-inner {
@@ -34,6 +32,10 @@
     border: 0.125rem solid @pure-blue-50;
     border-radius: 4px;
     align-items: center;
+  }
+
+  &__input-wrapper:focus-within {
+    box-shadow: @active-highlight;
   }
 
   &__input-element {
