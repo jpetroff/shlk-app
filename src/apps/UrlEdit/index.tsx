@@ -3,9 +3,9 @@ import * as React from 'react'
 import * as _ from 'underscore'
 import classNames from 'classnames'
 import Input from '../../components/input'
-import Icon, { IconSize, LinkIcon } from '../../components/icons'
+import { LinkIcon } from '../../components/icons'
 import Button, {ButtonSize, ButtonType} from '../../components/button'
-import AppContext from '../../js/app.context'
+import { modifyURLSlug } from '../../js/utils'
 
 type Props = {
   shortlink: ShortlinkDocument
@@ -29,8 +29,17 @@ const UrlEdit : React.FC< React.PropsWithChildren<Props> > = (
   })
 
   function updateShortlink(chunk: Partial<ShortlinkDocument>) {
+    if(props.isLoading) return
+
     setShortlink(
       _.defaults({}, chunk, shortlink)
+    )
+  }
+
+  function canSave(): boolean {
+    return (
+      shortlink.siteTitle && shortlink.siteTitle != '' &&
+      shortlink.location && shortlink.location != ''
     )
   }
 
@@ -57,28 +66,35 @@ const UrlEdit : React.FC< React.PropsWithChildren<Props> > = (
           value={shortlink.descriptor?.descriptionTag || ''}
           prefix={`${userTag}@`}
           onChange={(value, event) => 
-              updateShortlink( {descriptor: { userTag, descriptionTag: value} } ) 
+              updateShortlink( {descriptor: { userTag, descriptionTag: modifyURLSlug(value)} } ) 
             }
           label={`Custom shortlink`}
           placeholder={`Choose custom slug`}
           />
+        <Input
+          className={`${globalClass}__description-input`}
+          value={shortlink.siteDescription}
+          onChange={(value, event) => updateShortlink( {siteDescription: value} ) }
+          label={`Description`}
+          placeholder={`Set link description`}
+          />
         <div className={`${globalClass}__url-form__controls`}>
           <Button
-            size={ButtonSize.LARGE}
+            size={ButtonSize.SMALL}
             type={ButtonType.SECONDARY}
             label='Cancel'
             onClick={() => props.onCancel()}
             fullWidth={true}
             />  
-            <Button 
-              isDisabled={!(shortlink.location && shortlink.siteTitle)}
-              isLoading={props.isLoading}
-              size={ButtonSize.LARGE}
-              type={ButtonType.PRIMARY}
-              label='Save'
-              onClick={() => props.onChange(shortlink)}
-              fullWidth={true}
-              />
+          <Button 
+            isDisabled={!canSave()}
+            isLoading={props.isLoading}
+            size={ButtonSize.SMALL}
+            type={ButtonType.PRIMARY}
+            label='Save'
+            onClick={() => props.onChange(shortlink)}
+            fullWidth={true}
+            />
         </div>
       </div>
     </div>

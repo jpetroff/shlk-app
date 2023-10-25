@@ -52,7 +52,7 @@ const Button : React.FC<Props> = function(
     [`${globalClass}_${args.size}`]: true,
     [`${globalClass}_${args.type}`]: true,
     [`${globalClass}_disabled`]: args.isDisabled || args.isLoading,
-    [`${globalClass}_loading`]: args.isDisabled || args.isLoading,
+    [`${globalClass}_loading`]: args.isLoading,
     [`${globalClass}_icon-only`]: !args.label && args.icon,
     [`${globalClass}_full-width`]: args.fullWidth,
     [`${args.className}`]: !!args.className,

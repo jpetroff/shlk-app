@@ -190,6 +190,20 @@ export default class ShortlinkList extends React.Component<Props, State> {
     })
   }
 
+  private updateCachedShortlink(shortlink: ShortlinkDocument) {
+    const index = _.findIndex(this.state.shortlinks, {_id: shortlink._id})
+    console.log('Updating shortlink', index, this.state.shortlinks[index])
+    const updatedShortlinks = this.state.shortlinks
+    updatedShortlinks[index] = shortlink
+    const groupedShortlinks = this.groupShortlinks(updatedShortlinks)
+
+    this.setState({
+      shortlinks: updatedShortlinks,
+      groupedShortlinks: groupedShortlinks,
+      staleResults: false
+    })
+  }
+
   handleInternalNavigate(key: string) {
     if(key == ShortlinkListSubsection.all)
       this.props.navigate('/app')
@@ -292,9 +306,31 @@ export default class ShortlinkList extends React.Component<Props, State> {
       })
       console.error('No shortlink passed to onChange method from module UrlEdit', shortlink)
     }
-    console.log('sending ',shortlink)
-    const result = await shortlinkQueries.updateShortlink(shortlink._id, shortlink)
-    console.log(result)
+
+    this.setState({ selected: _.defaults({loading: true}, this.state.selected)})
+    try {
+      console.log('sending ',shortlink)
+      const result = await shortlinkQueries.updateShortlink(shortlink._id, shortlink)
+      console.log(result)
+      this.updateCachedShortlink(result)
+      this.setState({
+        selected: {
+          shortlink: null,
+          loading: false,
+          errorState: null,
+          successState: 'Shortlink updated'
+        }
+      })
+    } catch(error) {
+      console.error(error)
+      this.setState({
+        selected: _.defaults({
+          loading: false,
+          errorState: error.message || 'Something went wrong'
+        }, this.state.selected)
+      })
+    }
+      
   }
 
   handleSelectShortlink() {

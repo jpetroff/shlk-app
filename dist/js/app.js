@@ -2223,6 +2223,18 @@ var ShortlinkList = /** @class */ (function (_super) {
             staleResults: false
         });
     };
+    ShortlinkList.prototype.updateCachedShortlink = function (shortlink) {
+        var index = underscore__WEBPACK_IMPORTED_MODULE_2__.findIndex(this.state.shortlinks, { _id: shortlink._id });
+        console.log('Updating shortlink', index, this.state.shortlinks[index]);
+        var updatedShortlinks = this.state.shortlinks;
+        updatedShortlinks[index] = shortlink;
+        var groupedShortlinks = this.groupShortlinks(updatedShortlinks);
+        this.setState({
+            shortlinks: updatedShortlinks,
+            groupedShortlinks: groupedShortlinks,
+            staleResults: false
+        });
+    };
     ShortlinkList.prototype.handleInternalNavigate = function (key) {
         if (key == ShortlinkListSubsection.all)
             this.props.navigate('/app');
@@ -2330,7 +2342,7 @@ var ShortlinkList = /** @class */ (function (_super) {
     };
     ShortlinkList.prototype.handleUrlChange = function (shortlink) {
         return __awaiter(this, void 0, void 0, function () {
-            var result;
+            var result, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2342,12 +2354,36 @@ var ShortlinkList = /** @class */ (function (_super) {
                             });
                             console.error('No shortlink passed to onChange method from module UrlEdit', shortlink);
                         }
+                        this.setState({ selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({ loading: true }, this.state.selected) });
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
                         console.log('sending ', shortlink);
                         return [4 /*yield*/, _js_shortlink_gql__WEBPACK_IMPORTED_MODULE_4__["default"].updateShortlink(shortlink._id, shortlink)];
-                    case 1:
+                    case 2:
                         result = _a.sent();
                         console.log(result);
-                        return [2 /*return*/];
+                        this.updateCachedShortlink(result);
+                        this.setState({
+                            selected: {
+                                shortlink: null,
+                                loading: false,
+                                errorState: null,
+                                successState: 'Shortlink updated'
+                            }
+                        });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        console.error(error_1);
+                        this.setState({
+                            selected: underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({
+                                loading: false,
+                                errorState: error_1.message || 'Something went wrong'
+                            }, this.state.selected)
+                        });
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -2449,7 +2485,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/input */ "./src/components/input/index.tsx");
 /* harmony import */ var _components_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/icons */ "./src/components/icons/index.tsx");
-/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/button */ "./src/components/button/index.tsx");
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/button */ "./src/components/button/index.tsx");
+/* harmony import */ var _js_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/utils */ "./src/js/utils.ts");
+
 
 
 
@@ -2467,18 +2505,25 @@ var UrlEdit = function (props) {
         _a["".concat(globalClass)] = true,
         _a));
     function updateShortlink(chunk) {
+        if (props.isLoading)
+            return;
         setShortlink(underscore__WEBPACK_IMPORTED_MODULE_2__.defaults({}, chunk, shortlink));
+    }
+    function canSave() {
+        return (shortlink.siteTitle && shortlink.siteTitle != '' &&
+            shortlink.location && shortlink.location != '');
     }
     return (react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(appClasses) },
         react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__url-form") },
             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__title-input"), value: shortlink.siteTitle, onChange: function (value, event) { return updateShortlink({ siteTitle: value }); }, label: "Title", placeholder: "Set shortlink title" }),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__location-input"), value: shortlink.location, leftIcon: _components_icons__WEBPACK_IMPORTED_MODULE_5__.LinkIcon, onChange: function (value, event) { return updateShortlink({ location: value }); }, label: "Url", placeholder: "Set url" }),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__slug-input"), value: ((_c = shortlink.descriptor) === null || _c === void 0 ? void 0 : _c.descriptionTag) || '', prefix: "".concat(userTag, "@"), onChange: function (value, event) {
-                    return updateShortlink({ descriptor: { userTag: userTag, descriptionTag: value } });
+                    return updateShortlink({ descriptor: { userTag: userTag, descriptionTag: (0,_js_utils__WEBPACK_IMPORTED_MODULE_6__.modifyURLSlug)(value) } });
                 }, label: "Custom shortlink", placeholder: "Choose custom slug" }),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_input__WEBPACK_IMPORTED_MODULE_4__["default"], { className: "".concat(globalClass, "__description-input"), value: shortlink.siteDescription, onChange: function (value, event) { return updateShortlink({ siteDescription: value }); }, label: "Description", placeholder: "Set link description" }),
             react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", { className: "".concat(globalClass, "__url-form__controls") },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.SECONDARY, label: 'Cancel', onClick: function () { return props.onCancel(); }, fullWidth: true }),
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_6__["default"], { isDisabled: !(shortlink.location && shortlink.siteTitle), isLoading: props.isLoading, size: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonSize.LARGE, type: _components_button__WEBPACK_IMPORTED_MODULE_6__.ButtonType.PRIMARY, label: 'Save', onClick: function () { return props.onChange(shortlink); }, fullWidth: true })))));
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_7__["default"], { size: _components_button__WEBPACK_IMPORTED_MODULE_7__.ButtonSize.SMALL, type: _components_button__WEBPACK_IMPORTED_MODULE_7__.ButtonType.SECONDARY, label: 'Cancel', onClick: function () { return props.onCancel(); }, fullWidth: true }),
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_button__WEBPACK_IMPORTED_MODULE_7__["default"], { isDisabled: !canSave(), isLoading: props.isLoading, size: _components_button__WEBPACK_IMPORTED_MODULE_7__.ButtonSize.SMALL, type: _components_button__WEBPACK_IMPORTED_MODULE_7__.ButtonType.PRIMARY, label: 'Save', onClick: function () { return props.onChange(shortlink); }, fullWidth: true })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UrlEdit);
 
@@ -2749,7 +2794,7 @@ var Button = function (args) {
         _a["".concat(globalClass, "_").concat(args.size)] = true,
         _a["".concat(globalClass, "_").concat(args.type)] = true,
         _a["".concat(globalClass, "_disabled")] = args.isDisabled || args.isLoading,
-        _a["".concat(globalClass, "_loading")] = args.isDisabled || args.isLoading,
+        _a["".concat(globalClass, "_loading")] = args.isLoading,
         _a["".concat(globalClass, "_icon-only")] = !args.label && args.icon,
         _a["".concat(globalClass, "_full-width")] = args.fullWidth,
         _a["".concat(args.className)] = !!args.className,
@@ -5528,6 +5573,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 var GQLShortlinkQuery = /** @class */ (function () {
     function GQLShortlinkQuery() {
+        this.fullShortlinkProperties = "\n  _id\n  hash\n  location\n  descriptor {\n    userTag\n    descriptionTag\n  }\n  owner\n  urlMetadata\n  snooze {\n    awake\n    description\n  }\n  createdAt\n  updatedAt\n  siteTitle\n  siteDescription\n  ";
         this.queryUrl = (_config__WEBPACK_IMPORTED_MODULE_0___default().serviceUrl) + '/api';
         this.gqlClient = new _request_wrapper_gql__WEBPACK_IMPORTED_MODULE_1__["default"]({
             baseURL: this.queryUrl,
@@ -5580,7 +5626,7 @@ var GQLShortlinkQuery = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        query = "\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n      $isSnooze: Boolean\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n          isSnooze: $isSnooze\n        }\n      ) {\n        _id\n        hash\n        location\n        descriptor {\n          userTag\n          descriptionTag\n        }\n        owner\n        urlMetadata\n        snooze {\n          awake\n          description\n        }\n        createdAt\n        updatedAt\n        siteTitle\n        siteDescription\n      }\n    }\n    ";
+                        query = "\n    query getUserShortlinksWithVars (\n      $limit: Int\n      $skip: Int\n      $sort: String\n      $order: String\n      $search: String\n      $isSnooze: Boolean\n    ){\n      getUserShortlinks(\n        args: {\n          limit: $limit\n          skip: $skip\n          sort: $sort\n          order: $order\n          search: $search\n          isSnooze: $isSnooze\n        }\n      ) {\n        ".concat(this.fullShortlinkProperties, "\n      }\n    }\n    ");
                         return [4 /*yield*/, this.gqlClient.request(query, { limit: limit, skip: skip, sort: sort, order: order, search: search, isSnooze: isSnooze })];
                     case 1:
                         response = _b.sent();
@@ -5644,7 +5690,7 @@ var GQLShortlinkQuery = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = "\n    mutation updateShortlinkWithVars(\n      $id: String!\n      $shortlink: QIEditableShortlinkProps\n    ) {\n      updateShortlink (\n        id: $id\n        shortlink: $shortlink\n      ) {\n        _id\n        hash\n        location\n        siteTitle\n        siteDescription\n        descriptor {\n          userTag\n          descriptionTag\n        }\n      }\n    }\n    ";
+                        query = "\n    mutation updateShortlinkWithVars(\n      $id: String!\n      $shortlink: QIEditableShortlinkProps\n    ) {\n      updateShortlink (\n        id: $id\n        shortlink: $shortlink\n      ) {\n        ".concat(this.fullShortlinkProperties, "\n      }\n    }\n    ");
                         return [4 /*yield*/, this.gqlClient.request(query, { id: id, shortlink: shortlink })];
                     case 1:
                         response = _a.sent();

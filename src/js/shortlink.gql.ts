@@ -19,6 +19,26 @@ class GQLShortlinkQuery {
     })
   }
 
+  private fullShortlinkProperties : string = `
+  _id
+  hash
+  location
+  descriptor {
+    userTag
+    descriptionTag
+  }
+  owner
+  urlMetadata
+  snooze {
+    awake
+    description
+  }
+  createdAt
+  updatedAt
+  siteTitle
+  siteDescription
+  `
+
   public async createShortlink (location: string) : Promise<Partial<ShortlinkDocument>> {
     if (validateURL(location) == false) {
       throw new Error(`Not a valid URL: '${location}'`)
@@ -98,23 +118,7 @@ class GQLShortlinkQuery {
           isSnooze: $isSnooze
         }
       ) {
-        _id
-        hash
-        location
-        descriptor {
-          userTag
-          descriptionTag
-        }
-        owner
-        urlMetadata
-        snooze {
-          awake
-          description
-        }
-        createdAt
-        updatedAt
-        siteTitle
-        siteDescription
+        ${this.fullShortlinkProperties}
       }
     }
     `
@@ -214,7 +218,7 @@ class GQLShortlinkQuery {
     return response.deleteShortlink
   }
 
-  public async updateShortlink(id: string, shortlink: Partial<ShortlinkDocument>) {
+  public async updateShortlink(id: string, shortlink: Partial<ShortlinkDocument>) : Promise<ShortlinkDocument> {
     const query = `
     mutation updateShortlinkWithVars(
       $id: String!
@@ -224,19 +228,11 @@ class GQLShortlinkQuery {
         id: $id
         shortlink: $shortlink
       ) {
-        _id
-        hash
-        location
-        siteTitle
-        siteDescription
-        descriptor {
-          userTag
-          descriptionTag
-        }
+        ${this.fullShortlinkProperties}
       }
     }
     `
-    
+
     const response = await this.gqlClient.request(query, {id, shortlink})
     console.log('[GQL] updateShortlink\n', response)
     return response.updateShortlink
