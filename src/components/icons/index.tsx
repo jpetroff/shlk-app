@@ -16,6 +16,8 @@ import LogoutSvg from '../../assets/svg/icon/logout.svg'
 import CaretDownSvg from '../../assets/svg/icon/caret-down.svg'
 import LinkSvg from '../../assets/svg/icon/link.svg'
 import MoreVSvg from '../../assets/svg/icon/more.svg'
+import CompactSvg from '../../assets/svg/icon/compact.svg'
+import FullSvg from '../../assets/svg/icon/full.svg'
 
 
 export const Logo = LogoSvg
@@ -32,6 +34,8 @@ export const Search = SearchSvg
 export const Logout = LogoutSvg 
 export const LinkIcon = LinkSvg 
 export const MoreVertical = MoreVSvg 
+export const FullIcon = FullSvg 
+export const CompactIcon = CompactSvg 
 
 export const Cross_16 = CrossSvg_16
 

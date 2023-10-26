@@ -6,12 +6,17 @@ import clipboardTools from '../../js/clipboard.tools'
 import Link, { LinkColors } from '../../components/link'
 import LinkTools from '../../js/link.tools'
 import classNames from 'classnames'
+import Button, { ButtonSize, ButtonType } from '../../components/button'
+import AppContext from '../../js/app.context'
+import { checkMobileMQ } from '../../js/utils'
 
 type Props = {
   list: TCachedLink[]
   totalCount?: number
   isLoading?: boolean
   display?: number
+  context?: React.ContextType<typeof AppContext>
+  router?: PageRouterProps
 }
 
 enum ActionLabels {
@@ -25,7 +30,9 @@ const HistoryWidget : React.FC<Props> = (
     list,
     totalCount,
     isLoading,
-    display
+    display,
+    context,
+    router
   } : Props
 ) => {
   const globalClass = styles.widgetWrapper+'_history-widget'
@@ -93,6 +100,17 @@ const HistoryWidget : React.FC<Props> = (
             </div>
           )
         })}
+
+        {router && checkMobileMQ() &&
+          <Button 
+            className={`${globalClass}__all-links`}
+            label={`Show all links`}
+            type={ButtonType.SECONDARY}
+            size={ButtonSize.SMALL}
+            fullWidth={true}
+            onClick={() => router.navigate('/app')}
+            />
+        }
       </div>
     </div>
   )

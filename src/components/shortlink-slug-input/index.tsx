@@ -25,7 +25,10 @@ type Props = {
   value: string
   placeholder?: string
   flyover?: React.ReactElement
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
+  onDebouncedChange?: (value: string) => void
+  debounce?: number | null
+  onDeferredChange?: (value: string) => void
   show?: boolean
   generatedLink?: string
   isLoading?: boolean
@@ -36,6 +39,9 @@ type Props = {
 export const ShortlinkSlugInput : React.FC<Props> = (
   {
     onChange,
+    onDebouncedChange,
+    debounce,
+    onDeferredChange,
     show,
     isLoading,
     generatedLink,
@@ -48,6 +54,12 @@ export const ShortlinkSlugInput : React.FC<Props> = (
     flyover
   } : Props
 ) => {
+
+  const debouncedFn = React.useCallback( 
+    _.debounce( (fn: () => void) => {
+      fn()
+    }, debounce)
+  ,[debounce])
 
   const globalClass = styles.wrapperClass+'_slug-input'
   const slugInputClasses = classNames({
@@ -69,6 +81,19 @@ export const ShortlinkSlugInput : React.FC<Props> = (
     if(_.isFunction(navigator.clipboard.writeText) && generatedLink) {
       navigator.clipboard.writeText(generatedLink)
     } 
+  }
+
+  function handleChange(event) {
+    if(_.isFunction(onChange)) 
+      onChange(event.target.value)
+
+    if(_.isFunction(onDeferredChange))
+      _.defer(onDeferredChange, event.target.value)
+
+    if(_.isFunction(onDebouncedChange) && debounce) 
+      debouncedFn( () => {
+        onDebouncedChange(event.target.value)
+      })
   }
 
   return (
@@ -94,7 +119,7 @@ export const ShortlinkSlugInput : React.FC<Props> = (
             <input 
               className={`${globalClass}__input-resizable__real-input ${globalClass}__input-common-style`}
               value={value}
-              onChange={(event) => {onChange(event.target.value)}}
+              onChange={handleChange}
             />
             <span className={`${globalClass}__input-resizable__width-sizer ${globalClass}__input-common-style ${globalClass}__input-resizable__width-sizer_${value ? 'hide' : 'show'}`}>{value || placeholder}</span>
           </span>

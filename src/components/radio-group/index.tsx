@@ -4,7 +4,7 @@ import Icon, { IconSize, ReactIcon } from '../icons'
 import classNames from 'classnames'
 
 type Props = {
-  items: Array<{label: string, key: string, icon?: ReactIcon}>
+  items: Array<{label?: string, key: string, icon?: ReactIcon}>
   onChange: (key: string) => void
   value: string
   fullWidth?: boolean

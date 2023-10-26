@@ -13,10 +13,11 @@ import MenuItem from '../../components/menu-item'
 import Scroller from '../../components/scroller'
 import clipboardTools from '../../js/clipboard.tools'
 import linkTools from '../../js/link.tools'
-import { Search } from '../../components/icons'
+import { CompactIcon, FullIcon, Search } from '../../components/icons'
 import UrlEdit from '../UrlEdit'
 import Snackbar from '../../components/snackbar'
 import AppContext from '../../js/app.context'
+import { getCookie, setCookie } from '../../js/utils'
 
 type ShortlinkDisplayListItem = DateGrouped<Partial<ShortlinkDocument>> & {isSubheader?: boolean, timestamp?: any, originalIndex: number}
 
@@ -29,6 +30,11 @@ enum LoadMode {
 export enum ShortlinkListSubsection {
   all = 'created',
   snoozed = 'snoozed'
+}
+
+export enum ShortlinkListContentDisplay {
+  compact = 'compact',
+  full = 'full'
 }
 
 type Props = {
@@ -44,6 +50,7 @@ type State = {
   searchQuery: string
   pointer: number
   limit: number
+  contentDisplay: ShortlinkListContentDisplay
   staleResults: boolean
   isLoading: LoadMode
   contextMenu: {
@@ -65,12 +72,15 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
   constructor(props) {
     super(props)
+    const contentDisplay : ShortlinkListContentDisplay = getCookie('content-display') as ShortlinkListContentDisplay || ShortlinkListContentDisplay.compact
+
     this.state = {
       shortlinks: [],
       groupedShortlinks: [],
       searchQuery: '',
       pointer: 0,
       limit: props.limit || 30,
+      contentDisplay,
       staleResults: false,
       isLoading: LoadMode.none,
       contextMenu: {
@@ -210,6 +220,13 @@ export default class ShortlinkList extends React.Component<Props, State> {
 
     if(key == ShortlinkListSubsection.snoozed)
       this.props.navigate('/app/snoozed')
+  }
+
+  handleContentDisplayChange(key: ShortlinkListContentDisplay) {
+    this.setState({
+      contentDisplay: key
+    })
+    setCookie('content-display', key, 180)
   }
 
   handleContextClick(key: number, element: HTMLElement) {
@@ -380,15 +397,25 @@ export default class ShortlinkList extends React.Component<Props, State> {
             placeholder='Search your links'
             rightIcon={Search}
            />
-          <RadioGroup
-            items={[
-              {label: 'All links', key: ShortlinkListSubsection.all},
-              {label: 'Snoozed links', key: ShortlinkListSubsection.snoozed}
-            ]}
-            value={this.getSubsection()}
-            onChange={(key) => { this.handleInternalNavigate(key) } }
-            fullWidth={true}
-            />
+          <div className={`${globalClass}__search__controls`}>  
+            <RadioGroup
+              items={[
+                {label: 'All links', key: ShortlinkListSubsection.all},
+                {label: 'Snoozed', key: ShortlinkListSubsection.snoozed}
+              ]}
+              value={this.getSubsection()}
+              onChange={(key) => { this.handleInternalNavigate(key) } }
+              fullWidth={true}
+              />
+            <RadioGroup
+              items={[
+                {icon: CompactIcon, key: ShortlinkListContentDisplay.compact},
+                {icon: FullIcon, key: ShortlinkListContentDisplay.full}
+              ]}
+              value={this.state.contentDisplay}
+              onChange={this.handleContentDisplayChange}
+              />
+          </div>
         </div>
         <Scroller className={`${globalClass}__scroller`} onScroll={this.handleScroll}>
           <div className={`${globalClass}__list`}>
@@ -403,6 +430,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
                       {..._.omit(item, 'hash', 'location')}
                       hash={item.hash}
                       location={item.location}
+                      showDescription={this.state.contentDisplay == ShortlinkListContentDisplay.full}
                       onCopyClick={() => this.handleCopyClick(item.originalIndex)}
                       onContextClick={(elem) => { this.handleContextClick(item.originalIndex, elem) } }
                     />

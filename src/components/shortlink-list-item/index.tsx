@@ -28,6 +28,7 @@ type Props = {
     description?: string
   }
   tags?: string[]
+  showDescription?: boolean
   onContextClick?: (htmlNode: HTMLElement) => void
   onCopyClick?: () => void
 }
@@ -43,6 +44,7 @@ const ShortlinkListItem : React.FC<Props> & { Loading: React.FC } = (
     urlMetadata,
     snooze,
     tags,
+    showDescription,
     onContextClick,
     onCopyClick
   } : Props
@@ -71,7 +73,7 @@ const ShortlinkListItem : React.FC<Props> & { Loading: React.FC } = (
     return void 0
   }
 
-  const noDescription = (siteDescription = undefined) ? `` : `${globalClass}__display-full-link_no-description`
+  const noDescription = (siteDescription == undefined) ? `` : `${globalClass}__display-full-link_no-description`
   return (
     <div className={`${shortlinkItemClasses}`}>
       <Link  
@@ -81,12 +83,16 @@ const ShortlinkListItem : React.FC<Props> & { Loading: React.FC } = (
         >
         <div className={`${globalClass}__display-full-link__main`}>
           <div className={`${globalClass}__display-full-link__title`}>{siteTitle}</div>
-          {siteDescription && <div className={`${globalClass}__display-full-link__description`}>{siteDescription}</div>}
         </div>
         <div className={`${globalClass}__display-full-link__subheader`}>
           <img className={`${globalClass}__display-full-link__favicon`} src={favicon} />
           <span className={`${globalClass}__display-full-link__subheader__span`}>{LinkTools.makeDisplayUrl(location)}</span>
         </div>
+        {showDescription && siteDescription &&
+          <div className={`${globalClass}__display-full-link__description`}>
+            {siteDescription}
+          </div>
+        }
       </Link>
       <div className={`${globalClass}__shortlink-meta`}>
         <Link

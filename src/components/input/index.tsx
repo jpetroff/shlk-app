@@ -74,13 +74,15 @@ const Input : React.FC<Props> = (
       {props.label && <span className={`${globalClass}__label`}>{props.label}</span>}
 
       <div className={`${globalClass}__input-wrapper`}>
-        <div className={`${globalClass}__prefix`}>
-          {props.leftIcon && 
-            <Icon size={IconSize.LARGE} className={`${globalClass}__left-icon`} useIcon={props.leftIcon} />
-          }
+        { (props.prefix || props.leftIcon) &&
+          <div className={`${globalClass}__prefix`}>
+            {props.leftIcon && 
+              <Icon size={IconSize.LARGE} className={`${globalClass}__left-icon`} useIcon={props.leftIcon} />
+            }
 
-          {props.prefix}
-        </div>
+            {props.prefix}
+          </div>
+        }
 
         <div className={`${globalClass}__input-inner`}>
           <span className={`${globalClass}__placeholder`}>{props.placeholder}</span>
@@ -92,21 +94,23 @@ const Input : React.FC<Props> = (
             />
         </div>
 
-        <div className={`${globalClass}__suffix`}>
-          {props.suffix}
+        { (props.suffix || props.rightIcon || !isEmpty) &&
+          <div className={`${globalClass}__suffix`}>
+            {props.suffix}
 
-          {props.rightIcon && 
-            <Icon size={IconSize.LARGE} className={`${globalClass}__right-icon`} useIcon={props.rightIcon} />
-          }
+            {props.rightIcon && 
+              <Icon size={IconSize.LARGE} className={`${globalClass}__right-icon`} useIcon={props.rightIcon} />
+            }
 
-          <Button 
-            className={`${globalClass}__clear`} 
-            size={ButtonSize.SMALL}
-            type={ButtonType.GHOST}
-            icon={Cross}
-            onClick={handleClear}
-            />
-        </div>
+            <Button 
+              className={`${globalClass}__clear`} 
+              size={ButtonSize.SMALL}
+              type={ButtonType.GHOST}
+              icon={Cross}
+              onClick={handleClear}
+              />
+          </div>
+        }
       </div>
     </label>
   )

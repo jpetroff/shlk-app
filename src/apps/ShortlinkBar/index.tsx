@@ -100,7 +100,7 @@ export default class ShortlinkBar extends React.Component<Props, State> {
     }
     
     _.bindAll(this, ..._.functions(this))
-    this.submitDescriptor = _.debounce(this._submitDescriptor, 500)
+    // this.submitDescriptor = _.debounce(this._submitDescriptor, 500)
   }
 
   componentDidMount() {
@@ -319,11 +319,10 @@ export default class ShortlinkBar extends React.Component<Props, State> {
       descriptionTag: modifyURLSlug(value),
       loadingState: {createDescriptiveLinkIsLoading: true}
     })
-    this.submitDescriptor()
   }
 
-  public submitDescriptor: (() => void) & _.Cancelable;
-  private async _submitDescriptor() {
+  // public submitDescriptor: (() => void) & _.Cancelable;
+  private async submitDescriptor() {
     this._clearErrorState()
     console.log('[Home → submitDescriptor]\n', this.state.userTag, this.state.descriptionTag)
 
@@ -348,7 +347,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
         }
       )
 
-      if(!result || !result.descriptor) return;
+      if(!result || !result.descriptor) return
+      if(result.descriptor.descriptionTag != this.state.descriptionTag) return
+
       this.setShortlinkState({
         location: result.location,
         hash: result.hash,
@@ -471,7 +472,9 @@ export default class ShortlinkBar extends React.Component<Props, State> {
                     userTag={this.props.context?.user?.userTag ? this.props.context?.user?.userTag : 'someone'}
                     value={this.state.descriptionTag}
                     placeholder={`your-custom-url`}
-                    onChange={this.handleDescriptorChange}
+                    onDeferredChange={this.handleDescriptorChange}
+                    onDebouncedChange={this.submitDescriptor}
+                    debounce={500}
                     show={this.state.generatedShortlink ? true : false}
                     generatedLink={this.state.generatedDescriptiveShortlink}
                     isLoading={this.state.loadingState.createDescriptiveLinkIsLoading}
@@ -525,6 +528,8 @@ export default class ShortlinkBar extends React.Component<Props, State> {
                 totalCount={this.state.cachedShortlinks.length}
                 isLoading={this.state.cachedShortlinksLoading}
                 display={this.state.cachedShortlinksDisplayNumber}
+                context={this.props.context}
+                router={this.props.router}
               />
             </div>
           </div>
