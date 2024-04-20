@@ -157,18 +157,17 @@ export default class ShortlinkList extends React.Component<Props, State> {
     
     console.log(load, result)
     this.setState({
-      // pointer: load == LoadMode.replace ? 0 : this.state.shortlinks.length + result.length,
       pointer: load == LoadMode.replace ? result.length : this.state.shortlinks.length + result.length,
       shortlinks: newShortlinks,
       groupedShortlinks: groupedResult,
-      staleResults: false,
-      isLoading: LoadMode.none
+      staleResults: false
     })
 
-    _.defer( () => {
-      console.log(load)
-      console.log(this.state.shortlinks)
-    })
+    _.delay( () => {
+      this.setState({
+        isLoading: LoadMode.none
+      })
+    }, 250)
   }
 
   private groupShortlinks(shortlinks: ShortlinkDocument[]) : ShortlinkDisplayListItem[] {
@@ -309,7 +308,7 @@ export default class ShortlinkList extends React.Component<Props, State> {
       this.state.isLoading == LoadMode.none && 
       direction > 0
     ) { 
-      console.log('scroll load')
+      console.log('scroll load', scrollTop)
       this.loadShortlinks(LoadMode.append)
     }
   }
@@ -438,7 +437,9 @@ export default class ShortlinkList extends React.Component<Props, State> {
                 }
               })
             }
-            {this.state.isLoading == LoadMode.append &&  
+            { (
+                this.state.isLoading == LoadMode.append
+              ) &&  
               <ShortlinkListItem.Loading />
             }
             {this.state.shortlinks.length == 0 && this.state.isLoading == LoadMode.none &&
