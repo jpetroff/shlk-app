@@ -50,8 +50,9 @@ module.exports = (env, argv) => {
       }),
       new LiveReloadPlugin({
         appendScriptTag: !isProduction && appTarget != 'extension',
-        hostname: 'localhost',
-        protocol: 'http'
+        hostname: '0.0.0.0',
+        protocol: 'http',
+        ignore: ['node_modules/**']
       }),
       new webpack.NormalModuleReplacementPlugin(
         /.*\.webapp.*/,
